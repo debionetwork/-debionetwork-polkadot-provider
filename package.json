@@ -1,7 +1,6 @@
 {
-  "name": "polkadot-provider",
-  "version": "1.0.0",
-  "description": "",
+  "version": "0.0.1",
+  "description": "Javascript Library to connect and interact with the DeBio Network blockchain.",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -11,7 +10,7 @@
     "url": "git+https://github.com/debionetwork/polkadot-provider.git"
   },
   "keywords": [],
-  "author": "",
+  "author": "Agustinus Theodorus <agustinustheoo@gmail.com>",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/debionetwork/polkadot-provider/issues"
@@ -49,5 +48,9 @@
     "setupFiles": [
       "dotenv/config"
     ]
+  },
+  "name": "@debio-network/polkadot-provider",
+  "directories": {
+    "test": "tests"
   }
 }
