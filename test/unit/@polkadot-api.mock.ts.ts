@@ -7,6 +7,7 @@ export class WsProvider {
 }
 export class ApiPromise {
   query: any;
+  tx: any;
   
   static create(provider) { // eslint-disable-line
     return new ApiPromise();
@@ -20,4 +21,16 @@ export class Keyring {
     mockFunction(params);
   }
   addFromUri(provider) {} // eslint-disable-line
+}
+
+export const eventAndStatusMock = {
+  events: "EVENTS",
+  status: "STATUS"
+};
+
+export const signAndSend = {
+  signAndSend(pair: any, nonce: any, callback?: ({ events, status }) => void) {
+    callback(eventAndStatusMock);
+    return mockFunction;
+  }
 }

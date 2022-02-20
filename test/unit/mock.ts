@@ -1,1 +1,1 @@
-export function mockFunction(args){} // eslint-disable-line
+export function mockFunction(args: any = undefined){} // eslint-disable-line
