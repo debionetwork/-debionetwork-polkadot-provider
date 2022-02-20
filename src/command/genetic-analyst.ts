@@ -6,7 +6,7 @@ export async function updateGeneticAnalystVerificationStatus(
   pair: any,
   accountId: string,
   geneticAnalystVerificationStatus: GeneticAnalystsVerificationStatus,
-  callback: Function = () => {},
+  callback: () => void,
 ) {
   // eslint-disable-line
   const unsub = await api.tx.geneticAnalysts

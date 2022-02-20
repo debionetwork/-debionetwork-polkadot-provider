@@ -3,31 +3,31 @@ import { RequestStatus } from './request-status';
 export class ServiceRequest {
   constructor(anyJson: any) {
     this.hash = anyJson.hash_;
-    this.requester_address = anyJson.requesterAddress;
-    this.lab_address = anyJson.labAddress;
+    this.requesterAddress = anyJson.requesterAddress;
+    this.labAddress = anyJson.labAddress;
     this.country = anyJson.country;
     this.region = anyJson.region;
     this.city = anyJson.city;
-    this.service_category = anyJson.serviceCategory;
-    this.staking_amount = anyJson.stakingAmount;
+    this.serviceCategory = anyJson.serviceCategory;
+    this.stakingAmount = anyJson.stakingAmount;
     this.status = anyJson.status;
-    this.created_at = anyJson.createdAt;
-    this.updated_at = anyJson.updatedAt;
-    this.unstaked_at = anyJson.unstakedAt;
+    this.createdAt = anyJson.createdAt;
+    this.updatedAt = anyJson.updatedAt;
+    this.unstakedAt = anyJson.unstakedAt;
   }
 
   hash: string;
-  requester_address: string;
-  lab_address: string;
+  requesterAddress: string;
+  labAddress: string;
   country: string;
   region: string;
   city: string;
-  service_category: string;
-  staking_amount: number;
+  serviceCategory: string;
+  stakingAmount: number;
   status: RequestStatus;
-  created_at: Date;
-  updated_at: Date;
-  unstaked_at: Date;
+  createdAt: Date;
+  updatedAt: Date;
+  unstakedAt: Date;
 }
 
 export * from './request-status';

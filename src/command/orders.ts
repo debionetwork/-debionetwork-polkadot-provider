@@ -14,7 +14,7 @@ export async function fulfillOrder(
   api: ApiPromise,
   pair: any,
   orderId: string,
-  callback: Function = () => {},
+  callback: () => void,
 ): Promise<void> {
   // eslint-disable-line
   const unsub = await api.tx.orders

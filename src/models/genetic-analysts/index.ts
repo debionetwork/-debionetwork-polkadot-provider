@@ -3,15 +3,15 @@ import { GeneticAnalystsVerificationStatus } from './genetic-analyst-verificatio
 
 export class GeneticAnalyst {
   constructor(anyJson: any) {
-    this.account_id = anyJson.accountId;
+    this.accountId = anyJson.accountId;
     this.services = anyJson.services;
     this.qualifications = anyJson.qualifications;
     this.info = anyJson.info;
   }
-  account_id: string;
+  accountId: string;
   services: string[];
   qualifications: string[];
-  verification_status: GeneticAnalystsVerificationStatus;
+  verificationStatus: GeneticAnalystsVerificationStatus;
   info: GeneticAnalystInfo;
 }
 

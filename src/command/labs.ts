@@ -1,7 +1,7 @@
 import { ApiPromise } from '@polkadot/api';
 import { LabInfo, LabVerificationStatus } from '..';
 
-export async function registerLab(api: ApiPromise, pair: any, data: LabInfo, callback: Function = () => {}) {
+export async function registerLab(api: ApiPromise, pair: any, data: LabInfo, callback: () => void) {
   // eslint-disable-line
   const unsub = await api.tx.labs
     .registerLab(data)
@@ -10,7 +10,7 @@ export async function registerLab(api: ApiPromise, pair: any, data: LabInfo, cal
     });
 }
 
-export async function updateLab(api: ApiPromise, pair: any, data: LabInfo, callback: Function = () => {}) {
+export async function updateLab(api: ApiPromise, pair: any, data: LabInfo, callback: () => void) {
   // eslint-disable-line
   const unsub = await api.tx.labs.updateLab(data).signAndSend(pair, { nonce: -1 }, async ({ events = [], status }) => {
     successCallback(api, pair, { events, status, callback, unsub });
@@ -22,7 +22,7 @@ export async function updateLabVerificationStatus(
   pair: any,
   substrateAddress: string,
   labVerificationStatus: LabVerificationStatus,
-  callback: Function = () => {},
+  callback: () => void,
 ) {
   // eslint-disable-line
   const unsub = await api.tx.labs

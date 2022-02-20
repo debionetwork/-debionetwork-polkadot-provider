@@ -5,18 +5,18 @@ export async function processDnaSample(
   api: ApiPromise,
   pair: any,
   trackingId: string,
-  process_status: any,
-  callback: Function = () => {},
+  processStatus: any,
+  callback: () => void,
 ) {
   // eslint-disable-line
   const unsub = await api.tx.geneticTesting
-    .processDnaSample(trackingId, process_status)
+    .processDnaSample(trackingId, processStatus)
     .signAndSend(pair, { nonce: -1 }, ({ events, status }) =>
       successCallback(api, { events, status, callback, unsub }),
     );
 }
 
-export async function receiveDnaSample(api: ApiPromise, pair: any, trackingId: string, callback: Function = () => {}) {
+export async function receiveDnaSample(api: ApiPromise, pair: any, trackingId: string, callback: () => void) {
   // eslint-disable-line
   const unsub = await api.tx.geneticTesting
     .receiveDnaSample(trackingId)
@@ -31,7 +31,7 @@ export async function rejectDnaSample(
   trackingId: string,
   rejectedTitle: string,
   rejectedDescription: string,
-  callback: Function = () => {},
+  callback: () => void,
 ) {
   // eslint-disable-line
   const unsub = await api.tx.geneticTesting
@@ -45,7 +45,7 @@ export async function submitIndependentTestResult(
   api: ApiPromise,
   pair: any,
   submission: DnaTestResultSubmission,
-  callback: Function = () => {},
+  callback: () => void,
 ) {
   // eslint-disable-line
   const unsub = await api.tx.geneticTesting
@@ -60,7 +60,7 @@ export async function submitTestResult(
   pair: any,
   trackingId: string,
   submission: DnaTestResultSubmission,
-  callback: Function = () => {},
+  callback: () => void,
 ) {
   // eslint-disable-line
   const unsub = await api.tx.geneticTesting

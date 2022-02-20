@@ -4,33 +4,33 @@ import { OrderStatus } from './order-status';
 export class Order {
   constructor(anyJson: any) {
     this.id = anyJson.id;
-    this.service_id = anyJson.serviceId;
-    this.customer_id = anyJson.customerId;
-    this.customer_box_public_key = anyJson.customerBoxPublicKey;
-    this.seller_id = anyJson.sellerId;
-    this.dna_sample_tracking_id = anyJson.dnaSampleTrackingId;
+    this.serviceId = anyJson.serviceId;
+    this.customerId = anyJson.customerId;
+    this.customerBoxPublicKey = anyJson.customerBoxPublicKey;
+    this.sellerId = anyJson.sellerId;
+    this.dnaSampleTrackingId = anyJson.dnaSampleTrackingId;
     this.currency = anyJson.currency;
     this.prices = anyJson.prices;
-    this.additional_prices = anyJson.additionalPrices;
+    this.additionalPrices = anyJson.additionalPrices;
     this.status = anyJson.status;
-    this.order_flow = anyJson.orderFlow;
-    this.created_at = anyJson.createdAt;
-    this.updated_at = anyJson.updatedAt;
+    this.orderFlow = anyJson.orderFlow;
+    this.createdAt = anyJson.createdAt;
+    this.updatedAt = anyJson.updatedAt;
   }
 
   id: string;
-  service_id: string;
-  customer_id: string;
-  customer_box_public_key: string;
-  seller_id: string;
-  dna_sample_tracking_id: string;
+  serviceId: string;
+  customerId: string;
+  customerBoxPublicKey: string;
+  sellerId: string;
+  dnaSampleTrackingId: string;
   currency: CurrencyType;
   prices: Price[];
-  additional_prices: Price[];
+  additionalPrices: Price[];
   status: OrderStatus;
-  order_flow: ServiceFlow;
-  created_at: Date;
-  updated_at: Date;
+  orderFlow: ServiceFlow;
+  createdAt: Date;
+  updatedAt: Date;
 }
 
 export * from './order-status';

@@ -3,11 +3,11 @@ import { CertificationInfo } from './certification-info';
 export class Certification {
   constructor(anyJson: any) {
     this.id = anyJson.id;
-    this.owner_id = anyJson.owneIid;
+    this.ownerId = anyJson.ownerId;
     this.info = anyJson.info;
   }
   id: string;
-  owner_id: string;
+  ownerId: string;
   info: CertificationInfo;
 }
 

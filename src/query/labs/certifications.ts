@@ -9,10 +9,10 @@ export async function queryCertificationById(api: ApiPromise, certificationId: s
 export async function queryCertificationsByMultipleIds(
   api: ApiPromise,
   certificationIds: string[],
-): Promise<Array<Certification>> {
-  const certifications: Array<Certification> = new Array<Certification>();
-  for (const id in certificationIds) {
-    certifications.push(await queryCertificationById(api, certificationIds[id]));
+): Promise<Certification[]> {
+  const certifications: Certification[] = new Array<Certification>();
+  for (const certificationId of certificationIds) {
+    certifications.push(await queryCertificationById(api, certificationId));
   }
   return certifications;
 }

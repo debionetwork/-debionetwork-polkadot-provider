@@ -4,20 +4,20 @@ import { ServiceInfo } from './service-info';
 export class Service {
   constructor(anyJson: any) {
     this.id = anyJson.id;
-    this.owner_id = anyJson.ownerId;
+    this.ownerId = anyJson.ownerId;
     this.info = anyJson.info;
-    this.service_flow = anyJson.serviceFlow;
+    this.serviceFlow = anyJson.serviceFlow;
     this.price = this.info.pricesByCurrency[0].priceComponents[0].value.toString();
-    this.qc_price = this.info.pricesByCurrency[0].additionalPrices[0].value.toString();
+    this.qcPrice = this.info.pricesByCurrency[0].additionalPrices[0].value.toString();
     this.currency = this.info.pricesByCurrency[0].currency;
   }
   id: string;
-  owner_id: string;
+  ownerId: string;
   currency: string;
   price: string;
-  qc_price: string;
+  qcPrice: string;
   info: ServiceInfo;
-  service_flow: ServiceFlow;
+  serviceFlow: ServiceFlow;
 }
 
 export * from './expected-duration';
