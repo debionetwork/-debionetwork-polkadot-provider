@@ -1,4 +1,5 @@
 import { ApiPromise } from '@polkadot/api';
+import { successCallback } from '..';
 
 export async function createOrder(
   api: ApiPromise,
@@ -6,17 +7,16 @@ export async function createOrder(
   serviceId: string,
   customerBoxPublicKey: string,
   priceIndex: number,
-): Promise<void> {
-  await api.tx.orders.createOrder(serviceId, priceIndex, customerBoxPublicKey).signAndSend(pair, { nonce: -1 });
-}
-
-export async function fulfillOrder(
-  api: ApiPromise,
-  pair: any,
-  orderId: string,
   callback: () => void,
 ): Promise<void> {
-  // eslint-disable-line
+  const unsub = await api.tx.orders
+    .createOrder(serviceId, priceIndex, customerBoxPublicKey)
+    .signAndSend(pair, { nonce: -1 }, ({ events, status }) =>
+      successCallback(api, { events, status, callback, unsub }),
+    );
+}
+
+export async function fulfillOrder(api: ApiPromise, pair: any, orderId: string, callback: () => void): Promise<void> {
   const unsub = await api.tx.orders
     .fulfillOrder(orderId)
     .signAndSend(pair, { nonce: -1 }, ({ events, status }) =>
@@ -24,25 +24,26 @@ export async function fulfillOrder(
     );
 }
 
-export async function setOrderRefunded(api: ApiPromise, pair: any, orderId): Promise<void> {
-  await api.tx.orders.setOrderRefunded(orderId).signAndSend(pair, { nonce: -1 });
+export async function setOrderRefunded(api: ApiPromise, pair: any, orderId, callback: () => void): Promise<void> {
+  const unsub = await api.tx.orders
+    .setOrderRefunded(orderId)
+    .signAndSend(pair, { nonce: -1 }, ({ events, status }) =>
+      successCallback(api, { events, status, callback, unsub }),
+    );
 }
 
-export async function setOrderPaid(api: ApiPromise, pair: any, orderId): Promise<void> {
-  await api.tx.orders.setOrderPaid(orderId).signAndSend(pair, { nonce: -1 });
+export async function setOrderPaid(api: ApiPromise, pair: any, orderId, callback: () => void): Promise<void> {
+  const unsub = await api.tx.orders
+    .setOrderPaid(orderId)
+    .signAndSend(pair, { nonce: -1 }, ({ events, status }) =>
+      successCallback(api, { events, status, callback, unsub }),
+    );
 }
 
-export async function cancelOrder(api: ApiPromise, pair: any, orderId): Promise<void> {
-  await api.tx.orders.cancelOrder(orderId).signAndSend(pair, { nonce: -1 });
-}
-
-function successCallback(api: ApiPromise, { events, status, callback, unsub }) {
-  if (status.isFinalized) {
-    // find/filter for success events
-    const eventList = events.filter(({ event }) => api.events.system.ExtrinsicSuccess.is(event));
-    if (eventList.length > 0) {
-      callback();
-      unsub();
-    }
-  }
+export async function cancelOrder(api: ApiPromise, pair: any, orderId, callback: () => void): Promise<void> {
+  const unsub = await api.tx.orders
+    .cancelOrder(orderId)
+    .signAndSend(pair, { nonce: -1 }, ({ events, status }) =>
+      successCallback(api, { events, status, callback, unsub }),
+    );
 }
