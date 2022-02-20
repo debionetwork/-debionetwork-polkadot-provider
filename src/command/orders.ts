@@ -7,12 +7,16 @@ export async function createOrder(
   customerBoxPublicKey: string,
   priceIndex: number,
 ): Promise<void> {
-  await api.tx.orders
-    .createOrder(serviceId, priceIndex, customerBoxPublicKey)
-    .signAndSend(pair, { nonce: -1 });
+  await api.tx.orders.createOrder(serviceId, priceIndex, customerBoxPublicKey).signAndSend(pair, { nonce: -1 });
 }
 
-export async function fulfillOrder(api: ApiPromise, pair: any, orderId: string, callback: Function = ()=>{}): Promise<void> { // eslint-disable-line
+export async function fulfillOrder(
+  api: ApiPromise,
+  pair: any,
+  orderId: string,
+  callback: Function = () => {},
+): Promise<void> {
+  // eslint-disable-line
   const unsub = await api.tx.orders
     .fulfillOrder(orderId)
     .signAndSend(pair, { nonce: -1 }, ({ events, status }) =>
@@ -20,36 +24,22 @@ export async function fulfillOrder(api: ApiPromise, pair: any, orderId: string, 
     );
 }
 
-export async function setOrderRefunded(
-  api: ApiPromise,
-  pair: any,
-  orderId,
-): Promise<void> {
+export async function setOrderRefunded(api: ApiPromise, pair: any, orderId): Promise<void> {
   await api.tx.orders.setOrderRefunded(orderId).signAndSend(pair, { nonce: -1 });
 }
 
-export async function setOrderPaid(
-  api: ApiPromise,
-  pair: any,
-  orderId,
-): Promise<void> {
+export async function setOrderPaid(api: ApiPromise, pair: any, orderId): Promise<void> {
   await api.tx.orders.setOrderPaid(orderId).signAndSend(pair, { nonce: -1 });
 }
 
-export async function cancelOrder(
-  api: ApiPromise,
-  pair: any,
-  orderId,
-): Promise<void> {
+export async function cancelOrder(api: ApiPromise, pair: any, orderId): Promise<void> {
   await api.tx.orders.cancelOrder(orderId).signAndSend(pair, { nonce: -1 });
 }
 
 function successCallback(api: ApiPromise, { events, status, callback, unsub }) {
   if (status.isFinalized) {
     // find/filter for success events
-    const eventList = events.filter(({ event }) =>
-      api.events.system.ExtrinsicSuccess.is(event),
-    );
+    const eventList = events.filter(({ event }) => api.events.system.ExtrinsicSuccess.is(event));
     if (eventList.length > 0) {
       callback();
       unsub();

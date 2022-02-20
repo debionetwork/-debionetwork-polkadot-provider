@@ -7,10 +7,8 @@ export class Service {
     this.owner_id = anyJson.ownerId;
     this.info = anyJson.info;
     this.service_flow = anyJson.serviceFlow;
-    this.price =
-      this.info.pricesByCurrency[0].priceComponents[0].value.toString();
-    this.qc_price =
-      this.info.pricesByCurrency[0].additionalPrices[0].value.toString();
+    this.price = this.info.pricesByCurrency[0].priceComponents[0].value.toString();
+    this.qc_price = this.info.pricesByCurrency[0].additionalPrices[0].value.toString();
     this.currency = this.info.pricesByCurrency[0].currency;
   }
   id: string;
