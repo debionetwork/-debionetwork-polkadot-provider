@@ -13,7 +13,7 @@ export function successCallback(api: ApiPromise, { events, status, callback, uns
     // find/filter for success events
     const eventList = events.filter(({ event }) => api.events.system.ExtrinsicSuccess.is(event));
     if (eventList.length > 0) {
-      callback();
+      if(callback) callback(); // If callback not undefined
       unsub();
     }
   }

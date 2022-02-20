@@ -6,9 +6,9 @@ export async function setEthAddress(
   pair: any,
   substrateAddress: string,
   ethAddress: string,
-  callback: () => void,
+  callback?: () => void,
 ): Promise<void> {
-  const unsub = await api.tx.userProfile
+  var unsub = await api.tx.userProfile
     .adminSetEthAddress(substrateAddress, ethAddress)
     .signAndSend(pair, { nonce: -1 }, ({ events, status }) =>
       successCallback(api, { events, status, callback, unsub }),
