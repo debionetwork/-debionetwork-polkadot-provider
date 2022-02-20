@@ -1,18 +1,25 @@
 {
   "version": "0.0.1",
   "description": "Javascript Library to connect and interact with the DeBio Network blockchain.",
-  "main": "index.js",
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
+  "files": ["lib/**/*"],
   "scripts": {
     "build": "tsc",
     "format": "prettier --write \"src/**/*.ts\"",
     "lint": "tslint -p tsconfig.json",
+    "prepare" : "npm run build",
+    "prepublishOnly" : "npm test && npm run lint",
+    "preversion" : "npm run lint",
+    "version" : "npm run format && git add -A src",
+    "postversion" : "git push && git push --tags",
     "test": "jest --config ./test/unit/jest-unit.json"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/debionetwork/polkadot-provider.git"
   },
-  "keywords": [],
+  "keywords": ["PolkadotJs", "DeBio", "Blockchain", "Polkadot", "Provider"],
   "author": "Agustinus Theodorus <agustinustheoo@gmail.com>",
   "license": "ISC",
   "bugs": {
