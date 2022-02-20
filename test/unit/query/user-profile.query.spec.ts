@@ -1,7 +1,7 @@
 import { queryAccountIdByEthAddress, queryEthAdressByAccountId } from "../../../src/query/user-profile";
 import { ApiPromise } from "../@polkadot-api.mock.ts";
 import { mockFunction } from "../mock";
-import { userProfile } from "./user-profile.mock";
+import { userProfile } from "./user-profile.query.mock";
 
 jest.mock('../mock', () => ({
   mockFunction: jest.fn(),
