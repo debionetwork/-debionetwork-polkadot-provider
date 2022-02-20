@@ -4,7 +4,8 @@
     "module": "commonjs",
     "declaration": true,
     "outDir": "./lib",
-    "strict": true
+    "skipLibCheck": true,
+    "strict": false
   },
   "include": ["src"],
   "exclude": ["node_modules", "**/__tests__/*"]
