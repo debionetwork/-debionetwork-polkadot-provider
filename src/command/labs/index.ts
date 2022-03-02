@@ -1,5 +1,5 @@
 import { ApiPromise } from '@polkadot/api';
-import { LabInfo, LabVerificationStatus, successCallback } from '..';
+import { LabInfo, LabVerificationStatus, successCallback } from '../..';
 
 export async function registerLab(api: ApiPromise, pair: any, data: LabInfo, callback?: () => void): Promise<void> {
   var unsub = await api.tx.labs.registerLab(data).signAndSend(pair, { nonce: -1 }, ({ events, status }) => {
@@ -32,3 +32,6 @@ export async function deregisterLab(api: ApiPromise, pair: any, callback?: () =>
     successCallback(api, { events, status, callback, unsub });
   });
 }
+
+export * from './genetic-testing';
+export * from './orders';

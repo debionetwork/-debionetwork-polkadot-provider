@@ -1,6 +1,6 @@
 import { ApiPromise } from '@polkadot/api';
 import { successCallback } from '..';
-import { DnaTestResultSubmission } from '../models';
+import { DnaTestResultSubmission } from '../../models';
 
 export async function processDnaSample(
   api: ApiPromise,

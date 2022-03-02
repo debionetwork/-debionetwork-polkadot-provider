@@ -1,5 +1,5 @@
 import { ApiPromise } from '@polkadot/api';
-import { successCallback } from '..';
+import { successCallback } from '../..';
 
 export async function createOrder(
   api: ApiPromise,

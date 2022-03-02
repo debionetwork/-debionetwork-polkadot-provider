@@ -1,14 +1,14 @@
-import { retrieveUnstakedAmount } from "../../../src/command/service-request";
-import { successCallback } from "../../../src";
-import { ApiPromise, eventAndStatusMock, signAndSend } from "../@polkadot-api.mock.ts";
-import { mockFunction } from "../mock";
+import { retrieveUnstakedAmount } from "../../../../src/command/service-request";
+import { successCallback } from "../../../../src";
+import { ApiPromise, eventAndStatusMock, signAndSend } from "../../@polkadot-api.mock";
+import { mockFunction } from "../../mock";
 import { serviceRequest } from "./service-request.command.mock";
 
-jest.mock('../mock', () => ({
+jest.mock('../../mock', () => ({
   mockFunction: jest.fn(),
 }));
 
-jest.mock('../../../src', () => ({
+jest.mock('../../../../src', () => ({
   successCallback: jest.fn(() => mockFunction()),
 }));
 

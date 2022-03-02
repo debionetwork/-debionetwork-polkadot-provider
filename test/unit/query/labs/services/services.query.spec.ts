@@ -29,12 +29,13 @@ describe('User Profile Unit Tests', () => {
       // Arrange
       const PARAM = "PARAM";
       const EXPECTED_VALUE = new Service(serviceDataMock);
-      (mockFunction as jest.Mock).mockReturnValue(EXPECTED_VALUE);
+      (mockFunction as jest.Mock).mockReturnValue(serviceDataMock);
 
       // Assert
       expect(await queryServiceById(API_PROMISE_MOCK as any, PARAM))
         .toEqual(EXPECTED_VALUE);
       expect(mockFunction).toBeCalledTimes(1);
+      expect(mockFunction).toBeCalledWith(PARAM);
       expect(servicesSpy).toBeCalledTimes(1);
       expect(servicesSpy).toBeCalledWith(PARAM);
   });
@@ -43,12 +44,13 @@ describe('User Profile Unit Tests', () => {
       // Arrange
       const PARAM = "PARAM";
       const EXPECTED_VALUE = new Service(serviceDataMock);
-      (mockFunction as jest.Mock).mockReturnValue(EXPECTED_VALUE);
+      (mockFunction as jest.Mock).mockReturnValue(serviceDataMock);
 
       // Assert
       expect(await queryServicesByMultipleIds(API_PROMISE_MOCK as any, [PARAM]))
         .toEqual([EXPECTED_VALUE]);
       expect(mockFunction).toBeCalledTimes(1);
+      expect(mockFunction).toBeCalledWith(PARAM);
       expect(servicesSpy).toBeCalledTimes(1);
       expect(servicesSpy).toBeCalledWith(PARAM);
   });

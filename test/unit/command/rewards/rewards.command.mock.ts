@@ -1,4 +1,4 @@
-import { signAndSend } from "../@polkadot-api.mock.ts";
+import { signAndSend } from "../../@polkadot-api.mock";
 
 export const rewards = {
   rewardFunds(params) {

@@ -1,11 +1,11 @@
-import { toHumanMock } from "../../../@polkadot-types.mock";
+import { toHumanMock, returnToHumanMockWithParam } from "../../../@polkadot-types.mock";
 
 export const services = {
   services(param) { // eslint-disable-line
-    return toHumanMock;
+    return returnToHumanMockWithParam(param);
   },
   servicesCountByOwner(param) { // eslint-disable-line
-    return toHumanMock;
+    return returnToHumanMockWithParam(param);
   },
   servicesCount() {
     return toHumanMock;

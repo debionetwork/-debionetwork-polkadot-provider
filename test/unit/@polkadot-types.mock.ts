@@ -5,3 +5,12 @@ export const toHumanMock = {
         return mockFunction();
     }
 }
+
+
+export function returnToHumanMockWithParam(param) {
+    return {
+        toHuman() {
+            return mockFunction(param);
+        }
+    }
+}
