@@ -14,14 +14,6 @@ export async function queryServicesByMultipleIds(api: ApiPromise, serviceIds: st
   return services;
 }
 
-export async function queryServicesByMultipleIdsArray(api: ApiPromise, serviceIds: string[]): Promise<Service[]> {
-  const services: Service[] = new Array<Service>();
-  for (const serviceId of serviceIds) {
-    services.push(await queryServiceById(api, serviceId));
-  }
-  return services;
-}
-
 export async function queryServicesCount(api: ApiPromise): Promise<number> {
   const res: any = (await api.query.services.servicesCount()).toHuman();
   return parseInt(res, 0);
