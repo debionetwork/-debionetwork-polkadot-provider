@@ -1,14 +1,14 @@
-import { createOrder, fulfillOrder, setOrderRefunded, setOrderPaid, cancelOrder } from "../../../src/command/orders";
-import { ApiPromise, signAndSend, eventAndStatusMock } from "../@polkadot-api.mock";
-import { mockFunction } from "../mock";
-import { successCallback } from "../../../src";
+import { createOrder, fulfillOrder, setOrderRefunded, setOrderPaid, cancelOrder } from "../../../../../src/command/labs/orders";
+import { ApiPromise, signAndSend, eventAndStatusMock } from "../../../@polkadot-api.mock";
+import { mockFunction } from "../../../mock";
+import { successCallback } from "../../../../../src/index";
 import { orders } from "./orders.command.mock";
 
-jest.mock('../mock', () => ({
+jest.mock('../../../mock', () => ({
   mockFunction: jest.fn(),
 }));
 
-jest.mock('../../../src', () => ({
+jest.mock('../../../../../src/index', () => ({
   successCallback: jest.fn(() => mockFunction()),
 }));
 
