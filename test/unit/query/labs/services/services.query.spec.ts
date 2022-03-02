@@ -1,8 +1,9 @@
 import { queryServiceById, queryServicesByMultipleIds, queryServicesCount, queryServicesCountByOwnerId } from "../../../../../src/query/labs/services";
 import { ApiPromise } from "../../../@polkadot-api.mock";
 import { mockFunction } from "../../../mock";
-import { services, serviceDataMock } from "./services.query.mock";
+import { services } from "./services.query.mock";
 import { Service } from "../../../../../src/models/services";
+import { serviceDataMock } from "../../../models/labs/services.mock";
 
 jest.mock('../../../mock', () => ({
   mockFunction: jest.fn(),

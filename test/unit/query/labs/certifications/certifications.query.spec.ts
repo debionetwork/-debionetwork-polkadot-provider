@@ -2,7 +2,8 @@ import { Certification } from "../../../../../src/models/certifications";
 import { queryCertificationById, queryCertificationsByMultipleIds } from "../../../../../src/query/labs/certifications";
 import { ApiPromise } from "../../../@polkadot-api.mock";
 import { mockFunction } from "../../../mock";
-import { certificationDataMock, certifications } from "./certifications.query.mock";
+import { certificationDataMock } from "../../../models/labs/certifications.mock";
+import { certifications } from "./certifications.query.mock";
 
 jest.mock('../../../mock', () => ({
   mockFunction: jest.fn(),
