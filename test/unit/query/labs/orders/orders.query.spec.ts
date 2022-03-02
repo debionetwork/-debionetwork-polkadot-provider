@@ -2,7 +2,8 @@ import { Order } from "../../../../../src/models/orders";
 import { queryLastOrderHashByCustomer, queryOrderDetailByOrderID } from "../../../../../src/query/labs/orders";
 import { ApiPromise } from "../../../@polkadot-api.mock";
 import { mockFunction } from "../../../mock";
-import { orders, orderDataMock } from "./orders.query.mock";
+import { orderDataMock } from "../../../models/labs/orders.mock";
+import { orders } from "./orders.query.mock";
 
 jest.mock('../../../mock', () => ({
   mockFunction: jest.fn(),

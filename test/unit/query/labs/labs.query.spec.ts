@@ -1,7 +1,8 @@
 import { queryLabById } from "../../../../src/query/labs";
 import { ApiPromise } from "../../@polkadot-api.mock";
 import { mockFunction } from "../../mock";
-import { labDataMock, labs } from "./labs.query.mock";
+import { labs } from "./labs.query.mock";
+import { labDataMock } from "../../models/labs/labs.mock";
 import { Lab } from "../../../../src/models/labs";
 
 jest.mock('../../mock', () => ({
