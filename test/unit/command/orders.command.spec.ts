@@ -1,5 +1,5 @@
 import { createOrder, fulfillOrder, setOrderRefunded, setOrderPaid, cancelOrder } from "../../../src/command/orders";
-import { ApiPromise, signAndSend, eventAndStatusMock } from "../@polkadot-api.mock.ts";
+import { ApiPromise, signAndSend, eventAndStatusMock } from "../@polkadot-api.mock";
 import { mockFunction } from "../mock";
 import { successCallback } from "../../../src";
 import { orders } from "./orders.command.mock";
