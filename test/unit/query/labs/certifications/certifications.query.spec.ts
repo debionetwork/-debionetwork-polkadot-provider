@@ -1,4 +1,4 @@
-import { Certification } from "../../../../../src/models/certifications";
+import { Certification } from "../../../../../src/models/labs/certifications";
 import { queryCertificationById, queryCertificationsByMultipleIds } from "../../../../../src/query/labs/certifications";
 import { ApiPromise } from "../../../@polkadot-api.mock";
 import { mockFunction } from "../../../mock";
