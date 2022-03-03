@@ -10,7 +10,7 @@ export class GeneticAnalysis {
     this.comment = anyJson.comment;
     this.rejectedTitle = anyJson.rejectedTitle;
     this.rejectedDescription = anyJson.rejectedDescription;
-    this.geneticAnalysis_orderId = anyJson.geneticAnalysisOrderId;
+    this.geneticAnalysisOrderId = anyJson.geneticAnalysisOrderId;
     this.createdAt = anyJson.createdAt;
     this.updatedAt = anyJson.updatedAt;
     this.status = anyJson.status;
@@ -23,7 +23,7 @@ export class GeneticAnalysis {
   comment: string;
   rejectedTitle: string;
   rejectedDescription: string;
-  geneticAnalysis_orderId: string;
+  geneticAnalysisOrderId: string;
   createdAt: Date;
   updatedAt: Date;
   status: GeneticAnalysisStatus;

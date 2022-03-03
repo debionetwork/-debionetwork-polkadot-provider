@@ -13,7 +13,7 @@ export class GeneticAnalystOrder {
     this.customerBoxPublicKey = anyJson.customerBoxPublicKey;
     this.sellerId = anyJson.sellerId;
     this.geneticDataId = anyJson.geneticDataId;
-    this.geneticAnalysis_trackingId = anyJson.geneticAnalysisTrackingId;
+    this.geneticAnalysisdTrackingId = anyJson.geneticAnalysisTrackingId;
     this.currency = anyJson.currency;
     this.prices = anyJson.prices;
     this.additionalPrices = anyJson.additionalPrices;
@@ -27,7 +27,7 @@ export class GeneticAnalystOrder {
   customerBoxPublicKey: string;
   sellerId: string;
   geneticDataId: string;
-  geneticAnalysis_trackingId: string;
+  geneticAnalysisdTrackingId: string;
   currency: CurrencyType;
   prices: Price[];
   additionalPrices: Price[];
