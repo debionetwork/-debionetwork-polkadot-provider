@@ -1,3 +1,4 @@
+import { convertSubstrateBalanceToNumber, convertSubstrateNumberToNumber } from '../..';
 import { RequestStatus } from './request-status';
 
 export class ServiceRequest {
@@ -28,6 +29,24 @@ export class ServiceRequest {
   createdAt: Date;
   updatedAt: Date;
   unstakedAt: Date;
+
+  normalize() {
+    const serviceRequest: ServiceRequest = this; // eslint-disable-line
+
+    serviceRequest.stakingAmount = convertSubstrateBalanceToNumber(serviceRequest.stakingAmount);
+
+    serviceRequest.createdAt = new Date(convertSubstrateNumberToNumber(serviceRequest.createdAt));
+
+    if (serviceRequest.unstakedAt) {
+      serviceRequest.unstakedAt = new Date(convertSubstrateNumberToNumber(serviceRequest.unstakedAt));
+    }
+
+    if (serviceRequest.updatedAt) {
+      serviceRequest.updatedAt = new Date(convertSubstrateNumberToNumber(serviceRequest.updatedAt));
+    }
+
+    return serviceRequest;
+  }
 }
 
 export * from './request-status';

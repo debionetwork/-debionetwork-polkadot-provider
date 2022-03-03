@@ -16,5 +16,9 @@ export class Lab {
   info: LabInfo;
 }
 
+export * from './services';
+export * from './orders';
+export * from './certifications';
+export * from './genetic-testing';
 export * from './lab-info';
 export * from './lab-verification-status';

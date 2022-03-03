@@ -1,5 +1,5 @@
 import { ApiPromise } from '@polkadot/api';
-import { Certification } from '../../models/certifications';
+import { Certification } from '../../models/labs/certifications';
 
 export async function queryCertificationById(api: ApiPromise, certificationId: string): Promise<Certification> {
   const res = (await api.query.certifications.certifications(certificationId)).toHuman();

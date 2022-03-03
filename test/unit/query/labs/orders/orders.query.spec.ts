@@ -1,4 +1,4 @@
-import { Order } from "../../../../../src/models/orders";
+import { Order } from "../../../../../src/models/labs/orders";
 import { queryLastOrderHashByCustomer, queryOrderDetailByOrderID } from "../../../../../src/query/labs/orders";
 import { ApiPromise } from "../../../@polkadot-api.mock";
 import { mockFunction } from "../../../mock";

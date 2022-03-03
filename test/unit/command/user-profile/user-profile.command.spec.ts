@@ -28,7 +28,7 @@ describe('User Profile Unit Testing', () => {
     adminSetEthAddressSpy.mockClear();
   });
   
-  it('adminSetEthAddress should return', async () => {
+  it('setEthAddress should return', async () => {
       // Arrange
       const PAIR = "PAIR";
       const SUBSTRATE_ADDRESS = "SUBSTRATE_ADDRESS";
