@@ -8,9 +8,8 @@ export async function sendRewards(
   rewardAmount: string,
   callback?: () => void,
 ) {
-  var unsub = await api.tx.rewards
+  const unsub = await api.tx.rewards
     .rewardFunds(substrateAddress, rewardAmount)
-    .signAndSend(pair, { nonce: -1 }, ({ events, status }) =>
-      successCallback(api, { events, status, callback, unsub }),
-    );
+    .signAndSend(pair, { nonce: -1 }, ({ events, status }) => successCallback(api, { events, status, callback }));
+  unsub();
 }

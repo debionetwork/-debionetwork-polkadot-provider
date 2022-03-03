@@ -53,10 +53,9 @@ describe('Genetic Analysis Orders Unit Testing', () => {
       expect(successCallback).toBeCalledWith(API_PROMISE_MOCK, { 
         events: eventAndStatusMock.events, 
         status: eventAndStatusMock.status, 
-        callback: mockFunction, 
-        unsub: undefined,
+        callback: mockFunction,
       });
-      expect(mockFunction).toBeCalledTimes(1);
+      expect(mockFunction).toBeCalledTimes(2);
   });
   
   it('setGeneticAnalysisOrderPaid should return', async () => {
@@ -80,10 +79,9 @@ describe('Genetic Analysis Orders Unit Testing', () => {
       expect(successCallback).toBeCalledWith(API_PROMISE_MOCK, { 
         events: eventAndStatusMock.events, 
         status: eventAndStatusMock.status, 
-        callback: mockFunction, 
-        unsub: undefined,
+        callback: mockFunction,
       });
-      expect(mockFunction).toBeCalledTimes(1);
+      expect(mockFunction).toBeCalledTimes(2);
   });
   
   it('setGeneticAnalysisOrderFulfilled should return', async () => {
@@ -107,9 +105,8 @@ describe('Genetic Analysis Orders Unit Testing', () => {
       expect(successCallback).toBeCalledWith(API_PROMISE_MOCK, { 
         events: eventAndStatusMock.events, 
         status: eventAndStatusMock.status, 
-        callback: mockFunction, 
-        unsub: undefined,
+        callback: mockFunction,
       });
-      expect(mockFunction).toBeCalledTimes(1);
+      expect(mockFunction).toBeCalledTimes(2);
   });
 })

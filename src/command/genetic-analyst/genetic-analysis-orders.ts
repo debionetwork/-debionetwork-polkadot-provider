@@ -7,11 +7,10 @@ export async function setGeneticAnalysisOrderPaid(
   geneticAnalysisOrderId,
   callback?: () => void,
 ): Promise<void> {
-  var unsub = await api.tx.geneticAnalysisOrders
+  const unsub = await api.tx.geneticAnalysisOrders
     .setGeneticAnalysisOrderPaid(geneticAnalysisOrderId)
-    .signAndSend(pair, { nonce: -1 }, ({ events, status }) =>
-      successCallback(api, { events, status, callback, unsub }),
-    );
+    .signAndSend(pair, { nonce: -1 }, ({ events, status }) => successCallback(api, { events, status, callback }));
+  unsub();
 }
 
 export async function setGeneticAnalysisOrderRefunded(
@@ -20,11 +19,10 @@ export async function setGeneticAnalysisOrderRefunded(
   geneticAnalysisOrderId,
   callback?: () => void,
 ): Promise<void> {
-  var unsub = await api.tx.geneticAnalysisOrders
+  const unsub = await api.tx.geneticAnalysisOrders
     .setGeneticAnalysisOrderRefunded(geneticAnalysisOrderId)
-    .signAndSend(pair, { nonce: -1 }, ({ events, status }) =>
-      successCallback(api, { events, status, callback, unsub }),
-    );
+    .signAndSend(pair, { nonce: -1 }, ({ events, status }) => successCallback(api, { events, status, callback }));
+  unsub();
 }
 
 export async function setGeneticAnalysisOrderFulfilled(
@@ -33,9 +31,8 @@ export async function setGeneticAnalysisOrderFulfilled(
   geneticAnalysisOrderId,
   callback?: () => void,
 ): Promise<void> {
-  var unsub = await api.tx.geneticAnalysisOrders
+  const unsub = await api.tx.geneticAnalysisOrders
     .fulfillGeneticAnalysisOrder(geneticAnalysisOrderId)
-    .signAndSend(pair, { nonce: -1 }, ({ events, status }) =>
-      successCallback(api, { events, status, callback, unsub }),
-    );
+    .signAndSend(pair, { nonce: -1 }, ({ events, status }) => successCallback(api, { events, status, callback }));
+  unsub();
 }
