@@ -1,5 +1,5 @@
 import { ApiPromise } from '@polkadot/api';
-import { Service } from '../../models/services';
+import { Service } from '../../models/labs/services';
 
 export async function queryServiceById(api: ApiPromise, serviceId: string): Promise<Service> {
   const res = (await api.query.services.services(serviceId)).toHuman();
