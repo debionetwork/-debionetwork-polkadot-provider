@@ -1,6 +1,6 @@
 import { ApiPromise } from '@polkadot/api';
-import { successCallback } from '..';
-import { GeneticAnalystsVerificationStatus } from '../models/genetic-analysts';
+import { successCallback } from '../..';
+import { GeneticAnalystsVerificationStatus } from '../../models/genetic-analysts';
 
 export async function updateGeneticAnalystVerificationStatus(
   api: ApiPromise,
@@ -15,3 +15,5 @@ export async function updateGeneticAnalystVerificationStatus(
       successCallback(api, { events, status, callback, unsub }),
     );
 }
+
+export * from "./genetic-analysis-orders";
