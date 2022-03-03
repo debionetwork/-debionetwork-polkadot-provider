@@ -35,22 +35,14 @@ export class Order {
 
   normalize() {
     const order: Order = this; // eslint-disable-line
-    order.additionalPrices[0].value = convertSubstrateBalanceToNumber(
-      order.additionalPrices[0].value,
-    );
+    order.additionalPrices[0].value = convertSubstrateBalanceToNumber(order.additionalPrices[0].value);
 
-    order.prices[0].value = convertSubstrateBalanceToNumber(
-      order.prices[0].value,
-    );
+    order.prices[0].value = convertSubstrateBalanceToNumber(order.prices[0].value);
 
-    order.createdAt = new Date(
-      convertSubstrateNumberToNumber(order.createdAt),
-    );
+    order.createdAt = new Date(convertSubstrateNumberToNumber(order.createdAt));
 
     if (order.updatedAt) {
-      order.updatedAt = new Date(
-        convertSubstrateNumberToNumber(order.updatedAt),
-      );
+      order.updatedAt = new Date(convertSubstrateNumberToNumber(order.updatedAt));
     }
   }
 }

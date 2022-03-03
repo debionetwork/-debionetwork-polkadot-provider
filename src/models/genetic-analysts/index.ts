@@ -19,11 +19,9 @@ export class GeneticAnalyst {
   stakeAmount: number;
 
   normalize() {
-    const geneticAnalyst : GeneticAnalyst = this; // eslint-disable-line
+    const geneticAnalyst: GeneticAnalyst = this; // eslint-disable-line
 
-    geneticAnalyst.stakeAmount = convertSubstrateBalanceToNumber(
-      geneticAnalyst.stakeAmount,
-    );
+    geneticAnalyst.stakeAmount = convertSubstrateBalanceToNumber(geneticAnalyst.stakeAmount);
     return geneticAnalyst;
   }
 }

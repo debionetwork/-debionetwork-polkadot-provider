@@ -29,16 +29,12 @@ export class GeneticAnalysis {
   status: GeneticAnalysisStatus;
 
   normalize() {
-    const geneticAnalysis : GeneticAnalysis = this; // eslint-disable-line
+    const geneticAnalysis: GeneticAnalysis = this; // eslint-disable-line
 
-    geneticAnalysis.createdAt = new Date(
-      convertSubstrateNumberToNumber(geneticAnalysis.createdAt),
-    );
+    geneticAnalysis.createdAt = new Date(convertSubstrateNumberToNumber(geneticAnalysis.createdAt));
 
     if (geneticAnalysis.updatedAt) {
-      geneticAnalysis.updatedAt = new Date(
-        convertSubstrateNumberToNumber(geneticAnalysis.updatedAt),
-      );
+      geneticAnalysis.updatedAt = new Date(convertSubstrateNumberToNumber(geneticAnalysis.updatedAt));
     }
 
     return geneticAnalysis;

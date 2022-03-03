@@ -31,26 +31,18 @@ export class ServiceRequest {
   unstakedAt: Date;
 
   normalize() {
-    const serviceRequest: ServiceRequest = this;// eslint-disable-line
+    const serviceRequest: ServiceRequest = this; // eslint-disable-line
 
-    serviceRequest.stakingAmount = convertSubstrateBalanceToNumber(
-      serviceRequest.stakingAmount,
-    );
+    serviceRequest.stakingAmount = convertSubstrateBalanceToNumber(serviceRequest.stakingAmount);
 
-    serviceRequest.createdAt = new Date(
-      convertSubstrateNumberToNumber(serviceRequest.createdAt),
-    );
+    serviceRequest.createdAt = new Date(convertSubstrateNumberToNumber(serviceRequest.createdAt));
 
     if (serviceRequest.unstakedAt) {
-      serviceRequest.unstakedAt = new Date(
-        convertSubstrateNumberToNumber(serviceRequest.unstakedAt),
-      );
+      serviceRequest.unstakedAt = new Date(convertSubstrateNumberToNumber(serviceRequest.unstakedAt));
     }
 
     if (serviceRequest.updatedAt) {
-      serviceRequest.updatedAt = new Date(
-        convertSubstrateNumberToNumber(serviceRequest.updatedAt),
-      );
+      serviceRequest.updatedAt = new Date(convertSubstrateNumberToNumber(serviceRequest.updatedAt));
     }
 
     return serviceRequest;

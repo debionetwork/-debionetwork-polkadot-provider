@@ -1,8 +1,5 @@
 import { CurrencyType, Price } from '../../labs/services';
-import {
-  convertSubstrateBalanceToNumber,
-  convertSubstrateNumberToNumber,
-} from '../../../index';
+import { convertSubstrateBalanceToNumber, convertSubstrateNumberToNumber } from '../../../index';
 import { GeneticAnalysisOrderStatus } from './genetic-analysis-order-status';
 
 export class GeneticAnalystOrder {
@@ -36,22 +33,16 @@ export class GeneticAnalystOrder {
   updatedAt: Date;
 
   normalize() {
-    const geneticAnalysisOrder : GeneticAnalystOrder = this; // eslint-disable-line
+    const geneticAnalysisOrder: GeneticAnalystOrder = this; // eslint-disable-line
 
     if (geneticAnalysisOrder.prices[0].value) {
-      geneticAnalysisOrder.prices[0].value = convertSubstrateBalanceToNumber(
-        geneticAnalysisOrder.prices[0].value,
-      );
+      geneticAnalysisOrder.prices[0].value = convertSubstrateBalanceToNumber(geneticAnalysisOrder.prices[0].value);
     }
 
-    geneticAnalysisOrder.createdAt = new Date(
-      convertSubstrateNumberToNumber(geneticAnalysisOrder.createdAt),
-    );
+    geneticAnalysisOrder.createdAt = new Date(convertSubstrateNumberToNumber(geneticAnalysisOrder.createdAt));
 
     if (geneticAnalysisOrder.updatedAt) {
-      geneticAnalysisOrder.updatedAt = new Date(
-        convertSubstrateNumberToNumber(geneticAnalysisOrder.updatedAt),
-      );
+      geneticAnalysisOrder.updatedAt = new Date(convertSubstrateNumberToNumber(geneticAnalysisOrder.updatedAt));
     }
 
     return geneticAnalysisOrder;
