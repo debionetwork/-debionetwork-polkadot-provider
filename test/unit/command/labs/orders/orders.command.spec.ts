@@ -62,10 +62,9 @@ describe('Orders Unit Tests', () => {
       expect(successCallback).toBeCalledWith(API_PROMISE_MOCK, {
           events: eventAndStatusMock.events,
           status: eventAndStatusMock.status,
-          callback: mockFunction,
-          unsub: undefined
+          callback: mockFunction
       });
-      expect(mockFunction).toBeCalledTimes(1);
+      expect(mockFunction).toBeCalledTimes(2);
   });
 
   it('fulfillOrder should return', async () => {
@@ -90,10 +89,9 @@ describe('Orders Unit Tests', () => {
       expect(successCallback).toBeCalledWith(API_PROMISE_MOCK, {
           events: eventAndStatusMock.events,
           status: eventAndStatusMock.status,
-          callback: mockFunction,
-          unsub: undefined
+          callback: mockFunction
       });
-      expect(mockFunction).toBeCalledTimes(1);
+      expect(mockFunction).toBeCalledTimes(2);
   });
 
   it('setOrderRefunded should return', async () => {
@@ -118,10 +116,9 @@ describe('Orders Unit Tests', () => {
       expect(successCallback).toBeCalledWith(API_PROMISE_MOCK, {
           events: eventAndStatusMock.events,
           status: eventAndStatusMock.status,
-          callback: mockFunction,
-          unsub: undefined
+          callback: mockFunction
       });
-      expect(mockFunction).toBeCalledTimes(1);
+      expect(mockFunction).toBeCalledTimes(2);
   });
 
   it('setOrderPaid should return', async () => {
@@ -146,10 +143,9 @@ describe('Orders Unit Tests', () => {
       expect(successCallback).toBeCalledWith(API_PROMISE_MOCK, {
           events: eventAndStatusMock.events,
           status: eventAndStatusMock.status,
-          callback: mockFunction,
-          unsub: undefined
+          callback: mockFunction
       });
-      expect(mockFunction).toBeCalledTimes(1);
+      expect(mockFunction).toBeCalledTimes(2);
   });
 
   it('cancelOrder should return', async () => {
@@ -174,9 +170,8 @@ describe('Orders Unit Tests', () => {
       expect(successCallback).toBeCalledWith(API_PROMISE_MOCK, {
           events: eventAndStatusMock.events,
           status: eventAndStatusMock.status,
-          callback: mockFunction,
-          unsub: undefined
+          callback: mockFunction
       });
-      expect(mockFunction).toBeCalledTimes(1);
+      expect(mockFunction).toBeCalledTimes(2);
   });
 });

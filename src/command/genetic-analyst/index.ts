@@ -1,6 +1,6 @@
 import { ApiPromise } from '@polkadot/api';
-import { successCallback } from '..';
-import { GeneticAnalystsVerificationStatus } from '../models/genetic-analysts';
+import { successCallback } from '../..';
+import { GeneticAnalystsVerificationStatus } from '../../models/genetic-analysts';
 
 export async function updateGeneticAnalystVerificationStatus(
   api: ApiPromise,
@@ -9,9 +9,10 @@ export async function updateGeneticAnalystVerificationStatus(
   geneticAnalystVerificationStatus: GeneticAnalystsVerificationStatus,
   callback?: () => void,
 ) {
-  var unsub = await api.tx.geneticAnalysts
+  const unsub = await api.tx.geneticAnalysts
     .updateGeneticAnalystVerificationStatus(accountId, geneticAnalystVerificationStatus.toString())
-    .signAndSend(pair, { nonce: -1 }, ({ events, status }) =>
-      successCallback(api, { events, status, callback, unsub }),
-    );
+    .signAndSend(pair, { nonce: -1 }, ({ events, status }) => successCallback(api, { events, status, callback }));
+  unsub();
 }
+
+export * from './genetic-analysis-orders';

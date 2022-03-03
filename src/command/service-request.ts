@@ -7,9 +7,8 @@ export async function retrieveUnstakedAmount(
   requestId: string,
   callback?: () => void,
 ): Promise<void> {
-  var unsub = await api.tx.serviceRequest
+  const unsub = await api.tx.serviceRequest
     .retrieveUnstakedAmount(requestId)
-    .signAndSend(pair, { nonce: -1 }, ({ events, status }) =>
-      successCallback(api, { events, status, callback, unsub }),
-    );
+    .signAndSend(pair, { nonce: -1 }, ({ events, status }) => successCallback(api, { events, status, callback }));
+  unsub();
 }

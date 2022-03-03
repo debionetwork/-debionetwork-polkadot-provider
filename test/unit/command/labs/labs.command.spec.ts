@@ -58,10 +58,9 @@ describe('Lab Commands Unit Tests', () => {
       expect(successCallback).toBeCalledWith(API_PROMISE_MOCK, {
           events: eventAndStatusMock.events,
           status: eventAndStatusMock.status,
-          callback: mockFunction,
-          unsub: undefined
+          callback: mockFunction
       });
-      expect(mockFunction).toBeCalledTimes(1);
+      expect(mockFunction).toBeCalledTimes(2);
   });
 
   it('updateLab should return', async () => {
@@ -86,10 +85,9 @@ describe('Lab Commands Unit Tests', () => {
       expect(successCallback).toBeCalledWith(API_PROMISE_MOCK, {
           events: eventAndStatusMock.events,
           status: eventAndStatusMock.status,
-          callback: mockFunction,
-          unsub: undefined
+          callback: mockFunction
       });
-      expect(mockFunction).toBeCalledTimes(1);
+      expect(mockFunction).toBeCalledTimes(2);
   });
 
   it('updateLabVerificationStatus should return', async () => {
@@ -116,10 +114,9 @@ describe('Lab Commands Unit Tests', () => {
       expect(successCallback).toBeCalledWith(API_PROMISE_MOCK, {
           events: eventAndStatusMock.events,
           status: eventAndStatusMock.status,
-          callback: mockFunction,
-          unsub: undefined
+          callback: mockFunction
       });
-      expect(mockFunction).toBeCalledTimes(1);
+      expect(mockFunction).toBeCalledTimes(2);
   });
 
   it('deregisterLab should return', async () => {
@@ -141,9 +138,8 @@ describe('Lab Commands Unit Tests', () => {
       expect(successCallback).toBeCalledWith(API_PROMISE_MOCK, {
           events: eventAndStatusMock.events,
           status: eventAndStatusMock.status,
-          callback: mockFunction,
-          unsub: undefined
+          callback: mockFunction
       });
-      expect(mockFunction).toBeCalledTimes(1);
+      expect(mockFunction).toBeCalledTimes(2);
   });
 });
