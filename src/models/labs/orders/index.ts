@@ -44,6 +44,8 @@ export class Order {
     if (order.updatedAt) {
       order.updatedAt = new Date(convertSubstrateNumberToNumber(order.updatedAt));
     }
+
+    return order;
   }
 }
 
