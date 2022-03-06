@@ -2,7 +2,6 @@ export const geneticAnalystsDataMock = {
     accountId: "string",
     services: ["string"],
     qualifications: ["string"],
-    verificationStatus: "Unverified",
     info: {
         firstName: "string",
         lastName: "string",
@@ -13,4 +12,7 @@ export const geneticAnalystsDataMock = {
         specialization: "string",
     },
     stakeAmount: 0,
+    stakeStatus: 'Unstaked',
+    verificationStatus: "Unverified",
+    availabilityStatus: 'Unavailable',
 };
