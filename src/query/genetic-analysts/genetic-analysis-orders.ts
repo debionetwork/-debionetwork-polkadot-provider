@@ -6,7 +6,10 @@ export async function queryGeneticAnalysisOrderById(api: ApiPromise, orderId: st
   return new GeneticAnalysisOrder(res);
 }
 
-export async function queryGeneticAnalystOrderByCustomerId(api: ApiPromise, accountId: string): Promise<GeneticAnalysisOrder[]> {
+export async function queryGeneticAnalysisOrderByCustomerId(
+  api: ApiPromise,
+  accountId: string,
+): Promise<GeneticAnalysisOrder[]> {
   const orderIds: any = (await api.query.geneticAnalysisOrders.geneticAnalysisOrdersByCustomerId(accountId)).toHuman();
   const orders: GeneticAnalysisOrder[] = new Array<GeneticAnalysisOrder>();
   for (const orderId of orderIds) {
@@ -15,8 +18,13 @@ export async function queryGeneticAnalystOrderByCustomerId(api: ApiPromise, acco
   return orders;
 }
 
-export async function queryGeneticAnalystOrderByGeneticAnalystId(api: ApiPromise, accountId: string): Promise<GeneticAnalysisOrder[]> {
-  const orderIds: any = (await api.query.geneticAnalysisOrders.geneticAnalysisOrdersByGeneticAnalystId(accountId)).toHuman();
+export async function queryGeneticAnalysisOrderByGeneticAnalystId(
+  api: ApiPromise,
+  accountId: string,
+): Promise<GeneticAnalysisOrder[]> {
+  const orderIds: any = (
+    await api.query.geneticAnalysisOrders.geneticAnalysisOrdersByGeneticAnalystId(accountId)
+  ).toHuman();
   const orders: GeneticAnalysisOrder[] = new Array<GeneticAnalysisOrder>();
   for (const orderId of orderIds) {
     orders.push(await queryGeneticAnalysisOrderById(api, orderId));
@@ -24,8 +32,13 @@ export async function queryGeneticAnalystOrderByGeneticAnalystId(api: ApiPromise
   return orders;
 }
 
-export async function queryPendingGeneticAnalystOrderByGeneticAnalystId(api: ApiPromise, accountId: string): Promise<GeneticAnalysisOrder[]> {
-  const orderIds: any = (await api.query.geneticAnalysisOrders.pendingGeneticAnalysisOrdersByGeneticAnalystId(accountId)).toHuman();
+export async function queryPendingGeneticAnalysisOrderByGeneticAnalystId(
+  api: ApiPromise,
+  accountId: string,
+): Promise<GeneticAnalysisOrder[]> {
+  const orderIds: any = (
+    await api.query.geneticAnalysisOrders.pendingGeneticAnalysisOrdersByGeneticAnalystId(accountId)
+  ).toHuman();
   const orders: GeneticAnalysisOrder[] = new Array<GeneticAnalysisOrder>();
   for (const orderId of orderIds) {
     orders.push(await queryGeneticAnalysisOrderById(api, orderId));
@@ -33,8 +46,13 @@ export async function queryPendingGeneticAnalystOrderByGeneticAnalystId(api: Api
   return orders;
 }
 
-export async function queryLastGeneticAnalystOrderByCustomerId(api: ApiPromise, accountId: string): Promise<GeneticAnalysisOrder[]> {
-  const orderIds: any = (await api.query.geneticAnalysisOrders.lastGeneticAnalysisOrderByCustomerId(accountId)).toHuman();
+export async function queryLastGeneticAnalysisOrderByCustomerId(
+  api: ApiPromise,
+  accountId: string,
+): Promise<GeneticAnalysisOrder[]> {
+  const orderIds: any = (
+    await api.query.geneticAnalysisOrders.lastGeneticAnalysisOrderByCustomerId(accountId)
+  ).toHuman();
   const orders: GeneticAnalysisOrder[] = new Array<GeneticAnalysisOrder>();
   for (const orderId of orderIds) {
     orders.push(await queryGeneticAnalysisOrderById(api, orderId));
@@ -42,15 +60,15 @@ export async function queryLastGeneticAnalystOrderByCustomerId(api: ApiPromise, 
   return orders;
 }
 
-export async function queryGeneticAnalystOrderAdminKey(api: ApiPromise): Promise<string> {
+export async function queryGeneticAnalysisOrderAdminKey(api: ApiPromise): Promise<string> {
   return (await api.query.geneticAnalysisOrders.adminKey()).toString();
 }
 
-export async function queryGeneticAnalystOrderPalletId(api: ApiPromise): Promise<string> {
+export async function queryGeneticAnalysisOrderPalletId(api: ApiPromise): Promise<string> {
   return (await api.query.geneticAnalysisOrders.palletId()).toString();
 }
 
-export async function queryGeneticAnalystOrderTotalEscrowAmount(api: ApiPromise): Promise<number> {
+export async function queryGeneticAnalysisOrderTotalEscrowAmount(api: ApiPromise): Promise<number> {
   const res: any = (await api.query.geneticAnalysisOrders.totalEscrowAmount()).toHuman();
   return parseInt(res, 0);
 }
