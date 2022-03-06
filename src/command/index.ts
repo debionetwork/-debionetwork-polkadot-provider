@@ -5,6 +5,7 @@ export * from './rewards';
 export * from './service-request';
 export * from './user-profile';
 export * from './genetic-analyst';
+export * from './electronic-medical-record';
 
 export function successCallback(api: ApiPromise, { events, status, callback }) {
   if (status.isFinalized) {

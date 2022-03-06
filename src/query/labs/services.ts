@@ -19,7 +19,7 @@ export async function queryServicesCount(api: ApiPromise): Promise<number> {
   return parseInt(res, 0);
 }
 
-export async function queryServicesCountByOwnerId(api: ApiPromise, accoutId: string): Promise<number> {
-  const res: any = (await api.query.services.servicesCountByOwner(accoutId)).toHuman();
+export async function queryServicesCountByOwnerId(api: ApiPromise, accountId: string): Promise<number> {
+  const res: any = (await api.query.services.servicesCountByOwner(accountId)).toHuman();
   return parseInt(res, 0);
 }
