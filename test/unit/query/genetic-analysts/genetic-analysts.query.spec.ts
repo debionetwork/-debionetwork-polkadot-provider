@@ -3,8 +3,8 @@ import {
     queryGeneticAnalystAdminKey,
     queryGeneticAnalystCount,
     queryGeneticAnalystPalletId,
-    queryMinimumStakeAmount,
-    queryTotalStakedAmount,
+    queryGeneticAnalystMinimumStakeAmount,
+    queryGeneticAnalystTotalStakedAmount,
   } from "../../../../src/query/genetic-analysts/index";
   import { geneticAnalysts } from "./genetic-analysts.query.mock";
   import { ApiPromise } from "../../@polkadot-api.mock";
@@ -90,25 +90,25 @@ import { GeneticAnalyst } from "../../../../src/models/genetic-analysts";
       expect(palletIdSpy).toBeCalledTimes(1);
     });
   
-    it('queryTotalStakedAmount should return', async () => {
+    it('queryGeneticAnalystTotalStakedAmount should return', async () => {
       // Arrange
       const EXPECTED_VALUE = 0;
       (mockFunction as jest.Mock).mockReturnValue(EXPECTED_VALUE);
   
       // Assert
-      expect(await queryTotalStakedAmount(API_PROMISE_MOCK as any))
+      expect(await queryGeneticAnalystTotalStakedAmount(API_PROMISE_MOCK as any))
         .toEqual(EXPECTED_VALUE);
       expect(mockFunction).toBeCalledTimes(1);
       expect(totalStakedAmountSpy).toBeCalledTimes(1);
     });
   
-    it('queryMinimumStakeAmount should return', async () => {
+    it('queryGeneticAnalystMinimumStakeAmount should return', async () => {
       // Arrange
       const EXPECTED_VALUE = 0;
       (mockFunction as jest.Mock).mockReturnValue(EXPECTED_VALUE);
   
       // Assert
-      expect(await queryMinimumStakeAmount(API_PROMISE_MOCK as any))
+      expect(await queryGeneticAnalystMinimumStakeAmount(API_PROMISE_MOCK as any))
         .toEqual(EXPECTED_VALUE);
       expect(mockFunction).toBeCalledTimes(1);
       expect(minimumStakeAmountSpy).toBeCalledTimes(1);
