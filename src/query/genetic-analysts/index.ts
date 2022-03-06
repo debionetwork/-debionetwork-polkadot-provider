@@ -19,12 +19,12 @@ export async function queryGeneticAnalystPalletId(api: ApiPromise): Promise<stri
   return (await api.query.geneticAnalysts.palletId()).toString();
 }
 
-export async function queryTotalStakedAmount(api: ApiPromise): Promise<number> {
+export async function queryGeneticAnalystTotalStakedAmount(api: ApiPromise): Promise<number> {
   const res: any = (await api.query.geneticAnalysts.totalStakedAmount()).toHuman();
   return parseInt(res, 0);
 }
 
-export async function queryMinimumStakeAmount(api: ApiPromise): Promise<number> {
+export async function queryGeneticAnalystMinimumStakeAmount(api: ApiPromise): Promise<number> {
   const res: any = (await api.query.geneticAnalysts.minimumStakeAmount()).toHuman();
   return parseInt(res, 0);
 }
