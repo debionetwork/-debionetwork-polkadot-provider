@@ -1,5 +1,5 @@
-import { createOrder, fulfillOrder, setOrderRefunded, setOrderPaid, cancelOrder } from "../../../../../src/command/labs/orders";
-import { ApiPromise, signAndSend, eventAndStatusMock } from "../../../@polkadot-api.mock";
+import { createOrder, fulfillOrder, setOrderRefunded, setOrderPaid, cancelOrder, getCreateOrderFee } from "../../../../../src/command/labs/orders";
+import { ApiPromise, signAndSendWithPaymentInfo, eventAndStatusMock } from "../../../@polkadot-api.mock";
 import { mockFunction } from "../../../mock";
 import { successCallback } from "../../../../../src/index";
 import { orders } from "./orders.command.mock";
@@ -18,7 +18,8 @@ describe('Orders Commands Unit Tests', () => {
       orders: orders
   };
   
-  const signAndSendSpy = jest.spyOn(signAndSend, 'signAndSend');
+  const signAndSendSpy = jest.spyOn(signAndSendWithPaymentInfo, 'signAndSend');
+  const paymentInfoSpy = jest.spyOn(signAndSendWithPaymentInfo, 'paymentInfo');
   const createOrderSpy = jest.spyOn(orders, 'createOrder');
   const fulfillOrderSpy = jest.spyOn(orders, 'fulfillOrder');
   const setOrderRefundedSpy = jest.spyOn(orders, 'setOrderRefunded');
@@ -29,6 +30,7 @@ describe('Orders Commands Unit Tests', () => {
     (mockFunction as jest.Mock).mockClear();
     (successCallback as jest.Mock).mockClear();
     signAndSendSpy.mockClear();
+    paymentInfoSpy.mockClear();
     createOrderSpy.mockClear();
     fulfillOrderSpy.mockClear();
     setOrderRefundedSpy.mockClear();
@@ -173,5 +175,30 @@ describe('Orders Commands Unit Tests', () => {
           callback: mockFunction
       });
       expect(mockFunction).toBeCalledTimes(2);
+  });
+
+  it('getCreateOrderFee should return', () => {
+    // Arrange
+    const PAIR = "PAIR";
+    const SERVICE_ID = "SERVICE_ID";
+    const BOX_PUBLIC_KEY = "BOX_PUBLIC_KEY";
+    const PRICE_INDEX = 0;
+    const EXPECTED_VALUE = 0;
+    (mockFunction as jest.Mock).mockReturnValue(EXPECTED_VALUE);
+      
+    // Assert
+    expect(
+      getCreateOrderFee(
+        API_PROMISE_MOCK as any, 
+        PAIR,
+        SERVICE_ID,
+        BOX_PUBLIC_KEY,
+        PRICE_INDEX,
+      )).toEqual(EXPECTED_VALUE);
+    expect(createOrderSpy).toBeCalledTimes(1);
+    expect(createOrderSpy).toBeCalledWith(SERVICE_ID, PRICE_INDEX, BOX_PUBLIC_KEY);
+    expect(paymentInfoSpy).toBeCalledTimes(1);
+    expect(paymentInfoSpy).toBeCalledWith(PAIR);
+    expect(mockFunction).toBeCalledTimes(1);
   });
 });
