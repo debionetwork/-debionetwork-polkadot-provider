@@ -19,7 +19,7 @@ import { when } from 'jest-when';
     mockFunction: jest.fn(),
   }));
   
-  describe('Genetic Analysis Orders Unit Tests', () => {
+  describe('Genetic Analysis Orders Queries Unit Tests', () => {
     const API_PROMISE_MOCK: ApiPromise = new ApiPromise();
     API_PROMISE_MOCK.query = {
         geneticAnalysisOrders: geneticAnalysisOrders

@@ -12,7 +12,7 @@ jest.mock('../../../../src', () => ({
   successCallback: jest.fn(() => mockFunction()),
 }));
 
-describe('Service Request Unit Testing', () => {
+describe('Service Request Commands Unit Testing', () => {
   const API_PROMISE_MOCK: ApiPromise = new ApiPromise();
   API_PROMISE_MOCK.tx = {
     serviceRequest: serviceRequest

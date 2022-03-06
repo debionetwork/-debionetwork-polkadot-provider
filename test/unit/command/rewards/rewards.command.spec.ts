@@ -12,7 +12,7 @@ jest.mock('../../../../src', () => ({
   successCallback: jest.fn(() => mockFunction()),
 }));
 
-describe('Reward Unit Testing', () => {
+describe('Reward Commands Unit Testing', () => {
   const API_PROMISE_MOCK: ApiPromise = new ApiPromise();
   API_PROMISE_MOCK.tx = {
     rewards: rewards

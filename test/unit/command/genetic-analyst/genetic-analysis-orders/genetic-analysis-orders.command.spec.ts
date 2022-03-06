@@ -12,7 +12,7 @@ jest.mock('../../../../../src/index', () => ({
   successCallback: jest.fn(() => mockFunction()),
 }));
 
-describe('Genetic Analysis Orders Unit Testing', () => {
+describe('Genetic Analysis Orders Commands Unit Testing', () => {
   const API_PROMISE_MOCK: ApiPromise = new ApiPromise();
   API_PROMISE_MOCK.tx = {
     geneticAnalysisOrders: geneticAnalysisOrders

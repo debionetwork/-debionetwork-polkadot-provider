@@ -16,7 +16,7 @@ import { GeneticAnalyst } from "../../../../src/models/genetic-analysts";
     mockFunction: jest.fn(),
   }));
   
-  describe('Genetic Analysts Unit Tests', () => {
+  describe('Genetic Analysts Queries Unit Tests', () => {
     const API_PROMISE_MOCK: ApiPromise = new ApiPromise();
     API_PROMISE_MOCK.query = {
         geneticAnalysts: geneticAnalysts
