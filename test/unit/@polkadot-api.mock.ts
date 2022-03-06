@@ -29,8 +29,18 @@ export const eventAndStatusMock = {
 };
 
 export const signAndSend = {
-  signAndSend(pair: any, nonce: any, callback?: ({ events, status }) => void) {
+  signAndSend(pair: any, nonce: any, callback?: ({ events, status }) => void) { // eslint-disable-line
     callback(eventAndStatusMock);
     return mockFunction;
+  }
+}
+
+export const signAndSendWithPaymentInfo = {
+  signAndSend(pair: any, nonce: any, callback?: ({ events, status }) => void) { // eslint-disable-line
+    callback(eventAndStatusMock);
+    return mockFunction;
+  },
+  paymentInfo(pair: any) { // eslint-disable-line
+    return mockFunction();
   }
 }
