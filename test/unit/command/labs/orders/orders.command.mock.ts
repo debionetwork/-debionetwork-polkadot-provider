@@ -1,19 +1,19 @@
-import { signAndSend } from "../../../@polkadot-api.mock";
+import { signAndSendWithPaymentInfo } from "../../../@polkadot-api.mock";
 
 export const orders = {
   createOrder(param) {
-    return signAndSend;
+    return signAndSendWithPaymentInfo;
   },
   fulfillOrder(param) {
-    return signAndSend;
+    return signAndSendWithPaymentInfo;
   },
   setOrderRefunded(param) {
-    return signAndSend;
+    return signAndSendWithPaymentInfo;
   },
   setOrderPaid(param) {
-    return signAndSend;
+    return signAndSendWithPaymentInfo;
   },
   cancelOrder(param) {
-    return signAndSend;
+    return signAndSendWithPaymentInfo;
   }
 }
