@@ -1,6 +1,8 @@
 import { convertSubstrateBalanceToNumber } from '../..';
+import { GeneticAnalystsAvailabilityStatus } from './genetic-analyst-availability-status';
 import { GeneticAnalystInfo } from './genetic-analyst-info';
 import { GeneticAnalystsVerificationStatus } from './genetic-analyst-verification-status';
+import { StakeStatus } from './stake-status';
 
 export class GeneticAnalyst {
   constructor(anyJson: any) {
@@ -14,9 +16,11 @@ export class GeneticAnalyst {
   accountId: string;
   services: string[];
   qualifications: string[];
-  verificationStatus: GeneticAnalystsVerificationStatus;
   info: GeneticAnalystInfo;
   stakeAmount: number;
+  stakeStatus: StakeStatus;
+  verificationStatus: GeneticAnalystsVerificationStatus;
+  availabilityStatus: GeneticAnalystsAvailabilityStatus;
 
   normalize() {
     const geneticAnalyst: GeneticAnalyst = this; // eslint-disable-line
