@@ -30,3 +30,5 @@ export async function queryGeneticAnalystMinimumStakeAmount(api: ApiPromise): Pr
 }
 
 export * from './genetic-data';
+export * from './genetic-analysis';
+export * from './genetic-analysis-orders';
