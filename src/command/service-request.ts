@@ -12,3 +12,18 @@ export async function retrieveUnstakedAmount(
     .signAndSend(pair, { nonce: -1 }, ({ events, status }) => successCallback(api, { events, status, callback }));
   unsub();
 }
+
+export function getCreateRequestFee(
+  api: ApiPromise,
+  pair: any,
+  country: string,
+  region: string,
+  city: string,
+  category: string,
+): any {
+  return api.tx.serviceRequest.createRequest(country, region, city, category, 1).paymentInfo(pair);
+}
+
+export function unstakeRequestFee(api: ApiPromise, pair: any, requestId: string): any {
+  return api.tx.serviceRequest.unstake(requestId).paymentInfo(pair);
+}
