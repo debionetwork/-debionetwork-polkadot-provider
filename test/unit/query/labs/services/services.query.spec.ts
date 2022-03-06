@@ -9,7 +9,7 @@ jest.mock('../../../mock', () => ({
   mockFunction: jest.fn(),
 }));
 
-describe('Services Unit Tests', () => {
+describe('Services Queries Unit Tests', () => {
   const API_PROMISE_MOCK: ApiPromise = new ApiPromise();
   API_PROMISE_MOCK.query = {
       services: services

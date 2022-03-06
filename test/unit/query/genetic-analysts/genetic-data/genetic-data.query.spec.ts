@@ -15,7 +15,7 @@ jest.mock('../../../mock', () => ({
   mockFunction: jest.fn(),
 }));
 
-describe('Genetic Data Unit Tests', () => {
+describe('Genetic Data Queries Unit Tests', () => {
   const API_PROMISE_MOCK: ApiPromise = new ApiPromise();
   API_PROMISE_MOCK.query = {
       geneticData: geneticData

@@ -7,7 +7,7 @@ jest.mock('../../mock', () => ({
   mockFunction: jest.fn(),
 }));
 
-describe('User Profile Unit Tests', () => {
+describe('User Profile Queries Unit Tests', () => {
   const API_PROMISE_MOCK: ApiPromise = new ApiPromise();
   API_PROMISE_MOCK.query = {
       userProfile: userProfile

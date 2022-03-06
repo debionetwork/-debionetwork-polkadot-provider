@@ -95,4 +95,6 @@ export async function sudoUpdateAdminKey(api: ApiPromise, pair: any, accountId: 
   unsub();
 }
 
+export * from './genetic-data';
+export * from './genetic-analysis';
 export * from './genetic-analysis-orders';

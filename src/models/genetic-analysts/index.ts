@@ -32,6 +32,7 @@ export class GeneticAnalyst {
 
 export * from './genetic-analyst-info';
 export * from './genetic-analyst-verification-status';
+export * from './genetic-analyst-availability-status';
 export * from './genetic-analysis-orders';
 export * from './genetic-analysis';
 export * from './genetic-data';
