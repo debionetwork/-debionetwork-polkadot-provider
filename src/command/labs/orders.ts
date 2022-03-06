@@ -42,3 +42,13 @@ export async function cancelOrder(api: ApiPromise, pair: any, orderId, callback?
     .signAndSend(pair, { nonce: -1 }, ({ events, status }) => successCallback(api, { events, status, callback }));
   unsub();
 }
+
+export function getCreateOrderFee(
+  api: ApiPromise,
+  pair: any,
+  serviceId: string,
+  customerBoxPublicKey: string,
+  priceIndex: number,
+): any {
+  return api.tx.orders.createOrder(serviceId, priceIndex, customerBoxPublicKey).paymentInfo(pair);
+}
