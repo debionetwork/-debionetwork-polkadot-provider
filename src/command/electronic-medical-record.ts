@@ -23,13 +23,13 @@ export async function deregisterElectronicMedicalRecord(api: ApiPromise, pair: a
     unsub();
 }
   
-export function getAddElectronicMedicalRecordFee(api: ApiPromise, pair: any, data: ElectronicMedicalRecord): Promise<any> {
+export function getAddElectronicMedicalRecordFee(api: ApiPromise, pair: any, data: ElectronicMedicalRecord): any {
     return api.tx.electronicMedicalRecord
       .addElectronicMedicalRecord(data.title, data.category, data.files)
       .paymentInfo(pair)
 }
   
-export function getRemoveElectronicMedicalRecordFee(api: ApiPromise, pair: any, emrId: string): Promise<any> {
+export function getRemoveElectronicMedicalRecordFee(api: ApiPromise, pair: any, emrId: string): any {
     return api.tx.electronicMedicalRecord
       .removeElectronicMedicalRecord(emrId)
       .paymentInfo(pair)
