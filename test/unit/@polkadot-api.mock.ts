@@ -8,6 +8,7 @@ export class WsProvider {
 export class ApiPromise {
   query: any;
   tx: any;
+  registry: any;
   
   static create(provider) { // eslint-disable-line
     return new ApiPromise();
