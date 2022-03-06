@@ -8,7 +8,7 @@ import {
 import { electronicMedicalRecord } from "./electronic-medical-record.query.mock";
 import { ApiPromise } from "../../@polkadot-api.mock";
 import { mockFunction } from "../../mock";
-import { ElectronicMedicalRecord, ElectronicMedicalRecordFile } from "../../../../src";
+import { ElectronicMedicalRecord, ElectronicMedicalRecordFile } from "../../../../src/models/electronic-medical-record";
 import { electronicMedicalRecordDataMock } from "../../models/electronic-medical-record/electronic-medical-record.mock";
 import { electronicMedicalRecordFileDataMock } from "../../models/electronic-medical-record/electronic-medical-record-file.mock";
 import { when } from 'jest-when';

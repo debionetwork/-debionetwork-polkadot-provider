@@ -1,4 +1,4 @@
-import { convertSubstrateNumberToNumber } from "../../..";
+import { convertSubstrateNumberToNumber } from '../../index';
 
 export class ElectronicMedicalRecordFile {
   constructor(anyJson: any) {

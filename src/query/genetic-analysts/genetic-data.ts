@@ -1,5 +1,5 @@
-import { ApiPromise } from "@polkadot/api";
-import { GeneticData } from "../../models/genetic-analysts/genetic-data";
+import { ApiPromise } from '@polkadot/api';
+import { GeneticData } from '../../models/genetic-analysts/genetic-data';
 
 export async function queryGeneticDataById(api: ApiPromise, dataId: string): Promise<GeneticData> {
   const res = (await api.query.geneticData.geneticDataById(dataId)).toHuman();
