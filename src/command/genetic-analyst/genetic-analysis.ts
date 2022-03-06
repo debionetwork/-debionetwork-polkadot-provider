@@ -19,16 +19,23 @@ export async function processGeneticAnalysis(
   api: ApiPromise,
   pair: any,
   geneticAnalysisTrackingId: string,
-  status: string,
+  geneticAnalysisStatus: string,
   callback?: () => void,
 ): Promise<void> {
   const unsub = await api.tx.geneticAnalysis
-    .processGeneticAnalysis(geneticAnalysisTrackingId, status)
+    .processGeneticAnalysis(geneticAnalysisTrackingId, geneticAnalysisStatus)
     .signAndSend(pair, { nonce: -1 }, ({ events, status }) => successCallback(api, { events, status, callback }));
   unsub();
 }
 
-export async function submitGeneticAnalysis(api: ApiPromise, pair: any, geneticAnalysisTrackingId: string, reportLink: string, comment: string, callback?: () => void): Promise<void> {
+export async function submitGeneticAnalysis(
+  api: ApiPromise,
+  pair: any,
+  geneticAnalysisTrackingId: string,
+  reportLink: string,
+  comment: string,
+  callback?: () => void,
+): Promise<void> {
   const unsub = await api.tx.geneticAnalysis
     .submitGeneticAnalysis(geneticAnalysisTrackingId, reportLink, comment)
     .signAndSend(pair, { nonce: -1 }, ({ events, status }) => successCallback(api, { events, status, callback }));
