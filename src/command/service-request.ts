@@ -25,8 +25,7 @@ export function getCreateRequestFee(
 }
 
 export function unstakeRequestFee(api: ApiPromise, pair: any, requestId: string): any {
-  return api.tx./* A prefix for the `serviceRequest` module. */
-  serviceRequest.unstake(requestId).paymentInfo(pair);
+  return api.tx.serviceRequest.unstake(requestId).paymentInfo(pair);
 }
 
 export async function generateRequestId(api: ApiPromise, pair: any, country: string, region: string, city: string, category: string) {
