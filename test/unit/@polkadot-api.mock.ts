@@ -1,3 +1,4 @@
+import { toHumanMock } from './@polkadot-types.mock';
 import { mockFunction } from './mock';
 
 export class WsProvider {
@@ -43,5 +44,11 @@ export const signAndSendWithPaymentInfo = {
   },
   paymentInfo(pair: any) { // eslint-disable-line
     return mockFunction();
+  }
+}
+
+export const signAndSendReturnToHuman = {
+  signAndSend(pair: any, nonce: any) {
+    return toHumanMock;
   }
 }
