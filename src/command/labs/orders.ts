@@ -5,12 +5,13 @@ export async function createOrder(
   api: ApiPromise,
   pair: any,
   serviceId: string,
-  customerBoxPublicKey: string,
   priceIndex: number,
+  customerBoxPublicKey: string,
+  orderFlow: string,
   callback?: () => void,
 ): Promise<void> {
   const unsub = await api.tx.orders
-    .createOrder(serviceId, priceIndex, customerBoxPublicKey)
+    .createOrder(serviceId, priceIndex, customerBoxPublicKey, orderFlow)
     .signAndSend(pair, { nonce: -1 }, ({ events, status }) => successCallback(api, { events, status, callback }));
   unsub();
 }

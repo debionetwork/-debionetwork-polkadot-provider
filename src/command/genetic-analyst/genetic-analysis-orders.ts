@@ -1,6 +1,34 @@
 import { ApiPromise } from '@polkadot/api';
 import { successCallback } from '../..';
 
+export async function cancelGeneticAnalysisOrder(
+  api: ApiPromise,
+  pair: any,
+  geneticAnalysisOrderId,
+  callback?: () => void,
+): Promise<void> {
+  const unsub = await api.tx.geneticAnalysisOrders
+    .cancelGeneticAnalysisOrder(geneticAnalysisOrderId)
+    .signAndSend(pair, { nonce: -1 }, ({ events, status }) => successCallback(api, { events, status, callback }));
+  unsub();
+}
+
+export async function createGeneticAnalysisOrder(
+  api: ApiPromise,
+  pair: any,
+  geneticDataId: string,
+  serviceId: string,
+  priceIndex: number,
+  geneticLink: string,
+  customerBoxPublicKey: string,
+  callback?: () => void,
+): Promise<void> {
+  const unsub = await api.tx.geneticAnalysisOrders
+    .createGeneticAnalysisOrder(geneticDataId, serviceId, priceIndex, customerBoxPublicKey, geneticLink)
+    .signAndSend(pair, { nonce: -1 }, ({ events, status }) => successCallback(api, { events, status, callback }));
+  unsub();
+}
+
 export async function setGeneticAnalysisOrderPaid(
   api: ApiPromise,
   pair: any,
@@ -33,6 +61,29 @@ export async function setGeneticAnalysisOrderFulfilled(
 ): Promise<void> {
   const unsub = await api.tx.geneticAnalysisOrders
     .fulfillGeneticAnalysisOrder(geneticAnalysisOrderId)
+    .signAndSend(pair, { nonce: -1 }, ({ events, status }) => successCallback(api, { events, status, callback }));
+  unsub();
+}
+
+export async function sudoUpdateEscrowKey(
+  api: ApiPromise,
+  pair: any,
+  accountId,
+  callback?: () => void,
+): Promise<void> {
+  const unsub = await api.tx.geneticAnalysisOrders
+    .sudoUpdateEscrowKey(accountId)
+    .signAndSend(pair, { nonce: -1 }, ({ events, status }) => successCallback(api, { events, status, callback }));
+  unsub();
+}
+export async function updateEscrowKey(
+  api: ApiPromise,
+  pair: any,
+  accountId,
+  callback?: () => void,
+): Promise<void> {
+  const unsub = await api.tx.geneticAnalysisOrders
+    .updateEscrowKey(accountId)
     .signAndSend(pair, { nonce: -1 }, ({ events, status }) => successCallback(api, { events, status, callback }));
   unsub();
 }
