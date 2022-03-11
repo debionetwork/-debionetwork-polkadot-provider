@@ -1,15 +1,15 @@
 import { ApiPromise } from '@polkadot/api';
 import { successCallback } from '../..';
-import { GeneticAnalystInfo } from '../../models';
+import { GeneticAnalystServiceInfo } from '../../models';
 
 export async function bulkCreateGeneticAnalystService(
 	api: ApiPromise,
 	pair: any,
-	geneticAnalystInfo: GeneticAnalystInfo,
+	geneticAnalystServiceInfo: GeneticAnalystServiceInfo,
 	callback?: () => void,
 ): Promise<void> {
 	const unsub = await api.tx.geneticAnalystServices
-		.bulkCreateGeneticAnalystService(geneticAnalystInfo)
+		.bulkCreateGeneticAnalystService(geneticAnalystServiceInfo)
 		.signAndSend(pair, { nonce: -1 }, ({ events, status }) => successCallback(api, { events, status, callback }));
 	unsub();
 }
@@ -17,11 +17,11 @@ export async function bulkCreateGeneticAnalystService(
 export async function createGeneticAnalystService(
 	api: ApiPromise,
 	pair: any,
-	geneticAnalystInfo: GeneticAnalystInfo,
+	geneticAnalystServiceInfo: GeneticAnalystServiceInfo,
 	callback?: () => void,
 ): Promise<void> {
 	const unsub = await api.tx.geneticAnalystServices
-		.createGeneticAnalystService(geneticAnalystInfo)
+		.createGeneticAnalystService(geneticAnalystServiceInfo)
 		.signAndSend(pair, { nonce: -1 }, ({ events, status }) => successCallback(api, { events, status, callback }));
 	unsub();
 }
@@ -42,11 +42,11 @@ export async function updateGeneticAnalystService(
 	api: ApiPromise,
 	pair: any,
 	geneticAnalystServiceId: string,
-	geneticAnalystInfo: GeneticAnalystInfo,
+	geneticAnalystServiceInfo: GeneticAnalystServiceInfo,
 	callback?: () => void,
 ): Promise<void> {
 	const unsub = await api.tx.geneticAnalystServices
-		.updateGeneticAnalystService(geneticAnalystServiceId, geneticAnalystInfo)
+		.updateGeneticAnalystService(geneticAnalystServiceId, geneticAnalystServiceInfo)
 		.signAndSend(pair, { nonce: -1 }, ({ events, status }) => successCallback(api, { events, status, callback }));
 	unsub();
 }

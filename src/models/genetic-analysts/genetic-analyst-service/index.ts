@@ -8,3 +8,5 @@ export class GeneticAnalystService {
   ownerId: string;
   info: string;
 }
+
+export * from './genetic-analyst-service-info';

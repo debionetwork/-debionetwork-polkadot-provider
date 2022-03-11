@@ -8,3 +8,5 @@ export class GeneticAnalystQualification {
     ownerId: string;
     info: string;
   }
+  
+  export * from './genetic-analyst-qualification-info';

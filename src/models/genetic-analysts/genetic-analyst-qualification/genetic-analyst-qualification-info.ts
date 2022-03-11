@@ -1,7 +1,7 @@
 import { Experience } from './experiece';
 import { GeneticAnalystQualificationCertification } from './genetic-analyst-qualification-certification';
 
-export class GeneticAnalystServiceInfo {
+export class GeneticAnalystQualificationInfo {
   experience : string;
   pricesByCurrency: Experience[];
   expectedDuration: GeneticAnalystQualificationCertification[];

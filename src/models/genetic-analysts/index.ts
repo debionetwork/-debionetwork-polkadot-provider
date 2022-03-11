@@ -37,3 +37,4 @@ export * from './genetic-analysis-orders';
 export * from './genetic-analysis';
 export * from './genetic-data';
 export * from './genetic-analyst-service';
+export * from './genetic-analyst-qualification';
