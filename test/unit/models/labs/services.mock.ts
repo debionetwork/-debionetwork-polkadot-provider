@@ -3,20 +3,35 @@ export const serviceDataMock = {
   ownerId: "OWNER_ID",
   serviceFlow: "RequestTest",
   info: {
+    name: 'string',
+    category: 'string',
+    description: 'string',
     pricesByCurrency: [
       {
         priceComponents: [
           {
-            value: "VALUE",
+            component: 'string',
+            value: 1
           }
         ],
         additionalPrices: [
           {
-            value: "VALUE",
+            component: 'string',
+            value: 1
           }
         ],
-        currency: "CURRENCY"
+        currency: "CURRENCY",
+        totalPrice: 1,
       }
-    ]
+    ],
+    expectedDuration: {
+      duration: 'string',
+      durationType: 'string',
+    },
+    testResultSample: 'string',
+    longDescription: 'string',
+    image: 'string',
+    dnaCollectionProcess: 'string',
+    price: 'string',
   },
 }
