@@ -46,9 +46,3 @@ export const signAndSendWithPaymentInfo = {
     return mockFunction();
   }
 }
-
-export const signAndSendReturnToHuman = {
-  signAndSend(pair: any, nonce: any) {
-    return toHumanMock;
-  }
-}

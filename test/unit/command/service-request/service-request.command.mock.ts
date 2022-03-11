@@ -1,4 +1,4 @@
-import { signAndSendReturnToHuman, signAndSendWithPaymentInfo } from "../../@polkadot-api.mock";
+import { signAndSendWithPaymentInfo } from "../../@polkadot-api.mock";
 
 export const serviceRequest = {
   createRequest(param1, param2, param3, param4, param5) { // eslint-disable-line
@@ -11,15 +11,15 @@ export const serviceRequest = {
     return signAndSendWithPaymentInfo;
   },
   generateRequestid(params) { // eslit-disable-line
-    return signAndSendReturnToHuman;
+    return signAndSendWithPaymentInfo;
   },
   claimRequest(params) { // eslit-disable-line
-    return signAndSendReturnToHuman;
+    return signAndSendWithPaymentInfo;
   },
   processRequest(params) { // eslit-disable-line
-    return signAndSendReturnToHuman;
+    return signAndSendWithPaymentInfo;
   },
   finalizeRequest(params) { // eslit-disable-line
-    return signAndSendReturnToHuman;
+    return signAndSendWithPaymentInfo;
   }
 }

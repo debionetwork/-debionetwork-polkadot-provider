@@ -28,12 +28,19 @@ export function unstakeRequestFee(api: ApiPromise, pair: any, requestId: string)
   return api.tx.serviceRequest.unstake(requestId).paymentInfo(pair);
 }
 
-export async function generateRequestId(api: ApiPromise, pair: any, country: string, region: string, city: string, category: string) {
-  const result = await api.tx.serviceRequest
+export async function generateRequestId(
+  api: ApiPromise, 
+  pair: any, 
+  country: string, 
+  region: string, 
+  city: string, 
+  category: string, 
+  callback?: () => void,
+) {
+  const unsub = await api.tx.serviceRequest
     .generateRequestid(country, region, city, category)
-    .signAndSend(pair, { nonce: -1 });
-
-  return result.toHuman();
+    .signAndSend(pair, { nonce: -1 }, ({ events, status }) => successCallback(api, { events, status, callback }));
+  unsub();
 }
 
 export async function unstakeRequest (
@@ -48,11 +55,19 @@ export async function unstakeRequest (
   unsub();
 }
 
-export async function claimRequest(api: ApiPromise, pair: any, requestId: string, serviceId: string, testingPrice: string, qcPrice: string) {
-  const result = await api.tx.serviceRequest
+export async function claimRequest(
+  api: ApiPromise, 
+  pair: any, 
+  requestId: string, 
+  serviceId: string, 
+  testingPrice: string, 
+  qcPrice: string, 
+  callback?: () => void,
+) {
+  const unsub = await api.tx.serviceRequest
     .claimRequest(requestId, serviceId, testingPrice, qcPrice)
-    .signAndSend(pair, { nonce: -1 });
-  return result.toHuman();
+    .signAndSend(pair, { nonce: -1 }, ({ events, status }) => successCallback(api, { events, status, callback }));
+  unsub();
 }
 
 export async function processRequest(
@@ -63,11 +78,12 @@ export async function processRequest(
   orderId: string,
   dnaSampleTrackingId: string,
   additionalStakingAmount: string,
+  callback?: () => void,
 ) {
-  const result = await api.tx.serviceRequest
+  const unsub = await api.tx.serviceRequest
     .processRequest(labId, requestId, orderId, dnaSampleTrackingId, additionalStakingAmount)
-    .signAndSend(pair, { nonce: -1 });
-  return result.toHuman();
+    .signAndSend(pair, { nonce: -1 }, ({ events, status }) => successCallback(api, { events, status, callback }));
+  unsub();
 }
 
 export async function finalizeRequest(
@@ -75,9 +91,10 @@ export async function finalizeRequest(
   pair: any,
   requestId: string,
   testResultSuccess: string,
+  callback?: () => void,
 ) {
-  const result = await api.tx.serviceRequest
+  const unsub = await api.tx.serviceRequest
     .finalizeRequest(requestId, testResultSuccess)
-    .signAndSend(pair, { nonce: -1 });
-  return result.toHuman();
+    .signAndSend(pair, { nonce: -1 }, ({ events, status }) => successCallback(api, { events, status, callback }));
+  unsub();
 }

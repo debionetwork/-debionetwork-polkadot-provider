@@ -1,6 +1,6 @@
 import { retrieveUnstakedAmount, getCreateRequestFee, unstakeRequestFee, generateRequestId, unstakeRequest, claimRequest, processRequest, finalizeRequest } from "../../../../src/command/service-request";
 import { successCallback } from "../../../../src";
-import { ApiPromise, eventAndStatusMock, signAndSendReturnToHuman, signAndSendWithPaymentInfo } from "../../@polkadot-api.mock";
+import { ApiPromise, eventAndStatusMock, signAndSendWithPaymentInfo } from "../../@polkadot-api.mock";
 import { mockFunction } from "../../mock";
 import { serviceRequest } from "./service-request.command.mock";
 
@@ -20,7 +20,6 @@ describe('Service Request Commands Unit Testing', () => {
 
   const signAndSendSpy = jest.spyOn(signAndSendWithPaymentInfo, 'signAndSend');
   const paymentInfoSpy = jest.spyOn(signAndSendWithPaymentInfo, 'paymentInfo');
-  const signAndSendReturnToHumanSpy = jest.spyOn(signAndSendReturnToHuman, 'signAndSend');
   const createRequestSpy = jest.spyOn(serviceRequest, 'createRequest');
   const unstakeSpy = jest.spyOn(serviceRequest, 'unstake');
   const retrieveUnstakedAmountSpy = jest.spyOn(serviceRequest, 'retrieveUnstakedAmount');
@@ -34,7 +33,6 @@ describe('Service Request Commands Unit Testing', () => {
     (successCallback as jest.Mock).mockClear();
     signAndSendSpy.mockClear();
     paymentInfoSpy.mockClear();
-    signAndSendReturnToHumanSpy.mockClear();
     createRequestSpy.mockClear();
     unstakeSpy.mockClear();
     retrieveUnstakedAmountSpy.mockClear();
@@ -129,21 +127,19 @@ describe('Service Request Commands Unit Testing', () => {
     (mockFunction as jest.Mock).mockReturnValue(EXPECTED_VALUE);
     
     // Assert
-    expect(
-      await generateRequestId(
-        API_PROMISE_MOCK as any,
-        PAIR,
-        COUNTRY,
-        REGION,
-        CITY,
-        CATEGORY
-      )
-    ).toEqual(EXPECTED_VALUE);
+    await generateRequestId(
+      API_PROMISE_MOCK as any,
+      PAIR,
+      COUNTRY,
+      REGION,
+      CITY,
+      CATEGORY
+    );
     expect(generateRequestidSpy).toBeCalledTimes(1);
     expect(generateRequestidSpy).toBeCalledWith(COUNTRY, REGION, CITY, CATEGORY);
-    expect(signAndSendReturnToHumanSpy).toBeCalledTimes(1);
-    expect(signAndSendReturnToHumanSpy).toBeCalledWith(PAIR, { nonce: -1 });
-    expect(mockFunction).toBeCalledTimes(1);
+    expect(signAndSendSpy).toBeCalledTimes(1);
+    expect(signAndSendSpy).toBeCalledWith(PAIR, { nonce: -1 }, expect.any(Function));
+    expect(mockFunction).toBeCalledTimes(2);
   });
 
   it('unstakeRequest should return', async () => {
@@ -178,21 +174,19 @@ describe('Service Request Commands Unit Testing', () => {
     (mockFunction as jest.Mock).mockReturnValue(EXPECTED_VALUE);
 
     // Assert
-    expect(
-      await claimRequest(
-        API_PROMISE_MOCK as any,
-        PAIR,
-        REQUEST_ID,
-        SERVICE_ID,
-        TESTING_PRICE,
-        QC_PRICE
-      )
-    ).toEqual(EXPECTED_VALUE);
+    await claimRequest(
+      API_PROMISE_MOCK as any,
+      PAIR,
+      REQUEST_ID,
+      SERVICE_ID,
+      TESTING_PRICE,
+      QC_PRICE
+    );
     expect(claimRequestSpy).toBeCalledTimes(1);
     expect(claimRequestSpy).toBeCalledWith(REQUEST_ID, SERVICE_ID, TESTING_PRICE, QC_PRICE);
-    expect(signAndSendReturnToHumanSpy).toBeCalledTimes(1);
-    expect(signAndSendReturnToHumanSpy).toBeCalledWith(PAIR, { nonce: -1 });
-    expect(mockFunction).toBeCalledTimes(1);
+    expect(signAndSendSpy).toBeCalledTimes(1);
+    expect(signAndSendSpy).toBeCalledWith(PAIR, { nonce: -1 }, expect.any(Function));
+    expect(mockFunction).toBeCalledTimes(2);
   });
 
   it('processRequest should return', async () => {
@@ -207,22 +201,20 @@ describe('Service Request Commands Unit Testing', () => {
     (mockFunction as jest.Mock).mockReturnValue(EXPECTED_VALUE);
 
     // Assert
-    expect(
-      await processRequest(
-        API_PROMISE_MOCK as any,
-        PAIR,
-        LAB_ID,
-        REQUEST_ID,
-        ORDER_ID,
-        DNA_SAMPLE_TRACKING_ID,
-        ADDITIONAL_STACKING_AMOUNT
-      )
-    ).toEqual(EXPECTED_VALUE);
+    await processRequest(
+      API_PROMISE_MOCK as any,
+      PAIR,
+      LAB_ID,
+      REQUEST_ID,
+      ORDER_ID,
+      DNA_SAMPLE_TRACKING_ID,
+      ADDITIONAL_STACKING_AMOUNT
+    );
     expect(processRequestSpy).toBeCalledTimes(1);
     expect(processRequestSpy).toBeCalledWith(LAB_ID, REQUEST_ID, ORDER_ID, DNA_SAMPLE_TRACKING_ID, ADDITIONAL_STACKING_AMOUNT);
-    expect(signAndSendReturnToHumanSpy).toBeCalledTimes(1);
-    expect(signAndSendReturnToHumanSpy).toBeCalledWith(PAIR, { nonce: -1 });
-    expect(mockFunction).toBeCalledTimes(1);
+    expect(signAndSendSpy).toBeCalledTimes(1);
+    expect(signAndSendSpy).toBeCalledWith(PAIR, { nonce: -1 }, expect.any(Function));
+    expect(mockFunction).toBeCalledTimes(2);
   });
 
   it('finalizeRequest should return', async () => {
@@ -234,18 +226,16 @@ describe('Service Request Commands Unit Testing', () => {
     (mockFunction as jest.Mock).mockReturnValue(EXPECTED_VALUE);
 
     // Assert
-    expect(
-      await finalizeRequest(
-        API_PROMISE_MOCK as any,
-        PAIR,
-        REQUEST_ID,
-        TEST_RESULT_SUCCESS,
-      )
-    ).toEqual(EXPECTED_VALUE);
+    await finalizeRequest(
+      API_PROMISE_MOCK as any,
+      PAIR,
+      REQUEST_ID,
+      TEST_RESULT_SUCCESS,
+    );
     expect(finalizeRequestSpy).toBeCalledTimes(1);
     expect(finalizeRequestSpy).toBeCalledWith(REQUEST_ID, TEST_RESULT_SUCCESS);
-    expect(signAndSendReturnToHumanSpy).toBeCalledTimes(1);
-    expect(signAndSendReturnToHumanSpy).toBeCalledWith(PAIR, { nonce: -1 });
-    expect(mockFunction).toBeCalledTimes(1);
+    expect(signAndSendSpy).toBeCalledTimes(1);
+    expect(signAndSendSpy).toBeCalledWith(PAIR, { nonce: -1 }, expect.any(Function));
+    expect(mockFunction).toBeCalledTimes(2);
   });
 })
