@@ -6,7 +6,7 @@ export async function bulkCreateQualification(
 	api: ApiPromise,
 	pair: any,
 	geneticAnalystQualificationInfo: GeneticAnalystQualificationInfo,
-	callback?: () => void,
+	callback?: () => void
 ): Promise<void> {
 	const unsub = await api.tx.geneticAnalystQualifications
 		.bulkCreateQualification(geneticAnalystQualificationInfo)
