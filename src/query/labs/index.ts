@@ -34,7 +34,7 @@ export async function queryLabsCountByCountryRegionCity(
 }
 
 export async function queryLabsAdminKey(api: ApiPromise): Promise<string> {
-  return (await api.query.labs.adminKey()).toString();
+  return (await api.query.labs.labVerifierKey()).toString();
 }
 
 export * from './orders';
