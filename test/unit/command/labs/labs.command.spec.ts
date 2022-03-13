@@ -60,7 +60,7 @@ describe('Lab Commands Unit Tests', () => {
           status: eventAndStatusMock.status,
           callback: mockFunction
       });
-      expect(mockFunction).toBeCalledTimes(2);
+      expect(mockFunction).toBeCalledTimes(1);
   });
 
   it('updateLab should return', async () => {
@@ -87,7 +87,7 @@ describe('Lab Commands Unit Tests', () => {
           status: eventAndStatusMock.status,
           callback: mockFunction
       });
-      expect(mockFunction).toBeCalledTimes(2);
+      expect(mockFunction).toBeCalledTimes(1);
   });
 
   it('updateLabVerificationStatus should return', async () => {
@@ -116,7 +116,7 @@ describe('Lab Commands Unit Tests', () => {
           status: eventAndStatusMock.status,
           callback: mockFunction
       });
-      expect(mockFunction).toBeCalledTimes(2);
+      expect(mockFunction).toBeCalledTimes(1);
   });
 
   it('deregisterLab should return', async () => {
@@ -140,6 +140,6 @@ describe('Lab Commands Unit Tests', () => {
           status: eventAndStatusMock.status,
           callback: mockFunction
       });
-      expect(mockFunction).toBeCalledTimes(2);
+      expect(mockFunction).toBeCalledTimes(1);
   });
 });

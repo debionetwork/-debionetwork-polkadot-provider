@@ -6,12 +6,14 @@ export async function bulkCreateQualification(
   api: ApiPromise,
   pair: any,
   geneticAnalystQualificationInfo: GeneticAnalystQualificationInfo,
-  callback?: () => void
+  callback?: () => void,
 ): Promise<void> {
-  const unsub = await api.tx.geneticAnalystQualifications
+  // tslint:disable-next-line
+  var unsub = await api.tx.geneticAnalystQualifications
     .bulkCreateQualification(geneticAnalystQualificationInfo)
-    .signAndSend(pair, { nonce: -1 }, ({ events, status }) => successCallback(api, { events, status, callback }));
-  unsub();
+    .signAndSend(pair, { nonce: -1 }, ({ events, status }) => {
+      successCallback(api, { events, status, callback, unsub });
+    });
 }
 
 export async function createQualification(
@@ -20,10 +22,12 @@ export async function createQualification(
   geneticAnalystQualificationInfo: GeneticAnalystQualificationInfo,
   callback?: () => void,
 ): Promise<void> {
-  const unsub = await api.tx.geneticAnalystQualifications
+  // tslint:disable-next-line
+  var unsub = await api.tx.geneticAnalystQualifications
     .createQualification(geneticAnalystQualificationInfo)
-    .signAndSend(pair, { nonce: -1 }, ({ events, status }) => successCallback(api, { events, status, callback }));
-  unsub();
+    .signAndSend(pair, { nonce: -1 }, ({ events, status }) => {
+      successCallback(api, { events, status, callback, unsub });
+    });
 }
 
 export async function deleteQualification(
@@ -32,10 +36,12 @@ export async function deleteQualification(
   qualificationId: string,
   callback?: () => void,
 ): Promise<void> {
-  const unsub = await api.tx.geneticAnalystQualifications
+  // tslint:disable-next-line
+  var unsub = await api.tx.geneticAnalystQualifications
     .deleteQualification(qualificationId)
-    .signAndSend(pair, { nonce: -1 }, ({ events, status }) => successCallback(api, { events, status, callback }));
-  unsub();
+    .signAndSend(pair, { nonce: -1 }, ({ events, status }) => {
+      successCallback(api, { events, status, callback, unsub });
+    });
 }
 
 export async function updateQualification(
@@ -45,8 +51,10 @@ export async function updateQualification(
   geneticAnalystQualificationInfo: GeneticAnalystQualificationInfo,
   callback?: () => void,
 ): Promise<void> {
-  const unsub = await api.tx.geneticAnalystQualifications
+  // tslint:disable-next-line
+  var unsub = await api.tx.geneticAnalystQualifications
     .updateQualification(qualificationId, geneticAnalystQualificationInfo)
-    .signAndSend(pair, { nonce: -1 }, ({ events, status }) => successCallback(api, { events, status, callback }));
-  unsub();
+    .signAndSend(pair, { nonce: -1 }, ({ events, status }) => {
+      successCallback(api, { events, status, callback, unsub });
+    });
 }

@@ -1,4 +1,4 @@
 export class GAServiceExpectedDuration {
-    duration: string;
-    durationType: string;
-  }
+  duration: string;
+  durationType: string;
+}

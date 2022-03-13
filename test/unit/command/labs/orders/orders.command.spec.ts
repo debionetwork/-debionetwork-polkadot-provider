@@ -68,7 +68,7 @@ describe('Orders Commands Unit Tests', () => {
           status: eventAndStatusMock.status,
           callback: mockFunction
       });
-      expect(mockFunction).toBeCalledTimes(2);
+      expect(mockFunction).toBeCalledTimes(1);
   });
 
   it('fulfillOrder should return', async () => {
@@ -95,7 +95,7 @@ describe('Orders Commands Unit Tests', () => {
           status: eventAndStatusMock.status,
           callback: mockFunction
       });
-      expect(mockFunction).toBeCalledTimes(2);
+      expect(mockFunction).toBeCalledTimes(1);
   });
 
   it('setOrderRefunded should return', async () => {
@@ -122,7 +122,7 @@ describe('Orders Commands Unit Tests', () => {
           status: eventAndStatusMock.status,
           callback: mockFunction
       });
-      expect(mockFunction).toBeCalledTimes(2);
+      expect(mockFunction).toBeCalledTimes(1);
   });
 
   it('setOrderPaid should return', async () => {
@@ -149,7 +149,7 @@ describe('Orders Commands Unit Tests', () => {
           status: eventAndStatusMock.status,
           callback: mockFunction
       });
-      expect(mockFunction).toBeCalledTimes(2);
+      expect(mockFunction).toBeCalledTimes(1);
   });
 
   it('cancelOrder should return', async () => {
@@ -176,7 +176,7 @@ describe('Orders Commands Unit Tests', () => {
           status: eventAndStatusMock.status,
           callback: mockFunction
       });
-      expect(mockFunction).toBeCalledTimes(2);
+      expect(mockFunction).toBeCalledTimes(1);
   });
 
   it('getCreateOrderFee should return', () => {

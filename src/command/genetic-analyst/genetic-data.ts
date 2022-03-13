@@ -9,10 +9,12 @@ export async function addGeneticData(
   link: string,
   callback?: () => void,
 ): Promise<void> {
-  const unsub = await api.tx.geneticData
+  // tslint:disable-next-line
+  var unsub = await api.tx.geneticData
     .addGeneticData(title, description, link)
-    .signAndSend(pair, { nonce: -1 }, ({ events, status }) => successCallback(api, { events, status, callback }));
-  unsub();
+    .signAndSend(pair, { nonce: -1 }, ({ events, status }) => {
+      successCallback(api, { events, status, callback, unsub });
+    });
 }
 
 export async function updateGeneticData(
@@ -24,17 +26,19 @@ export async function updateGeneticData(
   link: string,
   callback?: () => void,
 ): Promise<void> {
-  const unsub = await api.tx.geneticData
+  // tslint:disable-next-line
+  var unsub = await api.tx.geneticData
     .updateGeneticData(id, title, description, link)
-    .signAndSend(pair, { nonce: -1 }, ({ events, status }) => successCallback(api, { events, status, callback }));
-  unsub();
+    .signAndSend(pair, { nonce: -1 }, ({ events, status }) => {
+      successCallback(api, { events, status, callback, unsub });
+    });
 }
 
 export async function removeGeneticData(api: ApiPromise, pair: any, id: string, callback?: () => void): Promise<void> {
-  const unsub = await api.tx.geneticData
-    .removeGeneticData(id)
-    .signAndSend(pair, { nonce: -1 }, ({ events, status }) => successCallback(api, { events, status, callback }));
-  unsub();
+  // tslint:disable-next-line
+  var unsub = await api.tx.geneticData.removeGeneticData(id).signAndSend(pair, { nonce: -1 }, ({ events, status }) => {
+    successCallback(api, { events, status, callback, unsub });
+  });
 }
 
 export function getAddGeneticDataFee(

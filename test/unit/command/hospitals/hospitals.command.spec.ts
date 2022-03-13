@@ -57,7 +57,7 @@ describe('Hospital Commands Unit Tests', () => {
           status: eventAndStatusMock.status,
           callback: mockFunction
       });
-      expect(mockFunction).toBeCalledTimes(2);
+      expect(mockFunction).toBeCalledTimes(1);
   });
 
   it('updateHospital should return', async () => {
@@ -84,7 +84,7 @@ describe('Hospital Commands Unit Tests', () => {
           status: eventAndStatusMock.status,
           callback: mockFunction
       });
-      expect(mockFunction).toBeCalledTimes(2);
+      expect(mockFunction).toBeCalledTimes(1);
   });
 
   it('deregisterHospital should return', async () => {
@@ -108,6 +108,6 @@ describe('Hospital Commands Unit Tests', () => {
           status: eventAndStatusMock.status,
           callback: mockFunction
       });
-      expect(mockFunction).toBeCalledTimes(2);
+      expect(mockFunction).toBeCalledTimes(1);
   });
 });
