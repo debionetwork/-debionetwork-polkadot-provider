@@ -9,5 +9,17 @@ export const serviceRequest = {
   },
   retrieveUnstakedAmount(params) { // eslint-disable-line
     return signAndSendWithPaymentInfo;
+  },
+  generateRequestid(params) { // eslit-disable-line
+    return signAndSendWithPaymentInfo;
+  },
+  claimRequest(params) { // eslit-disable-line
+    return signAndSendWithPaymentInfo;
+  },
+  processRequest(params) { // eslit-disable-line
+    return signAndSendWithPaymentInfo;
+  },
+  finalizeRequest(params) { // eslit-disable-line
+    return signAndSendWithPaymentInfo;
   }
 }
