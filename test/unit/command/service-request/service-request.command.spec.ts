@@ -1,4 +1,4 @@
-import { retrieveUnstakedAmount, getCreateRequestFee, unstakeRequestFee } from "../../../../src/command/service-request";
+import { retrieveUnstakedAmount, getCreateRequestFee, unstakeRequestFee, generateRequestId, unstakeRequest, claimRequest, processRequest, finalizeRequest } from "../../../../src/command/service-request";
 import { successCallback } from "../../../../src";
 import { ApiPromise, eventAndStatusMock, signAndSendWithPaymentInfo } from "../../@polkadot-api.mock";
 import { mockFunction } from "../../mock";
@@ -23,6 +23,10 @@ describe('Service Request Commands Unit Testing', () => {
   const createRequestSpy = jest.spyOn(serviceRequest, 'createRequest');
   const unstakeSpy = jest.spyOn(serviceRequest, 'unstake');
   const retrieveUnstakedAmountSpy = jest.spyOn(serviceRequest, 'retrieveUnstakedAmount');
+  const generateRequestidSpy = jest.spyOn(serviceRequest, 'generateRequestid');
+  const claimRequestSpy = jest.spyOn(serviceRequest, 'claimRequest');
+  const processRequestSpy = jest.spyOn(serviceRequest, 'processRequest');
+  const finalizeRequestSpy = jest.spyOn(serviceRequest, 'finalizeRequest');
 
   beforeEach(() => {
     (mockFunction as jest.Mock).mockClear();
@@ -32,6 +36,10 @@ describe('Service Request Commands Unit Testing', () => {
     createRequestSpy.mockClear();
     unstakeSpy.mockClear();
     retrieveUnstakedAmountSpy.mockClear();
+    generateRequestidSpy.mockClear();
+    claimRequestSpy.mockClear();
+    processRequestSpy.mockClear();
+    finalizeRequestSpy.mockClear();
   });
   
   it('retrieveUnstakedAmount should return', async () => {
@@ -106,5 +114,128 @@ describe('Service Request Commands Unit Testing', () => {
     expect(paymentInfoSpy).toBeCalledTimes(1);
     expect(paymentInfoSpy).toBeCalledWith(PAIR);
     expect(mockFunction).toBeCalledTimes(1);
+  });
+
+  it('generateRequestId should return', async () => {
+    // Arrange
+    const PAIR = "PAIR";
+    const COUNTRY = "COUNTRY";
+    const REGION = "REGION";
+    const CITY = "CITY";
+    const CATEGORY = "CATEGORY";
+    const EXPECTED_VALUE = {};
+    (mockFunction as jest.Mock).mockReturnValue(EXPECTED_VALUE);
+    
+    // Assert
+    await generateRequestId(
+      API_PROMISE_MOCK as any,
+      PAIR,
+      COUNTRY,
+      REGION,
+      CITY,
+      CATEGORY
+    );
+    expect(generateRequestidSpy).toBeCalledTimes(1);
+    expect(generateRequestidSpy).toBeCalledWith(COUNTRY, REGION, CITY, CATEGORY);
+    expect(signAndSendSpy).toBeCalledTimes(1);
+    expect(signAndSendSpy).toBeCalledWith(PAIR, { nonce: -1 }, expect.any(Function));
+    expect(mockFunction).toBeCalledTimes(2);
+  });
+
+  it('unstakeRequest should return', async () => {
+    // Arrange
+    const PAIR = "PAIR";
+    const REQUEST_ID = "REQUEST_ID";
+    const EXPECTED_VALUE = {};
+    (mockFunction as jest.Mock).mockReturnValue(EXPECTED_VALUE);
+      
+    // Assert
+    await unstakeRequest(
+      API_PROMISE_MOCK as any, 
+      PAIR,
+      REQUEST_ID,
+      mockFunction,
+    );
+    expect(unstakeSpy).toBeCalledTimes(1);
+    expect(unstakeSpy).toBeCalledWith(REQUEST_ID);
+    expect(signAndSendSpy).toBeCalledTimes(1);
+    expect(signAndSendSpy).toBeCalledWith(PAIR, { nonce: -1 }, expect.any(Function));
+    expect(mockFunction).toBeCalledTimes(2);
+  });
+
+  it('claimRequest should return', async () => {
+    // Arrange
+    const PAIR = "PAIR";
+    const REQUEST_ID = "REQUEST_ID";
+    const SERVICE_ID = "SERVICE_ID";
+    const TESTING_PRICE = "TESTING_PRICE";
+    const QC_PRICE = "QC_PRICE";
+    const EXPECTED_VALUE = {};
+    (mockFunction as jest.Mock).mockReturnValue(EXPECTED_VALUE);
+
+    // Assert
+    await claimRequest(
+      API_PROMISE_MOCK as any,
+      PAIR,
+      REQUEST_ID,
+      SERVICE_ID,
+      TESTING_PRICE,
+      QC_PRICE
+    );
+    expect(claimRequestSpy).toBeCalledTimes(1);
+    expect(claimRequestSpy).toBeCalledWith(REQUEST_ID, SERVICE_ID, TESTING_PRICE, QC_PRICE);
+    expect(signAndSendSpy).toBeCalledTimes(1);
+    expect(signAndSendSpy).toBeCalledWith(PAIR, { nonce: -1 }, expect.any(Function));
+    expect(mockFunction).toBeCalledTimes(2);
+  });
+
+  it('processRequest should return', async () => {
+    // Arrange
+    const PAIR = "PAIR";
+    const LAB_ID = "LAB_ID";
+    const REQUEST_ID = "REQUEST_ID";
+    const ORDER_ID = "ORDER_ID";
+    const DNA_SAMPLE_TRACKING_ID = "DNA_SAMPLE_TRACKING_ID";
+    const ADDITIONAL_STACKING_AMOUNT = "ADDITIONAL_STACKING_AMOUNT";
+    const EXPECTED_VALUE = {};
+    (mockFunction as jest.Mock).mockReturnValue(EXPECTED_VALUE);
+
+    // Assert
+    await processRequest(
+      API_PROMISE_MOCK as any,
+      PAIR,
+      LAB_ID,
+      REQUEST_ID,
+      ORDER_ID,
+      DNA_SAMPLE_TRACKING_ID,
+      ADDITIONAL_STACKING_AMOUNT
+    );
+    expect(processRequestSpy).toBeCalledTimes(1);
+    expect(processRequestSpy).toBeCalledWith(LAB_ID, REQUEST_ID, ORDER_ID, DNA_SAMPLE_TRACKING_ID, ADDITIONAL_STACKING_AMOUNT);
+    expect(signAndSendSpy).toBeCalledTimes(1);
+    expect(signAndSendSpy).toBeCalledWith(PAIR, { nonce: -1 }, expect.any(Function));
+    expect(mockFunction).toBeCalledTimes(2);
+  });
+
+  it('finalizeRequest should return', async () => {
+    // Arrange
+    const PAIR = "PAIR";
+    const REQUEST_ID = "REQUEST_ID";
+    const TEST_RESULT_SUCCESS = "TEST_RESULT_SUCCESS";
+    const EXPECTED_VALUE = {};
+    (mockFunction as jest.Mock).mockReturnValue(EXPECTED_VALUE);
+
+    // Assert
+    await finalizeRequest(
+      API_PROMISE_MOCK as any,
+      PAIR,
+      REQUEST_ID,
+      TEST_RESULT_SUCCESS,
+    );
+    expect(finalizeRequestSpy).toBeCalledTimes(1);
+    expect(finalizeRequestSpy).toBeCalledWith(REQUEST_ID, TEST_RESULT_SUCCESS);
+    expect(signAndSendSpy).toBeCalledTimes(1);
+    expect(signAndSendSpy).toBeCalledWith(PAIR, { nonce: -1 }, expect.any(Function));
+    expect(mockFunction).toBeCalledTimes(2);
   });
 })
