@@ -12,7 +12,7 @@ export async function registerElectronicMedicalRecord(
   var unsub = await api.tx.electronicMedicalRecord
     .addElectronicMedicalRecord(data.title, data.category, data.files)
     .signAndSend(pair, { nonce: -1 }, ({ events, status }) => {
-      successCallback(api, { events, status, callback, unsub })
+      successCallback(api, { events, status, callback, unsub });
     });
 }
 
@@ -26,7 +26,7 @@ export async function updateElectronicMedicalRecord(
   var unsub = await api.tx.electronicMedicalRecord
     .updateElectronicMedicalRecord(data.id, data.title, data.category, data.files)
     .signAndSend(pair, { nonce: -1 }, ({ events, status }) => {
-      successCallback(api, { events, status, callback, unsub })
+      successCallback(api, { events, status, callback, unsub });
     });
 }
 
@@ -40,7 +40,7 @@ export async function deregisterElectronicMedicalRecord(
   var unsub = await api.tx.electronicMedicalRecord
     .removeElectronicMedicalRecord(emrId)
     .signAndSend(pair, { nonce: -1 }, ({ events, status }) => {
-      successCallback(api, { events, status, callback, unsub })
+      successCallback(api, { events, status, callback, unsub });
     });
 }
 

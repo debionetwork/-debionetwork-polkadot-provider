@@ -13,7 +13,7 @@ export async function registerGeneticAnalyst(
   var unsub = await api.tx.geneticAnalysts
     .registerGeneticAnalyst(geneticAnalystInfo)
     .signAndSend(pair, { nonce: -1 }, ({ events, status }) => {
-      successCallback(api, { events, status, callback, unsub })
+      successCallback(api, { events, status, callback, unsub });
     });
 }
 
@@ -27,7 +27,7 @@ export async function updateGeneticAnalyst(
   var unsub = await api.tx.geneticAnalysts
     .updateGeneticAnalyst(geneticAnalystInfo)
     .signAndSend(pair, { nonce: -1 }, ({ events, status }) => {
-      successCallback(api, { events, status, callback, unsub })
+      successCallback(api, { events, status, callback, unsub });
     });
 }
 
@@ -36,7 +36,7 @@ export async function deregisterGeneticAnalyst(api: ApiPromise, pair: any, callb
   var unsub = await api.tx.geneticAnalysts
     .deregisterGeneticAnalyst()
     .signAndSend(pair, { nonce: -1 }, ({ events, status }) => {
-      successCallback(api, { events, status, callback, unsub })
+      successCallback(api, { events, status, callback, unsub });
     });
 }
 
@@ -51,7 +51,7 @@ export async function updateGeneticAnalystVerificationStatus(
   var unsub = await api.tx.geneticAnalysts
     .updateGeneticAnalystVerificationStatus(accountId, geneticAnalystVerificationStatus.toString())
     .signAndSend(pair, { nonce: -1 }, ({ events, status }) => {
-      successCallback(api, { events, status, callback, unsub })
+      successCallback(api, { events, status, callback, unsub });
     });
 }
 
@@ -66,7 +66,7 @@ export async function updateGeneticAnalystAvailabilityStatus(
   var unsub = await api.tx.geneticAnalysts
     .updateGeneticAnalystAvailabilityStatus(accountId, geneticAnalystAvailabilityStatus.toString())
     .signAndSend(pair, { nonce: -1 }, ({ events, status }) => {
-      successCallback(api, { events, status, callback, unsub })
+      successCallback(api, { events, status, callback, unsub });
     });
 }
 
@@ -75,7 +75,7 @@ export async function stakeGeneticAnalyst(api: ApiPromise, pair: any, callback?:
   var unsub = await api.tx.geneticAnalysts
     .stakeGeneticAnalyst()
     .signAndSend(pair, { nonce: -1 }, ({ events, status }) => {
-      successCallback(api, { events, status, callback, unsub })
+      successCallback(api, { events, status, callback, unsub });
     });
 }
 
@@ -84,7 +84,7 @@ export async function unstakeGeneticAnalyst(api: ApiPromise, pair: any, callback
   var unsub = await api.tx.geneticAnalysts
     .unstakeGeneticAnalyst()
     .signAndSend(pair, { nonce: -1 }, ({ events, status }) => {
-      successCallback(api, { events, status, callback, unsub })
+      successCallback(api, { events, status, callback, unsub });
     });
 }
 
@@ -93,7 +93,7 @@ export async function updateMinimumStakeAmount(api: ApiPromise, pair: any, minim
   var unsub = await api.tx.geneticAnalysts
     .updateMinimumStakeAmount(minimum)
     .signAndSend(pair, { nonce: -1 }, ({ events, status }) => {
-      successCallback(api, { events, status, callback, unsub })
+      successCallback(api, { events, status, callback, unsub });
     });
 }
 
@@ -102,7 +102,7 @@ export async function updateAdminKey(api: ApiPromise, pair: any, accountId: stri
   var unsub = await api.tx.geneticAnalysts
     .updateAdminKey(accountId)
     .signAndSend(pair, { nonce: -1 }, ({ events, status }) => {
-      successCallback(api, { events, status, callback, unsub })
+      successCallback(api, { events, status, callback, unsub });
     });
 }
 
@@ -111,7 +111,7 @@ export async function sudoUpdateAdminKey(api: ApiPromise, pair: any, accountId: 
   var unsub = await api.tx.geneticAnalysts
     .sudoUpdateAdminKey(accountId)
     .signAndSend(pair, { nonce: -1 }, ({ events, status }) => {
-      successCallback(api, { events, status, callback, unsub })
+      successCallback(api, { events, status, callback, unsub });
     });
 }
 

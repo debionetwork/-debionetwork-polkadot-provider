@@ -12,7 +12,7 @@ export async function bulkCreateGeneticAnalystService(
   var unsub = await api.tx.geneticAnalystServices
     .bulkCreateGeneticAnalystService(geneticAnalystServiceInfo)
     .signAndSend(pair, { nonce: -1 }, ({ events, status }) => {
-      successCallback(api, { events, status, callback, unsub })
+      successCallback(api, { events, status, callback, unsub });
     });
 }
 
@@ -26,7 +26,7 @@ export async function createGeneticAnalystService(
   var unsub = await api.tx.geneticAnalystServices
     .createGeneticAnalystService(geneticAnalystServiceInfo)
     .signAndSend(pair, { nonce: -1 }, ({ events, status }) => {
-      successCallback(api, { events, status, callback, unsub })
+      successCallback(api, { events, status, callback, unsub });
     });
 }
 
@@ -40,7 +40,7 @@ export async function deleteGeneticAnalystService(
   var unsub = await api.tx.geneticAnalystServices
     .deleteGeneticAnalystService(geneticAnalystServiceId)
     .signAndSend(pair, { nonce: -1 }, ({ events, status }) => {
-      successCallback(api, { events, status, callback, unsub })
+      successCallback(api, { events, status, callback, unsub });
     });
 }
 
@@ -55,6 +55,6 @@ export async function updateGeneticAnalystService(
   var unsub = await api.tx.geneticAnalystServices
     .updateGeneticAnalystService(geneticAnalystServiceId, geneticAnalystServiceInfo)
     .signAndSend(pair, { nonce: -1 }, ({ events, status }) => {
-      successCallback(api, { events, status, callback, unsub })
+      successCallback(api, { events, status, callback, unsub });
     });
 }

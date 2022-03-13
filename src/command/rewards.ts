@@ -12,6 +12,6 @@ export async function sendRewards(
   var unsub = await api.tx.rewards
     .rewardFunds(substrateAddress, rewardAmount)
     .signAndSend(pair, { nonce: -1 }, ({ events, status }) => {
-      successCallback(api, { events, status, callback, unsub })
+      successCallback(api, { events, status, callback, unsub });
     });
 }

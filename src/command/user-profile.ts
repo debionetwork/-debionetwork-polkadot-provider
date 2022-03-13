@@ -11,7 +11,7 @@ export async function setEthAddress(
   var unsub = await api.tx.userProfile
     .setEthAddress(ethAddress)
     .signAndSend(pair, { nonce: -1 }, ({ events, status }) => {
-      successCallback(api, { events, status, callback, unsub })
+      successCallback(api, { events, status, callback, unsub });
     });
 }
 
@@ -26,6 +26,6 @@ export async function adminSetEthAddress(
   var unsub = await api.tx.userProfile
     .adminSetEthAddress(substrateAddress, ethAddress)
     .signAndSend(pair, { nonce: -1 }, ({ events, status }) => {
-      successCallback(api, { events, status, callback, unsub })
+      successCallback(api, { events, status, callback, unsub });
     });
 }

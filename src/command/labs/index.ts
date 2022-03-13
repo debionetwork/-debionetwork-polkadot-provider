@@ -26,7 +26,7 @@ export async function updateLabVerificationStatus(
   var unsub = await api.tx.labs
     .updateLabVerificationStatus(substrateAddress, labVerificationStatus.toString())
     .signAndSend(pair, { nonce: -1 }, ({ events, status }) => {
-      successCallback(api, { events, status, callback, unsub })
+      successCallback(api, { events, status, callback, unsub });
     });
 }
 

@@ -1,5 +1,4 @@
 export class GAServicePrice {
-    component: string;
-    value: number;
-  }
-  
+  component: string;
+  value: number;
+}

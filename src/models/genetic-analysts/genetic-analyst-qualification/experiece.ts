@@ -1,3 +1,3 @@
 export class Experience {
-   title: string;
+  title: string;
 }

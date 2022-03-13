@@ -13,7 +13,7 @@ export async function rejectGeneticAnalysis(
   var unsub = await api.tx.geneticAnalysis
     .rejectGeneticAnalysis(geneticAnalysisTrackingId, rejectedTitle, rejectedDescription)
     .signAndSend(pair, { nonce: -1 }, ({ events, status }) => {
-      successCallback(api, { events, status, callback, unsub })
+      successCallback(api, { events, status, callback, unsub });
     });
 }
 
@@ -28,7 +28,7 @@ export async function processGeneticAnalysis(
   var unsub = await api.tx.geneticAnalysis
     .processGeneticAnalysis(geneticAnalysisTrackingId, geneticAnalysisStatus)
     .signAndSend(pair, { nonce: -1 }, ({ events, status }) => {
-      successCallback(api, { events, status, callback, unsub })
+      successCallback(api, { events, status, callback, unsub });
     });
 }
 
@@ -44,6 +44,6 @@ export async function submitGeneticAnalysis(
   var unsub = await api.tx.geneticAnalysis
     .submitGeneticAnalysis(geneticAnalysisTrackingId, reportLink, comment)
     .signAndSend(pair, { nonce: -1 }, ({ events, status }) => {
-      successCallback(api, { events, status, callback, unsub })
+      successCallback(api, { events, status, callback, unsub });
     });
 }

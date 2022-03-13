@@ -14,7 +14,12 @@ export async function registerHospital(
   });
 }
 
-export async function updateHospital(api: ApiPromise, pair: any, data: HospitalInfo, callback?: () => void): Promise<void> {
+export async function updateHospital(
+  api: ApiPromise,
+  pair: any,
+  data: HospitalInfo,
+  callback?: () => void,
+): Promise<void> {
   // tslint:disable-next-line
   var unsub = await api.tx.hospitals.updateHospital(data).signAndSend(pair, { nonce: -1 }, ({ events, status }) => {
     successCallback(api, { events, status, callback, unsub });
