@@ -7,10 +7,12 @@ export async function cancelGeneticAnalysisOrder(
   geneticAnalysisOrderId,
   callback?: () => void,
 ): Promise<void> {
-  const unsub = await api.tx.geneticAnalysisOrders
+  // tslint:disable-next-line
+  var unsub = await api.tx.geneticAnalysisOrders
     .cancelGeneticAnalysisOrder(geneticAnalysisOrderId)
-    .signAndSend(pair, { nonce: -1 }, ({ events, status }) => successCallback(api, { events, status, callback }));
-  unsub();
+    .signAndSend(pair, { nonce: -1 }, ({ events, status }) => {
+      successCallback(api, { events, status, callback, unsub })
+    });
 }
 
 export async function createGeneticAnalysisOrder(
@@ -23,10 +25,12 @@ export async function createGeneticAnalysisOrder(
   customerBoxPublicKey: string,
   callback?: () => void,
 ): Promise<void> {
-  const unsub = await api.tx.geneticAnalysisOrders
+  // tslint:disable-next-line
+  var unsub = await api.tx.geneticAnalysisOrders
     .createGeneticAnalysisOrder(geneticDataId, serviceId, priceIndex, customerBoxPublicKey, geneticLink)
-    .signAndSend(pair, { nonce: -1 }, ({ events, status }) => successCallback(api, { events, status, callback }));
-  unsub();
+    .signAndSend(pair, { nonce: -1 }, ({ events, status }) => {
+      successCallback(api, { events, status, callback, unsub })
+    });
 }
 
 export async function setGeneticAnalysisOrderPaid(
@@ -35,10 +39,12 @@ export async function setGeneticAnalysisOrderPaid(
   geneticAnalysisOrderId,
   callback?: () => void,
 ): Promise<void> {
-  const unsub = await api.tx.geneticAnalysisOrders
+  // tslint:disable-next-line
+  var unsub = await api.tx.geneticAnalysisOrders
     .setGeneticAnalysisOrderPaid(geneticAnalysisOrderId)
-    .signAndSend(pair, { nonce: -1 }, ({ events, status }) => successCallback(api, { events, status, callback }));
-  unsub();
+    .signAndSend(pair, { nonce: -1 }, ({ events, status }) => {
+      successCallback(api, { events, status, callback, unsub })
+    });
 }
 
 export async function setGeneticAnalysisOrderRefunded(
@@ -47,10 +53,12 @@ export async function setGeneticAnalysisOrderRefunded(
   geneticAnalysisOrderId,
   callback?: () => void,
 ): Promise<void> {
-  const unsub = await api.tx.geneticAnalysisOrders
+  // tslint:disable-next-line
+  var unsub = await api.tx.geneticAnalysisOrders
     .setGeneticAnalysisOrderRefunded(geneticAnalysisOrderId)
-    .signAndSend(pair, { nonce: -1 }, ({ events, status }) => successCallback(api, { events, status, callback }));
-  unsub();
+    .signAndSend(pair, { nonce: -1 }, ({ events, status }) => {
+      successCallback(api, { events, status, callback, unsub })
+    });
 }
 
 export async function setGeneticAnalysisOrderFulfilled(
@@ -59,10 +67,12 @@ export async function setGeneticAnalysisOrderFulfilled(
   geneticAnalysisOrderId,
   callback?: () => void,
 ): Promise<void> {
-  const unsub = await api.tx.geneticAnalysisOrders
+  // tslint:disable-next-line
+  var unsub = await api.tx.geneticAnalysisOrders
     .fulfillGeneticAnalysisOrder(geneticAnalysisOrderId)
-    .signAndSend(pair, { nonce: -1 }, ({ events, status }) => successCallback(api, { events, status, callback }));
-  unsub();
+    .signAndSend(pair, { nonce: -1 }, ({ events, status }) => {
+      successCallback(api, { events, status, callback, unsub })
+    });
 }
 
 export async function sudoUpdateEscrowKey(
@@ -71,10 +81,12 @@ export async function sudoUpdateEscrowKey(
   accountId,
   callback?: () => void,
 ): Promise<void> {
-  const unsub = await api.tx.geneticAnalysisOrders
+  // tslint:disable-next-line
+  var unsub = await api.tx.geneticAnalysisOrders
     .sudoUpdateEscrowKey(accountId)
-    .signAndSend(pair, { nonce: -1 }, ({ events, status }) => successCallback(api, { events, status, callback }));
-  unsub();
+    .signAndSend(pair, { nonce: -1 }, ({ events, status }) => {
+      successCallback(api, { events, status, callback, unsub })
+    });
 }
 export async function updateEscrowKey(
   api: ApiPromise,
@@ -82,8 +94,10 @@ export async function updateEscrowKey(
   accountId,
   callback?: () => void,
 ): Promise<void> {
-  const unsub = await api.tx.geneticAnalysisOrders
+  // tslint:disable-next-line
+  var unsub = await api.tx.geneticAnalysisOrders
     .updateEscrowKey(accountId)
-    .signAndSend(pair, { nonce: -1 }, ({ events, status }) => successCallback(api, { events, status, callback }));
-  unsub();
+    .signAndSend(pair, { nonce: -1 }, ({ events, status }) => {
+      successCallback(api, { events, status, callback, unsub })
+    });
 }

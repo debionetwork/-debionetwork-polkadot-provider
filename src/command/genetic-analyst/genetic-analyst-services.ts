@@ -8,10 +8,12 @@ export async function bulkCreateGeneticAnalystService(
   geneticAnalystServiceInfo: GeneticAnalystServiceInfo,
   callback?: () => void,
 ): Promise<void> {
-  const unsub = await api.tx.geneticAnalystServices
+  // tslint:disable-next-line
+  var unsub = await api.tx.geneticAnalystServices
     .bulkCreateGeneticAnalystService(geneticAnalystServiceInfo)
-    .signAndSend(pair, { nonce: -1 }, ({ events, status }) => successCallback(api, { events, status, callback }));
-  unsub();
+    .signAndSend(pair, { nonce: -1 }, ({ events, status }) => {
+      successCallback(api, { events, status, callback, unsub })
+    });
 }
 
 export async function createGeneticAnalystService(
@@ -20,10 +22,12 @@ export async function createGeneticAnalystService(
   geneticAnalystServiceInfo: GeneticAnalystServiceInfo,
   callback?: () => void,
 ): Promise<void> {
-  const unsub = await api.tx.geneticAnalystServices
+  // tslint:disable-next-line
+  var unsub = await api.tx.geneticAnalystServices
     .createGeneticAnalystService(geneticAnalystServiceInfo)
-    .signAndSend(pair, { nonce: -1 }, ({ events, status }) => successCallback(api, { events, status, callback }));
-  unsub();
+    .signAndSend(pair, { nonce: -1 }, ({ events, status }) => {
+      successCallback(api, { events, status, callback, unsub })
+    });
 }
 
 export async function deleteGeneticAnalystService(
@@ -32,10 +36,12 @@ export async function deleteGeneticAnalystService(
   geneticAnalystServiceId: string,
   callback?: () => void,
 ): Promise<void> {
-  const unsub = await api.tx.geneticAnalystServices
+  // tslint:disable-next-line
+  var unsub = await api.tx.geneticAnalystServices
     .deleteGeneticAnalystService(geneticAnalystServiceId)
-    .signAndSend(pair, { nonce: -1 }, ({ events, status }) => successCallback(api, { events, status, callback }));
-  unsub();
+    .signAndSend(pair, { nonce: -1 }, ({ events, status }) => {
+      successCallback(api, { events, status, callback, unsub })
+    });
 }
 
 export async function updateGeneticAnalystService(
@@ -45,8 +51,10 @@ export async function updateGeneticAnalystService(
   geneticAnalystServiceInfo: GeneticAnalystServiceInfo,
   callback?: () => void,
 ): Promise<void> {
-  const unsub = await api.tx.geneticAnalystServices
+  // tslint:disable-next-line
+  var unsub = await api.tx.geneticAnalystServices
     .updateGeneticAnalystService(geneticAnalystServiceId, geneticAnalystServiceInfo)
-    .signAndSend(pair, { nonce: -1 }, ({ events, status }) => successCallback(api, { events, status, callback }));
-  unsub();
+    .signAndSend(pair, { nonce: -1 }, ({ events, status }) => {
+      successCallback(api, { events, status, callback, unsub })
+    });
 }

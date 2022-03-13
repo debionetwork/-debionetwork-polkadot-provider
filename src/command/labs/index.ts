@@ -1,18 +1,18 @@
 import { ApiPromise } from '@polkadot/api';
-import { LabInfo, LabVerificationStatus, successCallback } from '../..';
+import { LabInfo, LabVerificationStatus, successCallback } from '../../index';
 
 export async function registerLab(api: ApiPromise, pair: any, data: LabInfo, callback?: () => void): Promise<void> {
-  const unsub = await api.tx.labs.registerLab(data).signAndSend(pair, { nonce: -1 }, ({ events, status }) => {
-    successCallback(api, { events, status, callback });
+  // tslint:disable-next-line
+  var unsub = await api.tx.labs.registerLab(data).signAndSend(pair, { nonce: -1 }, ({ events, status }) => {
+    successCallback(api, { events, status, callback, unsub });
   });
-  unsub();
 }
 
 export async function updateLab(api: ApiPromise, pair: any, data: LabInfo, callback?: () => void): Promise<void> {
-  const unsub = await api.tx.labs.updateLab(data).signAndSend(pair, { nonce: -1 }, ({ events, status }) => {
-    successCallback(api, { events, status, callback });
+  // tslint:disable-next-line
+  var unsub = await api.tx.labs.updateLab(data).signAndSend(pair, { nonce: -1 }, ({ events, status }) => {
+    successCallback(api, { events, status, callback, unsub });
   });
-  unsub();
 }
 
 export async function updateLabVerificationStatus(
@@ -22,17 +22,19 @@ export async function updateLabVerificationStatus(
   labVerificationStatus: LabVerificationStatus,
   callback?: () => void,
 ): Promise<void> {
-  const unsub = await api.tx.labs
+  // tslint:disable-next-line
+  var unsub = await api.tx.labs
     .updateLabVerificationStatus(substrateAddress, labVerificationStatus.toString())
-    .signAndSend(pair, { nonce: -1 }, ({ events, status }) => successCallback(api, { events, status, callback }));
-  unsub();
+    .signAndSend(pair, { nonce: -1 }, ({ events, status }) => {
+      successCallback(api, { events, status, callback, unsub })
+    });
 }
 
 export async function deregisterLab(api: ApiPromise, pair: any, callback?: () => void): Promise<void> {
-  const unsub = await api.tx.labs.deregisterLab().signAndSend(pair, { nonce: -1 }, ({ events, status }) => {
-    successCallback(api, { events, status, callback });
+  // tslint:disable-next-line
+  var unsub = await api.tx.labs.deregisterLab().signAndSend(pair, { nonce: -1 }, ({ events, status }) => {
+    successCallback(api, { events, status, callback, unsub });
   });
-  unsub();
 }
 
 export * from './genetic-testing';

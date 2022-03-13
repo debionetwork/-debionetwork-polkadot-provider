@@ -8,22 +8,22 @@ export async function registerHospital(
   data: HospitalInfo,
   callback?: () => void,
 ): Promise<void> {
-  const unsub = await api.tx.hospitals.registerHospital(data).signAndSend(pair, { nonce: -1 }, ({ events, status }) => {
-    successCallback(api, { events, status, callback });
+  // tslint:disable-next-line
+  var unsub = await api.tx.hospitals.registerHospital(data).signAndSend(pair, { nonce: -1 }, ({ events, status }) => {
+    successCallback(api, { events, status, callback, unsub });
   });
-  unsub();
 }
 
 export async function updateHospital(api: ApiPromise, pair: any, data: HospitalInfo, callback?: () => void): Promise<void> {
-  const unsub = await api.tx.hospitals.updateHospital(data).signAndSend(pair, { nonce: -1 }, ({ events, status }) => {
-    successCallback(api, { events, status, callback });
+  // tslint:disable-next-line
+  var unsub = await api.tx.hospitals.updateHospital(data).signAndSend(pair, { nonce: -1 }, ({ events, status }) => {
+    successCallback(api, { events, status, callback, unsub });
   });
-  unsub();
 }
 
 export async function deregisterHospital(api: ApiPromise, pair: any, callback?: () => void): Promise<void> {
-  const unsub = await api.tx.hospitals.deregisterHospital().signAndSend(pair, { nonce: -1 }, ({ events, status }) => {
-    successCallback(api, { events, status, callback });
+  // tslint:disable-next-line
+  var unsub = await api.tx.hospitals.deregisterHospital().signAndSend(pair, { nonce: -1 }, ({ events, status }) => {
+    successCallback(api, { events, status, callback, unsub });
   });
-  unsub();
 }

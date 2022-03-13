@@ -65,7 +65,7 @@ describe('Electronic Medical Record Commands Unit Tests', () => {
           status: eventAndStatusMock.status,
           callback: mockFunction
       });
-      expect(mockFunction).toBeCalledTimes(2);
+      expect(mockFunction).toBeCalledTimes(1);
   });
 
   it('updateElectronicMedicalRecord should return', async () => {
@@ -92,7 +92,7 @@ describe('Electronic Medical Record Commands Unit Tests', () => {
           status: eventAndStatusMock.status,
           callback: mockFunction
       });
-      expect(mockFunction).toBeCalledTimes(2);
+      expect(mockFunction).toBeCalledTimes(1);
   });
 
   it('deregisterElectronicMedicalRecord should return', async () => {
@@ -119,7 +119,7 @@ describe('Electronic Medical Record Commands Unit Tests', () => {
           status: eventAndStatusMock.status,
           callback: mockFunction
       });
-      expect(mockFunction).toBeCalledTimes(2);
+      expect(mockFunction).toBeCalledTimes(1);
   });
 
   it('getAddElectronicMedicalRecordFee should return', () => {

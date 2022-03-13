@@ -9,10 +9,12 @@ export async function rejectGeneticAnalysis(
   rejectedDescription: string,
   callback?: () => void,
 ): Promise<void> {
-  const unsub = await api.tx.geneticAnalysis
+  // tslint:disable-next-line
+  var unsub = await api.tx.geneticAnalysis
     .rejectGeneticAnalysis(geneticAnalysisTrackingId, rejectedTitle, rejectedDescription)
-    .signAndSend(pair, { nonce: -1 }, ({ events, status }) => successCallback(api, { events, status, callback }));
-  unsub();
+    .signAndSend(pair, { nonce: -1 }, ({ events, status }) => {
+      successCallback(api, { events, status, callback, unsub })
+    });
 }
 
 export async function processGeneticAnalysis(
@@ -22,10 +24,12 @@ export async function processGeneticAnalysis(
   geneticAnalysisStatus: string,
   callback?: () => void,
 ): Promise<void> {
-  const unsub = await api.tx.geneticAnalysis
+  // tslint:disable-next-line
+  var unsub = await api.tx.geneticAnalysis
     .processGeneticAnalysis(geneticAnalysisTrackingId, geneticAnalysisStatus)
-    .signAndSend(pair, { nonce: -1 }, ({ events, status }) => successCallback(api, { events, status, callback }));
-  unsub();
+    .signAndSend(pair, { nonce: -1 }, ({ events, status }) => {
+      successCallback(api, { events, status, callback, unsub })
+    });
 }
 
 export async function submitGeneticAnalysis(
@@ -36,8 +40,10 @@ export async function submitGeneticAnalysis(
   comment: string,
   callback?: () => void,
 ): Promise<void> {
-  const unsub = await api.tx.geneticAnalysis
+  // tslint:disable-next-line
+  var unsub = await api.tx.geneticAnalysis
     .submitGeneticAnalysis(geneticAnalysisTrackingId, reportLink, comment)
-    .signAndSend(pair, { nonce: -1 }, ({ events, status }) => successCallback(api, { events, status, callback }));
-  unsub();
+    .signAndSend(pair, { nonce: -1 }, ({ events, status }) => {
+      successCallback(api, { events, status, callback, unsub })
+    });
 }
