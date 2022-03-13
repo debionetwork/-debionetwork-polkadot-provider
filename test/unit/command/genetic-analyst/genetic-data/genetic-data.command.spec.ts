@@ -60,7 +60,7 @@ describe('Genetic Data Commands Unit Testing', () => {
         status: eventAndStatusMock.status, 
         callback: mockFunction,
       });
-      expect(mockFunction).toBeCalledTimes(2);
+      expect(mockFunction).toBeCalledTimes(1);
   });
   
   it('updateGeneticData should return', async () => {
@@ -89,7 +89,7 @@ describe('Genetic Data Commands Unit Testing', () => {
       status: eventAndStatusMock.status, 
       callback: mockFunction,
     });
-    expect(mockFunction).toBeCalledTimes(2);
+    expect(mockFunction).toBeCalledTimes(1);
   });
   
   it('removeGeneticData should return', async () => {
@@ -115,7 +115,7 @@ describe('Genetic Data Commands Unit Testing', () => {
       status: eventAndStatusMock.status, 
       callback: mockFunction,
     });
-    expect(mockFunction).toBeCalledTimes(2);
+    expect(mockFunction).toBeCalledTimes(1);
   });
 
   it('getAddGeneticDataFee should return', () => {

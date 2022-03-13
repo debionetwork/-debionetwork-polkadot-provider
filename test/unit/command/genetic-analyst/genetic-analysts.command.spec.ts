@@ -83,7 +83,7 @@ describe('Genetic Analysts Commands Unit Testing', () => {
         status: eventAndStatusMock.status, 
         callback: mockFunction,
       });
-      expect(mockFunction).toBeCalledTimes(2);
+      expect(mockFunction).toBeCalledTimes(1);
   });
   
   it('updateGeneticAnalyst should return', async () => {
@@ -109,7 +109,7 @@ describe('Genetic Analysts Commands Unit Testing', () => {
         status: eventAndStatusMock.status, 
         callback: mockFunction,
       });
-      expect(mockFunction).toBeCalledTimes(2);
+      expect(mockFunction).toBeCalledTimes(1);
   });
   
   it('deregisterGeneticAnalyst should return', async () => {
@@ -132,7 +132,7 @@ describe('Genetic Analysts Commands Unit Testing', () => {
         status: eventAndStatusMock.status, 
         callback: mockFunction,
       });
-      expect(mockFunction).toBeCalledTimes(2);
+      expect(mockFunction).toBeCalledTimes(1);
   });
   
   it('updateGeneticAnalystVerificationStatus should return', async () => {
@@ -159,7 +159,7 @@ describe('Genetic Analysts Commands Unit Testing', () => {
         status: eventAndStatusMock.status, 
         callback: mockFunction,
       });
-      expect(mockFunction).toBeCalledTimes(2);
+      expect(mockFunction).toBeCalledTimes(1);
   });
   
   it('updateGeneticAnalystAvailabilityStatus should return', async () => {
@@ -186,7 +186,7 @@ describe('Genetic Analysts Commands Unit Testing', () => {
         status: eventAndStatusMock.status, 
         callback: mockFunction,
       });
-      expect(mockFunction).toBeCalledTimes(2);
+      expect(mockFunction).toBeCalledTimes(1);
   });
   
   it('stakeGeneticAnalyst should return', async () => {
@@ -209,7 +209,7 @@ describe('Genetic Analysts Commands Unit Testing', () => {
         status: eventAndStatusMock.status, 
         callback: mockFunction,
       });
-      expect(mockFunction).toBeCalledTimes(2);
+      expect(mockFunction).toBeCalledTimes(1);
   });
   
   it('unstakeGeneticAnalyst should return', async () => {
@@ -232,7 +232,7 @@ describe('Genetic Analysts Commands Unit Testing', () => {
         status: eventAndStatusMock.status, 
         callback: mockFunction,
       });
-      expect(mockFunction).toBeCalledTimes(2);
+      expect(mockFunction).toBeCalledTimes(1);
   });
   
   it('updateMinimumStakeAmount should return', async () => {
@@ -258,7 +258,7 @@ describe('Genetic Analysts Commands Unit Testing', () => {
         status: eventAndStatusMock.status, 
         callback: mockFunction,
       });
-      expect(mockFunction).toBeCalledTimes(2);
+      expect(mockFunction).toBeCalledTimes(1);
   });
   
   it('updateAdminKey should return', async () => {
@@ -284,7 +284,7 @@ describe('Genetic Analysts Commands Unit Testing', () => {
         status: eventAndStatusMock.status, 
         callback: mockFunction,
       });
-      expect(mockFunction).toBeCalledTimes(2);
+      expect(mockFunction).toBeCalledTimes(1);
   });
   
   it('sudoUpdateAdminKey should return', async () => {
@@ -310,6 +310,6 @@ describe('Genetic Analysts Commands Unit Testing', () => {
         status: eventAndStatusMock.status, 
         callback: mockFunction,
       });
-      expect(mockFunction).toBeCalledTimes(2);
+      expect(mockFunction).toBeCalledTimes(1);
   });
 })

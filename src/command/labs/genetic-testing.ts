@@ -1,5 +1,5 @@
 import { ApiPromise } from '@polkadot/api';
-import { successCallback } from '..';
+import { successCallback } from '../../index';
 import { DnaTestResultSubmission } from '../../models';
 
 export async function processDnaSample(
@@ -9,17 +9,21 @@ export async function processDnaSample(
   processStatus: any,
   callback?: () => void,
 ) {
-  const unsub = await api.tx.geneticTesting
+  // tslint:disable-next-line
+  var unsub = await api.tx.geneticTesting
     .processDnaSample(trackingId, processStatus)
-    .signAndSend(pair, { nonce: -1 }, ({ events, status }) => successCallback(api, { events, status, callback }));
-  unsub();
+    .signAndSend(pair, { nonce: -1 }, ({ events, status }) => {
+      successCallback(api, { events, status, callback, unsub });
+    });
 }
 
 export async function receiveDnaSample(api: ApiPromise, pair: any, trackingId: string, callback?: () => void) {
-  const unsub = await api.tx.geneticTesting
+  // tslint:disable-next-line
+  var unsub = await api.tx.geneticTesting
     .receiveDnaSample(trackingId)
-    .signAndSend(pair, { nonce: -1 }, ({ events, status }) => successCallback(api, { events, status, callback }));
-  unsub();
+    .signAndSend(pair, { nonce: -1 }, ({ events, status }) => {
+      successCallback(api, { events, status, callback, unsub });
+    });
 }
 
 export async function rejectDnaSample(
@@ -30,10 +34,12 @@ export async function rejectDnaSample(
   rejectedDescription: string,
   callback?: () => void,
 ) {
-  const unsub = await api.tx.geneticTesting
+  // tslint:disable-next-line
+  var unsub = await api.tx.geneticTesting
     .rejectDnaSample(trackingId, rejectedTitle, rejectedDescription)
-    .signAndSend(pair, { nonce: -1 }, ({ events, status }) => successCallback(api, { events, status, callback }));
-  unsub();
+    .signAndSend(pair, { nonce: -1 }, ({ events, status }) => {
+      successCallback(api, { events, status, callback, unsub });
+    });
 }
 
 export async function submitIndependentTestResult(
@@ -42,10 +48,12 @@ export async function submitIndependentTestResult(
   submission: DnaTestResultSubmission,
   callback?: () => void,
 ) {
-  const unsub = await api.tx.geneticTesting
+  // tslint:disable-next-line
+  var unsub = await api.tx.geneticTesting
     .submitIndependentTestResult(submission)
-    .signAndSend(pair, { nonce: -1 }, ({ events, status }) => successCallback(api, { events, status, callback }));
-  unsub();
+    .signAndSend(pair, { nonce: -1 }, ({ events, status }) => {
+      successCallback(api, { events, status, callback, unsub });
+    });
 }
 
 export async function submitTestResult(
@@ -55,8 +63,10 @@ export async function submitTestResult(
   submission: DnaTestResultSubmission,
   callback?: () => void,
 ) {
-  const unsub = await api.tx.geneticTesting
+  // tslint:disable-next-line
+  var unsub = await api.tx.geneticTesting
     .submitTestResult(trackingId, submission)
-    .signAndSend(pair, { nonce: -1 }, ({ events, status }) => successCallback(api, { events, status, callback }));
-  unsub();
+    .signAndSend(pair, { nonce: -1 }, ({ events, status }) => {
+      successCallback(api, { events, status, callback, unsub });
+    });
 }

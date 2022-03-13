@@ -8,10 +8,12 @@ export async function registerElectronicMedicalRecord(
   data: ElectronicMedicalRecord,
   callback?: () => void,
 ): Promise<void> {
-  const unsub = await api.tx.electronicMedicalRecord
+  // tslint:disable-next-line
+  var unsub = await api.tx.electronicMedicalRecord
     .addElectronicMedicalRecord(data.title, data.category, data.files)
-    .signAndSend(pair, { nonce: -1 }, ({ events, status }) => successCallback(api, { events, status, callback }));
-  unsub();
+    .signAndSend(pair, { nonce: -1 }, ({ events, status }) => {
+      successCallback(api, { events, status, callback, unsub });
+    });
 }
 
 export async function updateElectronicMedicalRecord(
@@ -20,10 +22,12 @@ export async function updateElectronicMedicalRecord(
   data: ElectronicMedicalRecord,
   callback?: () => void,
 ): Promise<void> {
-  const unsub = await api.tx.electronicMedicalRecord
+  // tslint:disable-next-line
+  var unsub = await api.tx.electronicMedicalRecord
     .updateElectronicMedicalRecord(data.id, data.title, data.category, data.files)
-    .signAndSend(pair, { nonce: -1 }, ({ events, status }) => successCallback(api, { events, status, callback }));
-  unsub();
+    .signAndSend(pair, { nonce: -1 }, ({ events, status }) => {
+      successCallback(api, { events, status, callback, unsub });
+    });
 }
 
 export async function deregisterElectronicMedicalRecord(
@@ -32,10 +36,12 @@ export async function deregisterElectronicMedicalRecord(
   emrId: string,
   callback?: () => void,
 ): Promise<void> {
-  const unsub = await api.tx.electronicMedicalRecord
+  // tslint:disable-next-line
+  var unsub = await api.tx.electronicMedicalRecord
     .removeElectronicMedicalRecord(emrId)
-    .signAndSend(pair, { nonce: -1 }, ({ events, status }) => successCallback(api, { events, status, callback }));
-  unsub();
+    .signAndSend(pair, { nonce: -1 }, ({ events, status }) => {
+      successCallback(api, { events, status, callback, unsub });
+    });
 }
 
 export function getAddElectronicMedicalRecordFee(api: ApiPromise, pair: any, data: ElectronicMedicalRecord): any {

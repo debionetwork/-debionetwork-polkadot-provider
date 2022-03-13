@@ -14,7 +14,7 @@ export const labs = {
   labCountByCountryRegionCity(COUNTRY_ID, REGION_ID) {
     return returnToHumanMockWithParam({COUNTRY_ID, REGION_ID});
   },
-  adminKey() {
+  labVerifierKey() {
     return mockFunction();
   },
 }

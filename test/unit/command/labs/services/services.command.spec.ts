@@ -59,7 +59,7 @@ describe('Services Command Unit Tests', () => {
         status: eventAndStatusMock.status,
         callback: mockFunction
     });
-    expect(mockFunction).toBeCalledTimes(2);
+    expect(mockFunction).toBeCalledTimes(1);
   });
 
   it('update services should return', async () => {
@@ -88,7 +88,7 @@ describe('Services Command Unit Tests', () => {
         status: eventAndStatusMock.status,
         callback: mockFunction
     });
-    expect(mockFunction).toBeCalledTimes(2);
+    expect(mockFunction).toBeCalledTimes(1);
   });
 
   it('delete services should return', async () => {
@@ -115,6 +115,6 @@ describe('Services Command Unit Tests', () => {
         status: eventAndStatusMock.status,
         callback: mockFunction
     });
-    expect(mockFunction).toBeCalledTimes(2);
+    expect(mockFunction).toBeCalledTimes(1);
   });
 });

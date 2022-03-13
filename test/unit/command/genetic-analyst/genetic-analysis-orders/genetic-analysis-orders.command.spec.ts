@@ -71,7 +71,7 @@ describe('Genetic Analysis Orders Commands Unit Testing', () => {
       status: eventAndStatusMock.status, 
       callback: mockFunction,
     });
-    expect(mockFunction).toBeCalledTimes(2);
+    expect(mockFunction).toBeCalledTimes(1);
   });
 
   it('createGeneticAnalysisOrder should return', async () => {
@@ -111,7 +111,7 @@ describe('Genetic Analysis Orders Commands Unit Testing', () => {
       status: eventAndStatusMock.status, 
       callback: mockFunction,
     });
-    expect(mockFunction).toBeCalledTimes(2);
+    expect(mockFunction).toBeCalledTimes(1);
   });
 
   it('setGeneticAnalysisOrderRefunded should return', async () => {
@@ -137,7 +137,7 @@ describe('Genetic Analysis Orders Commands Unit Testing', () => {
         status: eventAndStatusMock.status, 
         callback: mockFunction,
       });
-      expect(mockFunction).toBeCalledTimes(2);
+      expect(mockFunction).toBeCalledTimes(1);
   });
   
   it('setGeneticAnalysisOrderPaid should return', async () => {
@@ -163,7 +163,7 @@ describe('Genetic Analysis Orders Commands Unit Testing', () => {
         status: eventAndStatusMock.status, 
         callback: mockFunction,
       });
-      expect(mockFunction).toBeCalledTimes(2);
+      expect(mockFunction).toBeCalledTimes(1);
   });
   
   it('setGeneticAnalysisOrderFulfilled should return', async () => {
@@ -189,7 +189,7 @@ describe('Genetic Analysis Orders Commands Unit Testing', () => {
         status: eventAndStatusMock.status, 
         callback: mockFunction,
       });
-      expect(mockFunction).toBeCalledTimes(2);
+      expect(mockFunction).toBeCalledTimes(1);
   });
 
   it('sudoUpdateEscrowKey should return', async () => {
@@ -215,7 +215,7 @@ describe('Genetic Analysis Orders Commands Unit Testing', () => {
       status: eventAndStatusMock.status, 
       callback: mockFunction,
     });
-    expect(mockFunction).toBeCalledTimes(2);
+    expect(mockFunction).toBeCalledTimes(1);
   });
 
   it('updateEscrowKey should return', async () => {
@@ -241,6 +241,6 @@ describe('Genetic Analysis Orders Commands Unit Testing', () => {
       status: eventAndStatusMock.status, 
       callback: mockFunction,
     });
-    expect(mockFunction).toBeCalledTimes(2);
+    expect(mockFunction).toBeCalledTimes(1);
   });
 })

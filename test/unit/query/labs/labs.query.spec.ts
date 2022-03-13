@@ -20,7 +20,7 @@ describe('Lab Queries Unit Tests', () => {
   const labsByCountryRegionCitySpy = jest.spyOn(labs, 'labsByCountryRegionCity');
   const labCountSpy = jest.spyOn(labs, 'labCount');
   const labCountByCountryRegionCitySpy = jest.spyOn(labs, 'labCountByCountryRegionCity');
-  const adminKeySpy = jest.spyOn(labs, 'adminKey');
+  const labVerifierKeySpy = jest.spyOn(labs, 'labVerifierKey');
   
   beforeEach(() => {
     (mockFunction as jest.Mock).mockClear();
@@ -28,7 +28,7 @@ describe('Lab Queries Unit Tests', () => {
     labsByCountryRegionCitySpy.mockClear();
     labCountSpy.mockClear();
     labCountByCountryRegionCitySpy.mockClear();
-    adminKeySpy.mockClear();
+    labVerifierKeySpy.mockClear();
   });
 
   it('queryLabById should return', async () => {
@@ -110,6 +110,6 @@ describe('Lab Queries Unit Tests', () => {
     expect(await queryLabsAdminKey(API_PROMISE_MOCK as any))
       .toEqual(EXPECTED_VALUE);
     expect(mockFunction).toBeCalledTimes(1);
-    expect(adminKeySpy).toBeCalledTimes(1);
+    expect(labVerifierKeySpy).toBeCalledTimes(1);
   });
 });
