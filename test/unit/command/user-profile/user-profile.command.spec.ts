@@ -53,7 +53,7 @@ describe('User Profile Commands Unit Testing', () => {
         status: eventAndStatusMock.status, 
         callback: mockFunction,
       });
-      expect(mockFunction).toBeCalledTimes(2);
+      expect(mockFunction).toBeCalledTimes(1);
   });
   
   it('adminSetEthAddress should return', async () => {
@@ -81,6 +81,6 @@ describe('User Profile Commands Unit Testing', () => {
         status: eventAndStatusMock.status, 
         callback: mockFunction,
       });
-      expect(mockFunction).toBeCalledTimes(2);
+      expect(mockFunction).toBeCalledTimes(1);
   });
 })

@@ -1,3 +1,4 @@
+import { toHumanMock } from './@polkadot-types.mock';
 import { mockFunction } from './mock';
 
 export class WsProvider {

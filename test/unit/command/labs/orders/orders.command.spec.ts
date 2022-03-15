@@ -44,20 +44,22 @@ describe('Orders Commands Unit Tests', () => {
       const SERVICE_ID = "SERVICE_ID";
       const BOX_PUBLIC_KEY = "BOX_PUBLIC_KEY";
       const PRICE_INDEX = 0;
+      const ORDER_FLOW = "RequestTest"
 
       // Act
       await createOrder(
         API_PROMISE_MOCK as any, 
         PAIR,
         SERVICE_ID,
-        BOX_PUBLIC_KEY,
         PRICE_INDEX,
+        BOX_PUBLIC_KEY,
+        ORDER_FLOW,
         mockFunction
       );
         
       // Assert
       expect(createOrderSpy).toBeCalledTimes(1);
-      expect(createOrderSpy).toBeCalledWith(SERVICE_ID, PRICE_INDEX, BOX_PUBLIC_KEY);
+      expect(createOrderSpy).toBeCalledWith(SERVICE_ID, PRICE_INDEX, BOX_PUBLIC_KEY, ORDER_FLOW);
       expect(signAndSendSpy).toBeCalledTimes(1);
       expect(signAndSendSpy).toBeCalledWith(PAIR, { nonce: -1 }, expect.any(Function));
       expect(successCallback).toBeCalledTimes(1);
@@ -66,7 +68,7 @@ describe('Orders Commands Unit Tests', () => {
           status: eventAndStatusMock.status,
           callback: mockFunction
       });
-      expect(mockFunction).toBeCalledTimes(2);
+      expect(mockFunction).toBeCalledTimes(1);
   });
 
   it('fulfillOrder should return', async () => {
@@ -93,7 +95,7 @@ describe('Orders Commands Unit Tests', () => {
           status: eventAndStatusMock.status,
           callback: mockFunction
       });
-      expect(mockFunction).toBeCalledTimes(2);
+      expect(mockFunction).toBeCalledTimes(1);
   });
 
   it('setOrderRefunded should return', async () => {
@@ -120,7 +122,7 @@ describe('Orders Commands Unit Tests', () => {
           status: eventAndStatusMock.status,
           callback: mockFunction
       });
-      expect(mockFunction).toBeCalledTimes(2);
+      expect(mockFunction).toBeCalledTimes(1);
   });
 
   it('setOrderPaid should return', async () => {
@@ -147,7 +149,7 @@ describe('Orders Commands Unit Tests', () => {
           status: eventAndStatusMock.status,
           callback: mockFunction
       });
-      expect(mockFunction).toBeCalledTimes(2);
+      expect(mockFunction).toBeCalledTimes(1);
   });
 
   it('cancelOrder should return', async () => {
@@ -174,7 +176,7 @@ describe('Orders Commands Unit Tests', () => {
           status: eventAndStatusMock.status,
           callback: mockFunction
       });
-      expect(mockFunction).toBeCalledTimes(2);
+      expect(mockFunction).toBeCalledTimes(1);
   });
 
   it('getCreateOrderFee should return', () => {

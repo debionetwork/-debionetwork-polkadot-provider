@@ -59,7 +59,7 @@ describe('Genetic Analysis Commands Unit Testing', () => {
         status: eventAndStatusMock.status, 
         callback: mockFunction,
       });
-      expect(mockFunction).toBeCalledTimes(2);
+      expect(mockFunction).toBeCalledTimes(1);
   });
   
   it('processGeneticAnalysis should return', async () => {
@@ -87,7 +87,7 @@ describe('Genetic Analysis Commands Unit Testing', () => {
         status: eventAndStatusMock.status, 
         callback: mockFunction,
       });
-      expect(mockFunction).toBeCalledTimes(2);
+      expect(mockFunction).toBeCalledTimes(1);
   });
   
   it('submitGeneticAnalysis should return', async () => {
@@ -117,6 +117,6 @@ describe('Genetic Analysis Commands Unit Testing', () => {
         status: eventAndStatusMock.status, 
         callback: mockFunction,
       });
-      expect(mockFunction).toBeCalledTimes(2);
+      expect(mockFunction).toBeCalledTimes(1);
   });
 })

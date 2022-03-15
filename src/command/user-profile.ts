@@ -7,10 +7,12 @@ export async function setEthAddress(
   ethAddress: string,
   callback?: () => void,
 ): Promise<void> {
-  const unsub = await api.tx.userProfile
+  // tslint:disable-next-line
+  var unsub = await api.tx.userProfile
     .setEthAddress(ethAddress)
-    .signAndSend(pair, { nonce: -1 }, ({ events, status }) => successCallback(api, { events, status, callback }));
-  unsub();
+    .signAndSend(pair, { nonce: -1 }, ({ events, status }) => {
+      successCallback(api, { events, status, callback, unsub });
+    });
 }
 
 export async function adminSetEthAddress(
@@ -20,8 +22,10 @@ export async function adminSetEthAddress(
   ethAddress: string,
   callback?: () => void,
 ): Promise<void> {
-  const unsub = await api.tx.userProfile
+  // tslint:disable-next-line
+  var unsub = await api.tx.userProfile
     .adminSetEthAddress(substrateAddress, ethAddress)
-    .signAndSend(pair, { nonce: -1 }, ({ events, status }) => successCallback(api, { events, status, callback }));
-  unsub();
+    .signAndSend(pair, { nonce: -1 }, ({ events, status }) => {
+      successCallback(api, { events, status, callback, unsub });
+    });
 }
