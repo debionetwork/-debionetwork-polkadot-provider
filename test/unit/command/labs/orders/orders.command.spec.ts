@@ -1,4 +1,13 @@
-import { createOrder, fulfillOrder, setOrderRefunded, setOrderPaid, cancelOrder, getCreateOrderFee } from "../../../../../src/command/labs/orders";
+import {
+  createOrder,
+  fulfillOrder,
+  setOrderRefunded,
+  setOrderPaid,
+  cancelOrder,
+  getCreateOrderFee,
+  sudoUpdateLabOrderEscrowKey,
+  updateLabOrderEscrowKey,
+} from "../../../../../src/command/labs/orders";
 import { ApiPromise, signAndSendWithPaymentInfo, eventAndStatusMock } from "../../../@polkadot-api.mock";
 import { mockFunction } from "../../../mock";
 import { successCallback } from "../../../../../src/index";
@@ -25,6 +34,8 @@ describe('Orders Commands Unit Tests', () => {
   const setOrderRefundedSpy = jest.spyOn(orders, 'setOrderRefunded');
   const setOrderPaidSpy = jest.spyOn(orders, 'setOrderPaid');
   const cancelOrderSpy = jest.spyOn(orders, 'cancelOrder');
+  const sudoUpdateEscrowKeySpy = jest.spyOn(orders, 'sudoUpdateLabOrderEscrowKey');
+  const updateEscrowKeySpy = jest.spyOn(orders, 'updateLabOrderEscrowKey');
   
   beforeEach(() => {
     (mockFunction as jest.Mock).mockClear();
@@ -36,6 +47,8 @@ describe('Orders Commands Unit Tests', () => {
     setOrderRefundedSpy.mockClear();
     setOrderPaidSpy.mockClear();
     cancelOrderSpy.mockClear();
+    sudoUpdateEscrowKeySpy.mockClear();
+    updateEscrowKeySpy.mockClear();
   });
 
   it('createOrder should return', async () => {
