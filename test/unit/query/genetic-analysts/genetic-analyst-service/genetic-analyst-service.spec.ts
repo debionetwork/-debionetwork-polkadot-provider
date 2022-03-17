@@ -2,8 +2,8 @@ import { queryGeneticAnalystServicesByHashId, queryGeneticAnalystServicesCount, 
 import { ApiPromise } from "../../../@polkadot-api.mock";
 import { geneticAnalystServices } from "./genetic-analyst-service.mock";
 import { mockFunction } from "../../../mock";
-import { GeneticAnalystQualification } from "../../../../../src/models/genetic-analysts/genetic-analyst-qualification";
-import { geneticAnalystQualificationsDataMock } from "../../../models/genetic-analysts/genetic-analyst-qualifications.mock";
+import { GeneticAnalystService } from "../../../../../src/models/genetic-analysts/genetic-analyst-service";
+import { geneticAnalystServiceDataMock } from "../../../models/genetic-analysts/genetic-analyst-service.mock";
 import { when } from 'jest-when';
 
 jest.mock('../../../mock', () => ({
@@ -30,9 +30,9 @@ describe('Genetic Analyst Service Qualifications Queries Unit Tests', () => {
   it("queryGeneticAnalystServicesByHashId should return", async () => {
     // Arrange
     const HASH_ID = "HASH_ID";
-    const EXPECTED_VALUE = new GeneticAnalystQualification(geneticAnalystQualificationsDataMock);
+    const EXPECTED_VALUE = new GeneticAnalystService(geneticAnalystServiceDataMock);
 
-    (mockFunction as jest.Mock).mockReturnValue(geneticAnalystQualificationsDataMock);
+    (mockFunction as jest.Mock).mockReturnValue(geneticAnalystServiceDataMock);
 
     // Assert
     expect(await queryGeneticAnalystServicesByHashId(API_PROMISE_MOCK as any, HASH_ID))
