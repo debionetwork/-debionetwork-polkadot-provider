@@ -11,11 +11,11 @@ export async function queryOrderDetailByOrderID(api: ApiPromise, orderID: string
 }
 
 export async function queryOrdersByCustomer(api: ApiPromise, customerId: string): Promise<Order[]> {
-  const ids = (await api.query.orders.ordersByCustomer(customerId)).toHuman() as Array<string>;
-  const orders: Array<Order> = new Array<Order>();
+  const ids = (await api.query.orders.ordersByCustomer(customerId)).toHuman() as string[];
+  const orders: Order[] = new Array<Order>();
 
-  for (let i = 0; i < ids.length; i++) {
-    const order = await queryOrderDetailByOrderID(api, ids[i]);
+  for (const id of ids) {
+    const order = await queryOrderDetailByOrderID(api, id);
     orders.push(order);
   }
 
@@ -23,11 +23,11 @@ export async function queryOrdersByCustomer(api: ApiPromise, customerId: string)
 }
 
 export async function queryOrdersBySeller(api: ApiPromise, sellerId: string): Promise<Order[]> {
-  const ids = (await api.query.orders.ordersBySeller(sellerId)).toHuman() as Array<string>;
-  const orders: Array<Order> = new Array<Order>();
+  const ids = (await api.query.orders.ordersBySeller(sellerId)).toHuman() as string[];
+  const orders: Order[] = new Array<Order>();
 
-  for (let i = 0; i < ids.length; i++) {
-    const order = await queryOrderDetailByOrderID(api, ids[i]);
+  for (const id of ids) {
+    const order = await queryOrderDetailByOrderID(api, id);
     orders.push(order);
   }
 
