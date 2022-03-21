@@ -40,12 +40,7 @@ export async function deregisterGeneticAnalyst(api: ApiPromise, pair: any, callb
     });
 }
 
-export async function retrieveUnstakeAmount(
-  api: ApiPromise,
-  pair: any,
-  accountId: string,
-  callback?: () => void,
-) {
+export async function retrieveUnstakeAmount(api: ApiPromise, pair: any, accountId: string, callback?: () => void) {
   // tslint:disable-next-line
   var unsub = await api.tx.geneticAnalysts
     .retrieveUnstakeAmount(accountId)
