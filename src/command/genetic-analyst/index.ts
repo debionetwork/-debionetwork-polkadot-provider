@@ -40,6 +40,20 @@ export async function deregisterGeneticAnalyst(api: ApiPromise, pair: any, callb
     });
 }
 
+export async function retrieveUnstakeAmount(
+  api: ApiPromise,
+  pair: any,
+  accountId: string,
+  callback?: () => void,
+) {
+  // tslint:disable-next-line
+  var unsub = await api.tx.geneticAnalysts
+    .retrieveUnstakeAmount(accountId)
+    .signAndSend(pair, { nonce: -1 }, ({ events, status }) => {
+      successCallback(api, { events, status, callback, unsub });
+    });
+}
+
 export async function updateGeneticAnalystVerificationStatus(
   api: ApiPromise,
   pair: any,
@@ -119,3 +133,4 @@ export * from './genetic-data';
 export * from './genetic-analysis';
 export * from './genetic-analysis-orders';
 export * from './genetic-analyst-services';
+export * from './genetic-analyst-qualification';
