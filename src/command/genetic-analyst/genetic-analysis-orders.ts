@@ -83,6 +83,7 @@ export async function sudoUpdateEscrowKey(api: ApiPromise, pair: any, accountId,
       successCallback(api, { events, status, callback, unsub });
     });
 }
+
 export async function updateEscrowKey(api: ApiPromise, pair: any, accountId, callback?: () => void): Promise<void> {
   // tslint:disable-next-line
   var unsub = await api.tx.geneticAnalysisOrders
