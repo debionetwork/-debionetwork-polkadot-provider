@@ -16,12 +16,7 @@ export async function createCertification(
     });
 }
 
-export async function deleteCertification(
-  api: ApiPromise,
-  pair: any,
-  certificationId: string,
-  callback?: () => void,
-) {
+export async function deleteCertification(api: ApiPromise, pair: any, certificationId: string, callback?: () => void) {
   // tslint:disable-next-line
   var unsub = await api.tx.certifications
     .deleteCertification(certificationId)
