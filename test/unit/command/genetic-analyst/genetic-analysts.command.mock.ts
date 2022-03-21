@@ -25,6 +25,9 @@ export const geneticAnalysts = {
   updateMinimumStakeAmount(params) { // eslint-disable-line
     return signAndSend;
   },
+  retrieveUnstakeAmount(params) { // eslint-disable-line
+    return signAndSend;
+  },
   updateAdminKey(params) { // eslint-disable-line
     return signAndSend;
   },
