@@ -39,3 +39,4 @@ export async function deregisterLab(api: ApiPromise, pair: any, callback?: () =>
 
 export * from './genetic-testing';
 export * from './orders';
+export * from './certification';
