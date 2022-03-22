@@ -30,7 +30,7 @@ describe('Lab Pallet Integration Tests', () => {
     });
 
     expect((await promise).info).toEqual(labDataMock.info);
-  }, 25000); // Set timeout for 90 seconds
+  }, 25000); // Set timeout for 25 seconds
 
   it('queryLabsByCountryRegionCity should return', async () => {
     const promise: Promise<Lab[]> = new Promise((resolve, reject) => { // eslint-disable-line
@@ -41,7 +41,7 @@ describe('Lab Pallet Integration Tests', () => {
     });
 
     expect((await promise)[0].info).toEqual(labDataMock.info);
-  }, 25000); // Set timeout for 90 seconds
+  }, 25000); // Set timeout for 25 seconds
 
   it('queryLabsCountByCountryRegionCity should return', async () => {
     const promise: Promise<number> = new Promise((resolve, reject) => { // eslint-disable-line
@@ -52,7 +52,7 @@ describe('Lab Pallet Integration Tests', () => {
     });
 
     expect(await promise).toEqual(1);
-  }, 25000); // Set timeout for 90 seconds
+  }, 25000); // Set timeout for 25 seconds
 
   it('queryLabCount should return', async () => {
     const promise: Promise<number> = new Promise((resolve, reject) => { // eslint-disable-line
@@ -63,7 +63,7 @@ describe('Lab Pallet Integration Tests', () => {
     });
 
     expect(await promise).toEqual(1);
-  }, 25000); // Set timeout for 90 seconds
+  }, 25000); // Set timeout for 25 seconds
 
   it('queryLabsAdminKey should return', async () => {
     const promise: Promise<string> = new Promise((resolve, reject) => { // eslint-disable-line
@@ -74,7 +74,7 @@ describe('Lab Pallet Integration Tests', () => {
     });
 
     expect(await promise).toEqual(pair.address);
-  }, 25000); // Set timeout for 90 seconds
+  }, 25000); // Set timeout for 25 seconds
 
   it('updateLab should return', async () => {
     const info = {
@@ -92,7 +92,7 @@ describe('Lab Pallet Integration Tests', () => {
     });
 
     expect((await promise).info).toEqual(info);
-  }, 25000); // Set timeout for 90 seconds
+  }, 25000); // Set timeout for 25 seconds
 
   it('updateLabVerificationStatus should return', async () => {
     const status = LabVerificationStatus.Verified;
@@ -106,7 +106,7 @@ describe('Lab Pallet Integration Tests', () => {
     });
 
     expect((await promise).verificationStatus).toEqual(status);
-  }, 25000); // Set timeout for 90 seconds
+  }, 25000); // Set timeout for 25 seconds
 
   it('deregisterLab should return', async () => {
     const promise: Promise<string> = new Promise((resolve, reject) => { // eslint-disable-line
@@ -116,5 +116,5 @@ describe('Lab Pallet Integration Tests', () => {
     });
 
     await promise;
-  }, 25000); // Set timeout for 90 seconds
+  }, 25000); // Set timeout for 25 seconds
 });

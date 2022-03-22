@@ -1,7 +1,10 @@
-import { ApiPromise } from "@polkadot/api";
-import { GeneticAnalystQualification } from "../../models";
+import { ApiPromise } from '@polkadot/api';
+import { GeneticAnalystQualification } from '../../models';
 
-export async function queryGeneticAnalystServicesByHashId(api: ApiPromise, hashId: string): Promise<GeneticAnalystQualification> {
+export async function queryGeneticAnalystServicesByHashId(
+  api: ApiPromise,
+  hashId: string,
+): Promise<GeneticAnalystQualification> {
   const res = (await api.query.geneticAnalystServices.geneticAnalystServices(hashId)).toHuman();
   return new GeneticAnalystQualification(res);
 }
