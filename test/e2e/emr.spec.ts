@@ -61,4 +61,49 @@ describe('EMR Pallet Integration Tests', () => {
   it('queryElectronicMedicalRecordCount should return', async () => {
     expect(await queryElectronicMedicalRecordCount(api)).toEqual(1);
   }, 25000); // Set timeout for 25 seconds
+
+  it('updateElectronicMedicalRecord should return', async () => {
+    const emrByOwner = await queryElectronicMedicalRecordByOwnerId(api, pair.address);
+    const emrFileById = await queryElectronicMedicalRecordFileById(api, emrByOwner[0].files[0]);
+
+    const emr = new ElectronicMedicalRecordInput({
+      ...emrByOwner[0],
+      files: [emrFileById]
+    });
+    const promise: Promise<ElectronicMedicalRecord[]> = new Promise((resolve, reject) => { // eslint-disable-line
+      updateElectronicMedicalRecord(api, pair, emr, () => {
+        queryElectronicMedicalRecordByOwnerId(api, pair.address)
+          .then((res) => {
+            resolve(res)
+          });
+      });
+    });
+
+    const result = await promise;
+    expect(result[0].title).toEqual(electronicMedicalRecordInputDataMock.title);
+    expect(result[0].category).toEqual(electronicMedicalRecordInputDataMock.category);
+  }, 25000); // Set timeout for 25 seconds
+
+  it('getAddElectronicMedicalRecordFee should return', async () => {
+    await getAddElectronicMedicalRecordFee(api, pair, new ElectronicMedicalRecordInput(electronicMedicalRecordInputDataMock));
+  }, 25000); // Set timeout for 25 seconds
+
+  it('getRemoveElectronicMedicalRecordFee should return', async () => {
+    const emrByOwner = await queryElectronicMedicalRecordByOwnerId(api, pair.address);
+    await getRemoveElectronicMedicalRecordFee(api, pair, emrByOwner[0].id);
+  }, 25000); // Set timeout for 25 seconds
+
+  it('deregisterElectronicMedicalRecord should return', async () => {
+    const emrByOwner = await queryElectronicMedicalRecordByOwnerId(api, pair.address);
+    const promise: Promise<number> = new Promise((resolve, reject) => { // eslint-disable-line
+      deregisterElectronicMedicalRecord(api, pair, emrByOwner[0].id, () => {
+        queryElectronicMedicalRecordCount(api)
+          .then((res) => {
+            resolve(res)
+          });
+      });
+    });
+
+    expect(await promise).toEqual(0);
+  }, 25000); // Set timeout for 25 seconds
 });

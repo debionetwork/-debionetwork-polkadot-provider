@@ -44,12 +44,12 @@ export async function deregisterElectronicMedicalRecord(
     });
 }
 
-export function getAddElectronicMedicalRecordFee(api: ApiPromise, pair: any, data: ElectronicMedicalRecordInput): any {
-  return api.tx.electronicMedicalRecord
+export async function getAddElectronicMedicalRecordFee(api: ApiPromise, pair: any, data: ElectronicMedicalRecordInput): Promise<any> {
+  return await api.tx.electronicMedicalRecord
     .addElectronicMedicalRecord(data.title, data.category, data.files)
     .paymentInfo(pair);
 }
 
-export function getRemoveElectronicMedicalRecordFee(api: ApiPromise, pair: any, emrId: string): any {
-  return api.tx.electronicMedicalRecord.removeElectronicMedicalRecord(emrId).paymentInfo(pair);
+export async function getRemoveElectronicMedicalRecordFee(api: ApiPromise, pair: any, emrId: string): Promise<any> {
+  return await api.tx.electronicMedicalRecord.removeElectronicMedicalRecord(emrId).paymentInfo(pair);
 }
