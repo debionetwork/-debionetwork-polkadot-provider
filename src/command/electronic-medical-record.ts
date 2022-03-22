@@ -1,11 +1,11 @@
 import { ApiPromise } from '@polkadot/api';
 import { successCallback } from '..';
-import { ElectronicMedicalRecord } from '../models';
+import { ElectronicMedicalRecordInput } from '../models';
 
 export async function registerElectronicMedicalRecord(
   api: ApiPromise,
   pair: any,
-  data: ElectronicMedicalRecord,
+  data: ElectronicMedicalRecordInput,
   callback?: () => void,
 ): Promise<void> {
   // tslint:disable-next-line
@@ -19,7 +19,7 @@ export async function registerElectronicMedicalRecord(
 export async function updateElectronicMedicalRecord(
   api: ApiPromise,
   pair: any,
-  data: ElectronicMedicalRecord,
+  data: ElectronicMedicalRecordInput,
   callback?: () => void,
 ): Promise<void> {
   // tslint:disable-next-line
@@ -44,7 +44,7 @@ export async function deregisterElectronicMedicalRecord(
     });
 }
 
-export function getAddElectronicMedicalRecordFee(api: ApiPromise, pair: any, data: ElectronicMedicalRecord): any {
+export function getAddElectronicMedicalRecordFee(api: ApiPromise, pair: any, data: ElectronicMedicalRecordInput): any {
   return api.tx.electronicMedicalRecord
     .addElectronicMedicalRecord(data.title, data.category, data.files)
     .paymentInfo(pair);
