@@ -2,7 +2,7 @@ import { ApiPromise, eventAndStatusMock, signAndSendWithPaymentInfo } from "../.
 import { mockFunction } from "../../mock";
 import { successCallback } from "../../../../src/index";
 import { electronicMedicalRecord } from "./electronic-medical-record.command.mock";
-import { electronicMedicalRecordDataMock } from "../../models/electronic-medical-record/electronic-medical-record.mock";
+import { electronicMedicalRecordInputDataMock } from "../../models/electronic-medical-record/electronic-medical-record.mock";
 import { 
   registerElectronicMedicalRecord,
   updateElectronicMedicalRecord,
@@ -44,7 +44,7 @@ describe('Electronic Medical Record Commands Unit Tests', () => {
   it('registerElectronicMedicalRecord should return', async () => {
       // Arrange
       const PAIR = "PAIR";
-      const EMR_MOCK = electronicMedicalRecordDataMock;
+      const EMR_MOCK = electronicMedicalRecordInputDataMock;
 
       // Act
       await registerElectronicMedicalRecord(
@@ -71,7 +71,7 @@ describe('Electronic Medical Record Commands Unit Tests', () => {
   it('updateElectronicMedicalRecord should return', async () => {
       // Arrange
       const PAIR = "PAIR";
-      const EMR_MOCK = electronicMedicalRecordDataMock;
+      const EMR_MOCK = electronicMedicalRecordInputDataMock;
 
       // Act
       await updateElectronicMedicalRecord(
@@ -125,7 +125,7 @@ describe('Electronic Medical Record Commands Unit Tests', () => {
   it('getAddElectronicMedicalRecordFee should return', () => {
       // Arrange
       const PAIR = "PAIR";
-      const EMR_MOCK = electronicMedicalRecordDataMock;
+      const EMR_MOCK = electronicMedicalRecordInputDataMock;
       const EXPECTED_VALUE = 0;
       (mockFunction as jest.Mock).mockReturnValue(EXPECTED_VALUE);
   

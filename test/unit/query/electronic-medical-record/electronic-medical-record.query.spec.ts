@@ -23,7 +23,7 @@ describe('Electronic Medical Record Queries Unit Tests', () => {
       electronicMedicalRecord: electronicMedicalRecord
   };
 
-  const electronicMedicalRecordByOwnerIdSpy = jest.spyOn(electronicMedicalRecord, 'electronicMedicalRecordByOwnerId');
+  const electronicMedicalRecordByOwnerSpy = jest.spyOn(electronicMedicalRecord, 'electronicMedicalRecordByOwner');
   const electronicMedicalRecordByIdSpy = jest.spyOn(electronicMedicalRecord, 'electronicMedicalRecordById');
   const electronicMedicalRecordFileByIdSpy = jest.spyOn(electronicMedicalRecord, 'electronicMedicalRecordFileById');
   const electronicMedicalRecordCountByOwnerSpy = jest.spyOn(electronicMedicalRecord, 'electronicMedicalRecordCountByOwner');
@@ -31,7 +31,7 @@ describe('Electronic Medical Record Queries Unit Tests', () => {
   
   beforeEach(() => {
     (mockFunction as jest.Mock).mockClear();
-    electronicMedicalRecordByOwnerIdSpy.mockClear();
+    electronicMedicalRecordByOwnerSpy.mockClear();
     electronicMedicalRecordByIdSpy.mockClear();
     electronicMedicalRecordFileByIdSpy.mockClear();
     electronicMedicalRecordCountByOwnerSpy.mockClear();
@@ -61,8 +61,8 @@ describe('Electronic Medical Record Queries Unit Tests', () => {
     expect(mockFunction).toBeCalledWith(EMR_ID);
     expect(electronicMedicalRecordByIdSpy).toBeCalledTimes(1);
     expect(electronicMedicalRecordByIdSpy).toBeCalledWith(EMR_ID);
-    expect(electronicMedicalRecordByOwnerIdSpy).toBeCalledTimes(1);
-    expect(electronicMedicalRecordByOwnerIdSpy).toBeCalledWith(OWNER_ID);
+    expect(electronicMedicalRecordByOwnerSpy).toBeCalledTimes(1);
+    expect(electronicMedicalRecordByOwnerSpy).toBeCalledWith(OWNER_ID);
   });
 
   it('queryElectronicMedicalRecordById should return', async () => {
