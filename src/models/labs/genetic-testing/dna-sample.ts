@@ -1,3 +1,5 @@
+import { DnaSampleStatus } from "./dna-sample-status";
+
 export class DnaSample {
   constructor(anyJson: any) {
     this.trackingId = anyJson.trackingId;
@@ -14,7 +16,7 @@ export class DnaSample {
   trackingId: string;
   labId: string;
   ownerId: string;
-  status: string;
+  status: DnaSampleStatus;
   orderId: string;
   rejectedTitle: string;
   rejectedDescription: string;
