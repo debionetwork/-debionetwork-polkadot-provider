@@ -1,16 +1,16 @@
-import { signAndSendWithPaymentInfo } from "../../../@polkadot-api.mock";
+import { signAndSend } from "../../../@polkadot-api.mock";
 
 export const geneticAnalystService = {
-  bulkCreateGeneticAnalystService(params) { // eslint-disable-line
-    return signAndSendWithPaymentInfo;
+  bulkCreateGeneticAnalystService(param1) { // eslint-disable-line
+    return signAndSend;
   },
-  createGeneticAnalystService(params) { // eslint-disable-line
-    return signAndSendWithPaymentInfo;
+  createGeneticAnalystService(param1) { // eslint-disable-line
+    return signAndSend;
   },
-  deleteGeneticAnalystService(params) { // eslint-disable-line
-    return signAndSendWithPaymentInfo;
+  deleteGeneticAnalystService(param1) { // eslint-disable-line
+    return signAndSend;
   },
-  updateGeneticAnalystService(params) { // eslint-disable-line
-    return signAndSendWithPaymentInfo;
+  updateGeneticAnalystService(param1, param2) { // eslint-disable-line
+    return signAndSend;
   }
 }

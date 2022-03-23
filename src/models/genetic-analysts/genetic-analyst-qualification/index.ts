@@ -1,3 +1,5 @@
+import { GeneticAnalystQualificationInfo } from './genetic-analyst-qualification-info';
+
 export class GeneticAnalystQualification {
   constructor(anyJson: any) {
     this.id = anyJson.id;
@@ -6,7 +8,7 @@ export class GeneticAnalystQualification {
   }
   id: string;
   ownerId: string;
-  info: string;
+  info: GeneticAnalystQualificationInfo;
 }
 
 export * from './genetic-analyst-qualification-info';
