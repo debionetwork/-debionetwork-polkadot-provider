@@ -36,7 +36,9 @@ export class GeneticAnalysisOrder {
     const geneticAnalysisOrder: GeneticAnalysisOrder = this; // eslint-disable-line
 
     if (geneticAnalysisOrder.prices[0].value) {
-      geneticAnalysisOrder.prices[0].value = convertSubstrateBalanceToNumber(geneticAnalysisOrder.prices[0].value);
+      geneticAnalysisOrder.prices[0].value = convertSubstrateBalanceToNumber(
+        geneticAnalysisOrder.prices[0].value,
+      ).toString();
     }
 
     geneticAnalysisOrder.createdAt = new Date(convertSubstrateNumberToNumber(geneticAnalysisOrder.createdAt));

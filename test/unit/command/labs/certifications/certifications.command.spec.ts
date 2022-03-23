@@ -1,5 +1,5 @@
-import { successCallback } from "../../../../../src";
-import { createCertification, updateCertification, deleteCertification } from "../../../../../src/command/labs/certification";
+import { successCallback } from "../../../../../src/command/index";
+import { createCertification, updateCertification, deleteCertification } from "../../../../../src/command/labs/certifications";
 import { ApiPromise, eventAndStatusMock, signAndSendWithPaymentInfo } from "../../../@polkadot-api.mock";
 import { mockFunction } from "../../../mock";
 import { certificationDataMock } from "../../../models/labs/certifications.mock";
@@ -9,7 +9,7 @@ jest.mock('../../../mock', () => ({
   mockFunction: jest.fn(),
 }));
 
-jest.mock('../../../../../src/index', () => ({
+jest.mock('../../../../../src/command/index', () => ({
   successCallback: jest.fn(() => mockFunction()),
 }));
 

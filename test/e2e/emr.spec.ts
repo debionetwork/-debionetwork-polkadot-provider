@@ -1,0 +1,109 @@
+import { ApiPromise } from '@polkadot/api';
+import 'regenerator-runtime/runtime';
+import { queryElectronicMedicalRecordByOwnerId, queryElectronicMedicalRecordById, queryElectronicMedicalRecordFileById, queryElectronicMedicalRecordCountByOwner, queryElectronicMedicalRecordCount } from '../../src/query/electronic-medical-record';
+import { registerElectronicMedicalRecord, updateElectronicMedicalRecord, deregisterElectronicMedicalRecord, getAddElectronicMedicalRecordFee, getRemoveElectronicMedicalRecordFee } from "../../src/command/electronic-medical-record";
+import { initializeApi } from './polkadot-init';
+import { electronicMedicalRecordInputDataMock } from '../unit/models/electronic-medical-record/electronic-medical-record.mock';
+import { ElectronicMedicalRecord } from '../../src/models/electronic-medical-record';
+import { ElectronicMedicalRecordInput } from '../../src/models/electronic-medical-record/electronic-medical-record-input';
+
+describe('EMR Pallet Integration Tests', () => {
+  let api: ApiPromise;
+  let pair: any;
+
+  beforeAll(async () => {
+    const { api: _api, pair: _pair } = await initializeApi();
+    api = _api;
+    pair = _pair;
+  });
+
+  afterAll(() => {
+    api.disconnect();
+  });
+
+  it('registerElectronicMedicalRecord should return', async () => {
+    const promise: Promise<ElectronicMedicalRecord[]> = new Promise((resolve, reject) => { // eslint-disable-line
+      registerElectronicMedicalRecord(api, pair, new ElectronicMedicalRecordInput(electronicMedicalRecordInputDataMock), () => {
+        queryElectronicMedicalRecordByOwnerId(api, pair.address)
+          .then((res) => {
+            resolve(res)
+          });
+      });
+    });
+
+    const result = await promise;
+    expect(result[0].title).toEqual(electronicMedicalRecordInputDataMock.title);
+    expect(result[0].category).toEqual(electronicMedicalRecordInputDataMock.category);
+  }, 25000); // Set timeout for 25 seconds
+
+  it('queryElectronicMedicalRecordById should return', async () => {
+    const emrByOwner = await queryElectronicMedicalRecordByOwnerId(api, pair.address);
+    const emrById = await queryElectronicMedicalRecordById(api, emrByOwner[0].id);
+
+    expect(emrByOwner[0]).toEqual(emrById);
+  }, 25000); // Set timeout for 25 seconds
+
+  it('queryElectronicMedicalRecordFileById should return', async () => {
+    const emrByOwner = await queryElectronicMedicalRecordByOwnerId(api, pair.address);
+    const emrFileById = await queryElectronicMedicalRecordFileById(api, emrByOwner[0].files[0]);
+
+    expect(emrFileById.id).toEqual(emrByOwner[0].files[0]);
+    expect(emrFileById.electronicMedicalRecordId).toEqual(emrByOwner[0].id);
+    expect(emrFileById.title).toEqual(electronicMedicalRecordInputDataMock.files[0].title);
+    expect(emrFileById.description).toEqual(electronicMedicalRecordInputDataMock.files[0].description);
+    expect(emrFileById.recordLink).toEqual(electronicMedicalRecordInputDataMock.files[0].title);
+  }, 25000); // Set timeout for 25 seconds
+
+  it('queryElectronicMedicalRecordCountByOwner should return', async () => {
+    expect(await queryElectronicMedicalRecordCountByOwner(api, pair.address)).toEqual(1);
+  }, 25000); // Set timeout for 25 seconds
+
+  it('queryElectronicMedicalRecordCount should return', async () => {
+    expect(await queryElectronicMedicalRecordCount(api)).toEqual(1);
+  }, 25000); // Set timeout for 25 seconds
+
+  it('updateElectronicMedicalRecord should return', async () => {
+    const emrByOwner = await queryElectronicMedicalRecordByOwnerId(api, pair.address);
+    const emrFileById = await queryElectronicMedicalRecordFileById(api, emrByOwner[0].files[0]);
+
+    const emr = new ElectronicMedicalRecordInput({
+      ...emrByOwner[0],
+      files: [emrFileById]
+    });
+    const promise: Promise<ElectronicMedicalRecord[]> = new Promise((resolve, reject) => { // eslint-disable-line
+      updateElectronicMedicalRecord(api, pair, emr, () => {
+        queryElectronicMedicalRecordByOwnerId(api, pair.address)
+          .then((res) => {
+            resolve(res)
+          });
+      });
+    });
+
+    const result = await promise;
+    expect(result[0].title).toEqual(electronicMedicalRecordInputDataMock.title);
+    expect(result[0].category).toEqual(electronicMedicalRecordInputDataMock.category);
+  }, 25000); // Set timeout for 25 seconds
+
+  it('getAddElectronicMedicalRecordFee should return', async () => {
+    await getAddElectronicMedicalRecordFee(api, pair, new ElectronicMedicalRecordInput(electronicMedicalRecordInputDataMock));
+  }, 25000); // Set timeout for 25 seconds
+
+  it('getRemoveElectronicMedicalRecordFee should return', async () => {
+    const emrByOwner = await queryElectronicMedicalRecordByOwnerId(api, pair.address);
+    await getRemoveElectronicMedicalRecordFee(api, pair, emrByOwner[0].id);
+  }, 25000); // Set timeout for 25 seconds
+
+  it('deregisterElectronicMedicalRecord should return', async () => {
+    const emrByOwner = await queryElectronicMedicalRecordByOwnerId(api, pair.address);
+    const promise: Promise<number> = new Promise((resolve, reject) => { // eslint-disable-line
+      deregisterElectronicMedicalRecord(api, pair, emrByOwner[0].id, () => {
+        queryElectronicMedicalRecordCount(api)
+          .then((res) => {
+            resolve(res)
+          });
+      });
+    });
+
+    expect(await promise).toEqual(0);
+  }, 25000); // Set timeout for 25 seconds
+});

@@ -5,7 +5,7 @@ export async function queryElectronicMedicalRecordByOwnerId(
   api: ApiPromise,
   ownerId: string,
 ): Promise<ElectronicMedicalRecord[]> {
-  const emrIds: any = (await api.query.electronicMedicalRecord.electronicMedicalRecordByOwnerId(ownerId)).toHuman();
+  const emrIds: any = (await api.query.electronicMedicalRecord.electronicMedicalRecordByOwner(ownerId)).toHuman();
 
   const emrs: ElectronicMedicalRecord[] = new Array<ElectronicMedicalRecord>();
   for (const emrId of emrIds) {
