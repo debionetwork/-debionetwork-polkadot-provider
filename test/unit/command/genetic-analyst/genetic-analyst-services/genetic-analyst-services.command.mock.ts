@@ -1,6 +1,6 @@
 import { signAndSend } from "../../../@polkadot-api.mock";
 
-export const geneticAnalystService = {
+export const geneticAnalystServices = {
   bulkCreateGeneticAnalystService(param1) { // eslint-disable-line
     return signAndSend;
   },

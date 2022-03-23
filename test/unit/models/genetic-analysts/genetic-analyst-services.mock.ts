@@ -1,4 +1,4 @@
-export const geneticAnalystServiceMock = {
+export const geneticAnalystServicesMock = {
   id: 'string',
   ownerId: 'string',
   info: {

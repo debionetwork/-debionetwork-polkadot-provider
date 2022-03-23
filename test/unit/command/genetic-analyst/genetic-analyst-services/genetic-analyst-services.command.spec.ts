@@ -1,38 +1,36 @@
 import {
-  successCallback,
+  successCallback
+} from "../../../../../src/command/index";
+import {
   bulkCreateGeneticAnalystService,
   createGeneticAnalystService,
   deleteGeneticAnalystService,
   updateGeneticAnalystService
-} from "../../../../../src/index";
+} from "../../../../../src/command/genetic-analyst/genetic-analyst-services"
 import { ApiPromise, eventAndStatusMock, signAndSend } from "../../../@polkadot-api.mock";
 import { mockFunction } from "../../../mock";
-import { geneticAnalystService } from "./genetic-analyst-service.command.mock";
-import { geneticAnalystServiceMock } from "../../../models/genetic-analysts/genetic-analyst-service.mock";
+import { geneticAnalystServices } from "./genetic-analyst-services.command.mock";
+import { geneticAnalystServicesMock } from "../../../models/genetic-analysts/genetic-analyst-services.mock";
 
 jest.mock('../../../mock', () => ({
   mockFunction: jest.fn(),
 }));
 
-jest.mock('../../../../../src/index', () => ({
+jest.mock('../../../../../src/command/index', () => ({
   successCallback: jest.fn(() => mockFunction()),
-  bulkCreateGeneticAnalystService: jest.fn(() => mockFunction()),
-  createGeneticAnalystService: jest.fn(() => mockFunction()),
-  deleteGeneticAnalystService: jest.fn(() => mockFunction()),
-  updateGeneticAnalystService: jest.fn(() => mockFunction()),
 }));
 
 describe('Genetic Analysis Commands Unit Testing', () => {
   const API_PROMISE_MOCK: ApiPromise = new ApiPromise();
   API_PROMISE_MOCK.tx = {
-    geneticAnalystService: geneticAnalystService
+    geneticAnalystServices: geneticAnalystServices
   };
 
   const signAndSendSpy = jest.spyOn(signAndSend, 'signAndSend');
-  const bulkCreateGeneticAnalystServiceSpy = jest.spyOn(geneticAnalystService, 'bulkCreateGeneticAnalystService');
-  const createGeneticAnalystServiceSpy = jest.spyOn(geneticAnalystService, 'createGeneticAnalystService');
-  const deleteGeneticAnalystServiceSpy = jest.spyOn(geneticAnalystService, 'deleteGeneticAnalystService');
-  const updateGeneticAnalystServiceSpy = jest.spyOn(geneticAnalystService, 'updateGeneticAnalystService');
+  const bulkCreateGeneticAnalystServiceSpy = jest.spyOn(geneticAnalystServices, 'bulkCreateGeneticAnalystService');
+  const createGeneticAnalystServiceSpy = jest.spyOn(geneticAnalystServices, 'createGeneticAnalystService');
+  const deleteGeneticAnalystServiceSpy = jest.spyOn(geneticAnalystServices, 'deleteGeneticAnalystService');
+  const updateGeneticAnalystServiceSpy = jest.spyOn(geneticAnalystServices, 'updateGeneticAnalystService');
 
   beforeEach(() => {
     (mockFunction as jest.Mock).mockClear();
@@ -47,7 +45,7 @@ describe('Genetic Analysis Commands Unit Testing', () => {
   it('bulkCreateGeneticAnalystService should return', async () => {
       // Arrange
       const PAIR = "PAIR";
-      const GA_INFO = geneticAnalystServiceMock.info;
+      const GA_INFO = geneticAnalystServicesMock.info;
 
       // Act
       await bulkCreateGeneticAnalystService(
@@ -73,7 +71,7 @@ describe('Genetic Analysis Commands Unit Testing', () => {
   it('createGeneticAnalystService should return', async () => {
       // Arrange
       const PAIR = "PAIR";
-      const GA_INFO = geneticAnalystServiceMock.info;
+      const GA_INFO = geneticAnalystServicesMock.info;
 
       // Act
       await createGeneticAnalystService(
@@ -126,7 +124,7 @@ describe('Genetic Analysis Commands Unit Testing', () => {
     // Arrange
     const PAIR = "PAIR";
       const GA_SERVICE_ID = "GA_SERVICE_ID";
-      const GA_INFO = geneticAnalystServiceMock.info;
+      const GA_INFO = geneticAnalystServicesMock.info;
 
     // Act
     await updateGeneticAnalystService(
