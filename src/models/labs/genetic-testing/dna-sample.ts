@@ -1,4 +1,4 @@
-import { DnaSampleStatus } from "./dna-sample-status";
+import { DnaSampleStatus } from './dna-sample-status';
 
 export class DnaSample {
   constructor(anyJson: any) {
