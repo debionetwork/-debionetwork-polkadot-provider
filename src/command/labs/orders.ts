@@ -50,8 +50,9 @@ export function getCreateOrderFee(
   api: ApiPromise,
   pair: any,
   serviceId: string,
-  customerBoxPublicKey: string,
   priceIndex: number,
+  customerBoxPublicKey: string,
+  orderFlow: string,
 ): any {
-  return api.tx.orders.createOrder(serviceId, priceIndex, customerBoxPublicKey).paymentInfo(pair);
+  return api.tx.orders.createOrder(serviceId, priceIndex, customerBoxPublicKey, orderFlow).paymentInfo(pair);
 }

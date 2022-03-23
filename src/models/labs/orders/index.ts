@@ -35,9 +35,9 @@ export class Order {
 
   normalize() {
     const order: Order = this; // eslint-disable-line
-    order.additionalPrices[0].value = convertSubstrateBalanceToNumber(order.additionalPrices[0].value);
+    order.additionalPrices[0].value = convertSubstrateBalanceToNumber(order.additionalPrices[0].value).toString();
 
-    order.prices[0].value = convertSubstrateBalanceToNumber(order.prices[0].value);
+    order.prices[0].value = convertSubstrateBalanceToNumber(order.prices[0].value).toString();
 
     order.createdAt = new Date(convertSubstrateNumberToNumber(order.createdAt));
 

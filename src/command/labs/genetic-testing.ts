@@ -6,7 +6,7 @@ export async function processDnaSample(
   api: ApiPromise,
   pair: any,
   trackingId: string,
-  processStatus: any,
+  processStatus: string,
   callback?: () => void,
 ) {
   // tslint:disable-next-line

@@ -184,6 +184,7 @@ describe('Orders Commands Unit Tests', () => {
     const PAIR = "PAIR";
     const SERVICE_ID = "SERVICE_ID";
     const BOX_PUBLIC_KEY = "BOX_PUBLIC_KEY";
+    const ORDER_FLOW = "RequestTest"
     const PRICE_INDEX = 0;
     const EXPECTED_VALUE = 0;
     (mockFunction as jest.Mock).mockReturnValue(EXPECTED_VALUE);
@@ -194,11 +195,12 @@ describe('Orders Commands Unit Tests', () => {
         API_PROMISE_MOCK as any, 
         PAIR,
         SERVICE_ID,
-        BOX_PUBLIC_KEY,
         PRICE_INDEX,
-      )).toEqual(EXPECTED_VALUE);
+        BOX_PUBLIC_KEY,
+        ORDER_FLOW,
+        )).toEqual(EXPECTED_VALUE);
     expect(createOrderSpy).toBeCalledTimes(1);
-    expect(createOrderSpy).toBeCalledWith(SERVICE_ID, PRICE_INDEX, BOX_PUBLIC_KEY);
+    expect(createOrderSpy).toBeCalledWith(SERVICE_ID, PRICE_INDEX, BOX_PUBLIC_KEY, ORDER_FLOW);
     expect(paymentInfoSpy).toBeCalledTimes(1);
     expect(paymentInfoSpy).toBeCalledWith(PAIR);
     expect(mockFunction).toBeCalledTimes(1);

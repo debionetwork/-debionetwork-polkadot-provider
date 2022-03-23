@@ -1,6 +1,6 @@
-import { ApiPromise } from "@polkadot/api";
-import { DnaSample } from "../../models/labs/genetic-testing/dna-sample";
-import { TestResult } from "../../models/labs/genetic-testing/test-result";
+import { ApiPromise } from '@polkadot/api';
+import { DnaSample } from '../../models/labs/genetic-testing/dna-sample';
+import { TestResult } from '../../models/labs/genetic-testing/test-result';
 
 export async function queryDNASamples(api: ApiPromise, trackingId: string): Promise<DnaSample> {
   const res = (await api.query.geneticTesting.dnaSamples(trackingId)).toHuman();
