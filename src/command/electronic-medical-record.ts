@@ -49,11 +49,11 @@ export async function getAddElectronicMedicalRecordFee(
   pair: any,
   data: ElectronicMedicalRecordInput,
 ): Promise<any> {
-  return await api.tx.electronicMedicalRecord
+  return api.tx.electronicMedicalRecord
     .addElectronicMedicalRecord(data.title, data.category, data.files)
     .paymentInfo(pair);
 }
 
 export async function getRemoveElectronicMedicalRecordFee(api: ApiPromise, pair: any, emrId: string): Promise<any> {
-  return await api.tx.electronicMedicalRecord.removeElectronicMedicalRecord(emrId).paymentInfo(pair);
+  return api.tx.electronicMedicalRecord.removeElectronicMedicalRecord(emrId).paymentInfo(pair);
 }
