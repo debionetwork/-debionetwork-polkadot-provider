@@ -44,7 +44,11 @@ export async function deregisterElectronicMedicalRecord(
     });
 }
 
-export async function getAddElectronicMedicalRecordFee(api: ApiPromise, pair: any, data: ElectronicMedicalRecordInput): Promise<any> {
+export async function getAddElectronicMedicalRecordFee(
+  api: ApiPromise,
+  pair: any,
+  data: ElectronicMedicalRecordInput,
+): Promise<any> {
   return await api.tx.electronicMedicalRecord
     .addElectronicMedicalRecord(data.title, data.category, data.files)
     .paymentInfo(pair);
