@@ -1,10 +1,10 @@
 import {
+  successCallback,
   bulkCreateGeneticAnalystService,
   createGeneticAnalystService,
   deleteGeneticAnalystService,
   updateGeneticAnalystService
-} from "../../../../../src/command/genetic-analyst/genetic-analyst-services";
-import { successCallback } from "../../../../../src/index";
+} from "../../../../../src/index";
 import { ApiPromise, eventAndStatusMock, signAndSend } from "../../../@polkadot-api.mock";
 import { mockFunction } from "../../../mock";
 import { geneticAnalystService } from "./genetic-analyst-service.command.mock";
@@ -16,6 +16,10 @@ jest.mock('../../../mock', () => ({
 
 jest.mock('../../../../../src/index', () => ({
   successCallback: jest.fn(() => mockFunction()),
+  bulkCreateGeneticAnalystService: jest.fn(() => mockFunction()),
+  createGeneticAnalystService: jest.fn(() => mockFunction()),
+  deleteGeneticAnalystService: jest.fn(() => mockFunction()),
+  updateGeneticAnalystService: jest.fn(() => mockFunction()),
 }));
 
 describe('Genetic Analysis Commands Unit Testing', () => {
@@ -70,7 +74,6 @@ describe('Genetic Analysis Commands Unit Testing', () => {
       // Arrange
       const PAIR = "PAIR";
       const GA_INFO = geneticAnalystServiceMock.info;
-      const STATUS = "Registered";
 
       // Act
       await createGeneticAnalystService(
@@ -97,8 +100,6 @@ describe('Genetic Analysis Commands Unit Testing', () => {
       // Arrange
       const PAIR = "PAIR";
       const GA_SERVICE_ID = "GA_SERVICE_ID";
-      const REPORT_LINK = "REPORT_LINK";
-      const COMMENT = "COMMENT";
 
       // Act
       await deleteGeneticAnalystService(
