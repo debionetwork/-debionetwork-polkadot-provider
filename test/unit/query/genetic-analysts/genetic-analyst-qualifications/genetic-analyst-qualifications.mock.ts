@@ -1,13 +1,13 @@
 import { returnToHumanMockWithParam, toHumanMock } from "../../../@polkadot-types.mock";
 
-export const geneticAnalystServices = {
-  geneticAnalystServices(param) {
+export const geneticAnalystQualifications = {
+  geneticAnalystQualifications(param) {
     return returnToHumanMockWithParam(param);
   },
-  geneticAnalystServicesCount() {
+  geneticAnalystQualificationsCount() {
     return toHumanMock;
   },
-  geneticAnalystServicesCountByOwner(param) {
+  geneticAnalystQualificationsCountByOwner(param) {
     return returnToHumanMockWithParam(param);
   },
 }

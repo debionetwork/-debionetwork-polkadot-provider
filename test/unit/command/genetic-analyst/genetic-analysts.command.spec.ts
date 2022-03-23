@@ -5,6 +5,7 @@ import {
     updateGeneticAnalystVerificationStatus,
     updateGeneticAnalystAvailabilityStatus,
     stakeGeneticAnalyst,
+    retrieveUnstakeAmount,
     unstakeGeneticAnalyst,
     updateMinimumStakeAmount,
     updateAdminKey,
@@ -39,6 +40,7 @@ describe('Genetic Analysts Commands Unit Testing', () => {
   const updateGeneticAnalystVerificationStatusSpy = jest.spyOn(geneticAnalysts, 'updateGeneticAnalystVerificationStatus');
   const updateGeneticAnalystAvailabilityStatusSpy = jest.spyOn(geneticAnalysts, 'updateGeneticAnalystAvailabilityStatus');
   const stakeGeneticAnalystSpy = jest.spyOn(geneticAnalysts, 'stakeGeneticAnalyst');
+  const retrieveUnstakeAmountSpy = jest.spyOn(geneticAnalysts, 'retrieveUnstakeAmount');
   const unstakeGeneticAnalystSpy = jest.spyOn(geneticAnalysts, 'unstakeGeneticAnalyst');
   const updateMinimumStakeAmountSpy = jest.spyOn(geneticAnalysts, 'updateMinimumStakeAmount');
   const updateAdminKeySpy = jest.spyOn(geneticAnalysts, 'updateAdminKey');
@@ -161,6 +163,32 @@ describe('Genetic Analysts Commands Unit Testing', () => {
       });
       expect(mockFunction).toBeCalledTimes(1);
   });
+
+  it('retrieveUnstakeAmount should return', async () => {
+    // Arrange
+    const PAIR = "PAIR";
+    const DATA_MOCK = geneticAnalystsDataMock;
+
+    // Act
+    await retrieveUnstakeAmount(
+      API_PROMISE_MOCK as any, 
+      PAIR,
+      DATA_MOCK.accountId,
+      mockFunction
+    );
+
+    expect(retrieveUnstakeAmountSpy).toBeCalledTimes(1);
+    expect(retrieveUnstakeAmountSpy).toBeCalledWith(DATA_MOCK.accountId);
+    expect(signAndSendSpy).toBeCalledTimes(1);
+    expect(signAndSendSpy).toBeCalledWith(PAIR, { nonce: -1 }, expect.any(Function));
+    expect(successCallback).toBeCalledTimes(1);
+    expect(successCallback).toBeCalledWith(API_PROMISE_MOCK, { 
+      events: eventAndStatusMock.events, 
+      status: eventAndStatusMock.status, 
+      callback: mockFunction,
+    });
+    expect(mockFunction).toBeCalledTimes(1);
+});
   
   it('updateGeneticAnalystAvailabilityStatus should return', async () => {
       // Arrange

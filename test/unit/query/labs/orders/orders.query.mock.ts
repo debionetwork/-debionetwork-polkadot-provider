@@ -7,5 +7,11 @@ export const orders = {
   },
   orders(param) {
     return returnToHumanMockWithParam(param);
+  },
+  ordersByCustomer(param) {
+    return returnToHumanMockWithParam(param)
+  },
+  ordersBySeller(param) {
+    return returnToHumanMockWithParam(param)
   }
 }
