@@ -200,7 +200,7 @@ describe('Orders Commands Unit Tests', () => {
         ORDER_FLOW,
         )).toEqual(EXPECTED_VALUE);
     expect(createOrderSpy).toBeCalledTimes(1);
-    expect(createOrderSpy).toBeCalledWith(SERVICE_ID, PRICE_INDEX, BOX_PUBLIC_KEY);
+    expect(createOrderSpy).toBeCalledWith(SERVICE_ID, PRICE_INDEX, BOX_PUBLIC_KEY, ORDER_FLOW);
     expect(paymentInfoSpy).toBeCalledTimes(1);
     expect(paymentInfoSpy).toBeCalledWith(PAIR);
     expect(mockFunction).toBeCalledTimes(1);
