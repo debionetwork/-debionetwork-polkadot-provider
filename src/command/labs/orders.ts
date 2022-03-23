@@ -57,14 +57,26 @@ export function getCreateOrderFee(
   return api.tx.orders.createOrder(serviceId, priceIndex, customerBoxPublicKey, orderFlow).paymentInfo(pair);
 }
 
-export async function sudoUpdateLabOrderEscrowKey(api: ApiPromise, pair: any, orderId: string, callback?: () => void): Promise<void> {
+export async function sudoUpdateLabOrderEscrowKey(
+  api: ApiPromise,
+  pair: any,
+  orderId: string,
+  callback?: () => void,
+): Promise<void> {
   // tslint:disable-next-line
-  var unsub = await api.tx.orders.sudoUpdateEscrowKey(orderId).signAndSend(pair, { nonce: -1 }, ({ events, status }) => {
-    successCallback(api, { events, status, callback, unsub });
-  });
+  var unsub = await api.tx.orders
+    .sudoUpdateEscrowKey(orderId)
+    .signAndSend(pair, { nonce: -1 }, ({ events, status }) => {
+      successCallback(api, { events, status, callback, unsub });
+    });
 }
 
-export async function updateLabOrderEscrowKey(api: ApiPromise, pair: any, orderId: string, callback?: () => void): Promise<void> {
+export async function updateLabOrderEscrowKey(
+  api: ApiPromise,
+  pair: any,
+  orderId: string,
+  callback?: () => void,
+): Promise<void> {
   // tslint:disable-next-line
   var unsub = await api.tx.orders.updateEscrowKey(orderId).signAndSend(pair, { nonce: -1 }, ({ events, status }) => {
     successCallback(api, { events, status, callback, unsub });
