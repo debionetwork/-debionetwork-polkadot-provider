@@ -1,4 +1,4 @@
-import { convertSubstrateBalanceToNumber } from '../..';
+import { convertSubstrateBalanceToNumber, convertSubstrateNumberToNumber } from '../..';
 import { GeneticAnalystsAvailabilityStatus } from './genetic-analyst-availability-status';
 import { GeneticAnalystInfo } from './genetic-analyst-info';
 import { GeneticAnalystsVerificationStatus } from './genetic-analyst-verification-status';
@@ -21,11 +21,23 @@ export class GeneticAnalyst {
   stakeStatus: StakeStatus;
   verificationStatus: GeneticAnalystsVerificationStatus;
   availabilityStatus: GeneticAnalystsAvailabilityStatus;
+  unstakeAt: Date;
+  retrieveUnstakeAt: Date;
 
   normalize() {
     const geneticAnalyst: GeneticAnalyst = this; // eslint-disable-line
 
     geneticAnalyst.stakeAmount = convertSubstrateBalanceToNumber(geneticAnalyst.stakeAmount);
+
+    
+    if (geneticAnalyst.unstakeAt) {
+      geneticAnalyst.unstakeAt = new Date(convertSubstrateNumberToNumber(geneticAnalyst.unstakeAt));
+    }
+
+    if (geneticAnalyst.retrieveUnstakeAt) {
+      geneticAnalyst.retrieveUnstakeAt = new Date(convertSubstrateNumberToNumber(geneticAnalyst.retrieveUnstakeAt));
+    }
+
     return geneticAnalyst;
   }
 }
