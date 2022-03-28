@@ -12,6 +12,8 @@ export class GeneticAnalyst {
     this.info = anyJson.info;
     this.stakeAmount = anyJson.stakeAmount;
     this.verificationStatus = anyJson.verificationStatus;
+    this.unstakeAt = anyJson.unstakeAt;
+    this.retrieveUnstakeAt = anyJson.retrieveUnstakeAt;
   }
   accountId: string;
   services: string[];
