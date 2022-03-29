@@ -16,19 +16,17 @@ export async function sendRewards(
     });
 }
 
-export async function updateAdminKey(api: ApiPromise, pair: any, accountId: string, callback?: () => void) {
+export async function updateRewardsAdminKey(api: ApiPromise, pair: any, accountId: string, callback?: () => void) {
   // tslint:disable-next-line
-  var unsub = await api.tx.rewards
-    .updateAdminKey(accountId)
-    .signAndSend(pair, { nonce: -1 }, ({ events, status }) => {
-      successCallback(api, { events, status, callback, unsub });
-    });
+  var unsub = await api.tx.rewards.updateAdminKey(accountId).signAndSend(pair, { nonce: -1 }, ({ events, status }) => {
+    successCallback(api, { events, status, callback, unsub });
+  });
 }
 
-export async function sudoUpdateAdminKey(api: ApiPromise, pair: any, accountId: string, callback?: () => void) {
+export async function sudoRewardsUpdateAdminKey(api: ApiPromise, pair: any, accountId: string, callback?: () => void) {
   // tslint:disable-next-line
-  var unsub = await api.tx.rewards
-    .sudoUpdateAdminKey(accountId)
+  var unsub = await api.tx.sudo
+    .sudo(api.tx.rewards.sudoUpdateAdminKey(accountId))
     .signAndSend(pair, { nonce: -1 }, ({ events, status }) => {
       successCallback(api, { events, status, callback, unsub });
     });

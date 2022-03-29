@@ -1,7 +1,9 @@
 import { ApiPromise } from '@polkadot/api';
 import 'regenerator-runtime/runtime';
-import { sendRewards } from "../../src/command/rewards";
+import { sendRewards, updateRewardsAdminKey, sudoRewardsUpdateAdminKey } from "../../src/command/rewards";
+import { queryRewarderKey } from "../../src/query/rewards";
 import { initializeApi } from './polkadot-init';
+
 
 describe('Rewards Pallet Integration Tests', () => {
   let api: ApiPromise;
@@ -21,5 +23,31 @@ describe('Rewards Pallet Integration Tests', () => {
 
   it('sendRewards should return', async () => {
     await sendRewards(api, pair, pair.address, REWARDS_MOCK);
+  }, 25000); // Set timeout for 25 seconds
+
+  it('updateRewardsAdminKey should return', async () => {
+    const promise: Promise<String> = new Promise((resolve, reject) => { // eslint-disable-line
+      updateRewardsAdminKey(api, pair, pair.address, () => {
+        queryRewarderKey(api)
+          .then((res) => {
+            resolve(res)
+          });
+      });
+    });
+
+    expect(await promise).toEqual(pair.address);
+  }, 25000); // Set timeout for 25 seconds
+
+  it('sudoRewardsUpdateAdminKey should return', async () => {
+    const promise: Promise<String> = new Promise((resolve, reject) => { // eslint-disable-line
+      sudoRewardsUpdateAdminKey(api, pair, pair.address, () => {
+        queryRewarderKey(api)
+          .then((res) => {
+            resolve(res)
+          });
+      });
+    });
+
+    expect(await promise).toEqual(pair.address);
   }, 25000); // Set timeout for 25 seconds
 });
