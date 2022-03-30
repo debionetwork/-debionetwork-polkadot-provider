@@ -1,5 +1,5 @@
 import { 
-  queryGeneticAnalysisById,
+  queryGeneticAnalysiByGeneticAnalysisTrackingId,
   queryGeneticAnalysisByOwnerId,
   queryGeneticAnalysisByGeneticAnalystId,
 } from "../../../../../src/query/genetic-analysts/genetic-analysis";
@@ -20,30 +20,30 @@ import { GeneticAnalysis } from "../../../../../src/models/genetic-analysts/gene
         geneticAnalysis: geneticAnalysis
     };
   
-    const geneticAnalysisByIdSpy = jest.spyOn(geneticAnalysis, 'geneticAnalysisById');
-    const geneticAnalysisByOwnerIdSpy = jest.spyOn(geneticAnalysis, 'geneticAnalysisByOwnerId');
+    const geneticAnalysisStorageSpy = jest.spyOn(geneticAnalysis, 'geneticAnalysisStorage');
+    const geneticAnalysisByOwnerSpy = jest.spyOn(geneticAnalysis, 'geneticAnalysisByOwner');
     const geneticAnalysisByGeneticAnalystIdSpy = jest.spyOn(geneticAnalysis, 'geneticAnalysisByGeneticAnalystId');
     
     beforeEach(() => {
       (mockFunction as jest.Mock).mockClear();
-      geneticAnalysisByIdSpy.mockClear();
-      geneticAnalysisByOwnerIdSpy.mockClear();
+      geneticAnalysisStorageSpy.mockClear();
+      geneticAnalysisByOwnerSpy.mockClear();
       geneticAnalysisByGeneticAnalystIdSpy.mockClear();
     });
   
-    it('queryGeneticAnalysisById should return', async () => {
+    it('queryGeneticAnalysiByGeneticAnalysisTrackingId should return', async () => {
       // Arrange
       const ANALYSIS_ID = "ANALYSIS_ID";
       const EXPECTED_VALUE = new GeneticAnalysis(geneticAnalysisDataMock);
       (mockFunction as jest.Mock).mockReturnValue(geneticAnalysisDataMock);
   
       // Assert
-      expect(await queryGeneticAnalysisById(API_PROMISE_MOCK as any, ANALYSIS_ID))
+      expect(await queryGeneticAnalysiByGeneticAnalysisTrackingId(API_PROMISE_MOCK as any, ANALYSIS_ID))
         .toEqual(EXPECTED_VALUE);
       expect(mockFunction).toBeCalledTimes(1);
       expect(mockFunction).toBeCalledWith(ANALYSIS_ID);
-      expect(geneticAnalysisByIdSpy).toBeCalledTimes(1);
-      expect(geneticAnalysisByIdSpy).toBeCalledWith(ANALYSIS_ID);
+      expect(geneticAnalysisStorageSpy).toBeCalledTimes(1);
+      expect(geneticAnalysisStorageSpy).toBeCalledWith(ANALYSIS_ID);
     });
 
     it('queryGeneticAnalysisByOwnerId should return', async () => {
@@ -67,10 +67,10 @@ import { GeneticAnalysis } from "../../../../../src/models/genetic-analysts/gene
       expect(mockFunction).toBeCalledTimes(2);
       expect(mockFunction).toBeCalledWith(ACCOUNT_ID);
       expect(mockFunction).toBeCalledWith(ANALYSIS_ID);
-      expect(geneticAnalysisByIdSpy).toBeCalledTimes(1);
-      expect(geneticAnalysisByIdSpy).toBeCalledWith(ANALYSIS_ID);
-      expect(geneticAnalysisByOwnerIdSpy).toBeCalledTimes(1);
-      expect(geneticAnalysisByOwnerIdSpy).toBeCalledWith(ACCOUNT_ID);
+      expect(geneticAnalysisStorageSpy).toBeCalledTimes(1);
+      expect(geneticAnalysisStorageSpy).toBeCalledWith(ANALYSIS_ID);
+      expect(geneticAnalysisByOwnerSpy).toBeCalledTimes(1);
+      expect(geneticAnalysisByOwnerSpy).toBeCalledWith(ACCOUNT_ID);
     });
 
     it('queryGeneticAnalysisByGeneticAnalystId should return', async () => {
@@ -94,8 +94,8 @@ import { GeneticAnalysis } from "../../../../../src/models/genetic-analysts/gene
       expect(mockFunction).toBeCalledTimes(2);
       expect(mockFunction).toBeCalledWith(ACCOUNT_ID);
       expect(mockFunction).toBeCalledWith(ANALYSIS_ID);
-      expect(geneticAnalysisByIdSpy).toBeCalledTimes(1);
-      expect(geneticAnalysisByIdSpy).toBeCalledWith(ANALYSIS_ID);
+      expect(geneticAnalysisStorageSpy).toBeCalledTimes(1);
+      expect(geneticAnalysisStorageSpy).toBeCalledWith(ANALYSIS_ID);
       expect(geneticAnalysisByGeneticAnalystIdSpy).toBeCalledTimes(1);
       expect(geneticAnalysisByGeneticAnalystIdSpy).toBeCalledWith(ACCOUNT_ID);
     });
