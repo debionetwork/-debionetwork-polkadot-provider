@@ -3,11 +3,15 @@ import {
 } from "../../../../../src/command/index";
 import {
   bulkCreateGeneticAnalystService,
+  bulkCreateGeneticAnalystServiceFee,
   createGeneticAnalystService,
+  createGeneticAnalystServiceFee,
   deleteGeneticAnalystService,
-  updateGeneticAnalystService
+  deleteGeneticAnalystServiceFee,
+  updateGeneticAnalystService,
+  updateGeneticAnalystServiceFee
 } from "../../../../../src/command/genetic-analyst/genetic-analyst-services"
-import { ApiPromise, eventAndStatusMock, signAndSend } from "../../../@polkadot-api.mock";
+import { ApiPromise, eventAndStatusMock, signAndSendWithPaymentInfo } from "../../../@polkadot-api.mock";
 import { mockFunction } from "../../../mock";
 import { geneticAnalystServices } from "./genetic-analyst-services.command.mock";
 import { geneticAnalystServicesMock } from "../../../models/genetic-analysts/genetic-analyst-services.mock";
@@ -26,7 +30,8 @@ describe('Genetic Analysis Commands Unit Testing', () => {
     geneticAnalystServices: geneticAnalystServices
   };
 
-  const signAndSendSpy = jest.spyOn(signAndSend, 'signAndSend');
+  const signAndSendSpy = jest.spyOn(signAndSendWithPaymentInfo, 'signAndSend');
+  const paymentInfoSpy = jest.spyOn(signAndSendWithPaymentInfo, 'paymentInfo');
   const bulkCreateGeneticAnalystServiceSpy = jest.spyOn(geneticAnalystServices, 'bulkCreateGeneticAnalystService');
   const createGeneticAnalystServiceSpy = jest.spyOn(geneticAnalystServices, 'createGeneticAnalystService');
   const deleteGeneticAnalystServiceSpy = jest.spyOn(geneticAnalystServices, 'deleteGeneticAnalystService');
@@ -36,6 +41,7 @@ describe('Genetic Analysis Commands Unit Testing', () => {
     (mockFunction as jest.Mock).mockClear();
     (successCallback as jest.Mock).mockClear();
     signAndSendSpy.mockClear();
+    paymentInfoSpy.mockClear();
     bulkCreateGeneticAnalystServiceSpy.mockClear();
     createGeneticAnalystServiceSpy.mockClear();
     deleteGeneticAnalystServiceSpy.mockClear();
@@ -123,8 +129,8 @@ describe('Genetic Analysis Commands Unit Testing', () => {
   it('updateGeneticAnalystService should return', async () => {
     // Arrange
     const PAIR = "PAIR";
-      const GA_SERVICE_ID = "GA_SERVICE_ID";
-      const GA_INFO = geneticAnalystServicesMock.info;
+    const GA_SERVICE_ID = "GA_SERVICE_ID";
+    const GA_INFO = geneticAnalystServicesMock.info;
 
     // Act
     await updateGeneticAnalystService(
@@ -146,5 +152,91 @@ describe('Genetic Analysis Commands Unit Testing', () => {
       callback: mockFunction,
     });
     expect(mockFunction).toBeCalledTimes(1);
-});
+  });
+
+  it('bulkCreateGeneticAnalystServiceFee should return', async () => {
+    // Arrange
+    const PAIR = "PAIR";
+    const GA_INFO = geneticAnalystServicesMock.info;
+    const EXPECTED_VALUE = 0;
+    (mockFunction as jest.Mock).mockReturnValue(EXPECTED_VALUE);
+      
+    // Assert
+    expect(
+      await bulkCreateGeneticAnalystServiceFee(
+        API_PROMISE_MOCK as any, 
+        PAIR,
+        GA_INFO,
+        )).toEqual(EXPECTED_VALUE);
+    expect(bulkCreateGeneticAnalystServiceSpy).toBeCalledTimes(1);
+    expect(bulkCreateGeneticAnalystServiceSpy).toBeCalledWith(GA_INFO);
+    expect(paymentInfoSpy).toBeCalledTimes(1);
+    expect(paymentInfoSpy).toBeCalledWith(PAIR);
+    expect(mockFunction).toBeCalledTimes(1);
+  });
+
+  it('createGeneticAnalystServiceFee should return', async () => {
+    // Arrange
+    const PAIR = "PAIR";
+    const GA_INFO = geneticAnalystServicesMock.info;
+    const EXPECTED_VALUE = 0;
+    (mockFunction as jest.Mock).mockReturnValue(EXPECTED_VALUE);
+      
+    // Assert
+    expect(
+      await createGeneticAnalystServiceFee(
+        API_PROMISE_MOCK as any, 
+        PAIR,
+        GA_INFO,
+        )).toEqual(EXPECTED_VALUE);
+    expect(createGeneticAnalystServiceSpy).toBeCalledTimes(1);
+    expect(createGeneticAnalystServiceSpy).toBeCalledWith(GA_INFO);
+    expect(paymentInfoSpy).toBeCalledTimes(1);
+    expect(paymentInfoSpy).toBeCalledWith(PAIR);
+    expect(mockFunction).toBeCalledTimes(1);
+  });
+
+  it('deleteGeneticAnalystServiceFee should return', async () => {
+    // Arrange
+    const PAIR = "PAIR";
+    const GA_SERVICE_ID = "GA_SERVICE_ID";
+    const EXPECTED_VALUE = 0;
+    (mockFunction as jest.Mock).mockReturnValue(EXPECTED_VALUE);
+      
+    // Assert
+    expect(
+      await deleteGeneticAnalystServiceFee(
+        API_PROMISE_MOCK as any, 
+        PAIR,
+        GA_SERVICE_ID,
+        )).toEqual(EXPECTED_VALUE);
+    expect(deleteGeneticAnalystServiceSpy).toBeCalledTimes(1);
+    expect(deleteGeneticAnalystServiceSpy).toBeCalledWith(GA_SERVICE_ID);
+    expect(paymentInfoSpy).toBeCalledTimes(1);
+    expect(paymentInfoSpy).toBeCalledWith(PAIR);
+    expect(mockFunction).toBeCalledTimes(1);
+  });
+
+  it('updateGeneticAnalystServiceFee should return', async () => {
+    // Arrange
+    const PAIR = "PAIR";
+    const GA_SERVICE_ID = "GA_SERVICE_ID";
+    const GA_INFO = geneticAnalystServicesMock.info;
+    const EXPECTED_VALUE = 0;
+    (mockFunction as jest.Mock).mockReturnValue(EXPECTED_VALUE);
+      
+    // Assert
+    expect(
+      await updateGeneticAnalystServiceFee(
+        API_PROMISE_MOCK as any, 
+        PAIR,
+        GA_SERVICE_ID,
+        GA_INFO,
+        )).toEqual(EXPECTED_VALUE);
+    expect(updateGeneticAnalystServiceSpy).toBeCalledTimes(1);
+    expect(updateGeneticAnalystServiceSpy).toBeCalledWith(GA_SERVICE_ID, GA_INFO);
+    expect(paymentInfoSpy).toBeCalledTimes(1);
+    expect(paymentInfoSpy).toBeCalledWith(PAIR);
+    expect(mockFunction).toBeCalledTimes(1);
+  });
 })
