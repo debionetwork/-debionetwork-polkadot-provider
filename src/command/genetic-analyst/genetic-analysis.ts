@@ -47,3 +47,27 @@ export async function submitGeneticAnalysis(
       successCallback(api, { events, status, callback, unsub });
     });
 }
+
+export async function rejectGeneticAnalysisFee(
+  api: ApiPromise,
+  pair: any,
+  geneticAnalysisTrackingId: string,
+  rejectedTitle: string,
+  rejectedDescription: string,
+): Promise<any> {
+  return await api.tx.geneticAnalysis
+    .rejectGeneticAnalysis(geneticAnalysisTrackingId, rejectedTitle, rejectedDescription)
+    .paymentInfo(pair);
+}
+
+export async function submitGeneticAnalysisFee(
+  api: ApiPromise,
+  pair: any,
+  geneticAnalysisTrackingId: string,
+  reportLink: string,
+  comment: string,
+): Promise<any> {
+  return await api.tx.geneticAnalysis
+    .submitGeneticAnalysis(geneticAnalysisTrackingId, reportLink, comment)
+    .paymentInfo(pair);
+}
