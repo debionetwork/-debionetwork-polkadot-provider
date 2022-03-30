@@ -1,12 +1,12 @@
 import { ApiPromise } from "../../../@polkadot-api.mock";
 import { geneticTesting } from "./genetic-testing.mock";
 import { mockFunction } from "../../../mock";
-import { queryDNASamples, 
-  queryDNASamplesByLab, 
-  queryDNASamplesByOwner, 
-  queryDNATestResults, 
-  queryDNATestResultsByLab, 
-  queryDNATestResultsByOwner, 
+import { queryDnaSamples, 
+  queryDnaSamplesByLab, 
+  queryDnaSamplesByOwner, 
+  queryDnaTestResults, 
+  queryDnaTestResultsByLab, 
+  queryDnaTestResultsByOwner, 
   queryStakedDataByAccountId, 
   queryStakedDataByOrderId } from "../../../../../src/query/labs/genetic-testing";
 import { DnaSample } from "../../../../../src/models/labs/genetic-testing/dna-sample";
@@ -45,14 +45,14 @@ describe('Orders Queries Unit Tests', () => {
     stakedDataByOrderIdSpy.mockClear();
   });
 
-  it("queryDNASamples should return", async () => {
+  it("queryDnaSamples should return", async () => {
     // Arrange
     const TRACKING_ID = "TRACKING_ID";
     const EXPECTED_VALUE = new DnaSample(DnaSampleDataMock);
     (mockFunction as jest.Mock).mockReturnValue(EXPECTED_VALUE);
 
     // Assert
-    expect(await queryDNASamples(API_PROMISE_MOCK as any, TRACKING_ID))
+    expect(await queryDnaSamples(API_PROMISE_MOCK as any, TRACKING_ID))
       .toEqual(EXPECTED_VALUE);
     expect(mockFunction).toBeCalledTimes(1);
     expect(mockFunction).toBeCalledWith(TRACKING_ID);
@@ -60,7 +60,7 @@ describe('Orders Queries Unit Tests', () => {
     expect(dnaSamplesSpy).toBeCalledWith(TRACKING_ID);
   });
 
-  it("queryDNASamplesByLab should return", async () => {
+  it("queryDnaSamplesByLab should return", async () => {
     // Arrange
     const LAB_ID = "LAB_ID";
     const TRACKING_ID = "TRACKING_ID";
@@ -75,7 +75,7 @@ describe('Orders Queries Unit Tests', () => {
       .mockReturnValue(EXPECTED_VALUE);
 
     // Assert
-    expect(await queryDNASamplesByLab(API_PROMISE_MOCK as any, LAB_ID))
+    expect(await queryDnaSamplesByLab(API_PROMISE_MOCK as any, LAB_ID))
       .toEqual([EXPECTED_VALUE]);
     expect(mockFunction).toBeCalledTimes(2);
     expect(mockFunction).toBeCalledWith(LAB_ID);
@@ -85,7 +85,7 @@ describe('Orders Queries Unit Tests', () => {
     expect(dnaSamplesSpy).toBeCalledWith(TRACKING_ID);
   });
 
-  it("queryDNASamplesByOwner should return", async () => {
+  it("queryDnaSamplesByOwner should return", async () => {
     // Arrange
     const OWNER_ID = "OWNER_ID";
     const TRACKING_ID = "TRACKING_ID";
@@ -100,7 +100,7 @@ describe('Orders Queries Unit Tests', () => {
       .mockReturnValue(EXPECTED_VALUE);
 
     // Assert
-    expect(await queryDNASamplesByOwner(API_PROMISE_MOCK as any, OWNER_ID))
+    expect(await queryDnaSamplesByOwner(API_PROMISE_MOCK as any, OWNER_ID))
       .toEqual([EXPECTED_VALUE]);
     expect(mockFunction).toBeCalledTimes(2);
     expect(mockFunction).toBeCalledWith(OWNER_ID);
@@ -110,14 +110,14 @@ describe('Orders Queries Unit Tests', () => {
     expect(dnaSamplesSpy).toBeCalledWith(TRACKING_ID);
   });
 
-  it("queryDNATestResults should return", async () => {
+  it("queryDnaTestResults should return", async () => {
     // Arrange
     const TRACKING_ID = "TRACKING_ID";
     const EXPECTED_VALUE = new TestResult(TestResultDataMock);
     (mockFunction as jest.Mock).mockReturnValue(EXPECTED_VALUE);
 
     // Assert
-    expect(await queryDNATestResults(API_PROMISE_MOCK as any, TRACKING_ID))
+    expect(await queryDnaTestResults(API_PROMISE_MOCK as any, TRACKING_ID))
       .toEqual(EXPECTED_VALUE);
     expect(mockFunction).toBeCalledTimes(1);
     expect(mockFunction).toBeCalledWith(TRACKING_ID);
@@ -125,7 +125,7 @@ describe('Orders Queries Unit Tests', () => {
     expect(dnaTestResultsSpy).toBeCalledWith(TRACKING_ID);
   });
 
-  it("queryDNATestResultsByLab should return", async () => {
+  it("queryDnaTestResultsByLab should return", async () => {
     // Arrange
     const LAB_ID = "LAB_ID";
     const TRACKING_ID = "TRACKING_ID";
@@ -140,7 +140,7 @@ describe('Orders Queries Unit Tests', () => {
       .mockReturnValue(EXPECTED_VALUE);
 
     // Assert
-    expect(await queryDNATestResultsByLab(API_PROMISE_MOCK as any, LAB_ID))
+    expect(await queryDnaTestResultsByLab(API_PROMISE_MOCK as any, LAB_ID))
       .toEqual([EXPECTED_VALUE]);
     expect(mockFunction).toBeCalledTimes(2);
     expect(mockFunction).toBeCalledWith(LAB_ID);
@@ -150,7 +150,7 @@ describe('Orders Queries Unit Tests', () => {
     expect(dnaTestResultsSpy).toBeCalledWith(TRACKING_ID);
   });
 
-  it("queryDNATestResultsByOwner should return", async () => {
+  it("queryDnaTestResultsByOwner should return", async () => {
     // Arrange
     const OWNER_ID = "OWNER_ID";
     const TRACKING_ID = "TRACKING_ID";
@@ -165,7 +165,7 @@ describe('Orders Queries Unit Tests', () => {
       .mockReturnValue(EXPECTED_VALUE);
 
     // Assert
-    expect(await queryDNATestResultsByOwner(API_PROMISE_MOCK as any, OWNER_ID))
+    expect(await queryDnaTestResultsByOwner(API_PROMISE_MOCK as any, OWNER_ID))
       .toEqual([EXPECTED_VALUE]);
     expect(mockFunction).toBeCalledTimes(2);
     expect(mockFunction).toBeCalledWith(OWNER_ID);
