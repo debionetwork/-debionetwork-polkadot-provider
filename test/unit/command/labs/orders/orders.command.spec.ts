@@ -34,8 +34,8 @@ describe('Orders Commands Unit Tests', () => {
   const setOrderRefundedSpy = jest.spyOn(orders, 'setOrderRefunded');
   const setOrderPaidSpy = jest.spyOn(orders, 'setOrderPaid');
   const cancelOrderSpy = jest.spyOn(orders, 'cancelOrder');
-  const sudoUpdateEscrowKeySpy = jest.spyOn(orders, 'sudoUpdateLabOrderEscrowKey');
-  const updateEscrowKeySpy = jest.spyOn(orders, 'updateLabOrderEscrowKey');
+  const sudoUpdateEscrowKeySpy = jest.spyOn(orders, 'sudoUpdateEscrowKey');
+  const updateEscrowKeySpy = jest.spyOn(orders, 'updateEscrowKey');
   
   beforeEach(() => {
     (mockFunction as jest.Mock).mockClear();
@@ -217,5 +217,57 @@ describe('Orders Commands Unit Tests', () => {
     expect(paymentInfoSpy).toBeCalledTimes(1);
     expect(paymentInfoSpy).toBeCalledWith(PAIR);
     expect(mockFunction).toBeCalledTimes(1);
+  });
+  
+  it('updateEscrowKey should return', async () => {
+      // Arrange
+      const PAIR = "PAIR";
+      const PARAM = "PARAM";
+
+      // Act
+      await updateLabOrderEscrowKey(
+        API_PROMISE_MOCK as any, 
+        PAIR,
+        PARAM,
+        mockFunction
+      );
+
+      expect(updateEscrowKeySpy).toBeCalledTimes(1);
+      expect(updateEscrowKeySpy).toBeCalledWith(PARAM);
+      expect(signAndSendSpy).toBeCalledTimes(1);
+      expect(signAndSendSpy).toBeCalledWith(PAIR, { nonce: -1 }, expect.any(Function));
+      expect(successCallback).toBeCalledTimes(1);
+      expect(successCallback).toBeCalledWith(API_PROMISE_MOCK, { 
+        events: eventAndStatusMock.events, 
+        status: eventAndStatusMock.status, 
+        callback: mockFunction,
+      });
+      expect(mockFunction).toBeCalledTimes(1);
+  });
+  
+  it('sudoUpdateEscrowKey should return', async () => {
+      // Arrange
+      const PAIR = "PAIR";
+      const PARAM = "PARAM";
+
+      // Act
+      await sudoUpdateLabOrderEscrowKey(
+        API_PROMISE_MOCK as any, 
+        PAIR,
+        PARAM,
+        mockFunction
+      );
+
+      expect(sudoUpdateEscrowKeySpy).toBeCalledTimes(1);
+      expect(sudoUpdateEscrowKeySpy).toBeCalledWith(PARAM);
+      expect(signAndSendSpy).toBeCalledTimes(1);
+      expect(signAndSendSpy).toBeCalledWith(PAIR, { nonce: -1 }, expect.any(Function));
+      expect(successCallback).toBeCalledTimes(1);
+      expect(successCallback).toBeCalledWith(API_PROMISE_MOCK, { 
+        events: eventAndStatusMock.events, 
+        status: eventAndStatusMock.status, 
+        callback: mockFunction,
+      });
+      expect(mockFunction).toBeCalledTimes(1);
   });
 });
