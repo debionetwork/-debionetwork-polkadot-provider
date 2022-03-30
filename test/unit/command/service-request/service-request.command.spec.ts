@@ -1,4 +1,4 @@
-import { retrieveUnstakedAmount, getCreateRequestFee, unstakeRequestFee, generateRequestId, unstakeRequest, claimRequest, processRequest, finalizeRequest } from "../../../../src/command/service-request";
+import { createRequest, retrieveUnstakedAmount, createRequestFee, unstakeRequestFee, generateRequestId, unstakeRequest, claimRequest, processRequest, finalizeRequest } from "../../../../src/command/service-request";
 import { successCallback } from "../../../../src/index";
 import { ApiPromise, eventAndStatusMock, signAndSendWithPaymentInfo } from "../../@polkadot-api.mock";
 import { mockFunction } from "../../mock";
@@ -55,6 +55,7 @@ describe('Service Request Commands Unit Testing', () => {
         mockFunction,
       );
 
+    // Assert
       expect(retrieveUnstakedAmountSpy).toBeCalledTimes(1);
       expect(retrieveUnstakedAmountSpy).toBeCalledWith(REQUEST_ID);
       expect(signAndSendSpy).toBeCalledTimes(1);
@@ -68,7 +69,42 @@ describe('Service Request Commands Unit Testing', () => {
       expect(mockFunction).toBeCalledTimes(1);
   });
 
-  it('getCreateRequestFee should return', () => {
+  it('createRequest should return', async () => {
+    // Arrange
+    const PAIR = "PAIR";
+    const COUNTRY_ID = "COUNTRY_ID";
+    const REGION_ID = "REGION_ID";
+    const CITY_ID = "CITY_ID";
+    const CATEGORY_ID = "CATEGORY_ID";
+    const EXPECTED_VALUE = 0;
+    (mockFunction as jest.Mock).mockReturnValue(EXPECTED_VALUE);
+      
+    // Act
+    await createRequest(
+      API_PROMISE_MOCK as any, 
+      PAIR,
+      COUNTRY_ID,
+      REGION_ID,
+      CITY_ID,
+      CATEGORY_ID,
+      mockFunction,
+    );
+
+    // Assert
+    expect(createRequestSpy).toBeCalledTimes(1);
+    expect(createRequestSpy).toBeCalledWith(COUNTRY_ID, REGION_ID, CITY_ID, CATEGORY_ID, 1);
+    expect(signAndSendSpy).toBeCalledTimes(1);
+    expect(signAndSendSpy).toBeCalledWith(PAIR, { nonce: -1 }, expect.any(Function));
+    expect(successCallback).toBeCalledTimes(1);
+    expect(successCallback).toBeCalledWith(API_PROMISE_MOCK, { 
+      events: eventAndStatusMock.events, 
+      status: eventAndStatusMock.status, 
+      callback: mockFunction,
+    });
+    expect(mockFunction).toBeCalledTimes(1);
+  });
+
+  it('createRequestFee should return', () => {
     // Arrange
     const PAIR = "PAIR";
     const COUNTRY_ID = "COUNTRY_ID";
@@ -80,7 +116,7 @@ describe('Service Request Commands Unit Testing', () => {
       
     // Assert
     expect(
-      getCreateRequestFee(
+      createRequestFee(
         API_PROMISE_MOCK as any, 
         PAIR,
         COUNTRY_ID,
