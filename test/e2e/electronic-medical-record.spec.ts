@@ -1,7 +1,7 @@
 import { ApiPromise } from '@polkadot/api';
 import 'regenerator-runtime/runtime';
 import { queryElectronicMedicalRecordByOwnerId, queryElectronicMedicalRecordById, queryElectronicMedicalRecordFileById, queryElectronicMedicalRecordCountByOwner, queryElectronicMedicalRecordCount } from '../../src/query/electronic-medical-record';
-import { registerElectronicMedicalRecord, updateElectronicMedicalRecord, deregisterElectronicMedicalRecord, getAddElectronicMedicalRecordFee, getRemoveElectronicMedicalRecordFee } from "../../src/command/electronic-medical-record";
+import { registerElectronicMedicalRecord, updateElectronicMedicalRecord, deregisterElectronicMedicalRecord, registerElectronicMedicalRecordFee, deregisterElectronicMedicalRecordFee } from "../../src/command/electronic-medical-record";
 import { initializeApi } from './polkadot-init';
 import { electronicMedicalRecordInputDataMock } from '../unit/models/electronic-medical-record/electronic-medical-record.mock';
 import { ElectronicMedicalRecord } from '../../src/models/electronic-medical-record';
@@ -84,13 +84,13 @@ describe('EMR Pallet Integration Tests', () => {
     expect(result[0].category).toEqual(electronicMedicalRecordInputDataMock.category);
   }, 25000); // Set timeout for 25 seconds
 
-  it('getAddElectronicMedicalRecordFee should return', async () => {
-    await getAddElectronicMedicalRecordFee(api, pair, new ElectronicMedicalRecordInput(electronicMedicalRecordInputDataMock));
+  it('registerElectronicMedicalRecordFee should return', async () => {
+    await registerElectronicMedicalRecordFee(api, pair, new ElectronicMedicalRecordInput(electronicMedicalRecordInputDataMock));
   }, 25000); // Set timeout for 25 seconds
 
-  it('getRemoveElectronicMedicalRecordFee should return', async () => {
+  it('deregisterElectronicMedicalRecordFee should return', async () => {
     const emrByOwner = await queryElectronicMedicalRecordByOwnerId(api, pair.address);
-    await getRemoveElectronicMedicalRecordFee(api, pair, emrByOwner[0].id);
+    await deregisterElectronicMedicalRecordFee(api, pair, emrByOwner[0].id);
   }, 25000); // Set timeout for 25 seconds
 
   it('deregisterElectronicMedicalRecord should return', async () => {
