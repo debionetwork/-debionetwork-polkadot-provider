@@ -37,6 +37,7 @@ export async function deregisterLab(api: ApiPromise, pair: any, callback?: () =>
   });
 }
 
+export * from './certifications';
 export * from './genetic-testing';
 export * from './orders';
-export * from './certifications';
+export * from './services';

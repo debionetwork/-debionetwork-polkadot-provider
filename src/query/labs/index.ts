@@ -37,6 +37,7 @@ export async function queryLabsAdminKey(api: ApiPromise): Promise<string> {
   return (await api.query.labs.labVerifierKey()).toString();
 }
 
+export * from './certifications';
+export * from './genetic-testing';
 export * from './orders';
 export * from './services';
-export * from './certifications';

@@ -2,7 +2,7 @@ import { ApiPromise } from '@polkadot/api';
 import { GeneticAnalyst } from '../../models/genetic-analysts/index';
 
 export async function queryGeneticAnalystByAccountId(api: ApiPromise, accountId: string): Promise<GeneticAnalyst> {
-  const res = (await api.query.geneticAnalysts.geneticAnalysByAccountId(accountId)).toHuman();
+  const res = (await api.query.geneticAnalysts.geneticAnalystByAccountId(accountId)).toHuman();
   return new GeneticAnalyst(res);
 }
 
@@ -29,6 +29,8 @@ export async function queryGeneticAnalystMinimumStakeAmount(api: ApiPromise): Pr
   return parseInt(res, 0);
 }
 
-export * from './genetic-data';
-export * from './genetic-analysis';
 export * from './genetic-analysis-orders';
+export * from './genetic-analysis';
+export * from './genetic-analyst-qualification';
+export * from './genetic-analyst-service';
+export * from './genetic-data';

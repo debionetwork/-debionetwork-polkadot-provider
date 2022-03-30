@@ -2,7 +2,7 @@ import { returnToHumanMockWithParam, toHumanMock } from "../../@polkadot-types.m
 import { mockFunction } from "../../mock";
 
 export const geneticAnalysts = {
-  geneticAnalysByAccountId(param) {
+  geneticAnalystByAccountId(param) {
     return returnToHumanMockWithParam(param);
   },
   geneticAnalystCount() {

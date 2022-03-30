@@ -1,11 +1,13 @@
 import { ApiPromise } from '@polkadot/api';
 
+export * from './genetic-analyst';
 export * from './labs';
+export * from './doctors';
+export * from './electronic-medical-record';
+export * from './hospitals';
 export * from './rewards';
 export * from './service-request';
 export * from './user-profile';
-export * from './genetic-analyst';
-export * from './electronic-medical-record';
 
 export function successCallback(api: ApiPromise, { events, status, callback, unsub }) {
   if (status.isFinalized) {
