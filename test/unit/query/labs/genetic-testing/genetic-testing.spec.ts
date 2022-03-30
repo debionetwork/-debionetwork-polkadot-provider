@@ -8,11 +8,31 @@ import { queryDnaSamples,
   queryDnaTestResultsByLab, 
   queryDnaTestResultsByOwner, 
   queryStakedDataByAccountId, 
-  queryStakedDataByOrderId } from "../../../../../src/query/labs/genetic-testing";
+  queryStakedDataByOrderId,
+  getDnaTestResultsDetailByLab
+} from "../../../../../src/query/labs/genetic-testing";
+import { queryOrderDetailByOrderID } from "../../../../../src/query/labs/orders";
+import { queryServiceById } from "../../../../../src/query/labs/services";
+import { queryLabById } from "../../../../../src/query/labs";
 import { DnaSample } from "../../../../../src/models/labs/genetic-testing/dna-sample";
 import { DnaSampleDataMock, TestResultDataMock } from "../../../models/labs/genetic-testing.mock";
 import { when } from 'jest-when';
 import { TestResult } from "../../../../../src/models/labs/genetic-testing/test-result";
+import { labDataMock } from "../../../models/labs/labs.mock";
+import { serviceDataMock } from "../../../models/labs/services.mock";
+import { orderDataMock } from "../../../models/labs/orders.mock";
+
+jest.mock('../../../../../src/query/labs/orders', () => ({
+  queryOrderDetailByOrderID: jest.fn()
+}));
+
+jest.mock('../../../../../src/query/labs/services', () => ({
+  queryServiceById: jest.fn()
+}));
+
+jest.mock('../../../../../src/query/labs', () => ({
+  queryLabById: jest.fn()
+}));
 
 jest.mock('../../../mock', () => ({
   mockFunction: jest.fn(),
@@ -203,5 +223,46 @@ describe('Orders Queries Unit Tests', () => {
     expect(mockFunction).toBeCalledWith(ORDER_ID);
     expect(stakedDataByOrderIdSpy).toBeCalledTimes(1);
     expect(stakedDataByOrderIdSpy).toBeCalledWith(ORDER_ID);
+  });
+
+  it("getDnaTestResultsDetailByLab should return", async () => {
+    // Arrange
+    const LAB_ID = "LAB_ID";
+    const TRACKING_ID = "TRACKING_ID";
+    const TRACKING_IDS = [ TRACKING_ID ];
+    const TEST_RESULT = new TestResult(TestResultDataMock);
+    (queryLabById as jest.Mock).mockReturnValue(labDataMock);
+    (queryServiceById as jest.Mock).mockReturnValue(serviceDataMock);
+    (queryOrderDetailByOrderID as jest.Mock).mockReturnValue(orderDataMock);
+    const EXPECTED_RESULT = {
+      ...orderDataMock,
+      labName: labDataMock.info.name,
+      serviceName: serviceDataMock.info.name,
+    };
+
+    when(mockFunction)
+      .calledWith(LAB_ID)
+      .mockReturnValue(TRACKING_IDS);
+    when(mockFunction)
+      .calledWith(TRACKING_ID)
+      .mockReturnValue(TEST_RESULT);
+
+    // Assert
+    expect(await getDnaTestResultsDetailByLab(API_PROMISE_MOCK as any, LAB_ID))
+      .toEqual([EXPECTED_RESULT]);
+    expect(mockFunction).toBeCalledTimes(3);
+    expect(mockFunction).toBeCalledWith(LAB_ID);
+    expect(mockFunction).toBeCalledWith(TRACKING_ID);
+    expect(mockFunction).toBeCalledWith(TestResultDataMock.trackingId);
+    expect(queryLabById).toBeCalledTimes(1);
+    expect(queryLabById).toBeCalledWith(API_PROMISE_MOCK, serviceDataMock.ownerId);
+    expect(queryServiceById).toBeCalledTimes(1);
+    expect(queryServiceById).toBeCalledWith(API_PROMISE_MOCK, orderDataMock.serviceId);
+    expect(queryOrderDetailByOrderID).toBeCalledTimes(1);
+    expect(queryOrderDetailByOrderID).toBeCalledWith(API_PROMISE_MOCK, TestResultDataMock.orderId);
+    expect(dnaTestResultsByLabSpy).toBeCalledTimes(1);
+    expect(dnaTestResultsByLabSpy).toBeCalledWith(LAB_ID);
+    expect(dnaTestResultsSpy).toBeCalledTimes(1);
+    expect(dnaTestResultsSpy).toBeCalledWith(TRACKING_ID);
   });
 });

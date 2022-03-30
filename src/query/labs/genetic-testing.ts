@@ -1,6 +1,9 @@
 import { ApiPromise } from '@polkadot/api';
+import { queryLabById } from './index';
 import { DnaSample } from '../../models/labs/genetic-testing/dna-sample';
 import { TestResult } from '../../models/labs/genetic-testing/test-result';
+import { queryOrderDetailByOrderID } from './orders';
+import { queryServiceById } from './services';
 
 export async function queryDnaSamples(api: ApiPromise, trackingId: string): Promise<DnaSample> {
   const res = (await api.query.geneticTesting.dnaSamples(trackingId)).toHuman();
@@ -48,7 +51,7 @@ export async function queryDnaTestResultsByLab(api: ApiPromise, accountId: strin
   return testResults;
 }
 
-export async function queryDnaTestResultsByOwner(api: ApiPromise, accountId: string) {
+export async function queryDnaTestResultsByOwner(api: ApiPromise, accountId: string): Promise<TestResult[]> {
   const trackingIds = (await api.query.geneticTesting.dnaTestResultsByOwner(accountId)).toHuman() as string[];
   const testResults: TestResult[] = new Array<TestResult>();
 
@@ -60,12 +63,37 @@ export async function queryDnaTestResultsByOwner(api: ApiPromise, accountId: str
   return testResults;
 }
 
-export async function queryStakedDataByAccountId(api: ApiPromise, accountId: string) {
+export async function queryStakedDataByAccountId(api: ApiPromise, accountId: string): Promise<string[]> {
   const res = (await api.query.geneticTesting.stakedDataByAccountId(accountId)).toHuman() as string[];
   return res;
 }
 
-export async function queryStakedDataByOrderId(api: ApiPromise, orderId: string) {
+export async function queryStakedDataByOrderId(api: ApiPromise, orderId: string): Promise<string[]> {
   const res = (await api.query.geneticTesting.stakedDataByOrderId(orderId)).toHuman() as string[];
   return res;
+}
+
+export async function getDnaTestResultsDetailByLab(api: ApiPromise, labId: string): Promise<any[]> {
+  const resultIds = await queryDnaTestResultsByLab(api, labId);
+
+  const resultsWithDetail = [];
+
+  if (resultIds != null) {
+    for (const resultId of resultIds) {
+      const resultDetail = await queryDnaSamples(api, resultId.trackingId);
+      const orderDetail = await queryOrderDetailByOrderID(api, resultDetail.orderId);
+
+      const service = await queryServiceById(api, orderDetail.serviceId);
+      const lab = await queryLabById(api, service.ownerId);
+
+      /* tslint:disable-next-line */
+      orderDetail['labName'] = lab.info.name;
+      /* tslint:disable-next-line */
+      orderDetail['serviceName'] = service.info.name;
+
+      resultsWithDetail.push(orderDetail);
+    }
+  }
+
+  return resultsWithDetail;
 }
