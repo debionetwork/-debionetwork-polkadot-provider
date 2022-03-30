@@ -41,17 +41,11 @@ export async function removeGeneticData(api: ApiPromise, pair: any, id: string, 
   });
 }
 
-export function getAddGeneticDataFee(
-  api: ApiPromise,
-  pair: any,
-  title: string,
-  description: string,
-  link: string,
-): any {
+export function addGeneticDataFee(api: ApiPromise, pair: any, title: string, description: string, link: string): any {
   return api.tx.geneticData.addGeneticData(title, description, link).paymentInfo(pair);
 }
 
-export function getUpdateGeneticDataFee(
+export function updateGeneticDataFee(
   api: ApiPromise,
   pair: any,
   id: string,
@@ -62,6 +56,6 @@ export function getUpdateGeneticDataFee(
   return api.tx.geneticData.updateGeneticData(id, title, description, link).paymentInfo(pair);
 }
 
-export function getRemoveGeneticDataFee(api: ApiPromise, pair: any, id: string): any {
+export function removeGeneticDataFee(api: ApiPromise, pair: any, id: string): any {
   return api.tx.geneticData.removeGeneticData(id).paymentInfo(pair);
 }
