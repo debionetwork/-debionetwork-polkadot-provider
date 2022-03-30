@@ -1,12 +1,21 @@
 import { ApiPromise } from '@polkadot/api';
-import { GeneticAnalystQualification } from '../../models';
+import { GeneticAnalystService } from '../../models';
 
 export async function queryGeneticAnalystServicesByHashId(
   api: ApiPromise,
   hashId: string,
-): Promise<GeneticAnalystQualification> {
+): Promise<GeneticAnalystService> {
   const res = (await api.query.geneticAnalystServices.geneticAnalystServices(hashId)).toHuman();
-  return new GeneticAnalystQualification(res);
+  return new GeneticAnalystService(res);
+}
+
+export async function queryGetAllGeneticAnalystServices(api: ApiPromise): Promise<GeneticAnalystService[]> {
+  const res = await api.query.geneticAnalystServices.geneticAnalystServices.entries();
+  const serviceArray: GeneticAnalystService[] = [];
+  res.forEach((element) => {
+    serviceArray.push(new GeneticAnalystService(element));
+  });
+  return serviceArray;
 }
 
 export async function queryGeneticAnalystServicesCount(api: ApiPromise): Promise<number> {

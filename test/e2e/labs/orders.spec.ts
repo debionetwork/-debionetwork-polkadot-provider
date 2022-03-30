@@ -1,7 +1,7 @@
 import { ApiPromise } from '@polkadot/api';
 import 'regenerator-runtime/runtime';
 import { queryLastOrderHashByCustomer, queryOrderDetailByOrderID, queryOrdersByCustomer, queryOrdersBySeller } from '../../../src/query/labs/orders';
-import { createOrder, cancelOrder, fulfillOrder, getCreateOrderFee, setOrderPaid, setOrderRefunded } from "../../../src/command/labs/orders";
+import { createOrder, cancelOrder, fulfillOrder, createOrderFee, setOrderPaid, setOrderRefunded } from "../../../src/command/labs/orders";
 import { processDnaSample, submitTestResult } from "../../../src/command/labs/genetic-testing";
 import { createService } from "../../../src/command/labs/services";
 import { initializeApi } from '../polkadot-init';
@@ -79,8 +79,8 @@ describe('Orders Pallet Integration Tests', () => {
     expect(order.orderFlow).toEqual(serviceDataMock.serviceFlow);
   }, 90000); // Set timeout for 90 seconds
 
-  it('getCreateOrderFee should return', async () => {
-    await getCreateOrderFee(api, pair, service.id, 0, lab.info.boxPublicKey, serviceDataMock.serviceFlow);
+  it('createOrderFee should return', async () => {
+    await createOrderFee(api, pair, service.id, 0, lab.info.boxPublicKey, serviceDataMock.serviceFlow);
   }, 25000); // Set timeout for 25 seconds
 
   it('queryOrdersByCustomer should return', async () => {

@@ -1,10 +1,10 @@
 import { returnToHumanMockWithParam } from "../../../@polkadot-types.mock";
 
 export const geneticAnalysis = {
-  geneticAnalysisById(param) {
+  geneticAnalysisStorage(param) {
     return returnToHumanMockWithParam(param);
   },
-  geneticAnalysisByOwnerId(param) {
+  geneticAnalysisByOwner(param) {
     return returnToHumanMockWithParam(param);
   },
   geneticAnalysisByGeneticAnalystId(param) {

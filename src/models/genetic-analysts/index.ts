@@ -31,7 +31,6 @@ export class GeneticAnalyst {
 
     geneticAnalyst.stakeAmount = convertSubstrateBalanceToNumber(geneticAnalyst.stakeAmount);
 
-    
     if (geneticAnalyst.unstakeAt) {
       geneticAnalyst.unstakeAt = new Date(convertSubstrateNumberToNumber(geneticAnalyst.unstakeAt));
     }

@@ -4,7 +4,7 @@ import {
   setOrderRefunded,
   setOrderPaid,
   cancelOrder,
-  getCreateOrderFee,
+  createOrderFee,
   sudoUpdateLabOrderEscrowKey,
   updateLabOrderEscrowKey,
 } from "../../../../../src/command/labs/orders";
@@ -192,7 +192,7 @@ describe('Orders Commands Unit Tests', () => {
       expect(mockFunction).toBeCalledTimes(1);
   });
 
-  it('getCreateOrderFee should return', () => {
+  it('createOrderFee should return', () => {
     // Arrange
     const PAIR = "PAIR";
     const SERVICE_ID = "SERVICE_ID";
@@ -204,7 +204,7 @@ describe('Orders Commands Unit Tests', () => {
       
     // Assert
     expect(
-      getCreateOrderFee(
+      createOrderFee(
         API_PROMISE_MOCK as any, 
         PAIR,
         SERVICE_ID,
