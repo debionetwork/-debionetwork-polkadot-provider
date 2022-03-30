@@ -1,4 +1,4 @@
-import { queryGeneticAnalystServicesByHashId, queryGeneticAnalystServicesCount, queryGeneticAnalystServicesCountByOwner } from "../../../../../src/query/genetic-analysts/genetic-analyst-service";
+import { queryGeneticAnalystServicesByHashId, queryGeneticAnalystServicesCount, queryGeneticAnalystServicesCountByOwner, queryGetAllGeneticAnalystServices } from "../../../../../src/query/genetic-analysts/genetic-analyst-service";
 import { ApiPromise } from "../../../@polkadot-api.mock";
 import { geneticAnalystServices } from "./genetic-analyst-services.mock";
 import { mockFunction } from "../../../mock";
@@ -41,6 +41,27 @@ describe('Genetic Analyst Service Qualifications Queries Unit Tests', () => {
     expect(mockFunction).toBeCalledWith(HASH_ID);
     expect(geneticAnalystServicesSpy).toBeCalledTimes(1);
     expect(geneticAnalystServicesSpy).toBeCalledWith(HASH_ID);
+  });
+
+  it("queryGetAllGeneticAnalystServices should return", async () => {
+    // Arrange
+    const API_PROMISE_MOCK2: ApiPromise = new ApiPromise();
+    API_PROMISE_MOCK2.query = {
+      geneticAnalystServices: {
+        geneticAnalystServices: {
+          entries: jest.fn(mockFunction)
+        }
+      }
+    };
+    const EXPECTED_VALUE = new GeneticAnalystService(geneticAnalystServicesMock);
+
+    (mockFunction as jest.Mock).mockReturnValue([geneticAnalystServicesMock]);
+
+    // Assert
+    expect(await queryGetAllGeneticAnalystServices(API_PROMISE_MOCK2 as any))
+      .toEqual([EXPECTED_VALUE]);
+    expect(mockFunction).toBeCalledTimes(1);
+    expect(API_PROMISE_MOCK2.query.geneticAnalystServices.geneticAnalystServices.entries).toBeCalledTimes(1);
   });
 
   it("queryGeneticAnalystServicesCount should return", async () => {
