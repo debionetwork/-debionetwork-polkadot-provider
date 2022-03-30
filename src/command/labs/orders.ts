@@ -46,7 +46,7 @@ export async function cancelOrder(api: ApiPromise, pair: any, orderId, callback?
   });
 }
 
-export function getCreateOrderFee(
+export function createOrderFee(
   api: ApiPromise,
   pair: any,
   serviceId: string,
