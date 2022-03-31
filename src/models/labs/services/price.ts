@@ -1,4 +1,4 @@
 export class Price {
   component: string;
-  value: number;
+  value: string;
 }

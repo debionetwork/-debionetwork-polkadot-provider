@@ -14,4 +14,5 @@ export class ElectronicMedicalRecord {
   files: string[];
 }
 
+export * from './electronic-medical-record-input';
 export * from './electronic-medical-record-file';

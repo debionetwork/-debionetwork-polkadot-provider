@@ -1,4 +1,13 @@
-import { createOrder, fulfillOrder, setOrderRefunded, setOrderPaid, cancelOrder, getCreateOrderFee } from "../../../../../src/command/labs/orders";
+import {
+  createOrder,
+  fulfillOrder,
+  setOrderRefunded,
+  setOrderPaid,
+  cancelOrder,
+  createOrderFee,
+  sudoUpdateLabOrderEscrowKey,
+  updateLabOrderEscrowKey,
+} from "../../../../../src/command/labs/orders";
 import { ApiPromise, signAndSendWithPaymentInfo, eventAndStatusMock } from "../../../@polkadot-api.mock";
 import { mockFunction } from "../../../mock";
 import { successCallback } from "../../../../../src/index";
@@ -25,6 +34,8 @@ describe('Orders Commands Unit Tests', () => {
   const setOrderRefundedSpy = jest.spyOn(orders, 'setOrderRefunded');
   const setOrderPaidSpy = jest.spyOn(orders, 'setOrderPaid');
   const cancelOrderSpy = jest.spyOn(orders, 'cancelOrder');
+  const sudoUpdateEscrowKeySpy = jest.spyOn(orders, 'sudoUpdateLabOrderEscrowKey');
+  const updateEscrowKeySpy = jest.spyOn(orders, 'updateLabOrderEscrowKey');
   
   beforeEach(() => {
     (mockFunction as jest.Mock).mockClear();
@@ -36,6 +47,8 @@ describe('Orders Commands Unit Tests', () => {
     setOrderRefundedSpy.mockClear();
     setOrderPaidSpy.mockClear();
     cancelOrderSpy.mockClear();
+    sudoUpdateEscrowKeySpy.mockClear();
+    updateEscrowKeySpy.mockClear();
   });
 
   it('createOrder should return', async () => {
@@ -179,26 +192,28 @@ describe('Orders Commands Unit Tests', () => {
       expect(mockFunction).toBeCalledTimes(1);
   });
 
-  it('getCreateOrderFee should return', () => {
+  it('createOrderFee should return', () => {
     // Arrange
     const PAIR = "PAIR";
     const SERVICE_ID = "SERVICE_ID";
     const BOX_PUBLIC_KEY = "BOX_PUBLIC_KEY";
+    const ORDER_FLOW = "RequestTest"
     const PRICE_INDEX = 0;
     const EXPECTED_VALUE = 0;
     (mockFunction as jest.Mock).mockReturnValue(EXPECTED_VALUE);
       
     // Assert
     expect(
-      getCreateOrderFee(
+      createOrderFee(
         API_PROMISE_MOCK as any, 
         PAIR,
         SERVICE_ID,
-        BOX_PUBLIC_KEY,
         PRICE_INDEX,
-      )).toEqual(EXPECTED_VALUE);
+        BOX_PUBLIC_KEY,
+        ORDER_FLOW,
+        )).toEqual(EXPECTED_VALUE);
     expect(createOrderSpy).toBeCalledTimes(1);
-    expect(createOrderSpy).toBeCalledWith(SERVICE_ID, PRICE_INDEX, BOX_PUBLIC_KEY);
+    expect(createOrderSpy).toBeCalledWith(SERVICE_ID, PRICE_INDEX, BOX_PUBLIC_KEY, ORDER_FLOW);
     expect(paymentInfoSpy).toBeCalledTimes(1);
     expect(paymentInfoSpy).toBeCalledWith(PAIR);
     expect(mockFunction).toBeCalledTimes(1);

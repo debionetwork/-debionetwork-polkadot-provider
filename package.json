@@ -1,5 +1,5 @@
 {
-  "version": "0.0.3",
+  "version": "0.0.7",
   "description": "Javascript Library to connect and interact with the DeBio Network blockchain.",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
@@ -7,8 +7,9 @@
     "lib/**/*"
   ],
   "scripts": {
+    "install:hooks": ".maintain/install-hooks.sh",
     "build": "tsc",
-    "check": "npm run test && npm run format && npm run lint && npm run build",
+    "check": "npm run test:unit && npm run format && npm run lint && npm run build",
     "format": "prettier --write \"src/**/*.ts\"",
     "lint": "tslint -p tsconfig.json",
     "prepare": "npm run build",
