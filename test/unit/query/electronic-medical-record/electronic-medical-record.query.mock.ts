@@ -1,7 +1,7 @@
 import { returnToHumanMockWithParam, toHumanMock } from "../../@polkadot-types.mock";
 
 export const electronicMedicalRecord = {
-  electronicMedicalRecordByOwnerId(param) {
+  electronicMedicalRecordByOwner(param) {
     return returnToHumanMockWithParam(param);
   },
   electronicMedicalRecordById(param) {

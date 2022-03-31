@@ -1,4 +1,4 @@
-import { queryGeneticAnalystQualificationsByHashId, queryGeneticAnalystQualificationsCount, queryGeneticAnalystQualificationsCountByOwner } from "../../../../../src/query/genetic-analysts/genetic-analys-qualification";
+import { queryGeneticAnalystQualificationsByHashId, queryGeneticAnalystQualificationsCount, queryGeneticAnalystQualificationsCountByOwner } from "../../../../../src/query/genetic-analysts/genetic-analyst-qualification";
 import { ApiPromise } from "../../../@polkadot-api.mock";
 import { geneticAnalystQualifications } from "./genetic-analyst-qualifications.mock";
 import { mockFunction } from "../../../mock";

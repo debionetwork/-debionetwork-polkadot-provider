@@ -15,7 +15,24 @@ export async function retrieveUnstakedAmount(
     });
 }
 
-export function getCreateRequestFee(
+export async function createRequest(
+  api: ApiPromise,
+  pair: any,
+  country: string,
+  region: string,
+  city: string,
+  category: string,
+  callback?: () => void,
+): Promise<void> {
+  // tslint:disable-next-line
+  var unsub = await api.tx.serviceRequest
+    .createRequest(country, region, city, category, 1)
+    .signAndSend(pair, { nonce: -1 }, ({ events, status }) => {
+      successCallback(api, { events, status, callback, unsub });
+    });
+}
+
+export function createRequestFee(
   api: ApiPromise,
   pair: any,
   country: string,

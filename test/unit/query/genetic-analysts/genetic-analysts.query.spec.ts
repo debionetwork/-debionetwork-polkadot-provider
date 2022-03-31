@@ -22,7 +22,7 @@ import { GeneticAnalyst } from "../../../../src/models/genetic-analysts";
         geneticAnalysts: geneticAnalysts
     };
   
-    const geneticAnalysByAccountIdSpy = jest.spyOn(geneticAnalysts, 'geneticAnalysByAccountId');
+    const geneticAnalystByAccountIdSpy = jest.spyOn(geneticAnalysts, 'geneticAnalystByAccountId');
     const geneticAnalystCountSpy = jest.spyOn(geneticAnalysts, 'geneticAnalystCount');
     const adminKeySpy = jest.spyOn(geneticAnalysts, 'adminKey');
     const palletIdSpy = jest.spyOn(geneticAnalysts, 'palletId');
@@ -31,7 +31,7 @@ import { GeneticAnalyst } from "../../../../src/models/genetic-analysts";
     
     beforeEach(() => {
       (mockFunction as jest.Mock).mockClear();
-      geneticAnalysByAccountIdSpy.mockClear();
+      geneticAnalystByAccountIdSpy.mockClear();
       geneticAnalystCountSpy.mockClear();
       adminKeySpy.mockClear();
       palletIdSpy.mockClear();
@@ -50,8 +50,8 @@ import { GeneticAnalyst } from "../../../../src/models/genetic-analysts";
         .toEqual(EXPECTED_VALUE);
       expect(mockFunction).toBeCalledTimes(1);
       expect(mockFunction).toBeCalledWith(GA_ID);
-      expect(geneticAnalysByAccountIdSpy).toBeCalledTimes(1);
-      expect(geneticAnalysByAccountIdSpy).toBeCalledWith(GA_ID);
+      expect(geneticAnalystByAccountIdSpy).toBeCalledTimes(1);
+      expect(geneticAnalystByAccountIdSpy).toBeCalledWith(GA_ID);
     });
   
     it('queryGeneticAnalystCount should return', async () => {

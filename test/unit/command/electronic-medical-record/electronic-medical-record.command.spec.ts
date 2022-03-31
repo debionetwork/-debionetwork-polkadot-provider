@@ -2,13 +2,13 @@ import { ApiPromise, eventAndStatusMock, signAndSendWithPaymentInfo } from "../.
 import { mockFunction } from "../../mock";
 import { successCallback } from "../../../../src/index";
 import { electronicMedicalRecord } from "./electronic-medical-record.command.mock";
-import { electronicMedicalRecordDataMock } from "../../models/electronic-medical-record/electronic-medical-record.mock";
+import { electronicMedicalRecordInputDataMock } from "../../models/electronic-medical-record/electronic-medical-record.mock";
 import { 
   registerElectronicMedicalRecord,
   updateElectronicMedicalRecord,
   deregisterElectronicMedicalRecord,
-  getAddElectronicMedicalRecordFee,
-  getRemoveElectronicMedicalRecordFee  
+  registerElectronicMedicalRecordFee,
+  deregisterElectronicMedicalRecordFee  
 } from "../../../../src/command/electronic-medical-record";
 
 jest.mock('../../mock', () => ({
@@ -44,7 +44,7 @@ describe('Electronic Medical Record Commands Unit Tests', () => {
   it('registerElectronicMedicalRecord should return', async () => {
       // Arrange
       const PAIR = "PAIR";
-      const EMR_MOCK = electronicMedicalRecordDataMock;
+      const EMR_MOCK = electronicMedicalRecordInputDataMock;
 
       // Act
       await registerElectronicMedicalRecord(
@@ -71,7 +71,7 @@ describe('Electronic Medical Record Commands Unit Tests', () => {
   it('updateElectronicMedicalRecord should return', async () => {
       // Arrange
       const PAIR = "PAIR";
-      const EMR_MOCK = electronicMedicalRecordDataMock;
+      const EMR_MOCK = electronicMedicalRecordInputDataMock;
 
       // Act
       await updateElectronicMedicalRecord(
@@ -122,15 +122,15 @@ describe('Electronic Medical Record Commands Unit Tests', () => {
       expect(mockFunction).toBeCalledTimes(1);
   });
 
-  it('getAddElectronicMedicalRecordFee should return', () => {
+  it('registerElectronicMedicalRecordFee should return', async () => {
       // Arrange
       const PAIR = "PAIR";
-      const EMR_MOCK = electronicMedicalRecordDataMock;
+      const EMR_MOCK = electronicMedicalRecordInputDataMock;
       const EXPECTED_VALUE = 0;
       (mockFunction as jest.Mock).mockReturnValue(EXPECTED_VALUE);
   
       // Assert
-      expect(getAddElectronicMedicalRecordFee(API_PROMISE_MOCK as any, PAIR, EMR_MOCK))
+      expect(await registerElectronicMedicalRecordFee(API_PROMISE_MOCK as any, PAIR, EMR_MOCK))
         .toEqual(EXPECTED_VALUE);
       expect(addElectronicMedicalRecordSpy).toBeCalledTimes(1);
       expect(addElectronicMedicalRecordSpy).toBeCalledWith(EMR_MOCK.title, EMR_MOCK.category, EMR_MOCK.files);
@@ -139,7 +139,7 @@ describe('Electronic Medical Record Commands Unit Tests', () => {
       expect(mockFunction).toBeCalledTimes(1);
   });
 
-  it('getRemoveElectronicMedicalRecordFee should return', () => {
+  it('deregisterElectronicMedicalRecordFee should return', async () => {
       // Arrange
       const PAIR = "PAIR";
       const EMR_ID = "EMR_ID";
@@ -147,7 +147,7 @@ describe('Electronic Medical Record Commands Unit Tests', () => {
       (mockFunction as jest.Mock).mockReturnValue(EXPECTED_VALUE);
   
       // Assert
-      expect(getRemoveElectronicMedicalRecordFee(API_PROMISE_MOCK as any, PAIR, EMR_ID))
+      expect(await deregisterElectronicMedicalRecordFee(API_PROMISE_MOCK as any, PAIR, EMR_ID))
         .toEqual(EXPECTED_VALUE);
       expect(removeElectronicMedicalRecordSpy).toBeCalledTimes(1);
       expect(removeElectronicMedicalRecordSpy).toBeCalledWith(EMR_ID);

@@ -1,4 +1,4 @@
-import { addGeneticData, updateGeneticData, removeGeneticData, getAddGeneticDataFee, getRemoveGeneticDataFee, getUpdateGeneticDataFee } from "../../../../../src/command/genetic-analyst/genetic-data";
+import { addGeneticData, updateGeneticData, removeGeneticData, addGeneticDataFee, removeGeneticDataFee, updateGeneticDataFee } from "../../../../../src/command/genetic-analyst/genetic-data";
 import { successCallback } from "../../../../../src/index";
 import { ApiPromise, eventAndStatusMock, signAndSendWithPaymentInfo } from "../../../@polkadot-api.mock";
 import { mockFunction } from "../../../mock";
@@ -118,7 +118,7 @@ describe('Genetic Data Commands Unit Testing', () => {
     expect(mockFunction).toBeCalledTimes(1);
   });
 
-  it('getAddGeneticDataFee should return', () => {
+  it('addGeneticDataFee should return', () => {
       // Arrange
       const PAIR = "PAIR";
       const DATA_MOCK = geneticDataMock;
@@ -126,7 +126,7 @@ describe('Genetic Data Commands Unit Testing', () => {
       (mockFunction as jest.Mock).mockReturnValue(EXPECTED_VALUE);
   
       // Assert
-      expect(getAddGeneticDataFee(API_PROMISE_MOCK as any, PAIR, DATA_MOCK.title, DATA_MOCK.description, DATA_MOCK.reportLink))
+      expect(addGeneticDataFee(API_PROMISE_MOCK as any, PAIR, DATA_MOCK.title, DATA_MOCK.description, DATA_MOCK.reportLink))
         .toEqual(EXPECTED_VALUE);
       expect(addGeneticDataSpy).toBeCalledTimes(1);
       expect(addGeneticDataSpy).toBeCalledWith(DATA_MOCK.title, DATA_MOCK.description, DATA_MOCK.reportLink);
@@ -135,7 +135,7 @@ describe('Genetic Data Commands Unit Testing', () => {
       expect(mockFunction).toBeCalledTimes(1);
   });
 
-  it('getUpdateGeneticDataFee should return', () => {
+  it('updateGeneticDataFee should return', () => {
       // Arrange
       const PAIR = "PAIR";
       const DATA_MOCK = geneticDataMock;
@@ -143,7 +143,7 @@ describe('Genetic Data Commands Unit Testing', () => {
       (mockFunction as jest.Mock).mockReturnValue(EXPECTED_VALUE);
   
       // Assert
-      expect(getUpdateGeneticDataFee(API_PROMISE_MOCK as any, PAIR, DATA_MOCK.id, DATA_MOCK.title, DATA_MOCK.description, DATA_MOCK.reportLink))
+      expect(updateGeneticDataFee(API_PROMISE_MOCK as any, PAIR, DATA_MOCK.id, DATA_MOCK.title, DATA_MOCK.description, DATA_MOCK.reportLink))
         .toEqual(EXPECTED_VALUE);
       expect(updateGeneticDataSpy).toBeCalledTimes(1);
       expect(updateGeneticDataSpy).toBeCalledWith(DATA_MOCK.id, DATA_MOCK.title, DATA_MOCK.description, DATA_MOCK.reportLink);
@@ -152,7 +152,7 @@ describe('Genetic Data Commands Unit Testing', () => {
       expect(mockFunction).toBeCalledTimes(1);
   });
 
-  it('getRemoveElectronicMedicalRecordFee should return', () => {
+  it('deregisterElectronicMedicalRecordFee should return', () => {
       // Arrange
       const PAIR = "PAIR";
       const DATA_ID = "DATA_ID";
@@ -160,7 +160,7 @@ describe('Genetic Data Commands Unit Testing', () => {
       (mockFunction as jest.Mock).mockReturnValue(EXPECTED_VALUE);
   
       // Assert
-      expect(getRemoveGeneticDataFee(API_PROMISE_MOCK as any, PAIR, DATA_ID))
+      expect(removeGeneticDataFee(API_PROMISE_MOCK as any, PAIR, DATA_ID))
         .toEqual(EXPECTED_VALUE);
       expect(removeGeneticDataSpy).toBeCalledTimes(1);
       expect(removeGeneticDataSpy).toBeCalledWith(DATA_ID);

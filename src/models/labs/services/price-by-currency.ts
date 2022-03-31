@@ -2,7 +2,7 @@ import { Price } from './price';
 
 export class PriceByCurrency {
   currency: string;
-  totalPrice: number;
+  totalPrice: string;
   priceComponents: Price[];
   additionalPrices: Price[];
 }

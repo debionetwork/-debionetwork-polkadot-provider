@@ -15,5 +15,11 @@ export const orders = {
   },
   cancelOrder(param) {
     return signAndSendWithPaymentInfo;
+  },
+  sudoUpdateLabOrderEscrowKey(param) {
+    return signAndSendWithPaymentInfo;
+  },
+  updateLabOrderEscrowKey(param) {
+    return signAndSendWithPaymentInfo;
   }
 }
