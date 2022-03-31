@@ -7,7 +7,7 @@ export async function queryGeneticDataById(api: ApiPromise, dataId: string): Pro
 }
 
 export async function queryGeneticDataByOwnerId(api: ApiPromise, accountId: string): Promise<GeneticData[]> {
-  const geneticDataIds: any = (await api.query.geneticData.geneticDataByOwnerId(accountId)).toHuman();
+  const geneticDataIds: any = (await api.query.geneticData.geneticDataByOwner(accountId)).toHuman();
 
   const geneticDataList: GeneticData[] = new Array<GeneticData>();
   for (const geneticDataId of geneticDataIds) {
