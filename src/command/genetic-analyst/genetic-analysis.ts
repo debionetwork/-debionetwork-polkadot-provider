@@ -81,7 +81,5 @@ export async function submitGeneticAnalysisFee(
   comment: string,
 ): Promise<any> {
   // tslint:disable-next-line
-  return api.tx.geneticAnalysis
-    .submitGeneticAnalysis(geneticAnalysisTrackingId, reportLink, comment)
-    .paymentInfo(pair);
+  return api.tx.geneticAnalysis.submitGeneticAnalysis(geneticAnalysisTrackingId, reportLink, comment).paymentInfo(pair);
 }

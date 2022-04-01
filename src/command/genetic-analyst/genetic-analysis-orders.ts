@@ -93,15 +93,8 @@ export async function updateEscrowKey(api: ApiPromise, pair: any, accountId, cal
     });
 }
 
-export async function cancelGeneticAnalysisOrderFee(
-  api: ApiPromise,
-  pair: any,
-  geneticAnalysisOrderId
-): Promise<any> {
-  // tslint:disable-next-line
-  return api.tx.geneticAnalysisOrders
-    .cancelGeneticAnalysisOrder(geneticAnalysisOrderId)
-    .paymentInfo(pair);
+export async function cancelGeneticAnalysisOrderFee(api: ApiPromise, pair: any, geneticAnalysisOrderId): Promise<any> {
+  return api.tx.geneticAnalysisOrders.cancelGeneticAnalysisOrder(geneticAnalysisOrderId).paymentInfo(pair);
 }
 
 export async function createGeneticAnalysisOrderFee(
@@ -111,9 +104,8 @@ export async function createGeneticAnalysisOrderFee(
   serviceId: string,
   priceIndex: number,
   geneticLink: string,
-  customerBoxPublicKey: string
+  customerBoxPublicKey: string,
 ): Promise<any> {
-  // tslint:disable-next-line
   return api.tx.geneticAnalysisOrders
     .createGeneticAnalysisOrder(geneticDataId, serviceId, priceIndex, customerBoxPublicKey, geneticLink)
     .paymentInfo(pair);
