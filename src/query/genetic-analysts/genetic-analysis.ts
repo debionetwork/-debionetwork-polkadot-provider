@@ -1,7 +1,7 @@
 import { ApiPromise } from '@polkadot/api';
 import { GeneticAnalysis } from '../../models/genetic-analysts/genetic-analysis';
 
-export async function queryGeneticAnalysiByGeneticAnalysisTrackingId(
+export async function queryGeneticAnalysisByGeneticAnalysisTrackingId(
   api: ApiPromise,
   trackingId: string,
 ): Promise<GeneticAnalysis> {
@@ -13,7 +13,7 @@ export async function queryGeneticAnalysisByOwnerId(api: ApiPromise, accountId: 
   const geneticAnalysisIds: any = (await api.query.geneticAnalysis.geneticAnalysisByOwner(accountId)).toHuman();
   const geneticAnalysisList: GeneticAnalysis[] = new Array<GeneticAnalysis>();
   for (const geneticAnalysisId of geneticAnalysisIds) {
-    geneticAnalysisList.push(await queryGeneticAnalysiByGeneticAnalysisTrackingId(api, geneticAnalysisId));
+    geneticAnalysisList.push(await queryGeneticAnalysisByGeneticAnalysisTrackingId(api, geneticAnalysisId));
   }
   return geneticAnalysisList;
 }
@@ -27,7 +27,7 @@ export async function queryGeneticAnalysisByGeneticAnalystId(
   ).toHuman();
   const geneticAnalysisList: GeneticAnalysis[] = new Array<GeneticAnalysis>();
   for (const geneticAnalysisId of geneticAnalysisIds) {
-    geneticAnalysisList.push(await queryGeneticAnalysiByGeneticAnalysisTrackingId(api, geneticAnalysisId));
+    geneticAnalysisList.push(await queryGeneticAnalysisByGeneticAnalysisTrackingId(api, geneticAnalysisId));
   }
   return geneticAnalysisList;
 }

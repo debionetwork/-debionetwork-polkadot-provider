@@ -1,5 +1,5 @@
 import { 
-  queryGeneticAnalysiByGeneticAnalysisTrackingId,
+  queryGeneticAnalysisByGeneticAnalysisTrackingId,
   queryGeneticAnalysisByOwnerId,
   queryGeneticAnalysisByGeneticAnalystId,
 } from "../../../../../src/query/genetic-analysts/genetic-analysis";
@@ -31,14 +31,14 @@ import { GeneticAnalysis } from "../../../../../src/models/genetic-analysts/gene
       geneticAnalysisByGeneticAnalystIdSpy.mockClear();
     });
   
-    it('queryGeneticAnalysiByGeneticAnalysisTrackingId should return', async () => {
+    it('queryGeneticAnalysisByGeneticAnalysisTrackingId should return', async () => {
       // Arrange
       const ANALYSIS_ID = "ANALYSIS_ID";
       const EXPECTED_VALUE = new GeneticAnalysis(geneticAnalysisDataMock);
       (mockFunction as jest.Mock).mockReturnValue(geneticAnalysisDataMock);
   
       // Assert
-      expect(await queryGeneticAnalysiByGeneticAnalysisTrackingId(API_PROMISE_MOCK as any, ANALYSIS_ID))
+      expect(await queryGeneticAnalysisByGeneticAnalysisTrackingId(API_PROMISE_MOCK as any, ANALYSIS_ID))
         .toEqual(EXPECTED_VALUE);
       expect(mockFunction).toBeCalledTimes(1);
       expect(mockFunction).toBeCalledWith(ANALYSIS_ID);
