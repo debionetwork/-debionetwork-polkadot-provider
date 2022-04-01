@@ -4,7 +4,7 @@ export const geneticData = {
   geneticDataById(param) {
     return returnToHumanMockWithParam(param);
   },
-  geneticDataByOwnerId(param) {
+  geneticDataByOwner(param) {
     return returnToHumanMockWithParam(param);
   },
   geneticDataCountByOwner(param) {

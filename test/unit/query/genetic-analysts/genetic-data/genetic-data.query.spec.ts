@@ -22,7 +22,7 @@ describe('Genetic Data Queries Unit Tests', () => {
   };
 
   const geneticDataByIdSpy = jest.spyOn(geneticData, 'geneticDataById');
-  const geneticDataByOwnerIdSpy = jest.spyOn(geneticData, 'geneticDataByOwnerId');
+  const geneticDataByOwnerIdSpy = jest.spyOn(geneticData, 'geneticDataByOwner');
   const geneticDataCountByOwnerSpy = jest.spyOn(geneticData, 'geneticDataCountByOwner');
   const geneticDataCountSpy = jest.spyOn(geneticData, 'geneticDataCount');
   
