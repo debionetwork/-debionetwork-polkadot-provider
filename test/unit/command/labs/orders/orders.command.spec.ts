@@ -34,8 +34,8 @@ describe('Orders Commands Unit Tests', () => {
   const setOrderRefundedSpy = jest.spyOn(orders, 'setOrderRefunded');
   const setOrderPaidSpy = jest.spyOn(orders, 'setOrderPaid');
   const cancelOrderSpy = jest.spyOn(orders, 'cancelOrder');
-  const sudoUpdateEscrowKeySpy = jest.spyOn(orders, 'sudoUpdateLabOrderEscrowKey');
-  const updateEscrowKeySpy = jest.spyOn(orders, 'updateLabOrderEscrowKey');
+  const sudoUpdateEscrowKeySpy = jest.spyOn(orders, 'sudoUpdateEscrowKey');
+  const updateEscrowKeySpy = jest.spyOn(orders, 'updateEscrowKey');
   
   beforeEach(() => {
     (mockFunction as jest.Mock).mockClear();

@@ -1,25 +1,25 @@
-import { signAndSend } from "../../../@polkadot-api.mock";
+import { signAndSendWithPaymentInfo } from "../../../@polkadot-api.mock";
 
 export const geneticAnalysisOrders = {
   cancelGeneticAnalysisOrder(params) {
-    return signAndSend;
+    return signAndSendWithPaymentInfo;
   },
   createGeneticAnalysisOrder(params) {
-    return signAndSend;
+    return signAndSendWithPaymentInfo;
   },
   setGeneticAnalysisOrderPaid(params) {
-    return signAndSend;
+    return signAndSendWithPaymentInfo;
   },
   setGeneticAnalysisOrderRefunded(params) {
-    return signAndSend;
+    return signAndSendWithPaymentInfo;
   },
   fulfillGeneticAnalysisOrder(params) {
-    return signAndSend;
+    return signAndSendWithPaymentInfo;
   },
   sudoUpdateEscrowKey(params) {
-    return signAndSend;
+    return signAndSendWithPaymentInfo;
   },
   updateEscrowKey(params) {
-    return signAndSend;
+    return signAndSendWithPaymentInfo;
   }
 }
