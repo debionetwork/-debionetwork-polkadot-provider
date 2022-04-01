@@ -92,3 +92,29 @@ export async function updateEscrowKey(api: ApiPromise, pair: any, accountId, cal
       successCallback(api, { events, status, callback, unsub });
     });
 }
+
+export async function cancelGeneticAnalysisOrderFee(
+  api: ApiPromise,
+  pair: any,
+  geneticAnalysisOrderId
+): Promise<any> {
+  // tslint:disable-next-line
+  return api.tx.geneticAnalysisOrders
+    .cancelGeneticAnalysisOrder(geneticAnalysisOrderId)
+    .paymentInfo(pair);
+}
+
+export async function createGeneticAnalysisOrderFee(
+  api: ApiPromise,
+  pair: any,
+  geneticDataId: string,
+  serviceId: string,
+  priceIndex: number,
+  geneticLink: string,
+  customerBoxPublicKey: string
+): Promise<any> {
+  // tslint:disable-next-line
+  return api.tx.geneticAnalysisOrders
+    .createGeneticAnalysisOrder(geneticDataId, serviceId, priceIndex, customerBoxPublicKey, geneticLink)
+    .paymentInfo(pair);
+}

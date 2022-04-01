@@ -1,6 +1,8 @@
 import {
   cancelGeneticAnalysisOrder,
   createGeneticAnalysisOrder,
+  cancelGeneticAnalysisOrderFee,
+  createGeneticAnalysisOrderFee,
   setGeneticAnalysisOrderPaid,
   setGeneticAnalysisOrderRefunded,
   setGeneticAnalysisOrderFulfilled,
@@ -8,7 +10,7 @@ import {
   updateEscrowKey
 } from "../../../../../src/command/genetic-analyst";
 import { successCallback } from "../../../../../src/index";
-import { ApiPromise, eventAndStatusMock, signAndSend } from "../../../@polkadot-api.mock";
+import { ApiPromise, eventAndStatusMock, signAndSendWithPaymentInfo } from "../../../@polkadot-api.mock";
 import { mockFunction } from "../../../mock";
 import { geneticAnalysisOrders } from "./genetic-analysis-orders.command.mock";
 
@@ -26,7 +28,8 @@ describe('Genetic Analysis Orders Commands Unit Testing', () => {
     geneticAnalysisOrders: geneticAnalysisOrders
   };
 
-  const signAndSendSpy = jest.spyOn(signAndSend, 'signAndSend');
+  const signAndSendSpy = jest.spyOn(signAndSendWithPaymentInfo, 'signAndSend');
+  const paymentInfoSpy = jest.spyOn(signAndSendWithPaymentInfo, 'paymentInfo');
   const cancelGeneticAnalysisOrderSpy = jest.spyOn(geneticAnalysisOrders, 'cancelGeneticAnalysisOrder');
   const createGeneticAnalysisOrderSpy = jest.spyOn(geneticAnalysisOrders, 'createGeneticAnalysisOrder');
   const setGeneticAnalysisOrderPaidSpy = jest.spyOn(geneticAnalysisOrders, 'setGeneticAnalysisOrderPaid');
@@ -39,6 +42,7 @@ describe('Genetic Analysis Orders Commands Unit Testing', () => {
     (mockFunction as jest.Mock).mockClear();
     (successCallback as jest.Mock).mockClear();
     signAndSendSpy.mockClear();
+    paymentInfoSpy.mockClear();
     cancelGeneticAnalysisOrderSpy.mockClear();
     createGeneticAnalysisOrderSpy.mockClear();
     setGeneticAnalysisOrderPaidSpy.mockClear();
@@ -241,6 +245,60 @@ describe('Genetic Analysis Orders Commands Unit Testing', () => {
       status: eventAndStatusMock.status, 
       callback: mockFunction,
     });
+    expect(mockFunction).toBeCalledTimes(1);
+  });
+  
+  it('cancelGeneticAnalysisOrderFee should return', async () => {
+    // Arrange
+    const PAIR = "PAIR";
+    const ORDER_ID = "ORDER_ID";
+    const EXPECTED_VALUE = 0;
+    (mockFunction as jest.Mock).mockReturnValue(EXPECTED_VALUE);
+
+    // Assert
+    expect(await cancelGeneticAnalysisOrderFee(
+      API_PROMISE_MOCK as any, 
+      PAIR,
+      ORDER_ID,
+    )).toEqual(EXPECTED_VALUE);
+    expect(cancelGeneticAnalysisOrderSpy).toBeCalledTimes(1);
+    expect(cancelGeneticAnalysisOrderSpy).toBeCalledWith(ORDER_ID);
+    expect(paymentInfoSpy).toBeCalledTimes(1);
+    expect(paymentInfoSpy).toBeCalledWith(PAIR);
+    expect(mockFunction).toBeCalledTimes(1);
+  });
+
+  it('createGeneticAnalysisOrderFee should return', async () => {
+    // Arrange
+    const PAIR = "PAIR";
+    const GENETIC_DATA_ID = "GENETIC_DATA_ID";
+    const SERVICE_ID = "SERVICE_ID";
+    const PRICE_INDEX = 0;
+    const GENETIC_LINK = "GENETIC_LINK";
+    const CUSTOMER_BOX_PUBLIC_KEY = "CUSTOMER_BOX_PUBLIC_KEY";
+    const EXPECTED_VALUE = 0;
+    (mockFunction as jest.Mock).mockReturnValue(EXPECTED_VALUE);
+
+    // Assert
+    expect(await createGeneticAnalysisOrderFee(
+      API_PROMISE_MOCK as any, 
+      PAIR,
+      GENETIC_DATA_ID,
+      SERVICE_ID,
+      PRICE_INDEX,
+      GENETIC_LINK,
+      CUSTOMER_BOX_PUBLIC_KEY,
+    )).toEqual(EXPECTED_VALUE);
+    expect(createGeneticAnalysisOrderSpy).toBeCalledTimes(1);
+    expect(createGeneticAnalysisOrderSpy).toBeCalledWith(
+      GENETIC_DATA_ID,
+      SERVICE_ID,
+      PRICE_INDEX,
+      CUSTOMER_BOX_PUBLIC_KEY,
+      GENETIC_LINK,
+    );
+    expect(paymentInfoSpy).toBeCalledTimes(1);
+    expect(paymentInfoSpy).toBeCalledWith(PAIR);
     expect(mockFunction).toBeCalledTimes(1);
   });
 })
