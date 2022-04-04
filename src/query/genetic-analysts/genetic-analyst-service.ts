@@ -12,8 +12,8 @@ export async function queryGeneticAnalystServicesByHashId(
 export async function queryGetAllGeneticAnalystServices(api: ApiPromise): Promise<GeneticAnalystService[]> {
   const res = await api.query.geneticAnalystServices.geneticAnalystServices.entries();
   const serviceArray: GeneticAnalystService[] = [];
-  res[0].forEach((element) => {
-    serviceArray.push(new GeneticAnalystService(element[1]));
+  res.forEach((element, i) => {    
+    serviceArray.push(new GeneticAnalystService(element[i][1]));
   });
   return serviceArray;
 }

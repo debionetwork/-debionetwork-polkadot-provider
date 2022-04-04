@@ -41,11 +41,10 @@ describe('Genetic Analysis Commands Unit Testing', () => {
     deleteGeneticAnalystServiceSpy.mockClear();
     updateGeneticAnalystServiceSpy.mockClear();
   });
-  
   it('bulkCreateGeneticAnalystService should return', async () => {
       // Arrange
       const PAIR = "PAIR";
-      const GA_INFO = geneticAnalystServicesMock.info;
+      const GA_INFO = geneticAnalystServicesMock[0][1]['info'];    
 
       // Act
       await bulkCreateGeneticAnalystService(
@@ -71,7 +70,7 @@ describe('Genetic Analysis Commands Unit Testing', () => {
   it('createGeneticAnalystService should return', async () => {
       // Arrange
       const PAIR = "PAIR";
-      const GA_INFO = geneticAnalystServicesMock.info;
+      const GA_INFO = geneticAnalystServicesMock[0][1]['info']
 
       // Act
       await createGeneticAnalystService(
@@ -124,7 +123,7 @@ describe('Genetic Analysis Commands Unit Testing', () => {
     // Arrange
     const PAIR = "PAIR";
       const GA_SERVICE_ID = "GA_SERVICE_ID";
-      const GA_INFO = geneticAnalystServicesMock.info;
+      const GA_INFO = geneticAnalystServicesMock[0][1]['info'];
 
     // Act
     await updateGeneticAnalystService(
