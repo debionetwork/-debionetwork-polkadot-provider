@@ -40,15 +40,6 @@ export async function deregisterGeneticAnalyst(api: ApiPromise, pair: any, callb
     });
 }
 
-export async function retrieveUnstakeAmount(api: ApiPromise, pair: any, accountId: string, callback?: () => void) {
-  // tslint:disable-next-line
-  var unsub = await api.tx.geneticAnalysts
-    .retrieveUnstakeAmount(accountId)
-    .signAndSend(pair, { nonce: -1 }, ({ events, status }) => {
-      successCallback(api, { events, status, callback, unsub });
-    });
-}
-
 export async function updateGeneticAnalystVerificationStatus(
   api: ApiPromise,
   pair: any,
@@ -97,7 +88,26 @@ export async function unstakeGeneticAnalyst(api: ApiPromise, pair: any, callback
     });
 }
 
-export async function updateMinimumStakeAmount(api: ApiPromise, pair: any, minimum: number, callback?: () => void) {
+export async function retrieveGeneticAnalystUnstakeAmount(
+  api: ApiPromise,
+  pair: any,
+  accountId: string,
+  callback?: () => void,
+) {
+  // tslint:disable-next-line
+  var unsub = await api.tx.geneticAnalysts
+    .retrieveUnstakeAmount(accountId)
+    .signAndSend(pair, { nonce: -1 }, ({ events, status }) => {
+      successCallback(api, { events, status, callback, unsub });
+    });
+}
+
+export async function updateGeneticAnalystMinimumStakeAmount(
+  api: ApiPromise,
+  pair: any,
+  minimum: number,
+  callback?: () => void,
+) {
   // tslint:disable-next-line
   var unsub = await api.tx.geneticAnalysts
     .updateMinimumStakeAmount(minimum)
@@ -106,7 +116,12 @@ export async function updateMinimumStakeAmount(api: ApiPromise, pair: any, minim
     });
 }
 
-export async function updateAdminKey(api: ApiPromise, pair: any, accountId: string, callback?: () => void) {
+export async function updateGeneticAnalystAdminKey(
+  api: ApiPromise,
+  pair: any,
+  accountId: string,
+  callback?: () => void,
+) {
   // tslint:disable-next-line
   var unsub = await api.tx.geneticAnalysts
     .updateAdminKey(accountId)
@@ -115,7 +130,12 @@ export async function updateAdminKey(api: ApiPromise, pair: any, accountId: stri
     });
 }
 
-export async function sudoUpdateAdminKey(api: ApiPromise, pair: any, accountId: string, callback?: () => void) {
+export async function sudoUpdateGeneticAnalystAdminKey(
+  api: ApiPromise,
+  pair: any,
+  accountId: string,
+  callback?: () => void,
+) {
   // tslint:disable-next-line
   var unsub = await api.tx.geneticAnalysts
     .sudoUpdateAdminKey(accountId)
