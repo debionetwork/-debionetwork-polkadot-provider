@@ -21,6 +21,9 @@ describe('Lab Queries Unit Tests', () => {
   const labCountSpy = jest.spyOn(labs, 'labCount');
   const labCountByCountryRegionCitySpy = jest.spyOn(labs, 'labCountByCountryRegionCity');
   const labVerifierKeySpy = jest.spyOn(labs, 'labVerifierKey');
+  const palletIdSpy = jest.spyOn(labs, 'palletId');
+  const totalStakedAmountSpy = jest.spyOn(labs, 'totalStakedAmount');
+  const minimumStakeAmountSpy = jest.spyOn(labs, 'minimumStakeAmount');
   
   beforeEach(() => {
     (mockFunction as jest.Mock).mockClear();
@@ -29,6 +32,9 @@ describe('Lab Queries Unit Tests', () => {
     labCountSpy.mockClear();
     labCountByCountryRegionCitySpy.mockClear();
     labVerifierKeySpy.mockClear();
+    palletIdSpy.mockClear();
+    totalStakedAmountSpy.mockClear();
+    minimumStakeAmountSpy.mockClear();
   });
 
   it('queryLabById should return', async () => {

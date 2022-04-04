@@ -17,4 +17,13 @@ export const labs = {
   labVerifierKey() {
     return mockFunction();
   },
+  palletId() {
+    return mockFunction();
+  },
+  totalStakedAmount() {
+    return toHumanMock;
+  },
+  minimumStakeAmount() {
+    return toHumanMock;
+  }
 }
