@@ -156,7 +156,7 @@ describe('Genetic Analysis Commands Unit Testing', () => {
   it('bulkCreateGeneticAnalystServiceFee should return', async () => {
       // Arrange
       const PAIR = "PAIR";
-      const GA_INFO = geneticAnalystServicesMock.info;
+      const GA_INFO = geneticAnalystServicesMock[0][1]['info'];
       const EXPECTED_VALUE = 0;
       (mockFunction as jest.Mock).mockReturnValue(EXPECTED_VALUE);
 
@@ -176,7 +176,7 @@ describe('Genetic Analysis Commands Unit Testing', () => {
   it('createGeneticAnalystServiceFee should return', async () => {
       // Arrange
       const PAIR = "PAIR";
-      const GA_INFO = geneticAnalystServicesMock.info;
+      const GA_INFO = geneticAnalystServicesMock[0][1]['info'];
       const EXPECTED_VALUE = 0;
       (mockFunction as jest.Mock).mockReturnValue(EXPECTED_VALUE);
 
@@ -217,7 +217,7 @@ describe('Genetic Analysis Commands Unit Testing', () => {
     // Arrange
     const PAIR = "PAIR";
     const GA_SERVICE_ID = "GA_SERVICE_ID";
-    const GA_INFO = geneticAnalystServicesMock.info;
+    const GA_INFO = geneticAnalystServicesMock[0][1]['info'];
     const EXPECTED_VALUE = 0;
     (mockFunction as jest.Mock).mockReturnValue(EXPECTED_VALUE);
 
