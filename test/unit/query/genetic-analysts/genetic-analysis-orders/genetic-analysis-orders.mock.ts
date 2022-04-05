@@ -15,7 +15,7 @@ export const geneticAnalysisOrders = {
     return returnToHumanMockWithParam(param);
   },
   lastGeneticAnalysisOrderByCustomer(param) {
-    return returnToHumanMockWithParam(param);
+    return mockFunction(param);
   },
   totalEscrowAmount() {
     return toHumanMock;
