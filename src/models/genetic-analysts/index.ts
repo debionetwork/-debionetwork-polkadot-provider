@@ -39,6 +39,8 @@ export class GeneticAnalyst {
       geneticAnalyst.retrieveUnstakeAt = new Date(convertSubstrateNumberToNumber(geneticAnalyst.retrieveUnstakeAt));
     }
 
+    geneticAnalyst.info.dateOfBirth = convertSubstrateNumberToNumber(geneticAnalyst.info.dateOfBirth);
+
     return geneticAnalyst;
   }
 }

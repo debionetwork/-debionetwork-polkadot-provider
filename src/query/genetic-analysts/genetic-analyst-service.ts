@@ -13,7 +13,7 @@ export async function queryGetAllGeneticAnalystServices(api: ApiPromise): Promis
   const res = await api.query.geneticAnalystServices.geneticAnalystServices.entries();
   const serviceArray: GeneticAnalystService[] = [];
   res.forEach((element, i) => {
-    serviceArray.push(new GeneticAnalystService(element[i][1]));
+    serviceArray.push(new GeneticAnalystService(element[1].toHuman()));
   });
   return serviceArray;
 }
