@@ -63,9 +63,6 @@ describe('Genetic Analyst Service Qualifications Queries Unit Tests', () => {
       EXPECTED_VALUE.push(data)
     });
 
-
-  
-
     (mockFunction as jest.Mock).mockReturnValue(dataMock);
 
     // Assert
