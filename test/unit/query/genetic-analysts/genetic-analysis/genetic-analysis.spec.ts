@@ -22,7 +22,7 @@ import { GeneticAnalysis } from "../../../../../src/models/genetic-analysts/gene
   
     const geneticAnalysisStorageSpy = jest.spyOn(geneticAnalysis, 'geneticAnalysisStorage');
     const geneticAnalysisByOwnerSpy = jest.spyOn(geneticAnalysis, 'geneticAnalysisByOwner');
-    const geneticAnalysisByGeneticAnalystIdSpy = jest.spyOn(geneticAnalysis, 'geneticAnalysisByGeneticAnalystId');
+    const geneticAnalysisByGeneticAnalystIdSpy = jest.spyOn(geneticAnalysis, 'geneticAnalysisByGeneticAnalyst');
     
     beforeEach(() => {
       (mockFunction as jest.Mock).mockClear();

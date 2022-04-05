@@ -23,7 +23,7 @@ export async function queryGeneticAnalysisByGeneticAnalystId(
   accountId: string,
 ): Promise<GeneticAnalysis[]> {
   const geneticAnalysisIds: any = (
-    await api.query.geneticAnalysis.geneticAnalysisByGeneticAnalystId(accountId)
+    await api.query.geneticAnalysis.geneticAnalysisByGeneticAnalyst(accountId)
   ).toHuman();
   const geneticAnalysisList: GeneticAnalysis[] = new Array<GeneticAnalysis>();
   for (const geneticAnalysisId of geneticAnalysisIds) {
