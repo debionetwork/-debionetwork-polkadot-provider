@@ -2,10 +2,10 @@ import { returnToHumanMockWithParam, toHumanMock } from "../../../@polkadot-type
 import { mockFunction } from "../../../mock";
 
 export const geneticAnalysisOrders = {
-  geneticAnalysisOrderById(param) {
+  geneticAnalysisOrders(param) {
     return returnToHumanMockWithParam(param);
   },
-  geneticAnalysisOrdersByCustomerId(param) {
+  geneticAnalysisOrdersByCustomer(param) {
     return returnToHumanMockWithParam(param);
   },
   geneticAnalysisOrdersByGeneticAnalystId(param) {
@@ -14,7 +14,7 @@ export const geneticAnalysisOrders = {
   pendingGeneticAnalysisOrdersByGeneticAnalystId(param) {
     return returnToHumanMockWithParam(param);
   },
-  lastGeneticAnalysisOrderByCustomerId(param) {
+  lastGeneticAnalysisOrderByCustomer(param) {
     return returnToHumanMockWithParam(param);
   },
   totalEscrowAmount() {

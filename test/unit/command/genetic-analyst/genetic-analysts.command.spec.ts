@@ -206,7 +206,7 @@ describe('Genetic Analysts Commands Unit Testing', () => {
       );
 
       expect(updateGeneticAnalystAvailabilityStatusSpy).toBeCalledTimes(1);
-      expect(updateGeneticAnalystAvailabilityStatusSpy).toBeCalledWith(DATA_MOCK.accountId, DATA_MOCK.availabilityStatus);
+      expect(updateGeneticAnalystAvailabilityStatusSpy).toBeCalledWith(DATA_MOCK.availabilityStatus);
       expect(signAndSendSpy).toBeCalledTimes(1);
       expect(signAndSendSpy).toBeCalledWith(PAIR, { nonce: -1 }, expect.any(Function));
       expect(successCallback).toBeCalledTimes(1);
