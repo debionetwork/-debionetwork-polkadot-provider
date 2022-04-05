@@ -22,9 +22,7 @@ export async function queryGeneticAnalysisOrderBySellerId(
   api: ApiPromise,
   accountId: string,
 ): Promise<GeneticAnalysisOrder[]> {
-  const orderIds: any = (
-    await api.query.geneticAnalysisOrders.geneticAnalysisOrdersBySeller(accountId)
-  ).toHuman();
+  const orderIds: any = (await api.query.geneticAnalysisOrders.geneticAnalysisOrdersBySeller(accountId)).toHuman();
   const orders: GeneticAnalysisOrder[] = new Array<GeneticAnalysisOrder>();
   for (const orderId of orderIds) {
     orders.push(await queryGeneticAnalysisOrder(api, orderId));
@@ -50,9 +48,7 @@ export async function queryLastGeneticAnalysisOrderByCustomerId(
   api: ApiPromise,
   accountId: string,
 ): Promise<GeneticAnalysisOrder[]> {
-  const orderIds: any = (
-    await api.query.geneticAnalysisOrders.lastGeneticAnalysisOrderByCustomer(accountId)
-  ).toHuman();
+  const orderIds: any = (await api.query.geneticAnalysisOrders.lastGeneticAnalysisOrderByCustomer(accountId)).toHuman();
   const orders: GeneticAnalysisOrder[] = new Array<GeneticAnalysisOrder>();
   for (const orderId of orderIds) {
     orders.push(await queryGeneticAnalysisOrder(api, orderId));
