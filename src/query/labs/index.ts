@@ -37,6 +37,20 @@ export async function queryLabsAdminKey(api: ApiPromise): Promise<string> {
   return (await api.query.labs.labVerifierKey()).toString();
 }
 
+export async function queryyLabPalletId(api: ApiPromise): Promise<string> {
+  return (await api.query.labs.palletId()).toString();
+}
+
+export async function queryyLabTotalStakedAmount(api: ApiPromise): Promise<number> {
+  const res: any = (await api.query.labs.totalStakedAmount()).toHuman();
+  return parseInt(res, 0);
+}
+
+export async function queryyLabMinimumStakeAmount(api: ApiPromise): Promise<number> {
+  const res: any = (await api.query.labs.minimumStakeAmount()).toHuman();
+  return parseInt(res, 0);
+}
+
 export * from './certifications';
 export * from './genetic-testing';
 export * from './orders';

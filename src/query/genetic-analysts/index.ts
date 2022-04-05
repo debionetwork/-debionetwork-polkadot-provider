@@ -2,7 +2,7 @@ import { ApiPromise } from '@polkadot/api';
 import { GeneticAnalyst } from '../../models/genetic-analysts/index';
 
 export async function queryGeneticAnalystByAccountId(api: ApiPromise, accountId: string): Promise<GeneticAnalyst> {
-  const res = (await api.query.geneticAnalysts.geneticAnalystByAccountId(accountId)).toHuman();
+  const res = (await api.query.geneticAnalysts.geneticAnalysts(accountId)).toHuman();
   return new GeneticAnalyst(res);
 }
 

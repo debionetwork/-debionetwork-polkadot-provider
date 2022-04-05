@@ -53,7 +53,12 @@ describe('Genetic Analyst Service Qualifications Queries Unit Tests', () => {
         }
       }
     };
-    const EXPECTED_VALUE = new GeneticAnalystService(geneticAnalystServicesMock);
+
+    let EXPECTED_VALUE;
+    geneticAnalystServicesMock.forEach(el => {      
+      const data = new GeneticAnalystService(el[1])
+      EXPECTED_VALUE = data
+    });
 
     (mockFunction as jest.Mock).mockReturnValue([geneticAnalystServicesMock]);
 

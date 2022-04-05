@@ -22,7 +22,7 @@ import { GeneticAnalyst } from "../../../../src/models/genetic-analysts";
         geneticAnalysts: geneticAnalysts
     };
   
-    const geneticAnalystByAccountIdSpy = jest.spyOn(geneticAnalysts, 'geneticAnalystByAccountId');
+    const geneticAnalystByAccountIdSpy = jest.spyOn(geneticAnalysts, 'geneticAnalysts');
     const geneticAnalystCountSpy = jest.spyOn(geneticAnalysts, 'geneticAnalystCount');
     const adminKeySpy = jest.spyOn(geneticAnalysts, 'adminKey');
     const palletIdSpy = jest.spyOn(geneticAnalysts, 'palletId');

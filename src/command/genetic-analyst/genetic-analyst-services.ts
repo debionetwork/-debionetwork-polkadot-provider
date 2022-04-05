@@ -58,3 +58,38 @@ export async function updateGeneticAnalystService(
       successCallback(api, { events, status, callback, unsub });
     });
 }
+
+export async function bulkCreateGeneticAnalystServiceFee(
+  api: ApiPromise,
+  pair: any,
+  geneticAnalystServiceInfo: GeneticAnalystServiceInfo,
+): Promise<any> {
+  return api.tx.geneticAnalystServices.bulkCreateGeneticAnalystService(geneticAnalystServiceInfo).paymentInfo(pair);
+}
+
+export async function createGeneticAnalystServiceFee(
+  api: ApiPromise,
+  pair: any,
+  geneticAnalystServiceInfo: GeneticAnalystServiceInfo,
+): Promise<any> {
+  return api.tx.geneticAnalystServices.createGeneticAnalystService(geneticAnalystServiceInfo).paymentInfo(pair);
+}
+
+export async function deleteGeneticAnalystServiceFee(
+  api: ApiPromise,
+  pair: any,
+  geneticAnalystServiceId: string,
+): Promise<any> {
+  return api.tx.geneticAnalystServices.deleteGeneticAnalystService(geneticAnalystServiceId).paymentInfo(pair);
+}
+
+export async function updateGeneticAnalystServiceFee(
+  api: ApiPromise,
+  pair: any,
+  geneticAnalystServiceId: string,
+  geneticAnalystServiceInfo: GeneticAnalystServiceInfo,
+): Promise<any> {
+  return api.tx.geneticAnalystServices
+    .updateGeneticAnalystService(geneticAnalystServiceId, geneticAnalystServiceInfo)
+    .paymentInfo(pair);
+}
