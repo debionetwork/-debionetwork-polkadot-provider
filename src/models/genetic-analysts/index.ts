@@ -40,7 +40,7 @@ export class GeneticAnalyst {
     }
 
     geneticAnalyst.info.dateOfBirth = convertSubstrateNumberToNumber(geneticAnalyst.info.dateOfBirth);
-    
+
     return geneticAnalyst;
   }
 }
