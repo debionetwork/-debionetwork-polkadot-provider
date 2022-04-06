@@ -1,7 +1,9 @@
 import { ApiPromise } from '@polkadot/api';
 import 'regenerator-runtime/runtime';
-import { Lab, queryLabById, queryLabsByCountryRegionCity, queryLabsCountByCountryRegionCity, queryLabCount, queryLabsAdminKey, LabVerificationStatus } from '../../../src';
-import { registerLab, updateLab, deregisterLab, updateLabVerificationStatus } from "../../../src/command/labs";
+import { Lab, queryLabById, queryLabsByCountryRegionCity, queryLabsCountByCountryRegionCity, queryLabCount, queryLabsAdminKey, queryLabMinimumStakeAmount, queryLabPalletAccount, queryLabTotalStakedAmount, queryLabUnstakeTime } from '../../../src';
+import { registerLab, updateLab, deregisterLab, updateLabVerificationStatus, stakeLab, retrieveLabUnstakeAmount, unstakeLab, updateLabMinimumStakeAmount, updateLabUnstakeTime } from "../../../src/command/labs";
+import { StakeStatus } from '../../../src/primitives/stake-status';
+import { VerificationStatus } from '../../../src/primitives/verification-status';
 import { labDataMock } from '../../unit/models/labs/labs.mock';
 import { initializeApi } from '../polkadot-init';
 
@@ -95,7 +97,7 @@ describe('Lab Pallet Integration Tests', () => {
   }, 25000); // Set timeout for 25 seconds
 
   it('updateLabVerificationStatus should return', async () => {
-    const status = LabVerificationStatus.Verified;
+    const status = VerificationStatus.Verified;
     const promise: Promise<Lab> = new Promise((resolve, reject) => { // eslint-disable-line
       updateLabVerificationStatus(api, pair, pair.address, status, () => {
         queryLabById(api, pair.address)
@@ -106,6 +108,120 @@ describe('Lab Pallet Integration Tests', () => {
     });
 
     expect((await promise).verificationStatus).toEqual(status);
+  }, 25000); // Set timeout for 25 seconds
+
+  it('stakeLab should return', async () => {
+    const status = StakeStatus.Staked;
+    const promise: Promise<Lab> = new Promise((resolve, reject) => { // eslint-disable-line
+      stakeLab(api, pair, () => {
+        queryLabById(api, pair.address)
+          .then((res) => {
+            resolve(res)
+          });
+      });
+    });
+
+    expect((await promise).stakeStatus).toEqual(status);
+  }, 25000); // Set timeout for 25 seconds
+
+  it('queryLabPalletAccount should return', async () => {
+    const promise: Promise<string> = new Promise((resolve, reject) => { // eslint-disable-line
+      queryLabPalletAccount(api)
+        .then((res) => {
+          resolve(res)
+        });
+    });
+
+    expect(await promise).toEqual('5EYCAe5gKDvdGNewu5i4UATj9LVx6bz3ysnM5WKBZkXytEVo');
+  }, 25000); // Set timeout for 25 seconds
+
+  it('queryLabMinimumStakeAmount should return', async () => {
+    const promise: Promise<number> = new Promise((resolve, reject) => { // eslint-disable-line
+      queryLabMinimumStakeAmount(api)
+        .then((res) => {
+          resolve(res)
+        });
+    });
+
+    expect(await promise).toEqual(50);
+  }, 25000); // Set timeout for 25 seconds
+
+  it('queryLabTotalStakedAmount should return', async () => {
+    const promise: Promise<number> = new Promise((resolve, reject) => { // eslint-disable-line
+      queryLabTotalStakedAmount(api)
+        .then((res) => {
+          resolve(res)
+        });
+    });
+
+    expect(await promise).toEqual(50);
+  }, 25000); // Set timeout for 25 seconds
+
+  it('queryLabUnstakeTime should return', async () => {
+    const promise: Promise<number> = new Promise((resolve, reject) => { // eslint-disable-line
+      queryLabUnstakeTime(api)
+        .then((res) => {
+          resolve(res)
+        });
+    });
+
+    expect(await promise).toEqual(0);
+  }, 25000); // Set timeout for 25 seconds
+
+  it('unstakeLab should return', async () => {
+    const status = StakeStatus.WaitingForUnstaked;
+    const promise: Promise<Lab> = new Promise((resolve, reject) => { // eslint-disable-line
+      unstakeLab(api, pair, () => {
+        queryLabById(api, pair.address)
+          .then((res) => {
+            resolve(res)
+          });
+      });
+    });
+
+    expect((await promise).stakeStatus).toEqual(status);
+  }, 25000); // Set timeout for 25 seconds
+
+  it('retrieveLabUnstakeAmount should return', async () => {
+    const status = StakeStatus.Unstaked;
+    const promise: Promise<Lab> = new Promise((resolve, reject) => { // eslint-disable-line
+      retrieveLabUnstakeAmount(api, pair, pair.address, () => {
+        queryLabById(api, pair.address)
+          .then((res) => {
+            resolve(res)
+          });
+      });
+    });
+
+    expect((await promise).stakeStatus).toEqual(status);
+  }, 25000); // Set timeout for 25 seconds
+
+  it('updateLabUnstakeTime should return', async () => {
+    const unstakeTime = 40;
+    const promise: Promise<number> = new Promise((resolve, reject) => { // eslint-disable-line
+      updateLabUnstakeTime(api, pair, unstakeTime, () => {
+        queryLabUnstakeTime(api)
+          .then((res) => {
+            resolve(res)
+          });
+      });
+    });
+
+    expect((await promise)).toEqual(unstakeTime);
+  }, 25000); // Set timeout for 25 seconds
+
+  it('updateLabMinimumStakeAmount should return', async () => {
+    const minimum = 40;
+    const promise: Promise<number> = new Promise((resolve, reject) => { // eslint-disable-line
+      updateLabMinimumStakeAmount(api, pair, minimum, () => {
+        queryLabMinimumStakeAmount(api)
+          .then((res) => {
+            resolve(res)
+          });
+      });
+    });
+
+    expect((await promise)).toEqual(minimum);
   }, 25000); // Set timeout for 25 seconds
 
   it('deregisterLab should return', async () => {
