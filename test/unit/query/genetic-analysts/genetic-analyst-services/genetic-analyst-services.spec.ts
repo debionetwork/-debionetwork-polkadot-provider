@@ -44,9 +44,6 @@ describe('Genetic Analyst Service Qualifications Queries Unit Tests', () => {
   });
 
   it("queryGetAllGeneticAnalystServices should return", async () => {
-
-    const dataMock = [[{toHuman: jest.fn(() => geneticAnalystServicesMock[0])},{toHuman: jest.fn(() => geneticAnalystServicesMock[1])}]]
-   
     // Arrange
     const API_PROMISE_MOCK2: ApiPromise = new ApiPromise();
     API_PROMISE_MOCK2.query = {
@@ -57,10 +54,10 @@ describe('Genetic Analyst Service Qualifications Queries Unit Tests', () => {
       }
     };
 
-    let EXPECTED_VALUE = [];
-    dataMock.forEach((el) => {
-      const data = new GeneticAnalystService(el[1].toHuman())
-      EXPECTED_VALUE.push(data)
+    let EXPECTED_VALUE;
+    geneticAnalystServicesMock.forEach(el => {
+      const data = new GeneticAnalystService(el[1])
+      EXPECTED_VALUE = data
     });
 
     (mockFunction as jest.Mock).mockReturnValue([
@@ -76,7 +73,7 @@ describe('Genetic Analyst Service Qualifications Queries Unit Tests', () => {
 
     // Assert
     expect(await queryGetAllGeneticAnalystServices(API_PROMISE_MOCK2 as any))
-      .toEqual(EXPECTED_VALUE);
+      .toEqual([EXPECTED_VALUE]);
     expect(mockFunction).toBeCalledTimes(1);
     expect(API_PROMISE_MOCK2.query.geneticAnalystServices.geneticAnalystServices.entries).toBeCalledTimes(1);
   });

@@ -59,12 +59,7 @@ export async function updateGeneticAnalystVerificationStatus(
 export async function updateGeneticAnalystAvailabilityStatus(
   api: ApiPromise,
   pair: any,
-<<<<<<< HEAD
-  geneticAnalystAvailabilityStatus: GeneticAnalystsAvailabilityStatus,
-=======
-  accountId: string,
   geneticAnalystAvailabilityStatus: AvailabilityStatus,
->>>>>>> 1c1f21f9228bda2d43cf9267ddd9edd6a7daf7fd
   callback?: () => void,
 ) {
   // tslint:disable-next-line
