@@ -60,7 +60,16 @@ describe('Genetic Analyst Service Qualifications Queries Unit Tests', () => {
       EXPECTED_VALUE = data
     });
 
-    (mockFunction as jest.Mock).mockReturnValue([geneticAnalystServicesMock]);
+    (mockFunction as jest.Mock).mockReturnValue([
+      [
+        ['string'],
+        {
+          toHuman: jest.fn(() => {
+            return geneticAnalystServicesMock[0][1];
+          })
+        }
+      ]
+    ]);
 
     // Assert
     expect(await queryGetAllGeneticAnalystServices(API_PROMISE_MOCK2 as any))
