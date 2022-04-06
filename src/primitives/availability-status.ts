@@ -1,4 +1,4 @@
-export enum GeneticAnalystsAvailabilityStatus {
+export enum AvailabilityStatus {
   Unavailable = 'Unavailable',
   Available = 'Available',
 }

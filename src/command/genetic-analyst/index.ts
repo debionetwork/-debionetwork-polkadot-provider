@@ -1,7 +1,8 @@
 import { ApiPromise } from '@polkadot/api';
 import { successCallback } from '../../index';
-import { GeneticAnalystInfo, GeneticAnalystsVerificationStatus } from '../../models/genetic-analysts';
-import { GeneticAnalystsAvailabilityStatus } from '../../models/genetic-analysts/genetic-analyst-availability-status';
+import { GeneticAnalystInfo } from '../../models/genetic-analysts';
+import { AvailabilityStatus } from '../../primitives/availability-status';
+import { VerificationStatus } from '../../primitives/verification-status';
 
 export async function registerGeneticAnalyst(
   api: ApiPromise,
@@ -44,7 +45,7 @@ export async function updateGeneticAnalystVerificationStatus(
   api: ApiPromise,
   pair: any,
   accountId: string,
-  geneticAnalystVerificationStatus: GeneticAnalystsVerificationStatus,
+  geneticAnalystVerificationStatus: VerificationStatus,
   callback?: () => void,
 ) {
   // tslint:disable-next-line
@@ -58,7 +59,12 @@ export async function updateGeneticAnalystVerificationStatus(
 export async function updateGeneticAnalystAvailabilityStatus(
   api: ApiPromise,
   pair: any,
+<<<<<<< HEAD
   geneticAnalystAvailabilityStatus: GeneticAnalystsAvailabilityStatus,
+=======
+  accountId: string,
+  geneticAnalystAvailabilityStatus: AvailabilityStatus,
+>>>>>>> 1c1f21f9228bda2d43cf9267ddd9edd6a7daf7fd
   callback?: () => void,
 ) {
   // tslint:disable-next-line
