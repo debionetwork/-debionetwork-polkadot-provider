@@ -18,12 +18,12 @@ export async function queryGeneticAnalysisOrderByCustomerId(
   return orders;
 }
 
-export async function queryGeneticAnalysisOrderByGeneticAnalystId(
+export async function queryGeneticAnalysisOrderBySeller(
   api: ApiPromise,
   accountId: string,
 ): Promise<GeneticAnalysisOrder[]> {
   const orderIds: any = (
-    await api.query.geneticAnalysisOrders.geneticAnalysisOrdersByGeneticAnalystId(accountId)
+    await api.query.geneticAnalysisOrders.geneticAnalysisOrdersBySeller(accountId)
   ).toHuman();
   const orders: GeneticAnalysisOrder[] = new Array<GeneticAnalysisOrder>();
   for (const orderId of orderIds) {
