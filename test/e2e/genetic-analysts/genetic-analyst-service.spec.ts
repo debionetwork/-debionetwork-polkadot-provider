@@ -118,6 +118,6 @@ describe('Genetic Analysis Service Pallet Integration Tests', () => {
     });
     
     expect(await geneticAnalystPromise).toEqual(0);
-  }, 2000);
+  }, 20000);
   
 });
