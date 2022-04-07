@@ -76,7 +76,7 @@ describe('Genetic Analyst Service Qualifications Queries Unit Tests', () => {
 
     // Assert
     expect(await queryGetAllGeneticAnalystServices(API_PROMISE_MOCK2 as any))
-      .toEqual(EXPECTED_VALUE);
+      .toEqual([EXPECTED_VALUE]);
     expect(mockFunction).toBeCalledTimes(1);
     expect(API_PROMISE_MOCK2.query.geneticAnalystServices.geneticAnalystServices.entries).toBeCalledTimes(1);
   });

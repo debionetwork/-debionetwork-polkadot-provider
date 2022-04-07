@@ -8,7 +8,7 @@ export const geneticAnalysisOrders = {
   geneticAnalysisOrdersByCustomer(param) {
     return returnToHumanMockWithParam(param);
   },
-  geneticAnalysisOrdersByGeneticAnalystId(param) {
+  geneticAnalysisOrdersBySeller(param) {
     return returnToHumanMockWithParam(param);
   },
   pendingGeneticAnalysisOrdersByGeneticAnalystId(param) {
