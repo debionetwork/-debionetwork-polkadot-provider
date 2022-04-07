@@ -200,7 +200,6 @@ describe('Genetic Analysts Commands Unit Testing', () => {
       await updateGeneticAnalystAvailabilityStatus(
         API_PROMISE_MOCK as any, 
         PAIR,
-        DATA_MOCK.accountId,
         DATA_MOCK.availabilityStatus as AvailabilityStatus,
         mockFunction
       );

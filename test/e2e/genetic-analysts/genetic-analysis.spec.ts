@@ -57,7 +57,6 @@ describe('Genetic Analysis Pallet Integration Tests', () => {
     await updateGeneticAnalystAvailabilityStatus(
       api,
       pair,
-      pair.address,
       AvailabilityStatus.Available
     );
 

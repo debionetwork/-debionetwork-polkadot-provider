@@ -50,7 +50,7 @@ describe('Genetic Analysis Commands Unit Testing', () => {
   it('bulkCreateGeneticAnalystService should return', async () => {
       // Arrange
       const PAIR = "PAIR";
-      const GA_INFO = geneticAnalystServicesMock[0][1]['info'];
+      const GA_INFO = geneticAnalystServicesMock[0][1]['info'];    
 
       // Act
       await bulkCreateGeneticAnalystService(
@@ -76,7 +76,7 @@ describe('Genetic Analysis Commands Unit Testing', () => {
   it('createGeneticAnalystService should return', async () => {
       // Arrange
       const PAIR = "PAIR";
-      const GA_INFO = geneticAnalystServicesMock[0][1]['info'];
+      const GA_INFO = geneticAnalystServicesMock[0][1]['info']
 
       // Act
       await createGeneticAnalystService(

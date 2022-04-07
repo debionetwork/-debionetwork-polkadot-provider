@@ -30,7 +30,7 @@ export const geneticAnalystServicesMock = [
         },
         description: 'string',
         testResultSample: 'string',
-      },
+      }
     }
   ]
-];
+]

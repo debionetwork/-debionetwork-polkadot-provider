@@ -1,7 +1,7 @@
 import { ApiPromise } from '@polkadot/api';
 import 'regenerator-runtime/runtime';
-import { queryLastOrderHashByCustomer, queryOrderDetailByOrderID, queryOrdersByCustomer, queryOrdersBySeller } from '../../../src/query/labs/orders';
-import { createOrder, cancelOrder, fulfillOrder, createOrderFee, setOrderPaid, setOrderRefunded } from "../../../src/command/labs/orders";
+import { queryLastOrderHashByCustomer, queryOrderDetailByOrderID} from '../../../src/query/labs/orders';
+import { createOrder} from "../../../src/command/labs/orders";
 import { processDnaSample, rejectDnaSample, submitTestResult } from "../../../src/command/labs/genetic-testing";
 import { createService } from "../../../src/command/labs/services";
 import { initializeApi } from '../polkadot-init';
@@ -11,7 +11,7 @@ import { DnaTestResultSubmission, Lab } from '../../../src/models/labs';
 import { registerLab } from "../../../src/command/labs";
 import { labDataMock } from '../../unit/models/labs/labs.mock';
 import { Service } from '../../../src/models/labs/services';
-import { Order, OrderStatus } from '../../../src/models/labs/orders';
+import { Order } from '../../../src/models/labs/orders';
 import { serviceDataMock } from '../../unit/models/labs/services.mock';
 import { DnaSampleStatus } from '../../../src/models/labs/genetic-testing/dna-sample-status';
 import { DnaSample } from '../../../src/models/labs/genetic-testing/dna-sample';
