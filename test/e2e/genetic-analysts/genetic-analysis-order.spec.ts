@@ -1,11 +1,13 @@
 import 'regenerator-runtime/runtime';
 import { ApiPromise } from '@polkadot/api';
-import { addGeneticData, cancelGeneticAnalysisOrder, createGeneticAnalysisOrder, createGeneticAnalystService, GeneticAnalysisOrder, GeneticAnalysisOrderStatus, GeneticAnalysisStatus, GeneticAnalyst, GeneticAnalystsAvailabilityStatus, GeneticAnalystService, GeneticAnalystsVerificationStatus, GeneticData, processGeneticAnalysis, queryGeneticAnalysisOrderByCustomerId, queryGeneticAnalysisOrderById, queryGeneticAnalystByAccountId, queryGeneticDataByOwnerId, queryGetAllGeneticAnalystServices, queryLastGeneticAnalysisOrderByCustomerId, registerGeneticAnalyst, setGeneticAnalysisOrderFulfilled, setGeneticAnalysisOrderPaid, setGeneticAnalysisOrderRefunded, stakeGeneticAnalyst, submitGeneticAnalysis, updateGeneticAnalystAvailabilityStatus, updateGeneticAnalystVerificationStatus } from '../../../src';
+import { addGeneticData, cancelGeneticAnalysisOrder, createGeneticAnalysisOrder, createGeneticAnalystService, GeneticAnalysisOrder, GeneticAnalysisOrderStatus, GeneticAnalysisStatus, GeneticAnalyst, GeneticAnalystService, GeneticData, processGeneticAnalysis, queryGeneticAnalysisOrderByCustomerId, queryGeneticAnalysisOrderById, queryGeneticAnalystByAccountId, queryGeneticDataByOwnerId, queryGetAllGeneticAnalystServices, queryLastGeneticAnalysisOrderByCustomerId, registerGeneticAnalyst, setGeneticAnalysisOrderFulfilled, setGeneticAnalysisOrderPaid, setGeneticAnalysisOrderRefunded, stakeGeneticAnalyst, submitGeneticAnalysis, updateGeneticAnalystAvailabilityStatus, updateGeneticAnalystVerificationStatus } from '../../../src';
 import { geneticAnalysisOrdersDataMock } from '../../unit/models/genetic-analysts/genetic-analysis-orders.mock';
 import { geneticAnalystServicesMock } from '../../unit/models/genetic-analysts/genetic-analyst-services.mock';
 import { geneticAnalystsDataMock } from '../../unit/models/genetic-analysts/genetic-analysts.mock';
 import { geneticDataMock } from '../../unit/models/genetic-analysts/genetic-data.mock';
 import { initializeApi } from '../polkadot-init';
+import { VerificationStatus } from '../../../src/primitives/verification-status';
+import { AvailabilityStatus } from '../../../src/primitives/availability-status';
 
 describe('Genetic Analysis Order Pallet Integration Tests', () => {
   let api: ApiPromise;
@@ -48,14 +50,14 @@ describe('Genetic Analysis Order Pallet Integration Tests', () => {
       api,
       pair,
       pair.address,
-      GeneticAnalystsVerificationStatus.Verified
+      VerificationStatus.Verified
     );
 
     await updateGeneticAnalystAvailabilityStatus(
       api,
       pair,
       pair.address,
-      GeneticAnalystsAvailabilityStatus.Available
+      AvailabilityStatus.Available
     );
 
     const geneticAnalystServicePromise: Promise<GeneticAnalystService> = new Promise((resolve, reject) => { // eslint-disable-line

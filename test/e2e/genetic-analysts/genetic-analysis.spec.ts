@@ -1,12 +1,14 @@
 import 'regenerator-runtime/runtime';
 import { ApiPromise } from '@polkadot/api';
 import { addGeneticData, createGeneticAnalysisOrder, createGeneticAnalystService, processGeneticAnalysis, queryGeneticAnalysisByGeneticAnalysisTrackingId, queryGeneticAnalystByAccountId, queryGeneticDataByOwnerId, queryGetAllGeneticAnalystServices, queryLastGeneticAnalysisOrderByCustomerId, registerGeneticAnalyst, rejectGeneticAnalysis, stakeGeneticAnalyst, submitGeneticAnalysis, updateGeneticAnalystAvailabilityStatus, updateGeneticAnalystVerificationStatus } from '../../../src';
-import { GeneticAnalysis, GeneticAnalysisOrder, GeneticAnalysisStatus, GeneticAnalyst, GeneticAnalystsAvailabilityStatus, GeneticAnalystService, GeneticAnalystsVerificationStatus, GeneticData } from '../../../src/models/genetic-analysts';
+import { GeneticAnalysis, GeneticAnalysisOrder, GeneticAnalysisStatus, GeneticAnalyst, GeneticAnalystService, GeneticData } from '../../../src/models/genetic-analysts';
 import { geneticAnalysisOrdersDataMock } from '../../unit/models/genetic-analysts/genetic-analysis-orders.mock';
 import { geneticAnalystServicesMock } from '../../unit/models/genetic-analysts/genetic-analyst-services.mock';
 import { geneticAnalystsDataMock } from '../../unit/models/genetic-analysts/genetic-analysts.mock';
 import { geneticDataMock } from '../../unit/models/genetic-analysts/genetic-data.mock';
 import { initializeApi } from '../polkadot-init';
+import { VerificationStatus } from '../../../src/primitives/verification-status';
+import { AvailabilityStatus } from '../../../src/primitives/availability-status';
 
 describe('Genetic Analysis Pallet Integration Tests', () => {
   let api: ApiPromise;
@@ -49,14 +51,14 @@ describe('Genetic Analysis Pallet Integration Tests', () => {
       api,
       pair,
       pair.address,
-      GeneticAnalystsVerificationStatus.Verified
+      VerificationStatus.Verified
     );
 
     await updateGeneticAnalystAvailabilityStatus(
       api,
       pair,
       pair.address,
-      GeneticAnalystsAvailabilityStatus.Available
+      AvailabilityStatus.Available
     );
 
     const geneticAnalystServicePromise: Promise<GeneticAnalystService> = new Promise((resolve, reject) => { // eslint-disable-line
