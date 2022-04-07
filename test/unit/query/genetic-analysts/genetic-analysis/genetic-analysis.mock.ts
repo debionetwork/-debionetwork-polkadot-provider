@@ -7,7 +7,7 @@ export const geneticAnalysis = {
   geneticAnalysisByOwner(param) {
     return returnToHumanMockWithParam(param);
   },
-  geneticAnalysisByGeneticAnalystId(param) {
+  geneticAnalysisByGeneticAnalyst(param) {
     return returnToHumanMockWithParam(param);
   }
 }

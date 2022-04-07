@@ -65,7 +65,7 @@ export async function updateGeneticAnalystAvailabilityStatus(
 ) {
   // tslint:disable-next-line
   var unsub = await api.tx.geneticAnalysts
-    .updateGeneticAnalystAvailabilityStatus(accountId, geneticAnalystAvailabilityStatus.toString())
+    .updateGeneticAnalystAvailabilityStatus(geneticAnalystAvailabilityStatus.toString())
     .signAndSend(pair, { nonce: -1 }, ({ events, status }) => {
       successCallback(api, { events, status, callback, unsub });
     });
