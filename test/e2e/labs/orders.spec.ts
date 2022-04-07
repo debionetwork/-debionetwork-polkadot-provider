@@ -77,7 +77,7 @@ describe('Orders Pallet Integration Tests', () => {
     expect(order.serviceId).toEqual(service.id);
     expect(order.customerBoxPublicKey).toEqual(lab.info.boxPublicKey);
     expect(order.orderFlow).toEqual(serviceDataMock.serviceFlow);
-  }, 90000); // Set timeout for 90 seconds
+  }, 120000); // Set timeout for 90 seconds
 
   it('createOrderFee should return', async () => {
     await createOrderFee(api, pair, service.id, 0, lab.info.boxPublicKey, serviceDataMock.serviceFlow);

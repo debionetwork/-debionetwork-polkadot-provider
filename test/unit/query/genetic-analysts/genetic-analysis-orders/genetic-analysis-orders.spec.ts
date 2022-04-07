@@ -2,7 +2,7 @@ import {
   queryGeneticAnalysisOrderById,
   queryGeneticAnalysisOrderAdminKey,
   queryGeneticAnalysisOrderByCustomerId,
-  queryGeneticAnalysisOrderByGeneticAnalystId,
+  queryGeneticAnalysisOrderBySeller,
   queryGeneticAnalysisOrderPalletId,
   queryGeneticAnalysisOrderTotalEscrowAmount,
   queryLastGeneticAnalysisOrderByCustomerId,
@@ -25,11 +25,11 @@ import { when } from 'jest-when';
         geneticAnalysisOrders: geneticAnalysisOrders
     };
   
-    const geneticAnalysisOrderByIdSpy = jest.spyOn(geneticAnalysisOrders, 'geneticAnalysisOrderById');
-    const geneticAnalysisOrdersByCustomerIdSpy = jest.spyOn(geneticAnalysisOrders, 'geneticAnalysisOrdersByCustomerId');
-    const geneticAnalysisOrdersByGeneticAnalystIdSpy = jest.spyOn(geneticAnalysisOrders, 'geneticAnalysisOrdersByGeneticAnalystId');
+    const geneticAnalysisOrderByIdSpy = jest.spyOn(geneticAnalysisOrders, 'geneticAnalysisOrders');
+    const geneticAnalysisOrdersByCustomerIdSpy = jest.spyOn(geneticAnalysisOrders, 'geneticAnalysisOrdersByCustomer');
+    const geneticAnalysisOrdersByGeneticAnalystIdSpy = jest.spyOn(geneticAnalysisOrders, 'geneticAnalysisOrdersBySeller');
     const pendingGeneticAnalysisOrdersByGeneticAnalystIdSpy = jest.spyOn(geneticAnalysisOrders, 'pendingGeneticAnalysisOrdersByGeneticAnalystId');
-    const lastGeneticAnalysisOrderByCustomerIdSpy = jest.spyOn(geneticAnalysisOrders, 'lastGeneticAnalysisOrderByCustomerId');
+    const lastGeneticAnalysisOrderByCustomerIdSpy = jest.spyOn(geneticAnalysisOrders, 'lastGeneticAnalysisOrderByCustomer');
     const totalEscrowAmountSpy = jest.spyOn(geneticAnalysisOrders, 'totalEscrowAmount');
     const adminKeySpy = jest.spyOn(geneticAnalysisOrders, 'adminKey');
     const palletIdSpy = jest.spyOn(geneticAnalysisOrders, 'palletId');
@@ -132,7 +132,7 @@ import { when } from 'jest-when';
   
       // Assert
       expect(await queryLastGeneticAnalysisOrderByCustomerId(API_PROMISE_MOCK as any, ACCOUNT_ID))
-        .toEqual([EXPECTED_VALUE]);
+        .toEqual(EXPECTED_VALUE);
       expect(mockFunction).toBeCalledTimes(2);
       expect(mockFunction).toBeCalledWith(ACCOUNT_ID);
       expect(mockFunction).toBeCalledWith(ORDER_ID);
@@ -158,7 +158,7 @@ import { when } from 'jest-when';
         .mockReturnValue(geneticAnalysisOrdersDataMock);
   
       // Assert
-      expect(await queryGeneticAnalysisOrderByGeneticAnalystId(API_PROMISE_MOCK as any, ACCOUNT_ID))
+      expect(await queryGeneticAnalysisOrderBySeller(API_PROMISE_MOCK as any, ACCOUNT_ID))
         .toEqual([EXPECTED_VALUE]);
       expect(mockFunction).toBeCalledTimes(2);
       expect(mockFunction).toBeCalledWith(ACCOUNT_ID);
