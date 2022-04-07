@@ -12,6 +12,7 @@ export class GeneticAnalyst {
     this.info = anyJson.info;
     this.stakeAmount = anyJson.stakeAmount;
     this.verificationStatus = anyJson.verificationStatus;
+    this.availabilityStatus = anyJson.availabilityStatus;
     this.unstakeAt = anyJson.unstakeAt;
     this.retrieveUnstakeAt = anyJson.retrieveUnstakeAt;
   }

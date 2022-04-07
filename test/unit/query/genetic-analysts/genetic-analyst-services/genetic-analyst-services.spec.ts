@@ -44,9 +44,6 @@ describe('Genetic Analyst Service Qualifications Queries Unit Tests', () => {
   });
 
   it("queryGetAllGeneticAnalystServices should return", async () => {
-
-    const dataMock = [[{toHuman: jest.fn(() => geneticAnalystServicesMock[0])},{toHuman: jest.fn(() => geneticAnalystServicesMock[1])}]]
-   
     // Arrange
     const API_PROMISE_MOCK2: ApiPromise = new ApiPromise();
     API_PROMISE_MOCK2.query = {

@@ -59,7 +59,6 @@ export async function updateGeneticAnalystVerificationStatus(
 export async function updateGeneticAnalystAvailabilityStatus(
   api: ApiPromise,
   pair: any,
-  accountId: string,
   geneticAnalystAvailabilityStatus: AvailabilityStatus,
   callback?: () => void,
 ) {

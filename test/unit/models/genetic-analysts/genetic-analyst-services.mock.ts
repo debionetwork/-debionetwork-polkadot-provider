@@ -28,9 +28,9 @@ export const geneticAnalystServicesMock = [
           duration: '1',
           durationType: 'WorkingDays',
         },
-      },
-      description: 'string',
-      testResultSample: 'string',
+        description: 'string',
+        testResultSample: 'string',
+      }
     }
   ]
-];
+]
