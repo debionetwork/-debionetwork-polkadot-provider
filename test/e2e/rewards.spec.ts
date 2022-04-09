@@ -23,7 +23,7 @@ describe('Rewards Pallet Integration Tests', () => {
 
   it('sendRewards should return', async () => {
     await sendRewards(api, pair, pair.address, REWARDS_MOCK);
-  }, 25000); // Set timeout for 25 seconds
+  });
 
   it('updateRewardsAdminKey should return', async () => {
     const promise: Promise<String> = new Promise((resolve, reject) => { // eslint-disable-line
@@ -36,7 +36,7 @@ describe('Rewards Pallet Integration Tests', () => {
     });
 
     expect(await promise).toEqual(pair.address);
-  }, 25000); // Set timeout for 25 seconds
+  });
 
   it('sudoRewardsUpdateAdminKey should return', async () => {
     const promise: Promise<String> = new Promise((resolve, reject) => { // eslint-disable-line
@@ -49,5 +49,5 @@ describe('Rewards Pallet Integration Tests', () => {
     });
 
     expect(await promise).toEqual(pair.address);
-  }, 25000); // Set timeout for 25 seconds
+  });
 });

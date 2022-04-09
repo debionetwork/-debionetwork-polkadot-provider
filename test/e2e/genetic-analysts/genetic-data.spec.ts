@@ -34,7 +34,7 @@ describe('Genetic Data Pallet Integration Tests', () => {
     expect(geneticData.title).toEqual(geneticDataMock.title);
     expect(geneticData.description).toEqual(geneticDataMock.description);
     expect(geneticData.reportLink).toEqual(geneticDataMock.reportLink);
-  }, 25000);
+  });
 
   it('updateGeneticData should return', async () => {
     const title = "title update";
@@ -54,7 +54,7 @@ describe('Genetic Data Pallet Integration Tests', () => {
     expect(geneticDataUpdated.title).toEqual(title);
     expect(geneticDataUpdated.description).toEqual(description);
     expect(geneticDataUpdated.reportLink).toEqual(reportLink);
-  }, 25000);
+  });
 
   it('removeGeneticData should return', async () => {
     const geneticDataPromise: Promise<number> = new Promise((resolve, reject) => { // eslint-disable-line
@@ -68,5 +68,5 @@ describe('Genetic Data Pallet Integration Tests', () => {
 
     const geneticDataRemoved = await geneticDataPromise;
     expect(geneticDataRemoved).toEqual(0);
-  }, 25000);
+  });
 });
