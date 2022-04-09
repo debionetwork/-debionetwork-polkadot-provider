@@ -7,8 +7,7 @@ import { VerificationStatus } from '../../../src/primitives/verification-status'
 import { AvailabilityStatus } from '../../../src/primitives/availability-status';
 
 describe('Genetic Analyst Pallet Integration Tests', () => {
-  let api: ApiPromise
-  ;
+  let api: ApiPromise;
   let pair: any;
 
   let geneticAnalyst: GeneticAnalyst;
@@ -34,7 +33,7 @@ describe('Genetic Analyst Pallet Integration Tests', () => {
     });
     geneticAnalyst = await geneticAnalystPromise;
     expect(geneticAnalyst.normalize().info).toEqual(geneticAnalystsDataMock.info);
-  }, 20000);
+  });
 
   it('stakeGeneticAnalyst and queryGeneticAnalystByAccountId should return', async () => {
     const geneticAnalystPromise: Promise<GeneticAnalyst> = new Promise((resolve, reject) => { // eslint-disable-line
@@ -48,7 +47,7 @@ describe('Genetic Analyst Pallet Integration Tests', () => {
     
     geneticAnalyst = await geneticAnalystPromise;
     expect(geneticAnalyst.normalize().stakeAmount).toBeGreaterThan(0);
-  }, 20000);
+  });
 
   it('updateGeneticAnalystVerificationStatus should return', async () => {
     const geneticAnalystPromise: Promise<GeneticAnalyst> = new Promise((resolve, reject) => { // eslint-disable-line
@@ -62,7 +61,7 @@ describe('Genetic Analyst Pallet Integration Tests', () => {
     
     geneticAnalyst = await geneticAnalystPromise;
     expect(geneticAnalyst.normalize().verificationStatus).toEqual(VerificationStatus.Verified);
-  }, 20000);
+  });
 
   it('updateGeneticAnalystAvailabilityStatus should return', async () => {
     const geneticAnalystPromise: Promise<GeneticAnalyst> = new Promise((resolve, reject) => { // eslint-disable-line
@@ -76,7 +75,7 @@ describe('Genetic Analyst Pallet Integration Tests', () => {
     
     geneticAnalyst = await geneticAnalystPromise;
     expect(geneticAnalyst.availabilityStatus).toEqual(AvailabilityStatus.Available);
-  }, 20000);
+  });
 
   it('updateGeneticAnalyst should return', async () => {
     const inputUpdateLastName = 'testUpdateLastName';
@@ -93,7 +92,7 @@ describe('Genetic Analyst Pallet Integration Tests', () => {
     
     geneticAnalyst = await geneticAnalystPromise;
     expect(geneticAnalyst.normalize().info.lastName).toEqual(inputUpdateLastName);
-  }, 20000);
+  });
 
   it('unstakeGeneticAnalyst should return', async () => {
     const geneticAnalystPromise: Promise<GeneticAnalyst> = new Promise((resolve, reject) => { // eslint-disable-line
@@ -110,7 +109,7 @@ describe('Genetic Analyst Pallet Integration Tests', () => {
     expect(geneticAnalyst.normalize().unstakeAt).not.toBeNull();
     expect(geneticAnalyst.availabilityStatus).toEqual(AvailabilityStatus.Unavailable);
 
-  }, 20000);
+  });
 
   it('retrieveGeneticAnalystUnstakeAmount should return', async () => {
     const geneticAnalystPromise: Promise<GeneticAnalyst> = new Promise((resolve, reject) => { // eslint-disable-line
@@ -125,22 +124,7 @@ describe('Genetic Analyst Pallet Integration Tests', () => {
     geneticAnalyst = await geneticAnalystPromise;
     
     expect(geneticAnalyst.normalize().stakeAmount).toEqual(0);
-  }, 20000);
-
-  it('deregisterGeneticAnalyst and queryGeneticAnalystCount should return', async () => {
-    const geneticAnalystPromise: Promise<Number> = new Promise((resolve, reject) => { // eslint-disable-line
-      deregisterGeneticAnalyst(api, pair, () => {
-        queryGeneticAnalystCount(api)
-          .then((res) => {
-            resolve(res);
-          });
-      });
-    });
-    
-    const geneticAnalystCount = await geneticAnalystPromise;
-    
-    expect(geneticAnalystCount).toEqual(0);
-  }, 20000);
+  });
 
   it('updateGeneticAnalystMinimumStakeAmount, queryGeneticAnalystCount and queryGeneticAnalystVerifierKey should return', async () => {
     const minimumStakeInput = 2
@@ -158,6 +142,18 @@ describe('Genetic Analyst Pallet Integration Tests', () => {
     
     expect(geneticAnalystMinimumStake).toEqual(minimumStakeInput);
     expect(verifierKey).not.toBeFalsy()
-  }, 20000);
+  });
 
+  it('deregisterGeneticAnalyst and queryGeneticAnalystCount should return', async () => {
+    const promise: Promise<Number> = new Promise((resolve, reject) => { // eslint-disable-line
+      deregisterGeneticAnalyst(api, pair, () => {
+        queryGeneticAnalystCount(api)
+          .then((res) => {
+            resolve(res);
+          });
+      });
+    });
+    
+    expect(await promise).toEqual(0);
+  });
 });

@@ -225,12 +225,15 @@ describe('Lab Pallet Integration Tests', () => {
   });
 
   it('deregisterLab should return', async () => {
-    const promise: Promise<string> = new Promise((resolve, reject) => { // eslint-disable-line
+    const promise: Promise<number> = new Promise((resolve, reject) => { // eslint-disable-line
       deregisterLab(api, pair, () => {
-        resolve("Deregistered");
+        queryLabCount(api)
+          .then((res) => {
+            resolve(res);
+          });
       });
     });
-
-    await promise;
+    
+    expect(await promise).toEqual(0);
   });
 });

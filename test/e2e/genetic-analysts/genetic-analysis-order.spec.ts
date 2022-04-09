@@ -1,6 +1,6 @@
 import 'regenerator-runtime/runtime';
 import { ApiPromise } from '@polkadot/api';
-import { addGeneticData, cancelGeneticAnalysisOrder, createGeneticAnalysisOrder, createGeneticAnalystService, GeneticAnalysisOrder, GeneticAnalysisOrderStatus, GeneticAnalysisStatus, GeneticAnalyst, GeneticAnalystService, GeneticData, processGeneticAnalysis, queryGeneticAnalysisOrderByCustomerId, queryGeneticAnalysisOrderById, queryGeneticAnalystByAccountId, queryGeneticDataByOwnerId, queryGetAllGeneticAnalystServices, queryLastGeneticAnalysisOrderByCustomerId, registerGeneticAnalyst, setGeneticAnalysisOrderFulfilled, setGeneticAnalysisOrderPaid, setGeneticAnalysisOrderRefunded, stakeGeneticAnalyst, submitGeneticAnalysis, updateGeneticAnalystAvailabilityStatus, updateGeneticAnalystVerificationStatus } from '../../../src';
+import { addGeneticData, cancelGeneticAnalysisOrder, createGeneticAnalysisOrder, createGeneticAnalystService, deleteGeneticAnalystService, deregisterGeneticAnalyst, GeneticAnalysisOrder, GeneticAnalysisOrderStatus, GeneticAnalysisStatus, GeneticAnalyst, GeneticAnalystService, GeneticData, processGeneticAnalysis, queryGeneticAnalysisOrderByCustomerId, queryGeneticAnalysisOrderById, queryGeneticAnalystByAccountId, queryGeneticAnalystServicesCount, queryGeneticDataByOwnerId, queryGetAllGeneticAnalystServices, queryLastGeneticAnalysisOrderByCustomerId, registerGeneticAnalyst, setGeneticAnalysisOrderFulfilled, setGeneticAnalysisOrderPaid, setGeneticAnalysisOrderRefunded, stakeGeneticAnalyst, submitGeneticAnalysis, updateGeneticAnalystAvailabilityStatus, updateGeneticAnalystVerificationStatus } from '../../../src';
 import { geneticAnalysisOrdersDataMock } from '../../unit/models/genetic-analysts/genetic-analysis-orders.mock';
 import { geneticAnalystServicesMock } from '../../unit/models/genetic-analysts/genetic-analyst-services.mock';
 import { geneticAnalystsDataMock } from '../../unit/models/genetic-analysts/genetic-analysts.mock';
@@ -13,9 +13,9 @@ describe('Genetic Analysis Order Pallet Integration Tests', () => {
   let api: ApiPromise;
   let pair: any;
 
+  let geneticData: GeneticData;
   let geneticAnalyst: GeneticAnalyst;
   let geneticAnalystService: GeneticAnalystService;
-  let geneticData: GeneticData;
   let geneticAnalysisOrder: GeneticAnalysisOrder;
 
   beforeAll(async () => {
@@ -98,7 +98,7 @@ describe('Genetic Analysis Order Pallet Integration Tests', () => {
     expect(geneticAnalysisOrder.sellerId).toEqual(pair.address);
     expect(geneticAnalysisOrder.geneticDataId).toEqual(geneticData.id);
     expect(geneticAnalysisOrder.customerBoxPublicKey).toEqual(geneticAnalysisOrdersDataMock.customerBoxPublicKey);
-  }, 80000);
+  });
 
   it('cancelGeneticAnalysisOrder should return', async () => {
     const geneticAnalysisOrderPromise: Promise<GeneticAnalysisOrder> = new Promise((resolve, reject) => { // eslint-disable-line
@@ -125,7 +125,7 @@ describe('Genetic Analysis Order Pallet Integration Tests', () => {
     });
 
     expect((await cancelGeneticAnalysisOrderPromise).status).toEqual(GeneticAnalysisOrderStatus.Cancelled);
-  }, 50000);
+  });
 
   it('setGeneticAnalysisOrderPaid should return', async () => {
     const paidGeneticAnalysisOrderPromise: Promise<GeneticAnalysisOrder> = new Promise((resolve, reject) => { // eslint-disable-line
@@ -138,7 +138,7 @@ describe('Genetic Analysis Order Pallet Integration Tests', () => {
     });
 
     expect((await paidGeneticAnalysisOrderPromise).status).toEqual(GeneticAnalysisOrderStatus.Paid);
-  }, 20000);
+  });
 
   it('setGeneticAnalysisOrderFulfilled should return', async () => {
     await submitGeneticAnalysis(
@@ -166,7 +166,7 @@ describe('Genetic Analysis Order Pallet Integration Tests', () => {
     });
 
     expect((await fulfilledGeneticAnalysisOrderPromise).status).toEqual(GeneticAnalysisOrderStatus.Fulfilled);
-  }, 25000);
+  });
 
   it('setGeneticAnalysisOrderRefunded should return', async () => {
     const geneticAnalysisOrderPromise: Promise<GeneticAnalysisOrder> = new Promise((resolve, reject) => { // eslint-disable-line
@@ -208,5 +208,20 @@ describe('Genetic Analysis Order Pallet Integration Tests', () => {
     });
 
     expect((await refundedGeneticAnalysisOrder).status).toEqual(GeneticAnalysisOrderStatus.Refunded);
-  }, 50000);
+  });
+
+  it('reset genetic analyst service and genetic analyst pallet data', async () => {
+    const promise: Promise<number> = new Promise((resolve, reject) => { // eslint-disable-line
+      deleteGeneticAnalystService(api, pair, geneticAnalystService.id, () => {
+        queryGeneticAnalystServicesCount(api)
+          .then((res) => {
+            deregisterGeneticAnalyst(api, pair, () => {
+              resolve(res);
+            });
+          });
+      });
+    });
+
+    expect(await promise).toEqual(0);
+  });
 });

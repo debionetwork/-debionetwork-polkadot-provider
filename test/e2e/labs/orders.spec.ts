@@ -3,10 +3,10 @@ import 'regenerator-runtime/runtime';
 import { queryLastOrderHashByCustomer, queryOrderDetailByOrderID, queryOrdersByCustomer, queryOrdersBySeller } from '../../../src/query/labs/orders';
 import { createOrder, cancelOrder, fulfillOrder, createOrderFee, setOrderPaid, setOrderRefunded } from "../../../src/command/labs/orders";
 import { processDnaSample, submitTestResult } from "../../../src/command/labs/genetic-testing";
-import { createService } from "../../../src/command/labs/services";
+import { createService, deleteService } from "../../../src/command/labs/services";
 import { initializeApi } from '../polkadot-init';
 import { queryLabById } from '../../../src/query/labs';
-import { queryServicesByMultipleIds } from '../../../src/query/labs/services';
+import { queryServicesByMultipleIds, queryServicesCount } from '../../../src/query/labs/services';
 import { Lab } from '../../../src/models/labs';
 import { deregisterLab, registerLab } from "../../../src/command/labs";
 import { labDataMock } from '../../unit/models/labs/labs.mock';
@@ -130,7 +130,7 @@ describe('Orders Pallet Integration Tests', () => {
     });
 
     expect((await promise).status).toEqual(OrderStatus.Cancelled);
-  }, 60000); // Set timeout for 60 seconds
+  });
 
   it('setOrderPaid should return', async () => {
     const promise: Promise<Order> = new Promise((resolve, reject) => { // eslint-disable-line
@@ -218,13 +218,26 @@ describe('Orders Pallet Integration Tests', () => {
         setOrderRefunded(api, pair, _order.id, () => {
             queryOrderDetailByOrderID(api, _order.id)
               .then((res) => {
-                deregisterLab(api, pair, () => {
-                  resolve(res);
-                });
+                resolve(res);
               });
         });
     });
 
     expect((await promise).status).toEqual(OrderStatus.Refunded);
+  });
+
+  it('reset service and lab pallet data', async () => {
+    const promise: Promise<number> = new Promise((resolve, reject) => { // eslint-disable-line
+      deleteService(api, pair, service.id, () => {
+        queryServicesCount(api)
+          .then((res) => {
+            deregisterLab(api, pair, () => {
+              resolve(res);
+            });
+          });
+      });
+    });
+
+    expect(await promise).toEqual(0);
   });
 });

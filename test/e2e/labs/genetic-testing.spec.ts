@@ -3,12 +3,12 @@ import 'regenerator-runtime/runtime';
 import { queryLastOrderHashByCustomer, queryOrderDetailByOrderID} from '../../../src/query/labs/orders';
 import { createOrder} from "../../../src/command/labs/orders";
 import { processDnaSample, rejectDnaSample, submitTestResult } from "../../../src/command/labs/genetic-testing";
-import { createService } from "../../../src/command/labs/services";
+import { createService, deleteService } from "../../../src/command/labs/services";
 import { initializeApi } from '../polkadot-init';
 import { queryDnaSamples, queryLabById } from '../../../src/query/labs';
-import { queryServicesByMultipleIds } from '../../../src/query/labs/services';
+import { queryServicesByMultipleIds, queryServicesCount } from '../../../src/query/labs/services';
 import { DnaTestResultSubmission, Lab } from '../../../src/models/labs';
-import { registerLab } from "../../../src/command/labs";
+import { deregisterLab, registerLab } from "../../../src/command/labs";
 import { labDataMock } from '../../unit/models/labs/labs.mock';
 import { Service } from '../../../src/models/labs/services';
 import { Order } from '../../../src/models/labs/orders';
@@ -98,7 +98,7 @@ describe('Genetic Testing Pallet Integration Tests', () => {
     expect(dnaSample.labId).toEqual(order.sellerId);
     expect(dnaSample.ownerId).toEqual(order.customerId);
     expect(dnaSample.trackingId).toEqual(order.dnaSampleTrackingId);
-  }, 120000 );
+  });
 
   it('should process dna sample return', async () => {
     const processDnaSamplePromise: Promise<DnaSample> = new Promise((resolve, reject) => { // eslint-disable-line
@@ -115,7 +115,7 @@ describe('Genetic Testing Pallet Integration Tests', () => {
     expect(dnaSample.ownerId).toEqual(order.customerId);
     expect(dnaSample.trackingId).toEqual(order.dnaSampleTrackingId);
     expect(dnaSample.status).toEqual(DnaSampleStatus.Arrived);
-  }, 25000);
+  });
 
   it('should reject dna sample return', async () => {
     const rejectedTitle = "REJECTED";
@@ -137,5 +137,20 @@ describe('Genetic Testing Pallet Integration Tests', () => {
     expect(dnaSample.status).toEqual(DnaSampleStatus.Rejected);
     expect(dnaSample.rejectedTitle).toEqual(rejectedTitle);
     expect(dnaSample.rejectedDescription).toEqual(rejectedDescription);
-  }, 25000);
+  });
+
+  it('reset service and lab pallet data', async () => {
+    const promise: Promise<number> = new Promise((resolve, reject) => { // eslint-disable-line
+      deleteService(api, pair, service.id, () => {
+        queryServicesCount(api)
+          .then((res) => {
+            deregisterLab(api, pair, () => {
+              resolve(res);
+            });
+          });
+      });
+    });
+
+    expect(await promise).toEqual(0);
+  });
 });

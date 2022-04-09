@@ -49,7 +49,7 @@ describe('Services Pallet Integration Tests', () => {
     });
 
     expect((await promise)[0].info).toEqual(serviceDataMock.info);
-  }, 60000); // Set timeout for 60 seconds
+  });
 
   it('queryServicesCountByOwnerId should return', async () => {
     expect(await queryServicesCountByOwnerId(api, pair.address)).toEqual(1);
@@ -83,8 +83,6 @@ describe('Services Pallet Integration Tests', () => {
           });
       });
     });
-
-    await promise;
 
     expect(await promise).toEqual(0);
   });

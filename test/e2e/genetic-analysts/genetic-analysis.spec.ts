@@ -1,6 +1,6 @@
 import 'regenerator-runtime/runtime';
 import { ApiPromise } from '@polkadot/api';
-import { addGeneticData, createGeneticAnalysisOrder, createGeneticAnalystService, processGeneticAnalysis, queryGeneticAnalysisByGeneticAnalysisTrackingId, queryGeneticAnalystByAccountId, queryGeneticDataByOwnerId, queryGetAllGeneticAnalystServices, queryLastGeneticAnalysisOrderByCustomerId, registerGeneticAnalyst, rejectGeneticAnalysis, stakeGeneticAnalyst, submitGeneticAnalysis, updateGeneticAnalystAvailabilityStatus, updateGeneticAnalystVerificationStatus } from '../../../src';
+import { addGeneticData, createGeneticAnalysisOrder, createGeneticAnalystService, deleteGeneticAnalystService, deregisterGeneticAnalyst, processGeneticAnalysis, queryGeneticAnalysisByGeneticAnalysisTrackingId, queryGeneticAnalystByAccountId, queryGeneticAnalystServicesCount, queryGeneticDataByOwnerId, queryGetAllGeneticAnalystServices, queryLastGeneticAnalysisOrderByCustomerId, registerGeneticAnalyst, rejectGeneticAnalysis, stakeGeneticAnalyst, submitGeneticAnalysis, updateGeneticAnalystAvailabilityStatus, updateGeneticAnalystVerificationStatus } from '../../../src';
 import { GeneticAnalysis, GeneticAnalysisOrder, GeneticAnalysisStatus, GeneticAnalyst, GeneticAnalystService, GeneticData } from '../../../src/models/genetic-analysts';
 import { geneticAnalysisOrdersDataMock } from '../../unit/models/genetic-analysts/genetic-analysis-orders.mock';
 import { geneticAnalystServicesMock } from '../../unit/models/genetic-analysts/genetic-analyst-services.mock';
@@ -113,7 +113,7 @@ describe('Genetic Analysis Pallet Integration Tests', () => {
     expect(geneticAnalysis.reportLink).toEqual(geneticDataMock.reportLink);
     expect(geneticAnalysis.comment).toEqual("string");
     expect(geneticAnalysis.geneticAnalysisTrackingId).toEqual(geneticAnalysisOrder.geneticAnalysisdTrackingId);
-  }, 100000);
+  });
 
   it('processGeneticAnalysis should return', async () => {
     const processInProgressGeneticAnalysisPromise: Promise<GeneticAnalysis> = new Promise((resolve, reject) => { // eslint-disable-line
@@ -130,7 +130,7 @@ describe('Genetic Analysis Pallet Integration Tests', () => {
     expect(geneticAnalysisInProgress.comment).toEqual("string");
     expect(geneticAnalysisInProgress.geneticAnalysisTrackingId).toEqual(geneticAnalysisOrder.geneticAnalysisdTrackingId);
     expect(geneticAnalysisInProgress.status).toEqual(GeneticAnalysisStatus.InProgress);
-  }, 25000);
+  });
 
   it('rejectGeneticAnalysis should return', async () => {
     const rejectedTitle = "REJECTED";
@@ -151,5 +151,20 @@ describe('Genetic Analysis Pallet Integration Tests', () => {
     expect(geneticAnalysis.status).toEqual(GeneticAnalysisStatus.Rejected);
     expect(geneticAnalysis.rejectedDescription).toEqual(rejectedDescription);
     expect(geneticAnalysis.rejectedTitle).toEqual(rejectedTitle);
-  }, 25000);
+  });
+
+  it('reset genetic analyst service and genetic analyst pallet data', async () => {
+    const promise: Promise<number> = new Promise((resolve, reject) => { // eslint-disable-line
+      deleteGeneticAnalystService(api, pair, geneticAnalystService.id, () => {
+        queryGeneticAnalystServicesCount(api)
+          .then((res) => {
+            deregisterGeneticAnalyst(api, pair, () => {
+              resolve(res);
+            });
+          });
+      });
+    });
+
+    expect(await promise).toEqual(0);
+  });
 });
