@@ -286,7 +286,7 @@ describe('Service Request Commands Unit Testing', () => {
     // Arrange
     const PAIR = "PAIR";
     const REQUEST_ID = "REQUEST_ID";
-    const TEST_RESULT_SUCCESS = "TEST_RESULT_SUCCESS";
+    const TEST_RESULT_SUCCESS = true;
 
     // Act
     await finalizeRequest(
