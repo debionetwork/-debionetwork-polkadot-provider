@@ -1,7 +1,7 @@
 import { registerLab, updateLab, updateLabVerificationStatus, deregisterLab, sudoUpdateLabAdminKey, updateLabAdminKey, updateLabMinimumStakeAmount, unstakeLab, stakeLab, retrieveLabUnstakeAmount } from "../../../../src/command/labs";
 import { ApiPromise, signAndSend, eventAndStatusMock } from "../../@polkadot-api.mock";
 import { mockFunction } from "../../mock";
-import { LabVerificationStatus } from "../../../../src/models/labs";
+import { VerificationStatus } from "../../../../src/primitives/verification-status";
 import { successCallback } from "../../../../src/index";
 import { labs } from "./labs.command.mock";
 import { labDataMock } from "../../models/labs/labs.mock";
@@ -106,7 +106,7 @@ describe('Lab Commands Unit Tests', () => {
       // Arrange
       const PAIR = "PAIR";
       const ADDR = "ADDR";
-      const STATUS = LabVerificationStatus.Unverified;
+      const STATUS = VerificationStatus.Unverified;
 
       // Act
       await updateLabVerificationStatus(
