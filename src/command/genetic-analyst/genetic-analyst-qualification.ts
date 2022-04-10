@@ -5,12 +5,12 @@ import { GeneticAnalystQualificationInfo } from '../../models';
 export async function bulkCreateQualification(
   api: ApiPromise,
   pair: any,
-  geneticAnalystQualificationInfos: GeneticAnalystQualificationInfo[],
+  geneticAnalystQualificationInfo: GeneticAnalystQualificationInfo,
   callback?: () => void,
 ): Promise<void> {
   // tslint:disable-next-line
   var unsub = await api.tx.geneticAnalystQualifications
-    .bulkCreateQualification(geneticAnalystQualificationInfos)
+    .bulkCreateQualification(geneticAnalystQualificationInfo)
     .signAndSend(pair, { nonce: -1 }, ({ events, status }) => {
       successCallback(api, { events, status, callback, unsub });
     });

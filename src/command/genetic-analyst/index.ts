@@ -1,8 +1,7 @@
 import { ApiPromise } from '@polkadot/api';
 import { successCallback } from '../../index';
-import { GeneticAnalystInfo } from '../../models/genetic-analysts';
-import { AvailabilityStatus } from '../../primitives/availability-status';
-import { VerificationStatus } from '../../primitives/verification-status';
+import { GeneticAnalystInfo, GeneticAnalystsVerificationStatus } from '../../models/genetic-analysts';
+import { GeneticAnalystsAvailabilityStatus } from '../../models/genetic-analysts/genetic-analyst-availability-status';
 
 export async function registerGeneticAnalyst(
   api: ApiPromise,
@@ -45,7 +44,7 @@ export async function updateGeneticAnalystVerificationStatus(
   api: ApiPromise,
   pair: any,
   accountId: string,
-  geneticAnalystVerificationStatus: VerificationStatus,
+  geneticAnalystVerificationStatus: GeneticAnalystsVerificationStatus,
   callback?: () => void,
 ) {
   // tslint:disable-next-line
@@ -59,12 +58,13 @@ export async function updateGeneticAnalystVerificationStatus(
 export async function updateGeneticAnalystAvailabilityStatus(
   api: ApiPromise,
   pair: any,
-  geneticAnalystAvailabilityStatus: AvailabilityStatus,
+  accountId: string,
+  geneticAnalystAvailabilityStatus: GeneticAnalystsAvailabilityStatus,
   callback?: () => void,
 ) {
   // tslint:disable-next-line
   var unsub = await api.tx.geneticAnalysts
-    .updateGeneticAnalystAvailabilityStatus(geneticAnalystAvailabilityStatus.toString())
+    .updateGeneticAnalystAvailabilityStatus(accountId, geneticAnalystAvailabilityStatus.toString())
     .signAndSend(pair, { nonce: -1 }, ({ events, status }) => {
       successCallback(api, { events, status, callback, unsub });
     });

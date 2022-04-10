@@ -1,6 +1,5 @@
 import { ApiPromise } from '@polkadot/api';
-import { LabInfo, successCallback } from '../../index';
-import { VerificationStatus } from '../../primitives/verification-status';
+import { LabInfo, LabVerificationStatus, successCallback } from '../../index';
 
 export async function registerLab(api: ApiPromise, pair: any, data: LabInfo, callback?: () => void): Promise<void> {
   // tslint:disable-next-line
@@ -20,7 +19,7 @@ export async function updateLabVerificationStatus(
   api: ApiPromise,
   pair: any,
   substrateAddress: string,
-  labVerificationStatus: VerificationStatus,
+  labVerificationStatus: LabVerificationStatus,
   callback?: () => void,
 ): Promise<void> {
   // tslint:disable-next-line
@@ -65,15 +64,6 @@ export async function updateLabMinimumStakeAmount(api: ApiPromise, pair: any, mi
   // tslint:disable-next-line
   var unsub = await api.tx.labs
     .updateMinimumStakeAmount(minimum)
-    .signAndSend(pair, { nonce: -1 }, ({ events, status }) => {
-      successCallback(api, { events, status, callback, unsub });
-    });
-}
-
-export async function updateLabUnstakeTime(api: ApiPromise, pair: any, unstakeTime: number, callback?: () => void) {
-  // tslint:disable-next-line
-  var unsub = await api.tx.labs
-    .updateUnstakeTime(unstakeTime)
     .signAndSend(pair, { nonce: -1 }, ({ events, status }) => {
       successCallback(api, { events, status, callback, unsub });
     });

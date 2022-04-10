@@ -17,8 +17,6 @@
     "collectCoverageFrom": [
       "**/*.(t|j)s"
     ],
-    "testSequencer": "./test-sequencer.js",
-    "testTimeout": 120000,
     "coverageDirectory": "../coverage"
   }
   

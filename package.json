@@ -19,7 +19,7 @@
     "postversion": "git push && git push --tags",
     "test": "jest --config ./test/unit/jest-unit.json",
     "test:unit": "jest --config ./test/unit/jest-unit.json",
-    "test:e2e": "jest --config ./test/e2e/jest-e2e.json --runInBand"
+    "test:e2e": "jest --config ./test/e2e/jest-e2e.json"
   },
   "repository": {
     "type": "git",

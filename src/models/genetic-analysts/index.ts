@@ -1,8 +1,8 @@
 import { convertSubstrateBalanceToNumber, convertSubstrateNumberToNumber } from '../..';
-import { AvailabilityStatus } from '../../primitives/availability-status';
+import { GeneticAnalystsAvailabilityStatus } from './genetic-analyst-availability-status';
 import { GeneticAnalystInfo } from './genetic-analyst-info';
-import { VerificationStatus } from '../../primitives/verification-status';
-import { StakeStatus } from '../../primitives/stake-status';
+import { GeneticAnalystsVerificationStatus } from './genetic-analyst-verification-status';
+import { StakeStatus } from './stake-status';
 
 export class GeneticAnalyst {
   constructor(anyJson: any) {
@@ -12,9 +12,7 @@ export class GeneticAnalyst {
     this.info = anyJson.info;
     this.stakeAmount = anyJson.stakeAmount;
     this.verificationStatus = anyJson.verificationStatus;
-    this.availabilityStatus = anyJson.availabilityStatus;
     this.unstakeAt = anyJson.unstakeAt;
-    this.stakeStatus = anyJson.stakeStatus;
     this.retrieveUnstakeAt = anyJson.retrieveUnstakeAt;
   }
   accountId: string;
@@ -23,8 +21,8 @@ export class GeneticAnalyst {
   info: GeneticAnalystInfo;
   stakeAmount: number;
   stakeStatus: StakeStatus;
-  verificationStatus: VerificationStatus;
-  availabilityStatus: AvailabilityStatus;
+  verificationStatus: GeneticAnalystsVerificationStatus;
+  availabilityStatus: GeneticAnalystsAvailabilityStatus;
   unstakeAt: Date;
   retrieveUnstakeAt: Date;
 
@@ -41,13 +39,13 @@ export class GeneticAnalyst {
       geneticAnalyst.retrieveUnstakeAt = new Date(convertSubstrateNumberToNumber(geneticAnalyst.retrieveUnstakeAt));
     }
 
-    geneticAnalyst.info.dateOfBirth = convertSubstrateNumberToNumber(geneticAnalyst.info.dateOfBirth);
-
     return geneticAnalyst;
   }
 }
 
 export * from './genetic-analyst-info';
+export * from './genetic-analyst-verification-status';
+export * from './genetic-analyst-availability-status';
 export * from './genetic-analysis-orders';
 export * from './genetic-analysis';
 export * from './genetic-data';

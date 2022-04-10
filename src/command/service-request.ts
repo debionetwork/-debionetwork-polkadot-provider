@@ -22,12 +22,11 @@ export async function createRequest(
   region: string,
   city: string,
   category: string,
-  stakingAmount: number,
   callback?: () => void,
 ): Promise<void> {
   // tslint:disable-next-line
   var unsub = await api.tx.serviceRequest
-    .createRequest(country, region, city, category, stakingAmount)
+    .createRequest(country, region, city, category, 1)
     .signAndSend(pair, { nonce: -1 }, ({ events, status }) => {
       successCallback(api, { events, status, callback, unsub });
     });
@@ -40,9 +39,8 @@ export function createRequestFee(
   region: string,
   city: string,
   category: string,
-  stakingAmount: number,
 ): any {
-  return api.tx.serviceRequest.createRequest(country, region, city, category, stakingAmount).paymentInfo(pair);
+  return api.tx.serviceRequest.createRequest(country, region, city, category, 1).paymentInfo(pair);
 }
 
 export function unstakeRequestFee(api: ApiPromise, pair: any, requestId: string): any {
@@ -112,7 +110,7 @@ export async function finalizeRequest(
   api: ApiPromise,
   pair: any,
   requestId: string,
-  testResultSuccess: boolean,
+  testResultSuccess: string,
   callback?: () => void,
 ) {
   // tslint:disable-next-line

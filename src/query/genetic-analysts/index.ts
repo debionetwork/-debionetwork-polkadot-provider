@@ -29,11 +29,6 @@ export async function queryGeneticAnalystMinimumStakeAmount(api: ApiPromise): Pr
   return parseInt(res, 0);
 }
 
-export async function queryGeneticAnalystVerifierKey(api: ApiPromise): Promise<any> {
-  const res = (await api.query.geneticAnalysts.geneticAnalystVerifierKey()).toHuman();
-  return res;
-}
-
 export * from './genetic-analysis-orders';
 export * from './genetic-analysis';
 export * from './genetic-analyst-qualification';
