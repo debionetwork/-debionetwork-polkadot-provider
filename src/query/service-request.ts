@@ -6,8 +6,8 @@ export async function queryServiceRequestById(api: ApiPromise, requestId: string
   return new ServiceRequest(resp);
 }
 
-export async function queryServiceRequestByAccountId(api: ApiPromise, requestId: string): Promise<ServiceRequest[]> {
-  const ids = (await api.query.serviceRequest.requestByAccountId(requestId)).toHuman() as string[];
+export async function queryServiceRequestByAccountId(api: ApiPromise, accountId: string): Promise<ServiceRequest[]> {
+  const ids = (await api.query.serviceRequest.requestByAccountId(accountId)).toHuman() as string[];
   const serviceRequests: ServiceRequest[] = new Array<ServiceRequest>();
 
   for (const id of ids) {

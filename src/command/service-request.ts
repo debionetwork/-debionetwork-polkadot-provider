@@ -112,7 +112,7 @@ export async function finalizeRequest(
   api: ApiPromise,
   pair: any,
   requestId: string,
-  testResultSuccess: string,
+  testResultSuccess: boolean,
   callback?: () => void,
 ) {
   // tslint:disable-next-line
