@@ -5,7 +5,7 @@ import { createService, updateService, deleteService } from "../../../src/comman
 import { initializeApi } from '../polkadot-init';
 import { queryLabById } from '../../../src/query/labs';
 import { Lab } from '../../../src/models/labs';
-import { registerLab } from "../../../src/command/labs";
+import { deregisterLab, registerLab } from "../../../src/command/labs";
 import { labDataMock } from '../../unit/models/labs/labs.mock';
 import { Service } from '../../../src/models/labs/services';
 import { serviceDataMock } from '../../unit/models/labs/services.mock';
@@ -49,11 +49,11 @@ describe('Services Pallet Integration Tests', () => {
     });
 
     expect((await promise)[0].info).toEqual(serviceDataMock.info);
-  }, 60000); // Set timeout for 60 seconds
+  });
 
   it('queryServicesCountByOwnerId should return', async () => {
     expect(await queryServicesCountByOwnerId(api, pair.address)).toEqual(1);
-  }, 25000); // Set timeout for 25 seconds
+  });
 
   it('updateService should return', async () => {
     const lab = await queryLabById(api, pair.address);
@@ -68,7 +68,7 @@ describe('Services Pallet Integration Tests', () => {
     });
 
     expect((await promise).info).toEqual(serviceDataMock.info);
-  }, 25000); // Set timeout for 25 seconds
+  });
 
   it('deleteService should return', async () => {
     const lab = await queryLabById(api, pair.address);
@@ -77,11 +77,13 @@ describe('Services Pallet Integration Tests', () => {
       deleteService(api, pair, lab.services[0], () => {
         queryServicesCount(api)
           .then((res) => {
-            resolve(res)
+            deregisterLab(api, pair, () => {
+              resolve(res);
+            });
           });
       });
     });
 
     expect(await promise).toEqual(0);
-  }, 25000); // Set timeout for 25 seconds
+  });
 });

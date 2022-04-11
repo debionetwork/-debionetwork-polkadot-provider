@@ -13,17 +13,18 @@ export async function queryGetAllGeneticAnalystServices(api: ApiPromise): Promis
   const res = await api.query.geneticAnalystServices.geneticAnalystServices.entries();
   const serviceArray: GeneticAnalystService[] = [];
   res.forEach((element) => {
-    serviceArray.push(new GeneticAnalystService(element));
+    serviceArray.push(new GeneticAnalystService(element[1].toHuman()));
   });
+
   return serviceArray;
 }
 
 export async function queryGeneticAnalystServicesCount(api: ApiPromise): Promise<number> {
   const res: any = (await api.query.geneticAnalystServices.geneticAnalystServicesCount()).toHuman();
-  return parseInt(res, 0);
+  return Number(res);
 }
 
 export async function queryGeneticAnalystServicesCountByOwner(api: ApiPromise, ownerId: string): Promise<number> {
   const res: any = (await api.query.geneticAnalystServices.geneticAnalystServicesCountByOwner(ownerId)).toHuman();
-  return parseInt(res, 0);
+  return Number(res);
 }

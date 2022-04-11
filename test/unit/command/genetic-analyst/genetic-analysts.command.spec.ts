@@ -5,17 +5,17 @@ import {
     updateGeneticAnalystVerificationStatus,
     updateGeneticAnalystAvailabilityStatus,
     stakeGeneticAnalyst,
-    retrieveUnstakeAmount,
+    retrieveGeneticAnalystUnstakeAmount,
     unstakeGeneticAnalyst,
-    updateMinimumStakeAmount,
-    updateAdminKey,
-    sudoUpdateAdminKey
+    updateGeneticAnalystMinimumStakeAmount,
+    updateGeneticAnalystAdminKey,
+    sudoUpdateGeneticAnalystAdminKey
 } from "../../../../src/command/genetic-analyst";
 import { successCallback } from "../../../../src/index";
 import { ApiPromise, eventAndStatusMock, signAndSend } from "../../@polkadot-api.mock";
 import { mockFunction } from "../../mock";
-import { GeneticAnalystsVerificationStatus } from "../../../../src/models/genetic-analysts/genetic-analyst-verification-status";
-import { GeneticAnalystsAvailabilityStatus } from "../../../../src/models/genetic-analysts/genetic-analyst-availability-status";
+import { VerificationStatus } from "../../../../src/primitives/verification-status";
+import { AvailabilityStatus } from "../../../../src/primitives/availability-status";
 import { geneticAnalystsDataMock } from "../../models/genetic-analysts/genetic-analysts.mock";
 import { geneticAnalysts } from "./genetic-analysts.command.mock";
 
@@ -40,8 +40,8 @@ describe('Genetic Analysts Commands Unit Testing', () => {
   const updateGeneticAnalystVerificationStatusSpy = jest.spyOn(geneticAnalysts, 'updateGeneticAnalystVerificationStatus');
   const updateGeneticAnalystAvailabilityStatusSpy = jest.spyOn(geneticAnalysts, 'updateGeneticAnalystAvailabilityStatus');
   const stakeGeneticAnalystSpy = jest.spyOn(geneticAnalysts, 'stakeGeneticAnalyst');
-  const retrieveUnstakeAmountSpy = jest.spyOn(geneticAnalysts, 'retrieveUnstakeAmount');
   const unstakeGeneticAnalystSpy = jest.spyOn(geneticAnalysts, 'unstakeGeneticAnalyst');
+  const retrieveUnstakeAmountSpy = jest.spyOn(geneticAnalysts, 'retrieveUnstakeAmount');
   const updateMinimumStakeAmountSpy = jest.spyOn(geneticAnalysts, 'updateMinimumStakeAmount');
   const updateAdminKeySpy = jest.spyOn(geneticAnalysts, 'updateAdminKey');
   const sudoUpdateAdminKeySpy = jest.spyOn(geneticAnalysts, 'sudoUpdateAdminKey');
@@ -57,6 +57,7 @@ describe('Genetic Analysts Commands Unit Testing', () => {
     updateGeneticAnalystAvailabilityStatusSpy.mockClear();
     stakeGeneticAnalystSpy.mockClear();
     unstakeGeneticAnalystSpy.mockClear();
+    retrieveUnstakeAmountSpy.mockClear();
     updateMinimumStakeAmountSpy.mockClear();
     updateAdminKeySpy.mockClear();
     sudoUpdateAdminKeySpy.mockClear();
@@ -147,7 +148,7 @@ describe('Genetic Analysts Commands Unit Testing', () => {
         API_PROMISE_MOCK as any, 
         PAIR,
         DATA_MOCK.accountId,
-        DATA_MOCK.verificationStatus as GeneticAnalystsVerificationStatus,
+        DATA_MOCK.verificationStatus as VerificationStatus,
         mockFunction
       );
 
@@ -164,13 +165,13 @@ describe('Genetic Analysts Commands Unit Testing', () => {
       expect(mockFunction).toBeCalledTimes(1);
   });
 
-  it('retrieveUnstakeAmount should return', async () => {
+  it('retrieveGeneticAnalystUnstakeAmount should return', async () => {
     // Arrange
     const PAIR = "PAIR";
     const DATA_MOCK = geneticAnalystsDataMock;
 
     // Act
-    await retrieveUnstakeAmount(
+    await retrieveGeneticAnalystUnstakeAmount(
       API_PROMISE_MOCK as any, 
       PAIR,
       DATA_MOCK.accountId,
@@ -199,13 +200,12 @@ describe('Genetic Analysts Commands Unit Testing', () => {
       await updateGeneticAnalystAvailabilityStatus(
         API_PROMISE_MOCK as any, 
         PAIR,
-        DATA_MOCK.accountId,
-        DATA_MOCK.availabilityStatus as GeneticAnalystsAvailabilityStatus,
+        DATA_MOCK.availabilityStatus as AvailabilityStatus,
         mockFunction
       );
 
       expect(updateGeneticAnalystAvailabilityStatusSpy).toBeCalledTimes(1);
-      expect(updateGeneticAnalystAvailabilityStatusSpy).toBeCalledWith(DATA_MOCK.accountId, DATA_MOCK.availabilityStatus);
+      expect(updateGeneticAnalystAvailabilityStatusSpy).toBeCalledWith(DATA_MOCK.availabilityStatus);
       expect(signAndSendSpy).toBeCalledTimes(1);
       expect(signAndSendSpy).toBeCalledWith(PAIR, { nonce: -1 }, expect.any(Function));
       expect(successCallback).toBeCalledTimes(1);
@@ -263,13 +263,13 @@ describe('Genetic Analysts Commands Unit Testing', () => {
       expect(mockFunction).toBeCalledTimes(1);
   });
   
-  it('updateMinimumStakeAmount should return', async () => {
+  it('updateGeneticAnalystMinimumStakeAmount should return', async () => {
       // Arrange
       const PAIR = "PAIR";
       const PARAM = 0;
 
       // Act
-      await updateMinimumStakeAmount(
+      await updateGeneticAnalystMinimumStakeAmount(
         API_PROMISE_MOCK as any, 
         PAIR,
         PARAM,
@@ -289,13 +289,13 @@ describe('Genetic Analysts Commands Unit Testing', () => {
       expect(mockFunction).toBeCalledTimes(1);
   });
   
-  it('updateAdminKey should return', async () => {
+  it('updateGeneticAnalystAdminKey should return', async () => {
       // Arrange
       const PAIR = "PAIR";
       const PARAM = "PARAM";
 
       // Act
-      await updateAdminKey(
+      await updateGeneticAnalystAdminKey(
         API_PROMISE_MOCK as any, 
         PAIR,
         PARAM,
@@ -315,13 +315,13 @@ describe('Genetic Analysts Commands Unit Testing', () => {
       expect(mockFunction).toBeCalledTimes(1);
   });
   
-  it('sudoUpdateAdminKey should return', async () => {
+  it('sudoUpdateGeneticAnalystAdminKey should return', async () => {
       // Arrange
       const PAIR = "PAIR";
       const PARAM = "PARAM";
 
       // Act
-      await sudoUpdateAdminKey(
+      await sudoUpdateGeneticAnalystAdminKey(
         API_PROMISE_MOCK as any, 
         PAIR,
         PARAM,
