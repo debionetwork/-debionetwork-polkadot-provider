@@ -1,6 +1,6 @@
 import 'regenerator-runtime/runtime';
 import { ApiPromise } from "@polkadot/api";
-import { claimRequest, createOrder, createRequest, createRequestFee, createService, finalizeRequest, Lab, Order, processRequest, queryGetAllServiceRequest, queryLabById, queryLastOrderHashByCustomer, queryOrderDetailByOrderID, queryServiceInvoiceById, queryServiceInvoiceByOrderId, queryServiceRequestByAccountId, queryServiceRequestById, queryServicesByMultipleIds, registerLab, RequestStatus, Service, ServiceInvoice, ServiceRequest, unstakeRequest, unstakeRequestFee, updateLabVerificationStatus } from "../../src";
+import { claimRequest, createOrder, createRequest, createRequestFee, createService, deregisterLab, finalizeRequest, Lab, Order, processRequest, queryGetAllServiceRequest, queryLabById, queryLabCount, queryLastOrderHashByCustomer, queryOrderDetailByOrderID, queryServiceInvoiceById, queryServiceInvoiceByOrderId, queryServiceRequestByAccountId, queryServiceRequestById, queryServicesByMultipleIds, registerLab, RequestStatus, Service, ServiceInvoice, ServiceRequest, unstakeRequest, unstakeRequestFee, updateLabVerificationStatus } from "../../src";
 import { labDataMock } from "../unit/models/labs/labs.mock";
 import { serviceDataMock } from "../unit/models/labs/services.mock";
 import { serviceRequestDataMock } from "../unit/models/service-request/service-request.mock";
@@ -192,7 +192,6 @@ describe('Service Request Pallet Integration Tests', () => {
       });
     });
 
-    console.log(serviceRequest);
     serviceInvoice = await promise;
 
     expect(serviceInvoice.customerAddress).toEqual(pair.address);
@@ -203,7 +202,6 @@ describe('Service Request Pallet Integration Tests', () => {
     expect(serviceInvoice.dnaSampleTrackingId).toEqual(order.dnaSampleTrackingId);
     
     const _serviceRequest = await queryServiceRequestById(api, serviceRequest.hash);
-    console.log(_serviceRequest);
 
     expect(_serviceRequest.requesterAddress).toEqual(pair.address);
     expect(_serviceRequest.country).toEqual(labDataMock.info.country);
@@ -247,5 +245,16 @@ describe('Service Request Pallet Integration Tests', () => {
     expect(serviceRequest.serviceCategory).toEqual(category);
     expect(serviceRequest.stakingAmount).toEqual(stakingAmount.toString());
     expect(serviceRequest.status).toEqual(RequestStatus.Finalized);
+
+    const labPromise: Promise<number> = new Promise((resolve, reject) => { // eslint-disable-line
+      deregisterLab(api, pair, () => {
+        queryLabCount(api)
+          .then((res) => {
+            resolve(res);
+          });
+      });
+    });
+    
+    expect(await labPromise).toEqual(0);
   });
 });
