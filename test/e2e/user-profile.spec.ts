@@ -32,7 +32,7 @@ describe('User Profile Pallet Integration Tests', () => {
 
     expect(await promise).toEqual(ETH_ADDRESS_MOCK);
     expect(await queryAccountIdByEthAddress(api, ETH_ADDRESS_MOCK)).toEqual(pair.address);
-  }, 25000); // Set timeout for 25 seconds
+  });
 
   it('adminSetEthAddress should return', async () => {
     const promise: Promise<String> = new Promise((resolve, reject) => { // eslint-disable-line
@@ -46,5 +46,5 @@ describe('User Profile Pallet Integration Tests', () => {
 
     expect(await promise).toEqual(ETH_ADDRESS_MOCK);
     expect(await queryAccountIdByEthAddress(api, ETH_ADDRESS_MOCK)).toEqual(pair.address);
-  }, 25000); // Set timeout for 25 seconds
+  });
 });

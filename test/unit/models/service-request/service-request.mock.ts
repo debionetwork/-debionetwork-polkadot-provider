@@ -1,7 +1,7 @@
 export const serviceRequestDataMock = {
-  hash: 'string',
+  hash: '0x8d2f0702072c07d31251be881104acde7953ecc1c8b33c31fce59ec6b0799ecc',
   requesterAddress: 'string',
-  labAddress: 'string',
+  labAddress: '5GrwvaEF5zXb26Fz9rcQpDWS57CtERHpNehXCPcNoHGKutQY',
   country: 'string',
   region: 'string',
   city: 'string',

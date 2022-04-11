@@ -76,6 +76,7 @@ describe('Service Request Commands Unit Testing', () => {
     const REGION_ID = "REGION_ID";
     const CITY_ID = "CITY_ID";
     const CATEGORY_ID = "CATEGORY_ID";
+    const STAKING_AMOUNT = 1;
     const EXPECTED_VALUE = 0;
     (mockFunction as jest.Mock).mockReturnValue(EXPECTED_VALUE);
       
@@ -87,12 +88,13 @@ describe('Service Request Commands Unit Testing', () => {
       REGION_ID,
       CITY_ID,
       CATEGORY_ID,
+      STAKING_AMOUNT,
       mockFunction,
     );
 
     // Assert
     expect(createRequestSpy).toBeCalledTimes(1);
-    expect(createRequestSpy).toBeCalledWith(COUNTRY_ID, REGION_ID, CITY_ID, CATEGORY_ID, 1);
+    expect(createRequestSpy).toBeCalledWith(COUNTRY_ID, REGION_ID, CITY_ID, CATEGORY_ID, STAKING_AMOUNT);
     expect(signAndSendSpy).toBeCalledTimes(1);
     expect(signAndSendSpy).toBeCalledWith(PAIR, { nonce: -1 }, expect.any(Function));
     expect(successCallback).toBeCalledTimes(1);
@@ -111,6 +113,7 @@ describe('Service Request Commands Unit Testing', () => {
     const REGION_ID = "REGION_ID";
     const CITY_ID = "CITY_ID";
     const CATEGORY_ID = "CATEGORY_ID";
+    const STAKING_AMOUNT = 1
     const EXPECTED_VALUE = 0;
     (mockFunction as jest.Mock).mockReturnValue(EXPECTED_VALUE);
       
@@ -123,6 +126,7 @@ describe('Service Request Commands Unit Testing', () => {
         REGION_ID,
         CITY_ID,
         CATEGORY_ID,
+        STAKING_AMOUNT,
       )).toEqual(EXPECTED_VALUE);
     expect(createRequestSpy).toBeCalledTimes(1);
     expect(createRequestSpy).toBeCalledWith(COUNTRY_ID, REGION_ID, CITY_ID, CATEGORY_ID, 1);
@@ -282,7 +286,7 @@ describe('Service Request Commands Unit Testing', () => {
     // Arrange
     const PAIR = "PAIR";
     const REQUEST_ID = "REQUEST_ID";
-    const TEST_RESULT_SUCCESS = "TEST_RESULT_SUCCESS";
+    const TEST_RESULT_SUCCESS = true;
 
     // Act
     await finalizeRequest(

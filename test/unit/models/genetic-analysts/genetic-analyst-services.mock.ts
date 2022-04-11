@@ -8,20 +8,25 @@ export const geneticAnalystServicesMock = [
         name: 'string',
         pricesByCurrency: [
           {
-            currency: 'string',
-            totalPrice: 0,
+            currency: 'DAI',
+            totalPrice: '0',
             priceComponents: [
               {
                 component: 'string',
-                value: 0
+                value: '0'
               }
             ],
-            additionalPrices: [],
+            additionalPrices: [
+              {
+                component: 'string',
+                value: '0'
+              }
+            ],
           },
         ],
         expectedDuration: {
           duration: '1',
-          durationType: 'string',
+          durationType: 'WorkingDays',
         },
         description: 'string',
         testResultSample: 'string',

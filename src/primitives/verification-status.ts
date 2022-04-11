@@ -1,4 +1,4 @@
-export enum GeneticAnalystsVerificationStatus {
+export enum VerificationStatus {
   Unverified = 'Unverified',
   Verified = 'Verified',
   Rejected = 'Rejected',

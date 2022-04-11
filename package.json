@@ -1,5 +1,5 @@
 {
-  "version": "0.0.9",
+  "version": "0.0.10",
   "description": "Javascript Library to connect and interact with the DeBio Network blockchain.",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
@@ -19,7 +19,7 @@
     "postversion": "git push && git push --tags",
     "test": "jest --config ./test/unit/jest-unit.json",
     "test:unit": "jest --config ./test/unit/jest-unit.json",
-    "test:e2e": "jest --config ./test/e2e/jest-e2e.json"
+    "test:e2e": "jest --config ./test/e2e/jest-e2e.json --runInBand"
   },
   "repository": {
     "type": "git",
