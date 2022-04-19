@@ -17,6 +17,17 @@ export async function processDnaSample(
     });
 }
 
+export function processDnaSampleFee(
+  api: ApiPromise,
+  pair: any,
+  trackingId: string,
+  processStatus: string
+): Promise<any> {
+  return api.tx.geneticTesting
+    .processDnaSample(trackingId, processStatus)
+    .paymentInfo(pair)
+}
+
 export async function receiveDnaSample(api: ApiPromise, pair: any, trackingId: string, callback?: () => void) {
   // tslint:disable-next-line
   var unsub = await api.tx.geneticTesting
@@ -40,6 +51,18 @@ export async function rejectDnaSample(
     .signAndSend(pair, { nonce: -1 }, ({ events, status }) => {
       successCallback(api, { events, status, callback, unsub });
     });
+}
+
+export function rejectDnaSampleFee(
+  api: ApiPromise,
+  pair: any,
+  trackingId: string,
+  rejectedTitle: string,
+  rejectedDescription: string
+): Promise<any> {
+  return api.tx.geneticTesting
+    .rejectDnaSample(trackingId, rejectedTitle, rejectedDescription)
+    .paymentInfo(pair)
 }
 
 export async function submitIndependentTestResult(
@@ -69,4 +92,15 @@ export async function submitTestResult(
     .signAndSend(pair, { nonce: -1 }, ({ events, status }) => {
       successCallback(api, { events, status, callback, unsub });
     });
+}
+
+export function submitTestResultFee(
+  api: ApiPromise,
+  pair: any,
+  trackingId: string,
+  submission: DnaTestResultSubmission
+): Promise<any> {
+  return api.tx.geneticTesting
+    .submitTestResult(trackingId, submission)
+    .paymentInfo(pair)
 }

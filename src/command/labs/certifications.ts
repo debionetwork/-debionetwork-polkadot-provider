@@ -16,6 +16,16 @@ export async function createCertification(
     });
 }
 
+export function createCertificationFee(
+  api:ApiPromise,
+  pair: any,
+  certificationInfo: CertificationInfo 
+): Promise<any> {
+  return api.tx.certifications
+    .createCertification(certificationInfo)
+    .paymentInfo(pair)
+}
+
 export async function deleteCertification(api: ApiPromise, pair: any, certificationId: string, callback?: () => void) {
   // tslint:disable-next-line
   var unsub = await api.tx.certifications
@@ -23,6 +33,16 @@ export async function deleteCertification(api: ApiPromise, pair: any, certificat
     .signAndSend(pair, { nonce: -1 }, ({ events, status }) => {
       successCallback(api, { events, status, callback, unsub });
     });
+}
+
+export function deleteCertificationFee(
+  api: ApiPromise,
+  pair: any,
+  certificationId: string
+): Promise<any> {
+  return api.tx.certifications
+    .deleteCertification(certificationId)
+    .paymentInfo(pair)
 }
 
 export async function updateCertification(
@@ -38,4 +58,15 @@ export async function updateCertification(
     .signAndSend(pair, { nonce: -1 }, ({ events, status }) => {
       successCallback(api, { events, status, callback, unsub });
     });
+}
+
+export function updateCertificationFee(
+  api: ApiPromise,
+  pair: any,
+  certificationId: string,
+  certificationInfo: CertificationInfo
+): Promise<any> {
+  return api.tx.certifications
+    .updateCertification(certificationId, certificationInfo)
+    .paymentInfo(pair)
 }

@@ -16,6 +16,17 @@ export async function createService(
     });
 }
 
+export function createServiceFee(
+  api: ApiPromise,
+  pair: any,
+  serviceInfo: ServiceInfo,
+  serviceFlow: string
+): Promise<any> {
+  return api.tx.services
+    .createService(serviceInfo, serviceFlow)
+    .paymentInfo(pair)
+}
+
 export async function updateService(
   api: ApiPromise,
   pair: any,
@@ -31,6 +42,17 @@ export async function updateService(
     });
 }
 
+export function updateServiceFee(
+  api: ApiPromise,
+  pair: any,
+  serviceId: string,
+  serviceInfo: ServiceInfo
+): Promise<any> {
+  return api.tx.services
+    .updateService(serviceId, serviceInfo)
+    .paymentInfo(pair)
+}
+
 export async function deleteService(
   api: ApiPromise,
   pair: any,
@@ -41,4 +63,14 @@ export async function deleteService(
   var unsub = await api.tx.services.deleteService(serviceId).signAndSend(pair, { nonce: -1 }, ({ events, status }) => {
     successCallback(api, { events, status, callback, unsub });
   });
+}
+
+export function deleteServiceFee(
+  api: ApiPromise,
+  pair: any,
+  serviceId: string
+): Promise<any> {
+  return api.tx.services
+    .deleteService(serviceId)
+    .paymentInfo(pair)
 }

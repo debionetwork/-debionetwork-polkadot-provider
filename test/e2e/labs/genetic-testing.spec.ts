@@ -2,7 +2,7 @@ import { ApiPromise } from '@polkadot/api';
 import 'regenerator-runtime/runtime';
 import { queryLastOrderHashByCustomer, queryOrderDetailByOrderID} from '../../../src/query/labs/orders';
 import { createOrder} from "../../../src/command/labs/orders";
-import { processDnaSample, rejectDnaSample, submitTestResult } from "../../../src/command/labs/genetic-testing";
+import { processDnaSample, processDnaSampleFee, rejectDnaSampleFee, rejectDnaSample, submitTestResult, submitTestResultFee } from "../../../src/command/labs/genetic-testing";
 import { createService, deleteService } from "../../../src/command/labs/services";
 import { initializeApi } from '../polkadot-init';
 import { queryDnaSamples, queryLabById } from '../../../src/query/labs';
@@ -100,6 +100,10 @@ describe('Genetic Testing Pallet Integration Tests', () => {
     expect(dnaSample.trackingId).toEqual(order.dnaSampleTrackingId);
   });
 
+  it('should get submit test result fee return', async () => {
+    expect(await submitTestResultFee(api, pair, order.dnaSampleTrackingId, submission)).toHaveProperty('partialFee')
+  })
+
   it('should process dna sample return', async () => {
     const processDnaSamplePromise: Promise<DnaSample> = new Promise((resolve, reject) => { // eslint-disable-line
       processDnaSample(api, pair, order.dnaSampleTrackingId, DnaSampleStatus.Arrived, () => {
@@ -116,6 +120,16 @@ describe('Genetic Testing Pallet Integration Tests', () => {
     expect(dnaSample.trackingId).toEqual(order.dnaSampleTrackingId);
     expect(dnaSample.status).toEqual(DnaSampleStatus.Arrived);
   });
+
+  it('should get process dna sample fee return', async () => {
+    expect(await processDnaSampleFee(api, pair, order.dnaSampleTrackingId, DnaSampleStatus.Arrived)).toHaveProperty('partialFee')
+  })
+
+  it('should get get reject dna sample fee return', async () => {
+    const rejectedTitle = "REJECTED";
+    const rejectedDescription = "REJECTED_DESCRIPTION";
+    expect(await rejectDnaSampleFee(api, pair, order.dnaSampleTrackingId, rejectedTitle, rejectedDescription)).toHaveProperty('partialFee')
+  })
 
   it('should reject dna sample return', async () => {
     const rejectedTitle = "REJECTED";

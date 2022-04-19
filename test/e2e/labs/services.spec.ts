@@ -1,7 +1,7 @@
 import { ApiPromise } from '@polkadot/api';
 import 'regenerator-runtime/runtime';
 import { queryServiceById, queryServicesByMultipleIds, queryServicesCount, queryServicesCountByOwnerId } from '../../../src/query/labs/services';
-import { createService, updateService, deleteService } from "../../../src/command/labs/services";
+import { createService, createServiceFee, updateService, updateServiceFee, deleteService, deleteServiceFee } from "../../../src/command/labs/services";
 import { initializeApi } from '../polkadot-init';
 import { queryLabById } from '../../../src/query/labs';
 import { Lab } from '../../../src/models/labs';
@@ -51,6 +51,10 @@ describe('Services Pallet Integration Tests', () => {
     expect((await promise)[0].info).toEqual(serviceDataMock.info);
   });
 
+  it('createServiceFee should return', async () => {
+    expect(await createServiceFee(api, pair, serviceDataMock.info, serviceDataMock.serviceFlow)).toHaveProperty('partialFee')
+  })
+
   it('queryServicesCountByOwnerId should return', async () => {
     expect(await queryServicesCountByOwnerId(api, pair.address)).toEqual(1);
   });
@@ -69,6 +73,16 @@ describe('Services Pallet Integration Tests', () => {
 
     expect((await promise).info).toEqual(serviceDataMock.info);
   });
+
+  it('updateServiceFee should return', async () => {
+    const lab = await queryLabById(api, pair.address);
+    expect(await updateServiceFee(api, pair, lab.services[0], serviceDataMock.info)).toHaveProperty('partialFee')
+  })
+
+  it('deleteServiceFee should return', async () => {
+    const lab = await queryLabById(api, pair.address);
+    expect(await deleteServiceFee(api, pair, lab.services[0])).toHaveProperty('partialFee')
+  })
 
   it('deleteService should return', async () => {
     const lab = await queryLabById(api, pair.address);
