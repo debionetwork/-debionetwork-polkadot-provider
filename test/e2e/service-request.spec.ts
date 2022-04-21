@@ -1,6 +1,6 @@
 import 'regenerator-runtime/runtime';
 import { ApiPromise } from "@polkadot/api";
-import { claimRequest, createOrder, createRequest, createRequestFee, createService, deregisterLab, finalizeRequest, Lab, Order, processRequest, queryGetAllServiceRequest, queryLabById, queryLabCount, queryLastOrderHashByCustomer, queryOrderDetailByOrderID, queryServiceInvoiceById, queryServiceInvoiceByOrderId, queryServiceRequestByAccountId, queryServiceRequestById, queryServicesByMultipleIds, registerLab, RequestStatus, Service, ServiceInvoice, ServiceRequest, unstakeRequest, unstakeRequestFee, updateLabVerificationStatus } from "../../src";
+import { claimRequest, claimRequestFee, createOrder, createRequest, createRequestFee, createService, deregisterLab, finalizeRequest, Lab, Order, processRequest, queryGetAllServiceRequest, queryLabById, queryLabCount, queryLastOrderHashByCustomer, queryOrderDetailByOrderID, queryServiceInvoiceById, queryServiceInvoiceByOrderId, queryServiceRequestByAccountId, queryServiceRequestById, queryServicesByMultipleIds, registerLab, RequestStatus, Service, ServiceInvoice, ServiceRequest, unstakeRequest, unstakeRequestFee, updateLabVerificationStatus } from "../../src";
 import { labDataMock } from "../unit/models/labs/labs.mock";
 import { serviceDataMock } from "../unit/models/labs/services.mock";
 import { serviceRequestDataMock } from "../unit/models/service-request/service-request.mock";
@@ -164,6 +164,11 @@ describe('Service Request Pallet Integration Tests', () => {
     expect(serviceRequest.stakingAmount).toEqual(stakingAmount.toString());
     expect(serviceRequest.status).toEqual(RequestStatus.Claimed);
   });
+
+  it('claimRequestFee should return', async () => {
+    expect(await claimRequestFee(api, pair, serviceRequest.hash, service.id, service.price, service.qcPrice)).toHaveProperty('partialFee')
+  })
+
 
   it('processRequest should return', async () => {
     const category = 'Whole Genome Sequencing';

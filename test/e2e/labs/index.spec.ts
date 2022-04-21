@@ -1,7 +1,7 @@
 import { ApiPromise } from '@polkadot/api';
 import 'regenerator-runtime/runtime';
 import { Lab, queryLabById, queryLabsByCountryRegionCity, queryLabsCountByCountryRegionCity, queryLabCount, queryLabsAdminKey, queryLabMinimumStakeAmount, queryLabPalletAccount, queryLabTotalStakedAmount, queryLabUnstakeTime } from '../../../src';
-import { registerLab, updateLab, deregisterLab, updateLabVerificationStatus, stakeLab, retrieveLabUnstakeAmount, unstakeLab, updateLabMinimumStakeAmount, updateLabUnstakeTime } from "../../../src/command/labs";
+import { registerLab, registerLabFee, updateLab, updateLabFee, deregisterLab, updateLabVerificationStatus, stakeLab, retrieveLabUnstakeAmount, unstakeLab, updateLabMinimumStakeAmount, updateLabUnstakeTime } from "../../../src/command/labs";
 import { StakeStatus } from '../../../src/primitives/stake-status';
 import { VerificationStatus } from '../../../src/primitives/verification-status';
 import { labDataMock } from '../../unit/models/labs/labs.mock';
@@ -236,4 +236,17 @@ describe('Lab Pallet Integration Tests', () => {
     
     expect(await promise).toEqual(0);
   });
+
+  it('registerLabFee should return', async () => {
+    expect(await registerLabFee(api, pair, labDataMock.info)).toHaveProperty('partialFee')
+  })
+
+
+  it('updateLabFee should return', async () => {
+    const info = {
+      ...labDataMock.info,
+      country: "SG",
+    };
+    expect(await updateLabFee(api, pair, info)).toHaveProperty('partialFee')
+  })
 });

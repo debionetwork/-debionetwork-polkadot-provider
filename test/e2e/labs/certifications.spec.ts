@@ -1,7 +1,7 @@
 import { ApiPromise } from '@polkadot/api';
 import 'regenerator-runtime/runtime';
 import { queryCertificationById, queryCertificationsByMultipleIds } from '../../../src/query/labs/certifications';
-import { createCertification, updateCertification, deleteCertification } from "../../../src/command/labs/certifications";
+import { createCertification, createCertificationFee, updateCertification, updateCertificationFee, deleteCertification, deleteCertificationFee } from "../../../src/command/labs/certifications";
 import { initializeApi } from '../polkadot-init';
 import { queryLabById } from '../../../src/query/labs';
 import { Lab } from '../../../src/models/labs';
@@ -51,6 +51,11 @@ describe('Certifications Pallet Integration Tests', () => {
     expect((await promise)[0].info).toEqual(certificationDataMock.info);
   });
 
+  it('createCertificationFee should return', async () => {
+    expect(await createCertificationFee(api, pair, certificationDataMock.info)).toHaveProperty('partialFee')
+  })
+
+
   it('updateCertification should return', async () => {
     const lab = await queryLabById(api, pair.address);
 
@@ -65,6 +70,16 @@ describe('Certifications Pallet Integration Tests', () => {
 
     expect((await promise).info).toEqual(certificationDataMock.info);
   });
+
+  it('updateCertificationFee should return', async () => {
+    const lab = await queryLabById(api, pair.address);
+    expect(await updateCertificationFee(api, pair, lab.certifications[0], certificationDataMock.info)).toHaveProperty('partialFee')
+  })
+
+  it('deleteCertificationFee should return', async () => {
+    const lab = await queryLabById(api, pair.address)
+    expect(await deleteCertificationFee(api, pair, lab.certifications[0])).toHaveProperty('partialFee')
+  })
 
   it('deleteCertification should return', async () => {
     const lab = await queryLabById(api, pair.address);

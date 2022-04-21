@@ -9,11 +9,31 @@ export async function registerLab(api: ApiPromise, pair: any, data: LabInfo, cal
   });
 }
 
+export function registerLabFee(
+  api: ApiPromise, 
+  pair: any, 
+  data: LabInfo
+): Promise<any> {
+  return api.tx.labs
+    .registerLab(data)
+    .paymentInfo(pair)
+}
+
 export async function updateLab(api: ApiPromise, pair: any, data: LabInfo, callback?: () => void): Promise<void> {
   // tslint:disable-next-line
   var unsub = await api.tx.labs.updateLab(data).signAndSend(pair, { nonce: -1 }, ({ events, status }) => {
     successCallback(api, { events, status, callback, unsub });
   });
+}
+
+export function updateLabFee(
+  api: ApiPromise, 
+  pair: any, 
+  data: LabInfo
+): Promise<any> {
+  return api.tx.labs
+    .updateLab(data)
+    .paymentInfo(pair)
 }
 
 export async function updateLabVerificationStatus(

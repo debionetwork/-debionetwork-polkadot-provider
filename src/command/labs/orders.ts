@@ -25,6 +25,16 @@ export async function fulfillOrder(api: ApiPromise, pair: any, orderId: string, 
   });
 }
 
+export function fulfillOrderFee(
+  api: ApiPromise,
+  pair: any,
+  orderId: string
+): Promise<any> {
+  return api.tx.orders
+    .fulfillOrder(orderId)
+    .paymentInfo(pair)
+}
+
 export async function setOrderRefunded(api: ApiPromise, pair: any, orderId, callback?: () => void): Promise<void> {
   // tslint:disable-next-line
   var unsub = await api.tx.orders.setOrderRefunded(orderId).signAndSend(pair, { nonce: -1 }, ({ events, status }) => {
@@ -44,6 +54,16 @@ export async function cancelOrder(api: ApiPromise, pair: any, orderId, callback?
   var unsub = await api.tx.orders.cancelOrder(orderId).signAndSend(pair, { nonce: -1 }, ({ events, status }) => {
     successCallback(api, { events, status, callback, unsub });
   });
+}
+
+export async function cancelOrderFee(
+  api: ApiPromise,
+  pair: any,
+  orderId: string
+): Promise<any>{
+  return api.tx.orders
+    .cancelOrder(orderId)
+    .paymentInfo(pair)
 }
 
 export function createOrderFee(

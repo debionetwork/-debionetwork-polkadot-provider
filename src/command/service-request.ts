@@ -90,6 +90,19 @@ export async function claimRequest(
     });
 }
 
+export function claimRequestFee(
+  api: ApiPromise,
+  pair: any,
+  requestId: string,
+  serviceId: string,
+  testingPrice: string,
+  qcPrice: string
+): Promise<any> {
+  return api.tx.serviceRequest
+    .claimRequest(requestId, serviceId, testingPrice, qcPrice)
+    .paymentInfo(pair)
+}
+
 export async function processRequest(
   api: ApiPromise,
   pair: any,

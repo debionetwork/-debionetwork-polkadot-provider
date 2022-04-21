@@ -1,7 +1,7 @@
 import { ApiPromise } from '@polkadot/api';
 import 'regenerator-runtime/runtime';
 import { queryLastOrderHashByCustomer, queryOrderDetailByOrderID, queryOrdersByCustomer, queryOrdersBySeller } from '../../../src/query/labs/orders';
-import { createOrder, cancelOrder, fulfillOrder, createOrderFee, setOrderPaid, setOrderRefunded } from "../../../src/command/labs/orders";
+import { createOrder, cancelOrder, fulfillOrder, createOrderFee, cancelOrderFee, fulfillOrderFee, setOrderPaid, setOrderRefunded } from "../../../src/command/labs/orders";
 import { processDnaSample, submitTestResult } from "../../../src/command/labs/genetic-testing";
 import { createService, deleteService } from "../../../src/command/labs/services";
 import { initializeApi } from '../polkadot-init';
@@ -83,6 +83,10 @@ describe('Orders Pallet Integration Tests', () => {
     await createOrderFee(api, pair, service.id, 0, lab.info.boxPublicKey, serviceDataMock.serviceFlow);
   });
 
+  it('cancelOrderFee should return', async () => {
+    expect(await cancelOrderFee(api, pair, order.id)).toHaveProperty('partialFee')
+  });
+
   it('queryOrdersByCustomer should return', async () => {
     const orders = await queryOrdersByCustomer(api, pair.address);
     expect(orders.length).toEqual(1);
@@ -143,6 +147,10 @@ describe('Orders Pallet Integration Tests', () => {
     });
 
     expect((await promise).status).toEqual(OrderStatus.Paid);
+  });
+
+  it('fulfillOrderFee should return', async () => {
+    expect(await fulfillOrderFee(api, pair, order.id )).toHaveProperty('partialFee')
   });
 
   it('fulfillOrder should return', async () => {
