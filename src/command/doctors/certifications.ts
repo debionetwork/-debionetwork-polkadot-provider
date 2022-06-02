@@ -1,5 +1,6 @@
 import { ApiPromise } from '@polkadot/api';
-import { successCallback } from '../../index';
+import { EventRecord } from '@polkadot/types/interfaces/system';
+import { extrinsicCallback, ExtrinsicCallbackParameters } from '../../index';
 import { DoctorCertificationInfo } from '../../models';
 
 export async function createDoctorCertification(
@@ -7,26 +8,51 @@ export async function createDoctorCertification(
   pair: any,
   doctorCertificationInfo: DoctorCertificationInfo,
   callback?: () => void,
-) {
-  // tslint:disable-next-line
-  var unsub = await api.tx.doctorCertifications
-    .createDoctorCertification(doctorCertificationInfo)
-    .signAndSend(pair, { nonce: -1 }, ({ events, status }) => {
-      successCallback(api, { events, status, callback, unsub });
-    });
+): Promise<EventRecord[]> {
+  let unsub;
+  return new Promise((resolve, reject) => {
+    // tslint:disable-next-line
+    unsub = api.tx.doctorCertifications
+      .createDoctorCertification(doctorCertificationInfo)
+      .signAndSend(pair, { nonce: -1 }, ({ events, status }) => {
+        extrinsicCallback(api, {
+          events,
+          status,
+          callback,
+          resolve,
+          reject,
+          unsub,
+        } as ExtrinsicCallbackParameters);
+      });
+  });
 }
 
 export function createDoctorCertificationFee(api: ApiPromise, pair: any, doctorCertificationInfo: DoctorCertificationInfo): Promise<any> {
   return api.tx.doctorCertifications.createDoctorCertification(doctorCertificationInfo).paymentInfo(pair);
 }
 
-export async function deleteDoctorCertification(api: ApiPromise, pair: any, doctorCertificationId: string, callback?: () => void) {
-  // tslint:disable-next-line
-  var unsub = await api.tx.doctorCertifications
-    .deleteDoctorCertification(doctorCertificationId)
-    .signAndSend(pair, { nonce: -1 }, ({ events, status }) => {
-      successCallback(api, { events, status, callback, unsub });
-    });
+export async function deleteDoctorCertification(
+  api: ApiPromise,
+  pair: any,
+  doctorCertificationId: string,
+  callback?: () => void,
+): Promise<EventRecord[]> {
+  let unsub;
+  return new Promise((resolve, reject) => {
+    // tslint:disable-next-line
+    unsub = api.tx.doctorCertifications
+      .deleteDoctorCertification(doctorCertificationId)
+      .signAndSend(pair, { nonce: -1 }, ({ events, status }) => {
+        extrinsicCallback(api, {
+          events,
+          status,
+          callback,
+          resolve,
+          reject,
+          unsub,
+        } as ExtrinsicCallbackParameters);
+      });
+  });
 }
 
 export function deleteDoctorCertificationFee(api: ApiPromise, pair: any, doctorCertificationId: string): Promise<any> {
@@ -39,13 +65,23 @@ export async function updateDoctorCertification(
   doctorCertificationId: string,
   doctorCertificationInfo: DoctorCertificationInfo,
   callback?: () => void,
-) {
-  // tslint:disable-next-line
-  var unsub = await api.tx.doctorCertifications
-    .updateDoctorCertification(doctorCertificationId, doctorCertificationInfo)
-    .signAndSend(pair, { nonce: -1 }, ({ events, status }) => {
-      successCallback(api, { events, status, callback, unsub });
-    });
+): Promise<EventRecord[]> {
+  let unsub;
+  return new Promise((resolve, reject) => {
+    // tslint:disable-next-line
+    unsub = api.tx.doctorCertifications
+      .updateDoctorCertification(doctorCertificationId, doctorCertificationInfo)
+      .signAndSend(pair, { nonce: -1 }, ({ events, status }) => {
+        extrinsicCallback(api, {
+          events,
+          status,
+          callback,
+          resolve,
+          reject,
+          unsub,
+        } as ExtrinsicCallbackParameters);
+      });
+  });
 }
 
 export function updateDoctorCertificationFee(

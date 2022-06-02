@@ -1,7 +1,10 @@
 import { ApiPromise } from '@polkadot/api';
 import { HospitalCertification } from '../../models/hospitals/certifications';
 
-export async function queryHospitalCertificationById(api: ApiPromise, certificationId: string): Promise<HospitalCertification> {
+export async function queryHospitalCertificationById(
+  api: ApiPromise,
+  certificationId: string,
+): Promise<HospitalCertification> {
   const res = (await api.query.hospitalCertifications.hospitalCertifications(certificationId)).toHuman();
   return new HospitalCertification(res);
 }

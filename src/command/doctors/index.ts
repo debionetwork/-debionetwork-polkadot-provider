@@ -1,30 +1,66 @@
 import { ApiPromise } from '@polkadot/api';
+import { EventRecord } from '@polkadot/types/interfaces/system';
+import { extrinsicCallback, ExtrinsicCallbackParameters } from '../../index';
 import { DoctorInfo } from '../../models/doctors';
-import { successCallback } from '../index';
 
 export async function registerDoctor(
   api: ApiPromise,
   pair: any,
   data: DoctorInfo,
   callback?: () => void,
-): Promise<void> {
-  // tslint:disable-next-line
-  var unsub = await api.tx.doctors.registerDoctor(data).signAndSend(pair, { nonce: -1 }, ({ events, status }) => {
-    successCallback(api, { events, status, callback, unsub });
+): Promise<EventRecord[]> {
+  let unsub;
+  return new Promise((resolve, reject) => {
+    // tslint:disable-next-line
+    unsub = api.tx.doctors.registerDoctor(data).signAndSend(pair, { nonce: -1 }, ({ events, status }) => {
+        extrinsicCallback(api, {
+          events,
+          status,
+          callback,
+          resolve,
+          reject,
+          unsub,
+        } as ExtrinsicCallbackParameters);
+      });
   });
 }
 
-export async function updateDoctor(api: ApiPromise, pair: any, data: DoctorInfo, callback?: () => void): Promise<void> {
-  // tslint:disable-next-line
-  var unsub = await api.tx.doctors.updateDoctor(data).signAndSend(pair, { nonce: -1 }, ({ events, status }) => {
-    successCallback(api, { events, status, callback, unsub });
+export async function updateDoctor(
+  api: ApiPromise,
+  pair: any,
+  data: DoctorInfo,
+  callback?: () => void,
+): Promise<EventRecord[]> {
+  let unsub;
+  return new Promise((resolve, reject) => {
+    // tslint:disable-next-line
+    unsub = api.tx.doctors.updateDoctor(data).signAndSend(pair, { nonce: -1 }, ({ events, status }) => {
+        extrinsicCallback(api, {
+          events,
+          status,
+          callback,
+          resolve,
+          reject,
+          unsub,
+        } as ExtrinsicCallbackParameters);
+      });
   });
 }
 
-export async function deregisterDoctor(api: ApiPromise, pair: any, callback?: () => void): Promise<void> {
-  // tslint:disable-next-line
-  var unsub = await api.tx.doctors.deregisterDoctor().signAndSend(pair, { nonce: -1 }, ({ events, status }) => {
-    successCallback(api, { events, status, callback, unsub });
+export async function deregisterDoctor(api: ApiPromise, pair: any, callback?: () => void): Promise<EventRecord[]> {
+  let unsub;
+  return new Promise((resolve, reject) => {
+    // tslint:disable-next-line
+    unsub = api.tx.doctors.deregisterDoctor().signAndSend(pair, { nonce: -1 }, ({ events, status }) => {
+        extrinsicCallback(api, {
+          events,
+          status,
+          callback,
+          resolve,
+          reject,
+          unsub,
+        } as ExtrinsicCallbackParameters);
+      });
   });
 }
 

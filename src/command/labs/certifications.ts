@@ -12,16 +12,18 @@ export async function createCertification(
   let unsub;
   return new Promise((resolve, reject) => {
     // tslint:disable-next-line
-    unsub = api.tx.certifications.createCertification(certificationInfo).signAndSend(pair, { nonce: -1 }, ({ events, status }) => {
-      extrinsicCallback(api, {
-        events,
-        status,
-        callback,
-        resolve,
-        reject,
-        unsub,
-      } as ExtrinsicCallbackParameters);
-    });
+    unsub = api.tx.certifications
+      .createCertification(certificationInfo)
+      .signAndSend(pair, { nonce: -1 }, ({ events, status }) => {
+        extrinsicCallback(api, {
+          events,
+          status,
+          callback,
+          resolve,
+          reject,
+          unsub,
+        } as ExtrinsicCallbackParameters);
+      });
   });
 }
 
@@ -29,20 +31,27 @@ export function createCertificationFee(api: ApiPromise, pair: any, certification
   return api.tx.certifications.createCertification(certificationInfo).paymentInfo(pair);
 }
 
-export async function deleteCertification(api: ApiPromise, pair: any, certificationId: string, callback?: () => void): Promise<EventRecord[]> {
+export async function deleteCertification(
+  api: ApiPromise,
+  pair: any,
+  certificationId: string,
+  callback?: () => void,
+): Promise<EventRecord[]> {
   let unsub;
   return new Promise((resolve, reject) => {
     // tslint:disable-next-line
-    unsub = api.tx.certifications.deleteCertification(certificationId).signAndSend(pair, { nonce: -1 }, ({ events, status }) => {
-      extrinsicCallback(api, {
-        events,
-        status,
-        callback,
-        resolve,
-        reject,
-        unsub,
-      } as ExtrinsicCallbackParameters);
-    });
+    unsub = api.tx.certifications
+      .deleteCertification(certificationId)
+      .signAndSend(pair, { nonce: -1 }, ({ events, status }) => {
+        extrinsicCallback(api, {
+          events,
+          status,
+          callback,
+          resolve,
+          reject,
+          unsub,
+        } as ExtrinsicCallbackParameters);
+      });
   });
 }
 
@@ -60,16 +69,18 @@ export async function updateCertification(
   let unsub;
   return new Promise((resolve, reject) => {
     // tslint:disable-next-line
-    unsub = api.tx.certifications.updateCertification(certificationId, certificationInfo).signAndSend(pair, { nonce: -1 }, ({ events, status }) => {
-      extrinsicCallback(api, {
-        events,
-        status,
-        callback,
-        resolve,
-        reject,
-        unsub,
-      } as ExtrinsicCallbackParameters);
-    });
+    unsub = api.tx.certifications
+      .updateCertification(certificationId, certificationInfo)
+      .signAndSend(pair, { nonce: -1 }, ({ events, status }) => {
+        extrinsicCallback(api, {
+          events,
+          status,
+          callback,
+          resolve,
+          reject,
+          unsub,
+        } as ExtrinsicCallbackParameters);
+      });
   });
 }
 

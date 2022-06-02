@@ -1,5 +1,6 @@
 import { ApiPromise } from '@polkadot/api';
-import { successCallback } from '../index';
+import { EventRecord } from '@polkadot/types/interfaces/system';
+import { extrinsicCallback, ExtrinsicCallbackParameters } from '../../index';
 import { HospitalInfo } from '../../models/hospitals';
 
 export async function registerHospital(
@@ -7,10 +8,20 @@ export async function registerHospital(
   pair: any,
   data: HospitalInfo,
   callback?: () => void,
-): Promise<void> {
-  // tslint:disable-next-line
-  var unsub = await api.tx.hospitals.registerHospital(data).signAndSend(pair, { nonce: -1 }, ({ events, status }) => {
-    successCallback(api, { events, status, callback, unsub });
+): Promise<EventRecord[]> {
+  let unsub;
+  return new Promise((resolve, reject) => {
+    // tslint:disable-next-line
+    unsub = api.tx.hospitals.registerHospital(data).signAndSend(pair, { nonce: -1 }, ({ events, status }) => {
+        extrinsicCallback(api, {
+          events,
+          status,
+          callback,
+          resolve,
+          reject,
+          unsub,
+        } as ExtrinsicCallbackParameters);
+      });
   });
 }
 
@@ -19,17 +30,37 @@ export async function updateHospital(
   pair: any,
   data: HospitalInfo,
   callback?: () => void,
-): Promise<void> {
-  // tslint:disable-next-line
-  var unsub = await api.tx.hospitals.updateHospital(data).signAndSend(pair, { nonce: -1 }, ({ events, status }) => {
-    successCallback(api, { events, status, callback, unsub });
+): Promise<EventRecord[]> {
+  let unsub;
+  return new Promise((resolve, reject) => {
+    // tslint:disable-next-line
+    unsub = api.tx.hospitals.updateHospital(data).signAndSend(pair, { nonce: -1 }, ({ events, status }) => {
+        extrinsicCallback(api, {
+          events,
+          status,
+          callback,
+          resolve,
+          reject,
+          unsub,
+        } as ExtrinsicCallbackParameters);
+      });
   });
 }
 
-export async function deregisterHospital(api: ApiPromise, pair: any, callback?: () => void): Promise<void> {
-  // tslint:disable-next-line
-  var unsub = await api.tx.hospitals.deregisterHospital().signAndSend(pair, { nonce: -1 }, ({ events, status }) => {
-    successCallback(api, { events, status, callback, unsub });
+export async function deregisterHospital(api: ApiPromise, pair: any, callback?: () => void): Promise<EventRecord[]> {
+  let unsub;
+  return new Promise((resolve, reject) => {
+    // tslint:disable-next-line
+    unsub = api.tx.hospitals.deregisterHospital().signAndSend(pair, { nonce: -1 }, ({ events, status }) => {
+        extrinsicCallback(api, {
+          events,
+          status,
+          callback,
+          resolve,
+          reject,
+          unsub,
+        } as ExtrinsicCallbackParameters);
+      });
   });
 }
 
