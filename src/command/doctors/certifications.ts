@@ -27,7 +27,11 @@ export async function createDoctorCertification(
   });
 }
 
-export function createDoctorCertificationFee(api: ApiPromise, pair: any, doctorCertificationInfo: DoctorCertificationInfo): Promise<any> {
+export function createDoctorCertificationFee(
+  api: ApiPromise,
+  pair: any,
+  doctorCertificationInfo: DoctorCertificationInfo,
+): Promise<any> {
   return api.tx.doctorCertifications.createDoctorCertification(doctorCertificationInfo).paymentInfo(pair);
 }
 
@@ -90,5 +94,7 @@ export function updateDoctorCertificationFee(
   doctorCertificationId: string,
   doctorCertificationInfo: DoctorCertificationInfo,
 ): Promise<any> {
-  return api.tx.doctorCertifications.updateDoctorCertification(doctorCertificationId, doctorCertificationInfo).paymentInfo(pair);
+  return api.tx.doctorCertifications
+    .updateDoctorCertification(doctorCertificationId, doctorCertificationInfo)
+    .paymentInfo(pair);
 }

@@ -13,15 +13,15 @@ export async function registerDoctor(
   return new Promise((resolve, reject) => {
     // tslint:disable-next-line
     unsub = api.tx.doctors.registerDoctor(data).signAndSend(pair, { nonce: -1 }, ({ events, status }) => {
-        extrinsicCallback(api, {
-          events,
-          status,
-          callback,
-          resolve,
-          reject,
-          unsub,
-        } as ExtrinsicCallbackParameters);
-      });
+      extrinsicCallback(api, {
+        events,
+        status,
+        callback,
+        resolve,
+        reject,
+        unsub,
+      } as ExtrinsicCallbackParameters);
+    });
   });
 }
 
@@ -35,15 +35,15 @@ export async function updateDoctor(
   return new Promise((resolve, reject) => {
     // tslint:disable-next-line
     unsub = api.tx.doctors.updateDoctor(data).signAndSend(pair, { nonce: -1 }, ({ events, status }) => {
-        extrinsicCallback(api, {
-          events,
-          status,
-          callback,
-          resolve,
-          reject,
-          unsub,
-        } as ExtrinsicCallbackParameters);
-      });
+      extrinsicCallback(api, {
+        events,
+        status,
+        callback,
+        resolve,
+        reject,
+        unsub,
+      } as ExtrinsicCallbackParameters);
+    });
   });
 }
 
@@ -52,15 +52,15 @@ export async function deregisterDoctor(api: ApiPromise, pair: any, callback?: ()
   return new Promise((resolve, reject) => {
     // tslint:disable-next-line
     unsub = api.tx.doctors.deregisterDoctor().signAndSend(pair, { nonce: -1 }, ({ events, status }) => {
-        extrinsicCallback(api, {
-          events,
-          status,
-          callback,
-          resolve,
-          reject,
-          unsub,
-        } as ExtrinsicCallbackParameters);
-      });
+      extrinsicCallback(api, {
+        events,
+        status,
+        callback,
+        resolve,
+        reject,
+        unsub,
+      } as ExtrinsicCallbackParameters);
+    });
   });
 }
 

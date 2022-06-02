@@ -27,7 +27,11 @@ export async function createHospitalCertification(
   });
 }
 
-export function createHospitalCertificationFee(api: ApiPromise, pair: any, hospitalCertificationInfo: HospitalCertificationInfo): Promise<any> {
+export function createHospitalCertificationFee(
+  api: ApiPromise,
+  pair: any,
+  hospitalCertificationInfo: HospitalCertificationInfo,
+): Promise<any> {
   return api.tx.hospitalCertifications.createHospitalCertification(hospitalCertificationInfo).paymentInfo(pair);
 }
 
@@ -55,7 +59,11 @@ export async function deleteHospitalCertification(
   });
 }
 
-export function deleteHospitalCertificationFee(api: ApiPromise, pair: any, hospitalCertificationId: string): Promise<any> {
+export function deleteHospitalCertificationFee(
+  api: ApiPromise,
+  pair: any,
+  hospitalCertificationId: string,
+): Promise<any> {
   return api.tx.hospitalCertifications.deleteHospitalCertification(hospitalCertificationId).paymentInfo(pair);
 }
 
@@ -90,5 +98,7 @@ export function updateHospitalCertificationFee(
   hospitalCertificationId: string,
   hospitalCertificationInfo: HospitalCertificationInfo,
 ): Promise<any> {
-  return api.tx.hospitalCertifications.updateHospitalCertification(hospitalCertificationId, hospitalCertificationInfo).paymentInfo(pair);
+  return api.tx.hospitalCertifications
+    .updateHospitalCertification(hospitalCertificationId, hospitalCertificationInfo)
+    .paymentInfo(pair);
 }

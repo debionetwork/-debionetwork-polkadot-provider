@@ -13,15 +13,15 @@ export async function registerHospital(
   return new Promise((resolve, reject) => {
     // tslint:disable-next-line
     unsub = api.tx.hospitals.registerHospital(data).signAndSend(pair, { nonce: -1 }, ({ events, status }) => {
-        extrinsicCallback(api, {
-          events,
-          status,
-          callback,
-          resolve,
-          reject,
-          unsub,
-        } as ExtrinsicCallbackParameters);
-      });
+      extrinsicCallback(api, {
+        events,
+        status,
+        callback,
+        resolve,
+        reject,
+        unsub,
+      } as ExtrinsicCallbackParameters);
+    });
   });
 }
 
@@ -35,15 +35,15 @@ export async function updateHospital(
   return new Promise((resolve, reject) => {
     // tslint:disable-next-line
     unsub = api.tx.hospitals.updateHospital(data).signAndSend(pair, { nonce: -1 }, ({ events, status }) => {
-        extrinsicCallback(api, {
-          events,
-          status,
-          callback,
-          resolve,
-          reject,
-          unsub,
-        } as ExtrinsicCallbackParameters);
-      });
+      extrinsicCallback(api, {
+        events,
+        status,
+        callback,
+        resolve,
+        reject,
+        unsub,
+      } as ExtrinsicCallbackParameters);
+    });
   });
 }
 
@@ -52,15 +52,15 @@ export async function deregisterHospital(api: ApiPromise, pair: any, callback?: 
   return new Promise((resolve, reject) => {
     // tslint:disable-next-line
     unsub = api.tx.hospitals.deregisterHospital().signAndSend(pair, { nonce: -1 }, ({ events, status }) => {
-        extrinsicCallback(api, {
-          events,
-          status,
-          callback,
-          resolve,
-          reject,
-          unsub,
-        } as ExtrinsicCallbackParameters);
-      });
+      extrinsicCallback(api, {
+        events,
+        status,
+        callback,
+        resolve,
+        reject,
+        unsub,
+      } as ExtrinsicCallbackParameters);
+    });
   });
 }
 
