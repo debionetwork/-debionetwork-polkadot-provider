@@ -2,7 +2,7 @@ import { registerLab, updateLab, updateLabVerificationStatus, deregisterLab, sud
 import { ApiPromise, signAndSend, eventAndStatusMock } from "../../@polkadot-api.mock";
 import { mockFunction } from "../../mock";
 import { VerificationStatus } from "../../../../src/primitives/verification-status";
-import { successCallback } from "../../../../src/index";
+import { extrinsicCallback, ExtrinsicCallbackParameters } from "../../../../src/index";
 import { labs } from "./labs.command.mock";
 import { labDataMock } from "../../models/labs/labs.mock";
 
@@ -11,7 +11,9 @@ jest.mock('../../mock', () => ({
 }));
 
 jest.mock('../../../../src/index', () => ({
-  successCallback: jest.fn(() => mockFunction()),
+  extrinsicCallback: jest.fn((api: ApiPromise, callbackParam: ExtrinsicCallbackParameters) => {
+    callbackParam.resolve(mockFunction());
+  }),
 }));
 
 describe('Lab Commands Unit Tests', () => {
@@ -34,7 +36,7 @@ describe('Lab Commands Unit Tests', () => {
   
   beforeEach(() => {
     (mockFunction as jest.Mock).mockClear();
-    (successCallback as jest.Mock).mockClear();
+    (extrinsicCallback as jest.Mock).mockClear();
     signAndSendSpy.mockClear();
     registerLabSpy.mockClear();
     updateLabSpy.mockClear();
@@ -66,11 +68,14 @@ describe('Lab Commands Unit Tests', () => {
       expect(registerLabSpy).toBeCalledWith(LAB_INFO);
       expect(signAndSendSpy).toBeCalledTimes(1);
       expect(signAndSendSpy).toBeCalledWith(PAIR, { nonce: -1 }, expect.any(Function));
-      expect(successCallback).toBeCalledTimes(1);
-      expect(successCallback).toBeCalledWith(API_PROMISE_MOCK, {
+      expect(extrinsicCallback).toBeCalledTimes(1);
+      expect(extrinsicCallback).toBeCalledWith(API_PROMISE_MOCK, {
           events: eventAndStatusMock.events,
           status: eventAndStatusMock.status,
-          callback: mockFunction
+          reject: expect.any(Function),
+          resolve: expect.any(Function),
+          callback: mockFunction,
+          unsub: undefined
       });
       expect(mockFunction).toBeCalledTimes(1);
   });
@@ -93,11 +98,14 @@ describe('Lab Commands Unit Tests', () => {
       expect(updateLabSpy).toBeCalledWith(LAB_INFO);
       expect(signAndSendSpy).toBeCalledTimes(1);
       expect(signAndSendSpy).toBeCalledWith(PAIR, { nonce: -1 }, expect.any(Function));
-      expect(successCallback).toBeCalledTimes(1);
-      expect(successCallback).toBeCalledWith(API_PROMISE_MOCK, {
+      expect(extrinsicCallback).toBeCalledTimes(1);
+      expect(extrinsicCallback).toBeCalledWith(API_PROMISE_MOCK, {
           events: eventAndStatusMock.events,
           status: eventAndStatusMock.status,
-          callback: mockFunction
+          reject: expect.any(Function),
+          resolve: expect.any(Function),
+          callback: mockFunction,
+          unsub: undefined
       });
       expect(mockFunction).toBeCalledTimes(1);
   });
@@ -122,11 +130,14 @@ describe('Lab Commands Unit Tests', () => {
       expect(updateLabVerificationStatusSpy).toBeCalledWith(ADDR, STATUS);
       expect(signAndSendSpy).toBeCalledTimes(1);
       expect(signAndSendSpy).toBeCalledWith(PAIR, { nonce: -1 }, expect.any(Function));
-      expect(successCallback).toBeCalledTimes(1);
-      expect(successCallback).toBeCalledWith(API_PROMISE_MOCK, {
+      expect(extrinsicCallback).toBeCalledTimes(1);
+      expect(extrinsicCallback).toBeCalledWith(API_PROMISE_MOCK, {
           events: eventAndStatusMock.events,
           status: eventAndStatusMock.status,
-          callback: mockFunction
+          reject: expect.any(Function),
+          resolve: expect.any(Function),
+          callback: mockFunction,
+          unsub: undefined
       });
       expect(mockFunction).toBeCalledTimes(1);
   });
@@ -146,11 +157,14 @@ describe('Lab Commands Unit Tests', () => {
       expect(deregisterLabSpy).toBeCalledTimes(1);
       expect(signAndSendSpy).toBeCalledTimes(1);
       expect(signAndSendSpy).toBeCalledWith(PAIR, { nonce: -1 }, expect.any(Function));
-      expect(successCallback).toBeCalledTimes(1);
-      expect(successCallback).toBeCalledWith(API_PROMISE_MOCK, {
+      expect(extrinsicCallback).toBeCalledTimes(1);
+      expect(extrinsicCallback).toBeCalledWith(API_PROMISE_MOCK, {
           events: eventAndStatusMock.events,
           status: eventAndStatusMock.status,
-          callback: mockFunction
+          reject: expect.any(Function),
+          resolve: expect.any(Function),
+          callback: mockFunction,
+          unsub: undefined
       });
       expect(mockFunction).toBeCalledTimes(1);
   });
@@ -169,11 +183,14 @@ describe('Lab Commands Unit Tests', () => {
       expect(stakeLabSpy).toBeCalledTimes(1);
       expect(signAndSendSpy).toBeCalledTimes(1);
       expect(signAndSendSpy).toBeCalledWith(PAIR, { nonce: -1 }, expect.any(Function));
-      expect(successCallback).toBeCalledTimes(1);
-      expect(successCallback).toBeCalledWith(API_PROMISE_MOCK, { 
-        events: eventAndStatusMock.events, 
-        status: eventAndStatusMock.status, 
-        callback: mockFunction,
+      expect(extrinsicCallback).toBeCalledTimes(1);
+      expect(extrinsicCallback).toBeCalledWith(API_PROMISE_MOCK, {
+          events: eventAndStatusMock.events,
+          status: eventAndStatusMock.status,
+          reject: expect.any(Function),
+          resolve: expect.any(Function),
+          callback: mockFunction,
+          unsub: undefined
       });
       expect(mockFunction).toBeCalledTimes(1);
   });
@@ -192,11 +209,14 @@ describe('Lab Commands Unit Tests', () => {
       expect(unstakeLabSpy).toBeCalledTimes(1);
       expect(signAndSendSpy).toBeCalledTimes(1);
       expect(signAndSendSpy).toBeCalledWith(PAIR, { nonce: -1 }, expect.any(Function));
-      expect(successCallback).toBeCalledTimes(1);
-      expect(successCallback).toBeCalledWith(API_PROMISE_MOCK, { 
-        events: eventAndStatusMock.events, 
-        status: eventAndStatusMock.status, 
-        callback: mockFunction,
+      expect(extrinsicCallback).toBeCalledTimes(1);
+      expect(extrinsicCallback).toBeCalledWith(API_PROMISE_MOCK, {
+          events: eventAndStatusMock.events,
+          status: eventAndStatusMock.status,
+          reject: expect.any(Function),
+          resolve: expect.any(Function),
+          callback: mockFunction,
+          unsub: undefined
       });
       expect(mockFunction).toBeCalledTimes(1);
   });
@@ -218,11 +238,14 @@ describe('Lab Commands Unit Tests', () => {
     expect(retrieveUnstakeAmountSpy).toBeCalledWith(DATA_MOCK.accountId);
     expect(signAndSendSpy).toBeCalledTimes(1);
     expect(signAndSendSpy).toBeCalledWith(PAIR, { nonce: -1 }, expect.any(Function));
-    expect(successCallback).toBeCalledTimes(1);
-    expect(successCallback).toBeCalledWith(API_PROMISE_MOCK, { 
-      events: eventAndStatusMock.events, 
-      status: eventAndStatusMock.status, 
-      callback: mockFunction,
+    expect(extrinsicCallback).toBeCalledTimes(1);
+    expect(extrinsicCallback).toBeCalledWith(API_PROMISE_MOCK, {
+        events: eventAndStatusMock.events,
+        status: eventAndStatusMock.status,
+        reject: expect.any(Function),
+        resolve: expect.any(Function),
+        callback: mockFunction,
+        unsub: undefined
     });
     expect(mockFunction).toBeCalledTimes(1);
 });
@@ -244,11 +267,14 @@ describe('Lab Commands Unit Tests', () => {
       expect(updateMinimumStakeAmountSpy).toBeCalledWith(PARAM);
       expect(signAndSendSpy).toBeCalledTimes(1);
       expect(signAndSendSpy).toBeCalledWith(PAIR, { nonce: -1 }, expect.any(Function));
-      expect(successCallback).toBeCalledTimes(1);
-      expect(successCallback).toBeCalledWith(API_PROMISE_MOCK, { 
-        events: eventAndStatusMock.events, 
-        status: eventAndStatusMock.status, 
-        callback: mockFunction,
+      expect(extrinsicCallback).toBeCalledTimes(1);
+      expect(extrinsicCallback).toBeCalledWith(API_PROMISE_MOCK, {
+          events: eventAndStatusMock.events,
+          status: eventAndStatusMock.status,
+          reject: expect.any(Function),
+          resolve: expect.any(Function),
+          callback: mockFunction,
+          unsub: undefined
       });
       expect(mockFunction).toBeCalledTimes(1);
   });
@@ -270,11 +296,14 @@ describe('Lab Commands Unit Tests', () => {
       expect(updateAdminKeySpy).toBeCalledWith(PARAM);
       expect(signAndSendSpy).toBeCalledTimes(1);
       expect(signAndSendSpy).toBeCalledWith(PAIR, { nonce: -1 }, expect.any(Function));
-      expect(successCallback).toBeCalledTimes(1);
-      expect(successCallback).toBeCalledWith(API_PROMISE_MOCK, { 
-        events: eventAndStatusMock.events, 
-        status: eventAndStatusMock.status, 
-        callback: mockFunction,
+      expect(extrinsicCallback).toBeCalledTimes(1);
+      expect(extrinsicCallback).toBeCalledWith(API_PROMISE_MOCK, {
+          events: eventAndStatusMock.events,
+          status: eventAndStatusMock.status,
+          reject: expect.any(Function),
+          resolve: expect.any(Function),
+          callback: mockFunction,
+          unsub: undefined
       });
       expect(mockFunction).toBeCalledTimes(1);
   });
@@ -296,11 +325,14 @@ describe('Lab Commands Unit Tests', () => {
       expect(sudoUpdateAdminKeySpy).toBeCalledWith(PARAM);
       expect(signAndSendSpy).toBeCalledTimes(1);
       expect(signAndSendSpy).toBeCalledWith(PAIR, { nonce: -1 }, expect.any(Function));
-      expect(successCallback).toBeCalledTimes(1);
-      expect(successCallback).toBeCalledWith(API_PROMISE_MOCK, { 
-        events: eventAndStatusMock.events, 
-        status: eventAndStatusMock.status, 
-        callback: mockFunction,
+      expect(extrinsicCallback).toBeCalledTimes(1);
+      expect(extrinsicCallback).toBeCalledWith(API_PROMISE_MOCK, {
+          events: eventAndStatusMock.events,
+          status: eventAndStatusMock.status,
+          reject: expect.any(Function),
+          resolve: expect.any(Function),
+          callback: mockFunction,
+          unsub: undefined
       });
       expect(mockFunction).toBeCalledTimes(1);
   });
