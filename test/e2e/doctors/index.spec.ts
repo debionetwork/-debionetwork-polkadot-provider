@@ -26,7 +26,7 @@ describe('Doctor Pallet Integration Tests', () => {
           .then((res) => {
             resolve(res)
           });
-      });
+      }).catch(e => reject(e));
     });
 
     expect((await promise).info).toEqual(doctorDataMock.info);
@@ -77,7 +77,7 @@ describe('Doctor Pallet Integration Tests', () => {
           .then((res) => {
             resolve(res)
           });
-      });
+      }).catch(e => reject(e));
     });
 
     expect((await promise).info).toEqual(info);
@@ -90,7 +90,7 @@ describe('Doctor Pallet Integration Tests', () => {
           .then((res) => {
             resolve(res);
           });
-      });
+      }).catch(e => reject(e));
     });
     
     expect(await promise).toEqual(0);

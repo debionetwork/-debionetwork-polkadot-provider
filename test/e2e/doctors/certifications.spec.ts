@@ -1,7 +1,7 @@
 import { ApiPromise } from '@polkadot/api';
 import 'regenerator-runtime/runtime';
 import { queryDoctorCertificationById, queryDoctorCertificationsByMultipleIds } from '../../../src/query/doctors/certifications';
-import { createDoctorCertification, createDoctorCertificationFee, updateDoctorCertification, updateDoctorCertificationFee, deleteDoctorCertification, deleteDoctorCertificationFee } from "../../../src/command/doctors/certifications";
+import { createCertification, createCertificationFee, updateCertification, updateCertificationFee, deleteCertification, deleteCertificationFee } from "../../../src/command/doctors/certifications";
 import { initializeApi } from '../polkadot-init';
 import { queryDoctorById } from '../../../src/query/doctors';
 import { Doctor } from '../../../src/models/doctors';
@@ -24,20 +24,20 @@ describe('DoctorCertifications Pallet Integration Tests', () => {
     api.disconnect();
   });
 
-  it('createDoctorCertification should return', async () => {
+  it('createCertification should return', async () => {
     const doctorPromise: Promise<Doctor> = new Promise((resolve, reject) => { // eslint-disable-line
       registerDoctor(api, pair, doctorDataMock.info, () => {
         queryDoctorById(api, pair.address)
           .then((res) => {
             resolve(res)
           });
-      });
+      }).catch(e => reject(e));
     });
 
     expect((await doctorPromise).info).toEqual(doctorDataMock.info);
 
     const promise: Promise<DoctorCertification[]> = new Promise((resolve, reject) => { // eslint-disable-line
-      createDoctorCertification(api, pair, doctorCertificationDataMock.info, () => {
+      createCertification(api, pair, doctorCertificationDataMock.info, () => {
         queryDoctorById(api, pair.address)
           .then((doctor) => {
             queryDoctorCertificationsByMultipleIds(api, doctor.certifications)
@@ -45,54 +45,54 @@ describe('DoctorCertifications Pallet Integration Tests', () => {
                 resolve(res)
               });
           });
-      });
+      }).catch(e => reject(e));
     });
 
     expect((await promise)[0].info).toEqual(doctorCertificationDataMock.info);
   });
 
-  it('createDoctorCertificationFee should return', async () => {
-    expect(await createDoctorCertificationFee(api, pair, doctorCertificationDataMock.info)).toHaveProperty('partialFee')
+  it('createCertificationFee should return', async () => {
+    expect(await createCertificationFee(api, pair, doctorCertificationDataMock.info)).toHaveProperty('partialFee')
   })
 
 
-  it('updateDoctorCertification should return', async () => {
+  it('updateCertification should return', async () => {
     const doctor = await queryDoctorById(api, pair.address);
 
     const promise: Promise<DoctorCertification> = new Promise((resolve, reject) => { // eslint-disable-line
-      updateDoctorCertification(api, pair, doctor.certifications[0], doctorCertificationDataMock.info, () => {
+      updateCertification(api, pair, doctor.certifications[0], doctorCertificationDataMock.info, () => {
         queryDoctorCertificationById(api, doctor.certifications[0])
           .then((res) => {
             resolve(res)
           });
-      });
+      }).catch(e => reject(e));
     });
 
     expect((await promise).info).toEqual(doctorCertificationDataMock.info);
   });
 
-  it('updateDoctorCertificationFee should return', async () => {
+  it('updateCertificationFee should return', async () => {
     const doctor = await queryDoctorById(api, pair.address);
-    expect(await updateDoctorCertificationFee(api, pair, doctor.certifications[0], doctorCertificationDataMock.info)).toHaveProperty('partialFee')
+    expect(await updateCertificationFee(api, pair, doctor.certifications[0], doctorCertificationDataMock.info)).toHaveProperty('partialFee')
   })
 
-  it('deleteDoctorCertificationFee should return', async () => {
+  it('deleteCertificationFee should return', async () => {
     const doctor = await queryDoctorById(api, pair.address)
-    expect(await deleteDoctorCertificationFee(api, pair, doctor.certifications[0])).toHaveProperty('partialFee')
+    expect(await deleteCertificationFee(api, pair, doctor.certifications[0])).toHaveProperty('partialFee')
   })
 
-  it('deleteDoctorCertification should return', async () => {
+  it('deleteCertification should return', async () => {
     const doctor = await queryDoctorById(api, pair.address);
 
     const promise: Promise<number> = new Promise((resolve, reject) => { // eslint-disable-line
-      deleteDoctorCertification(api, pair, doctor.certifications[0], () => {
+      deleteCertification(api, pair, doctor.certifications[0], () => {
         queryDoctorById(api, pair.address)
           .then((res) => {
             deregisterDoctor(api, pair, () => {
               resolve(res.certifications.length);
             });
           });
-      });
+      }).catch(e => reject(e));
     });
 
     expect(await promise).toEqual(0);
