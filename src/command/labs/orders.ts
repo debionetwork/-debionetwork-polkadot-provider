@@ -25,14 +25,8 @@ export async function fulfillOrder(api: ApiPromise, pair: any, orderId: string, 
   });
 }
 
-export function fulfillOrderFee(
-  api: ApiPromise,
-  pair: any,
-  orderId: string
-): Promise<any> {
-  return api.tx.orders
-    .fulfillOrder(orderId)
-    .paymentInfo(pair)
+export function fulfillOrderFee(api: ApiPromise, pair: any, orderId: string): Promise<any> {
+  return api.tx.orders.fulfillOrder(orderId).paymentInfo(pair);
 }
 
 export async function setOrderRefunded(api: ApiPromise, pair: any, orderId, callback?: () => void): Promise<void> {
@@ -56,14 +50,8 @@ export async function cancelOrder(api: ApiPromise, pair: any, orderId, callback?
   });
 }
 
-export async function cancelOrderFee(
-  api: ApiPromise,
-  pair: any,
-  orderId: string
-): Promise<any>{
-  return api.tx.orders
-    .cancelOrder(orderId)
-    .paymentInfo(pair)
+export async function cancelOrderFee(api: ApiPromise, pair: any, orderId: string): Promise<any> {
+  return api.tx.orders.cancelOrder(orderId).paymentInfo(pair);
 }
 
 export function createOrderFee(

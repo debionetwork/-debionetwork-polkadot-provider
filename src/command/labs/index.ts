@@ -9,14 +9,8 @@ export async function registerLab(api: ApiPromise, pair: any, data: LabInfo, cal
   });
 }
 
-export function registerLabFee(
-  api: ApiPromise, 
-  pair: any, 
-  data: LabInfo
-): Promise<any> {
-  return api.tx.labs
-    .registerLab(data)
-    .paymentInfo(pair)
+export function registerLabFee(api: ApiPromise, pair: any, data: LabInfo): Promise<any> {
+  return api.tx.labs.registerLab(data).paymentInfo(pair);
 }
 
 export async function updateLab(api: ApiPromise, pair: any, data: LabInfo, callback?: () => void): Promise<void> {
@@ -26,14 +20,8 @@ export async function updateLab(api: ApiPromise, pair: any, data: LabInfo, callb
   });
 }
 
-export function updateLabFee(
-  api: ApiPromise, 
-  pair: any, 
-  data: LabInfo
-): Promise<any> {
-  return api.tx.labs
-    .updateLab(data)
-    .paymentInfo(pair)
+export function updateLabFee(api: ApiPromise, pair: any, data: LabInfo): Promise<any> {
+  return api.tx.labs.updateLab(data).paymentInfo(pair);
 }
 
 export async function updateLabVerificationStatus(

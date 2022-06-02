@@ -16,14 +16,8 @@ export async function createCertification(
     });
 }
 
-export function createCertificationFee(
-  api:ApiPromise,
-  pair: any,
-  certificationInfo: CertificationInfo 
-): Promise<any> {
-  return api.tx.certifications
-    .createCertification(certificationInfo)
-    .paymentInfo(pair)
+export function createCertificationFee(api: ApiPromise, pair: any, certificationInfo: CertificationInfo): Promise<any> {
+  return api.tx.certifications.createCertification(certificationInfo).paymentInfo(pair);
 }
 
 export async function deleteCertification(api: ApiPromise, pair: any, certificationId: string, callback?: () => void) {
@@ -35,14 +29,8 @@ export async function deleteCertification(api: ApiPromise, pair: any, certificat
     });
 }
 
-export function deleteCertificationFee(
-  api: ApiPromise,
-  pair: any,
-  certificationId: string
-): Promise<any> {
-  return api.tx.certifications
-    .deleteCertification(certificationId)
-    .paymentInfo(pair)
+export function deleteCertificationFee(api: ApiPromise, pair: any, certificationId: string): Promise<any> {
+  return api.tx.certifications.deleteCertification(certificationId).paymentInfo(pair);
 }
 
 export async function updateCertification(
@@ -64,9 +52,7 @@ export function updateCertificationFee(
   api: ApiPromise,
   pair: any,
   certificationId: string,
-  certificationInfo: CertificationInfo
+  certificationInfo: CertificationInfo,
 ): Promise<any> {
-  return api.tx.certifications
-    .updateCertification(certificationId, certificationInfo)
-    .paymentInfo(pair)
+  return api.tx.certifications.updateCertification(certificationId, certificationInfo).paymentInfo(pair);
 }

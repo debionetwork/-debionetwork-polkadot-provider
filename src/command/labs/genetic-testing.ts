@@ -21,11 +21,9 @@ export function processDnaSampleFee(
   api: ApiPromise,
   pair: any,
   trackingId: string,
-  processStatus: string
+  processStatus: string,
 ): Promise<any> {
-  return api.tx.geneticTesting
-    .processDnaSample(trackingId, processStatus)
-    .paymentInfo(pair)
+  return api.tx.geneticTesting.processDnaSample(trackingId, processStatus).paymentInfo(pair);
 }
 
 export async function receiveDnaSample(api: ApiPromise, pair: any, trackingId: string, callback?: () => void) {
@@ -58,11 +56,9 @@ export function rejectDnaSampleFee(
   pair: any,
   trackingId: string,
   rejectedTitle: string,
-  rejectedDescription: string
+  rejectedDescription: string,
 ): Promise<any> {
-  return api.tx.geneticTesting
-    .rejectDnaSample(trackingId, rejectedTitle, rejectedDescription)
-    .paymentInfo(pair)
+  return api.tx.geneticTesting.rejectDnaSample(trackingId, rejectedTitle, rejectedDescription).paymentInfo(pair);
 }
 
 export async function submitIndependentTestResult(
@@ -98,9 +94,7 @@ export function submitTestResultFee(
   api: ApiPromise,
   pair: any,
   trackingId: string,
-  submission: DnaTestResultSubmission
+  submission: DnaTestResultSubmission,
 ): Promise<any> {
-  return api.tx.geneticTesting
-    .submitTestResult(trackingId, submission)
-    .paymentInfo(pair)
+  return api.tx.geneticTesting.submitTestResult(trackingId, submission).paymentInfo(pair);
 }
