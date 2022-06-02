@@ -1,5 +1,5 @@
 import { ApiPromise } from '@polkadot/api';
-import { Doctor } from '../models/doctors';
+import { Doctor } from '../../models/doctors';
 
 export async function queryDoctorById(api: ApiPromise, doctorId: string): Promise<Doctor> {
   const res = (await api.query.doctors.doctors(doctorId)).toHuman();
@@ -36,3 +36,5 @@ export async function queryDoctorsCountByCountryRegionCity(
 export async function queryDoctorsAdminKey(api: ApiPromise): Promise<string> {
   return (await api.query.doctors.adminKey()).toString();
 }
+
+export * from './certifications';

@@ -1,5 +1,5 @@
 import { ApiPromise } from '@polkadot/api';
-import { DoctorInfo } from '../models/doctors';
+import { DoctorInfo } from '../../models/doctors';
 import { successCallback } from '../index';
 
 export async function registerDoctor(
@@ -26,4 +26,12 @@ export async function deregisterDoctor(api: ApiPromise, pair: any, callback?: ()
   var unsub = await api.tx.doctors.deregisterDoctor().signAndSend(pair, { nonce: -1 }, ({ events, status }) => {
     successCallback(api, { events, status, callback, unsub });
   });
+}
+
+export function registerDoctorFee(api: ApiPromise, pair: any, data: DoctorInfo): Promise<any> {
+  return api.tx.doctors.registerDoctor(data).paymentInfo(pair);
+}
+
+export function updateDoctorFee(api: ApiPromise, pair: any, data: DoctorInfo): Promise<any> {
+  return api.tx.doctors.updateDoctor(data).paymentInfo(pair);
 }
