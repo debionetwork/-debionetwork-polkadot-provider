@@ -6,7 +6,7 @@ export const doctorDataMock = {
   info: {
     name: "string",
     email: "string",
-    country: "string",
+    country: "ID",
     region: "string",
     city: "string",
     address: "string",

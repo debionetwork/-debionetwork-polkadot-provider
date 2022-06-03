@@ -144,7 +144,7 @@ describe('Genetic Analysis Order Pallet Integration Tests', () => {
     await submitGeneticAnalysis(
       api, 
       pair, 
-      geneticAnalysisOrder.geneticAnalysisdTrackingId, 
+      geneticAnalysisOrder.geneticAnalysisTrackingId, 
       geneticDataMock.reportLink,
       "string"
     );
@@ -152,7 +152,7 @@ describe('Genetic Analysis Order Pallet Integration Tests', () => {
     await processGeneticAnalysis(
       api,
       pair,
-      geneticAnalysisOrder.geneticAnalysisdTrackingId, 
+      geneticAnalysisOrder.geneticAnalysisTrackingId, 
       GeneticAnalysisStatus.ResultReady,
     );
 
@@ -186,7 +186,7 @@ describe('Genetic Analysis Order Pallet Integration Tests', () => {
     await submitGeneticAnalysis(
       api, 
       pair, 
-      _geneticAnalysisOrder.geneticAnalysisdTrackingId, 
+      _geneticAnalysisOrder.geneticAnalysisTrackingId, 
       geneticDataMock.reportLink,
       "comment"
     );
@@ -194,7 +194,7 @@ describe('Genetic Analysis Order Pallet Integration Tests', () => {
     await processGeneticAnalysis(
       api,
       pair,
-      _geneticAnalysisOrder.geneticAnalysisdTrackingId, 
+      _geneticAnalysisOrder.geneticAnalysisTrackingId, 
       GeneticAnalysisStatus.Rejected,
     );
 

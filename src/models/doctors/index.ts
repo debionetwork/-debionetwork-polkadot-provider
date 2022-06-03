@@ -12,3 +12,4 @@ export class Doctor {
 }
 
 export * from './doctor-info';
+export * from './certifications';

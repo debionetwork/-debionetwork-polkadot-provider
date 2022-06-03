@@ -1,3 +1,5 @@
+import { GeneticAnalystServiceInfo } from './genetic-analyst-service-info';
+
 export class GeneticAnalystService {
   constructor(anyJson: any) {
     this.id = anyJson.id;
@@ -6,7 +8,7 @@ export class GeneticAnalystService {
   }
   id: string;
   ownerId: string;
-  info: string;
+  info: GeneticAnalystServiceInfo;
 }
 
 export * from './genetic-analyst-service-info';

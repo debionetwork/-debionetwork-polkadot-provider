@@ -28,7 +28,7 @@ describe('Lab Pallet Integration Tests', () => {
           .then((res) => {
             resolve(res)
           });
-      });
+      }).catch(e => reject(e));
     });
 
     expect((await promise).info).toEqual(labDataMock.info);
@@ -90,7 +90,7 @@ describe('Lab Pallet Integration Tests', () => {
           .then((res) => {
             resolve(res)
           });
-      });
+      }).catch(e => reject(e));
     });
 
     expect((await promise).info).toEqual(info);
@@ -104,7 +104,7 @@ describe('Lab Pallet Integration Tests', () => {
           .then((res) => {
             resolve(res)
           });
-      });
+      }).catch(e => reject(e));
     });
 
     expect((await promise).verificationStatus).toEqual(status);
@@ -118,7 +118,7 @@ describe('Lab Pallet Integration Tests', () => {
           .then((res) => {
             resolve(res)
           });
-      });
+      }).catch(e => reject(e));
     });
 
     expect((await promise).stakeStatus).toEqual(status);
@@ -176,7 +176,7 @@ describe('Lab Pallet Integration Tests', () => {
           .then((res) => {
             resolve(res)
           });
-      });
+      }).catch(e => reject(e));
     });
 
     expect((await promise).stakeStatus).toEqual(status);
@@ -190,7 +190,7 @@ describe('Lab Pallet Integration Tests', () => {
           .then((res) => {
             resolve(res)
           });
-      });
+      }).catch(e => reject(e));
     });
 
     expect((await promise).stakeStatus).toEqual(status);
@@ -204,7 +204,7 @@ describe('Lab Pallet Integration Tests', () => {
           .then((res) => {
             resolve(res)
           });
-      });
+      }).catch(e => reject(e));
     });
 
     expect((await promise)).toEqual(unstakeTime);
@@ -218,7 +218,7 @@ describe('Lab Pallet Integration Tests', () => {
           .then((res) => {
             resolve(res)
           });
-      });
+      }).catch(e => reject(e));
     });
 
     expect((await promise)).toEqual(minimum);
@@ -231,7 +231,7 @@ describe('Lab Pallet Integration Tests', () => {
           .then((res) => {
             resolve(res);
           });
-      });
+      }).catch(e => reject(e));
     });
     
     expect(await promise).toEqual(0);

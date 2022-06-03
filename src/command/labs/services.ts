@@ -20,11 +20,9 @@ export function createServiceFee(
   api: ApiPromise,
   pair: any,
   serviceInfo: ServiceInfo,
-  serviceFlow: string
+  serviceFlow: string,
 ): Promise<any> {
-  return api.tx.services
-    .createService(serviceInfo, serviceFlow)
-    .paymentInfo(pair)
+  return api.tx.services.createService(serviceInfo, serviceFlow).paymentInfo(pair);
 }
 
 export async function updateService(
@@ -46,11 +44,9 @@ export function updateServiceFee(
   api: ApiPromise,
   pair: any,
   serviceId: string,
-  serviceInfo: ServiceInfo
+  serviceInfo: ServiceInfo,
 ): Promise<any> {
-  return api.tx.services
-    .updateService(serviceId, serviceInfo)
-    .paymentInfo(pair)
+  return api.tx.services.updateService(serviceId, serviceInfo).paymentInfo(pair);
 }
 
 export async function deleteService(
@@ -65,12 +61,6 @@ export async function deleteService(
   });
 }
 
-export function deleteServiceFee(
-  api: ApiPromise,
-  pair: any,
-  serviceId: string
-): Promise<any> {
-  return api.tx.services
-    .deleteService(serviceId)
-    .paymentInfo(pair)
+export function deleteServiceFee(api: ApiPromise, pair: any, serviceId: string): Promise<any> {
+  return api.tx.services.deleteService(serviceId).paymentInfo(pair);
 }

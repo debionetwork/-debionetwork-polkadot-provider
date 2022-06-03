@@ -9,6 +9,18 @@ class CustomSequencer extends Sequencer {
       return obj.path.includes('user-profile.spec.ts');
     }));
     sequence.push(...testsArray.filter(obj => {
+      return obj.path.includes('doctors/index.spec.ts');
+    }));
+    sequence.push(...testsArray.filter(obj => {
+      return obj.path.includes('doctors/certifications.spec.ts');
+    }));
+    sequence.push(...testsArray.filter(obj => {
+      return obj.path.includes('hospitals/index.spec.ts');
+    }));
+    sequence.push(...testsArray.filter(obj => {
+      return obj.path.includes('hospitals/certifications.spec.ts');
+    }));
+    sequence.push(...testsArray.filter(obj => {
       return obj.path.includes('labs/index.spec.ts');
     }));
     sequence.push(...testsArray.filter(obj => {
