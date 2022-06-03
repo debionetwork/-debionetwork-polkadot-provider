@@ -101,8 +101,8 @@ describe('Genetic Analysis Pallet Integration Tests', () => {
     expect(geneticAnalysisOrder.customerBoxPublicKey).toEqual(geneticAnalysisOrdersDataMock.customerBoxPublicKey);
 
     const submitGeneticAnalysisPromise: Promise<GeneticAnalysis> = new Promise((resolve, reject) => { // eslint-disable-line
-      submitGeneticAnalysis(api, pair, geneticAnalysisOrder.geneticAnalysisIdTrackingId, geneticDataMock.reportLink, "string", () => {
-        queryGeneticAnalysisByGeneticAnalysisTrackingId(api, geneticAnalysisOrder.geneticAnalysisIdTrackingId)
+      submitGeneticAnalysis(api, pair, geneticAnalysisOrder.geneticAnalysisTrackingId, geneticDataMock.reportLink, "string", () => {
+        queryGeneticAnalysisByGeneticAnalysisTrackingId(api, geneticAnalysisOrder.geneticAnalysisTrackingId)
           .then((res) => {
             resolve(res);
           });
@@ -112,13 +112,13 @@ describe('Genetic Analysis Pallet Integration Tests', () => {
     const geneticAnalysis = await submitGeneticAnalysisPromise;
     expect(geneticAnalysis.reportLink).toEqual(geneticDataMock.reportLink);
     expect(geneticAnalysis.comment).toEqual("string");
-    expect(geneticAnalysis.geneticAnalysisTrackingId).toEqual(geneticAnalysisOrder.geneticAnalysisIdTrackingId);
+    expect(geneticAnalysis.geneticAnalysisTrackingId).toEqual(geneticAnalysisOrder.geneticAnalysisTrackingId);
   });
 
   it('processGeneticAnalysis should return', async () => {
     const processInProgressGeneticAnalysisPromise: Promise<GeneticAnalysis> = new Promise((resolve, reject) => { // eslint-disable-line
-      processGeneticAnalysis(api, pair, geneticAnalysisOrder.geneticAnalysisIdTrackingId, GeneticAnalysisStatus.InProgress, () => {
-        queryGeneticAnalysisByGeneticAnalysisTrackingId(api, geneticAnalysisOrder.geneticAnalysisIdTrackingId)
+      processGeneticAnalysis(api, pair, geneticAnalysisOrder.geneticAnalysisTrackingId, GeneticAnalysisStatus.InProgress, () => {
+        queryGeneticAnalysisByGeneticAnalysisTrackingId(api, geneticAnalysisOrder.geneticAnalysisTrackingId)
           .then((res) => {
             resolve(res);
           });
@@ -128,7 +128,7 @@ describe('Genetic Analysis Pallet Integration Tests', () => {
     const geneticAnalysisInProgress = await processInProgressGeneticAnalysisPromise;
     expect(geneticAnalysisInProgress.reportLink).toEqual(geneticDataMock.reportLink);
     expect(geneticAnalysisInProgress.comment).toEqual("string");
-    expect(geneticAnalysisInProgress.geneticAnalysisTrackingId).toEqual(geneticAnalysisOrder.geneticAnalysisIdTrackingId);
+    expect(geneticAnalysisInProgress.geneticAnalysisTrackingId).toEqual(geneticAnalysisOrder.geneticAnalysisTrackingId);
     expect(geneticAnalysisInProgress.status).toEqual(GeneticAnalysisStatus.InProgress);
   });
 
@@ -136,8 +136,8 @@ describe('Genetic Analysis Pallet Integration Tests', () => {
     const rejectedTitle = "REJECTED";
     const rejectedDescription = "REJECTED_DESCRIPTION";
     const processRejectGeneticAnalysisPromise: Promise<GeneticAnalysis> = new Promise((resolve, reject) => { // eslint-disable-line
-      rejectGeneticAnalysis(api, pair, geneticAnalysisOrder.geneticAnalysisIdTrackingId, rejectedTitle, rejectedDescription, () => {
-        queryGeneticAnalysisByGeneticAnalysisTrackingId(api, geneticAnalysisOrder.geneticAnalysisIdTrackingId)
+      rejectGeneticAnalysis(api, pair, geneticAnalysisOrder.geneticAnalysisTrackingId, rejectedTitle, rejectedDescription, () => {
+        queryGeneticAnalysisByGeneticAnalysisTrackingId(api, geneticAnalysisOrder.geneticAnalysisTrackingId)
           .then((res) => {
             resolve(res);
           });
@@ -147,7 +147,7 @@ describe('Genetic Analysis Pallet Integration Tests', () => {
     const geneticAnalysis = await processRejectGeneticAnalysisPromise;
     expect(geneticAnalysis.reportLink).toEqual(geneticDataMock.reportLink);
     expect(geneticAnalysis.comment).toEqual("string");
-    expect(geneticAnalysis.geneticAnalysisTrackingId).toEqual(geneticAnalysisOrder.geneticAnalysisIdTrackingId);
+    expect(geneticAnalysis.geneticAnalysisTrackingId).toEqual(geneticAnalysisOrder.geneticAnalysisTrackingId);
     expect(geneticAnalysis.status).toEqual(GeneticAnalysisStatus.Rejected);
     expect(geneticAnalysis.rejectedDescription).toEqual(rejectedDescription);
     expect(geneticAnalysis.rejectedTitle).toEqual(rejectedTitle);
