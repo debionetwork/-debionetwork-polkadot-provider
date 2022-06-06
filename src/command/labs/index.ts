@@ -114,6 +114,10 @@ export async function stakeLab(api: ApiPromise, pair: any, callback?: () => void
   });
 }
 
+export function stakeLabFee(api: ApiPromise, pair: any): Promise<any> {
+  return api.tx.labs.stakeLab().paymentInfo(pair);
+}
+
 export async function unstakeLab(api: ApiPromise, pair: any, callback?: () => void): Promise<EventRecord[]> {
   let unsub;
   return new Promise((resolve, reject) => {
@@ -129,6 +133,10 @@ export async function unstakeLab(api: ApiPromise, pair: any, callback?: () => vo
       } as ExtrinsicCallbackParameters);
     });
   });
+}
+
+export function unstakeLabFee(api: ApiPromise, pair: any): Promise<any> {
+  return api.tx.labs.unstakeLab().paymentInfo(pair);
 }
 
 export async function retrieveLabUnstakeAmount(

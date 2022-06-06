@@ -249,4 +249,12 @@ describe('Lab Pallet Integration Tests', () => {
     };
     expect(await updateLabFee(api, pair, info)).toHaveProperty('partialFee')
   })
+
+  it('stakeLabFee should return', async () => {
+    expect(await stakeLab(api, pair)).toHaveProperty('partialFee')
+  })
+
+  it('unstakeLabFee should return', async () => {
+    expect(await unstakeLab(api, pair)).toHaveProperty('partialFee')
+  })
 });
