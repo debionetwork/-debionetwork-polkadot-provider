@@ -115,7 +115,7 @@ export async function stakeLab(api: ApiPromise, pair: any, callback?: () => void
 }
 
 export function stakeLabFee(api: ApiPromise, pair: any): Promise<any> {
-  return api.tx.labs.registerLab().paymentInfo(pair);
+  return api.tx.labs.stakeLab().paymentInfo(pair);
 }
 
 export async function unstakeLab(api: ApiPromise, pair: any, callback?: () => void): Promise<EventRecord[]> {
