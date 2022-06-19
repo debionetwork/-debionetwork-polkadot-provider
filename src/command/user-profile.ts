@@ -1,5 +1,5 @@
 import { ApiPromise } from '@polkadot/api';
-import { successCallback } from '..';
+import { successCallback, getCommandNonceAndSigner } from '../index';
 
 export async function setEthAddress(
   api: ApiPromise,
@@ -10,7 +10,7 @@ export async function setEthAddress(
   // tslint:disable-next-line
   var unsub = await api.tx.userProfile
     .setEthAddress(ethAddress)
-    .signAndSend(pair, { nonce: -1 }, ({ events, status }) => {
+    .signAndSend(pair, getCommandNonceAndSigner(pair), ({ events, status }) => {
       successCallback(api, { events, status, callback, unsub });
     });
 }
@@ -25,7 +25,7 @@ export async function adminSetEthAddress(
   // tslint:disable-next-line
   var unsub = await api.tx.userProfile
     .adminSetEthAddress(substrateAddress, ethAddress)
-    .signAndSend(pair, { nonce: -1 }, ({ events, status }) => {
+    .signAndSend(pair, getCommandNonceAndSigner(pair), ({ events, status }) => {
       successCallback(api, { events, status, callback, unsub });
     });
 }

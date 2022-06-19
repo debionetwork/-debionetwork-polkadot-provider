@@ -1,5 +1,5 @@
 import { ApiPromise } from '@polkadot/api';
-import { ServiceFlow, ServiceInfo, successCallback } from '../..';
+import { ServiceFlow, ServiceInfo, successCallback, getCommandNonceAndSigner } from '../../index';
 
 export async function createService(
   api: ApiPromise,
@@ -11,7 +11,7 @@ export async function createService(
   // tslint:disable-next-line
   var unsub = await api.tx.services
     .createService(serviceInfo, serviceFlow)
-    .signAndSend(pair, { nonce: -1 }, ({ events, status }) => {
+    .signAndSend(pair, getCommandNonceAndSigner(pair), ({ events, status }) => {
       successCallback(api, { events, status, callback, unsub });
     });
 }
@@ -35,7 +35,7 @@ export async function updateService(
   // tslint:disable-next-line
   var unsub = await api.tx.services
     .updateService(serviceId, serviceInfo)
-    .signAndSend(pair, { nonce: -1 }, ({ events, status }) => {
+    .signAndSend(pair, getCommandNonceAndSigner(pair), ({ events, status }) => {
       successCallback(api, { events, status, callback, unsub });
     });
 }
@@ -56,7 +56,7 @@ export async function deleteService(
   callback?: () => void,
 ): Promise<void> {
   // tslint:disable-next-line
-  var unsub = await api.tx.services.deleteService(serviceId).signAndSend(pair, { nonce: -1 }, ({ events, status }) => {
+  var unsub = await api.tx.services.deleteService(serviceId).signAndSend(pair, getCommandNonceAndSigner(pair), ({ events, status }) => {
     successCallback(api, { events, status, callback, unsub });
   });
 }

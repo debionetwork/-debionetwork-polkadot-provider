@@ -1,5 +1,5 @@
 import { ApiPromise } from '@polkadot/api';
-import { successCallback } from '..';
+import { successCallback, getCommandNonceAndSigner } from '../index';
 import { ElectronicMedicalRecordInput } from '../models';
 
 export async function registerElectronicMedicalRecord(
@@ -11,7 +11,7 @@ export async function registerElectronicMedicalRecord(
   // tslint:disable-next-line
   var unsub = await api.tx.electronicMedicalRecord
     .addElectronicMedicalRecord(data.title, data.category, data.files)
-    .signAndSend(pair, { nonce: -1 }, ({ events, status }) => {
+    .signAndSend(pair, getCommandNonceAndSigner(pair), ({ events, status }) => {
       successCallback(api, { events, status, callback, unsub });
     });
 }
@@ -25,7 +25,7 @@ export async function updateElectronicMedicalRecord(
   // tslint:disable-next-line
   var unsub = await api.tx.electronicMedicalRecord
     .updateElectronicMedicalRecord(data.id, data.title, data.category, data.files)
-    .signAndSend(pair, { nonce: -1 }, ({ events, status }) => {
+    .signAndSend(pair, getCommandNonceAndSigner(pair), ({ events, status }) => {
       successCallback(api, { events, status, callback, unsub });
     });
 }
@@ -39,7 +39,7 @@ export async function deregisterElectronicMedicalRecord(
   // tslint:disable-next-line
   var unsub = await api.tx.electronicMedicalRecord
     .removeElectronicMedicalRecord(emrId)
-    .signAndSend(pair, { nonce: -1 }, ({ events, status }) => {
+    .signAndSend(pair, getCommandNonceAndSigner(pair), ({ events, status }) => {
       successCallback(api, { events, status, callback, unsub });
     });
 }

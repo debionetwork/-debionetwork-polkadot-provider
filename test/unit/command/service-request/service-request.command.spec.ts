@@ -1,5 +1,5 @@
 import { createRequest, retrieveUnstakedAmount, createRequestFee, unstakeRequestFee, generateRequestId, unstakeRequest, claimRequest, processRequest, finalizeRequest } from "../../../../src/command/service-request";
-import { successCallback } from "../../../../src/index";
+import { successCallback, getCommandNonceAndSigner } from "../../../../src/index";
 import { ApiPromise, eventAndStatusMock, signAndSendWithPaymentInfo } from "../../@polkadot-api.mock";
 import { mockFunction } from "../../mock";
 import { serviceRequest } from "./service-request.command.mock";
@@ -10,6 +10,9 @@ jest.mock('../../mock', () => ({
 
 jest.mock('../../../../src/index', () => ({
   successCallback: jest.fn(() => mockFunction()),
+  getCommandNonceAndSigner: jest.fn(() => {
+    return { nonce: -1 };
+  }),
 }));
 
 describe('Service Request Commands Unit Testing', () => {
@@ -59,7 +62,7 @@ describe('Service Request Commands Unit Testing', () => {
       expect(retrieveUnstakedAmountSpy).toBeCalledTimes(1);
       expect(retrieveUnstakedAmountSpy).toBeCalledWith(REQUEST_ID);
       expect(signAndSendSpy).toBeCalledTimes(1);
-      expect(signAndSendSpy).toBeCalledWith(PAIR, { nonce: -1 }, expect.any(Function));
+      expect(signAndSendSpy).toBeCalledWith(PAIR, getCommandNonceAndSigner(PAIR), expect.any(Function));
       expect(successCallback).toBeCalledTimes(1);
       expect(successCallback).toBeCalledWith(API_PROMISE_MOCK, { 
         events: eventAndStatusMock.events, 
@@ -96,7 +99,7 @@ describe('Service Request Commands Unit Testing', () => {
     expect(createRequestSpy).toBeCalledTimes(1);
     expect(createRequestSpy).toBeCalledWith(COUNTRY_ID, REGION_ID, CITY_ID, CATEGORY_ID, STAKING_AMOUNT);
     expect(signAndSendSpy).toBeCalledTimes(1);
-    expect(signAndSendSpy).toBeCalledWith(PAIR, { nonce: -1 }, expect.any(Function));
+    expect(signAndSendSpy).toBeCalledWith(PAIR, getCommandNonceAndSigner(PAIR), expect.any(Function));
     expect(successCallback).toBeCalledTimes(1);
     expect(successCallback).toBeCalledWith(API_PROMISE_MOCK, { 
       events: eventAndStatusMock.events, 
@@ -179,7 +182,7 @@ describe('Service Request Commands Unit Testing', () => {
     expect(generateRequestidSpy).toBeCalledTimes(1);
     expect(generateRequestidSpy).toBeCalledWith(COUNTRY, REGION, CITY, CATEGORY);
     expect(signAndSendSpy).toBeCalledTimes(1);
-    expect(signAndSendSpy).toBeCalledWith(PAIR, { nonce: -1 }, expect.any(Function));
+    expect(signAndSendSpy).toBeCalledWith(PAIR, getCommandNonceAndSigner(PAIR), expect.any(Function));
     expect(successCallback).toBeCalledTimes(1);
     expect(successCallback).toBeCalledWith(API_PROMISE_MOCK, { 
       events: eventAndStatusMock.events, 
@@ -204,7 +207,7 @@ describe('Service Request Commands Unit Testing', () => {
     expect(unstakeSpy).toBeCalledTimes(1);
     expect(unstakeSpy).toBeCalledWith(REQUEST_ID);
     expect(signAndSendSpy).toBeCalledTimes(1);
-    expect(signAndSendSpy).toBeCalledWith(PAIR, { nonce: -1 }, expect.any(Function));
+    expect(signAndSendSpy).toBeCalledWith(PAIR, getCommandNonceAndSigner(PAIR), expect.any(Function));
     expect(successCallback).toBeCalledTimes(1);
     expect(successCallback).toBeCalledWith(API_PROMISE_MOCK, { 
       events: eventAndStatusMock.events, 
@@ -237,7 +240,7 @@ describe('Service Request Commands Unit Testing', () => {
     expect(claimRequestSpy).toBeCalledTimes(1);
     expect(claimRequestSpy).toBeCalledWith(REQUEST_ID, SERVICE_ID, TESTING_PRICE, QC_PRICE);
     expect(signAndSendSpy).toBeCalledTimes(1);
-    expect(signAndSendSpy).toBeCalledWith(PAIR, { nonce: -1 }, expect.any(Function));
+    expect(signAndSendSpy).toBeCalledWith(PAIR, getCommandNonceAndSigner(PAIR), expect.any(Function));
     expect(successCallback).toBeCalledTimes(1);
     expect(successCallback).toBeCalledWith(API_PROMISE_MOCK, { 
       events: eventAndStatusMock.events, 
@@ -272,7 +275,7 @@ describe('Service Request Commands Unit Testing', () => {
     expect(processRequestSpy).toBeCalledTimes(1);
     expect(processRequestSpy).toBeCalledWith(LAB_ID, REQUEST_ID, ORDER_ID, DNA_SAMPLE_TRACKING_ID, ADDITIONAL_STACKING_AMOUNT);
     expect(signAndSendSpy).toBeCalledTimes(1);
-    expect(signAndSendSpy).toBeCalledWith(PAIR, { nonce: -1 }, expect.any(Function));
+    expect(signAndSendSpy).toBeCalledWith(PAIR, getCommandNonceAndSigner(PAIR), expect.any(Function));
     expect(successCallback).toBeCalledTimes(1);
     expect(successCallback).toBeCalledWith(API_PROMISE_MOCK, { 
       events: eventAndStatusMock.events, 
@@ -301,7 +304,7 @@ describe('Service Request Commands Unit Testing', () => {
     expect(finalizeRequestSpy).toBeCalledTimes(1);
     expect(finalizeRequestSpy).toBeCalledWith(REQUEST_ID, TEST_RESULT_SUCCESS);
     expect(signAndSendSpy).toBeCalledTimes(1);
-    expect(signAndSendSpy).toBeCalledWith(PAIR, { nonce: -1 }, expect.any(Function));
+    expect(signAndSendSpy).toBeCalledWith(PAIR, getCommandNonceAndSigner(PAIR), expect.any(Function));
     expect(successCallback).toBeCalledTimes(1);
     expect(successCallback).toBeCalledWith(API_PROMISE_MOCK, { 
       events: eventAndStatusMock.events, 

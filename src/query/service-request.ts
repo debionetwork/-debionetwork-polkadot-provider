@@ -1,5 +1,5 @@
 import { ApiPromise } from '@polkadot/api';
-import { ServiceInvoice, ServiceRequest } from '..';
+import { ServiceInvoice, ServiceRequest } from '../index';
 
 export async function queryServiceRequestById(api: ApiPromise, requestId: string): Promise<ServiceRequest> {
   const resp = (await api.query.serviceRequest.requestById(requestId)).toHuman();

@@ -2,7 +2,7 @@ import { registerLab, updateLab, updateLabVerificationStatus, deregisterLab, sud
 import { ApiPromise, signAndSend, eventAndStatusMock } from "../../@polkadot-api.mock";
 import { mockFunction } from "../../mock";
 import { VerificationStatus } from "../../../../src/primitives/verification-status";
-import { extrinsicCallback, ExtrinsicCallbackParameters } from "../../../../src/index";
+import { extrinsicCallback, ExtrinsicCallbackParameters, getCommandNonceAndSigner } from "../../../../src/index";
 import { labs } from "./labs.command.mock";
 import { labDataMock } from "../../models/labs/labs.mock";
 
@@ -13,6 +13,9 @@ jest.mock('../../mock', () => ({
 jest.mock('../../../../src/index', () => ({
   extrinsicCallback: jest.fn((api: ApiPromise, callbackParam: ExtrinsicCallbackParameters) => {
     callbackParam.resolve(mockFunction());
+  }),
+  getCommandNonceAndSigner: jest.fn(() => {
+    return { nonce: -1 };
   }),
 }));
 
@@ -67,7 +70,7 @@ describe('Lab Commands Unit Tests', () => {
       expect(registerLabSpy).toBeCalledTimes(1);
       expect(registerLabSpy).toBeCalledWith(LAB_INFO);
       expect(signAndSendSpy).toBeCalledTimes(1);
-      expect(signAndSendSpy).toBeCalledWith(PAIR, { nonce: -1 }, expect.any(Function));
+      expect(signAndSendSpy).toBeCalledWith(PAIR, getCommandNonceAndSigner(PAIR), expect.any(Function));
       expect(extrinsicCallback).toBeCalledTimes(1);
       expect(extrinsicCallback).toBeCalledWith(API_PROMISE_MOCK, {
           events: eventAndStatusMock.events,
@@ -97,7 +100,7 @@ describe('Lab Commands Unit Tests', () => {
       expect(updateLabSpy).toBeCalledTimes(1);
       expect(updateLabSpy).toBeCalledWith(LAB_INFO);
       expect(signAndSendSpy).toBeCalledTimes(1);
-      expect(signAndSendSpy).toBeCalledWith(PAIR, { nonce: -1 }, expect.any(Function));
+      expect(signAndSendSpy).toBeCalledWith(PAIR, getCommandNonceAndSigner(PAIR), expect.any(Function));
       expect(extrinsicCallback).toBeCalledTimes(1);
       expect(extrinsicCallback).toBeCalledWith(API_PROMISE_MOCK, {
           events: eventAndStatusMock.events,
@@ -129,7 +132,7 @@ describe('Lab Commands Unit Tests', () => {
       expect(updateLabVerificationStatusSpy).toBeCalledTimes(1);
       expect(updateLabVerificationStatusSpy).toBeCalledWith(ADDR, STATUS);
       expect(signAndSendSpy).toBeCalledTimes(1);
-      expect(signAndSendSpy).toBeCalledWith(PAIR, { nonce: -1 }, expect.any(Function));
+      expect(signAndSendSpy).toBeCalledWith(PAIR, getCommandNonceAndSigner(PAIR), expect.any(Function));
       expect(extrinsicCallback).toBeCalledTimes(1);
       expect(extrinsicCallback).toBeCalledWith(API_PROMISE_MOCK, {
           events: eventAndStatusMock.events,
@@ -156,7 +159,7 @@ describe('Lab Commands Unit Tests', () => {
       // Assert
       expect(deregisterLabSpy).toBeCalledTimes(1);
       expect(signAndSendSpy).toBeCalledTimes(1);
-      expect(signAndSendSpy).toBeCalledWith(PAIR, { nonce: -1 }, expect.any(Function));
+      expect(signAndSendSpy).toBeCalledWith(PAIR, getCommandNonceAndSigner(PAIR), expect.any(Function));
       expect(extrinsicCallback).toBeCalledTimes(1);
       expect(extrinsicCallback).toBeCalledWith(API_PROMISE_MOCK, {
           events: eventAndStatusMock.events,
@@ -182,7 +185,7 @@ describe('Lab Commands Unit Tests', () => {
 
       expect(stakeLabSpy).toBeCalledTimes(1);
       expect(signAndSendSpy).toBeCalledTimes(1);
-      expect(signAndSendSpy).toBeCalledWith(PAIR, { nonce: -1 }, expect.any(Function));
+      expect(signAndSendSpy).toBeCalledWith(PAIR, getCommandNonceAndSigner(PAIR), expect.any(Function));
       expect(extrinsicCallback).toBeCalledTimes(1);
       expect(extrinsicCallback).toBeCalledWith(API_PROMISE_MOCK, {
           events: eventAndStatusMock.events,
@@ -208,7 +211,7 @@ describe('Lab Commands Unit Tests', () => {
 
       expect(unstakeLabSpy).toBeCalledTimes(1);
       expect(signAndSendSpy).toBeCalledTimes(1);
-      expect(signAndSendSpy).toBeCalledWith(PAIR, { nonce: -1 }, expect.any(Function));
+      expect(signAndSendSpy).toBeCalledWith(PAIR, getCommandNonceAndSigner(PAIR), expect.any(Function));
       expect(extrinsicCallback).toBeCalledTimes(1);
       expect(extrinsicCallback).toBeCalledWith(API_PROMISE_MOCK, {
           events: eventAndStatusMock.events,
@@ -237,7 +240,7 @@ describe('Lab Commands Unit Tests', () => {
     expect(retrieveUnstakeAmountSpy).toBeCalledTimes(1);
     expect(retrieveUnstakeAmountSpy).toBeCalledWith(DATA_MOCK.accountId);
     expect(signAndSendSpy).toBeCalledTimes(1);
-    expect(signAndSendSpy).toBeCalledWith(PAIR, { nonce: -1 }, expect.any(Function));
+    expect(signAndSendSpy).toBeCalledWith(PAIR, getCommandNonceAndSigner(PAIR), expect.any(Function));
     expect(extrinsicCallback).toBeCalledTimes(1);
     expect(extrinsicCallback).toBeCalledWith(API_PROMISE_MOCK, {
         events: eventAndStatusMock.events,
@@ -266,7 +269,7 @@ describe('Lab Commands Unit Tests', () => {
       expect(updateMinimumStakeAmountSpy).toBeCalledTimes(1);
       expect(updateMinimumStakeAmountSpy).toBeCalledWith(PARAM);
       expect(signAndSendSpy).toBeCalledTimes(1);
-      expect(signAndSendSpy).toBeCalledWith(PAIR, { nonce: -1 }, expect.any(Function));
+      expect(signAndSendSpy).toBeCalledWith(PAIR, getCommandNonceAndSigner(PAIR), expect.any(Function));
       expect(extrinsicCallback).toBeCalledTimes(1);
       expect(extrinsicCallback).toBeCalledWith(API_PROMISE_MOCK, {
           events: eventAndStatusMock.events,
@@ -295,7 +298,7 @@ describe('Lab Commands Unit Tests', () => {
       expect(updateAdminKeySpy).toBeCalledTimes(1);
       expect(updateAdminKeySpy).toBeCalledWith(PARAM);
       expect(signAndSendSpy).toBeCalledTimes(1);
-      expect(signAndSendSpy).toBeCalledWith(PAIR, { nonce: -1 }, expect.any(Function));
+      expect(signAndSendSpy).toBeCalledWith(PAIR, getCommandNonceAndSigner(PAIR), expect.any(Function));
       expect(extrinsicCallback).toBeCalledTimes(1);
       expect(extrinsicCallback).toBeCalledWith(API_PROMISE_MOCK, {
           events: eventAndStatusMock.events,
@@ -324,7 +327,7 @@ describe('Lab Commands Unit Tests', () => {
       expect(sudoUpdateAdminKeySpy).toBeCalledTimes(1);
       expect(sudoUpdateAdminKeySpy).toBeCalledWith(PARAM);
       expect(signAndSendSpy).toBeCalledTimes(1);
-      expect(signAndSendSpy).toBeCalledWith(PAIR, { nonce: -1 }, expect.any(Function));
+      expect(signAndSendSpy).toBeCalledWith(PAIR, getCommandNonceAndSigner(PAIR), expect.any(Function));
       expect(extrinsicCallback).toBeCalledTimes(1);
       expect(extrinsicCallback).toBeCalledWith(API_PROMISE_MOCK, {
           events: eventAndStatusMock.events,
