@@ -56,9 +56,11 @@ export async function deleteService(
   callback?: () => void,
 ): Promise<void> {
   // tslint:disable-next-line
-  var unsub = await api.tx.services.deleteService(serviceId).signAndSend(pair, getCommandNonceAndSigner(pair), ({ events, status }) => {
-    successCallback(api, { events, status, callback, unsub });
-  });
+  var unsub = await api.tx.services
+    .deleteService(serviceId)
+    .signAndSend(pair, getCommandNonceAndSigner(pair), ({ events, status }) => {
+      successCallback(api, { events, status, callback, unsub });
+    });
 }
 
 export function deleteServiceFee(api: ApiPromise, pair: any, serviceId: string): Promise<any> {

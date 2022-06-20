@@ -36,9 +36,11 @@ export async function updateGeneticData(
 
 export async function removeGeneticData(api: ApiPromise, pair: any, id: string, callback?: () => void): Promise<void> {
   // tslint:disable-next-line
-  var unsub = await api.tx.geneticData.removeGeneticData(id).signAndSend(pair, getCommandNonceAndSigner(pair), ({ events, status }) => {
-    successCallback(api, { events, status, callback, unsub });
-  });
+  var unsub = await api.tx.geneticData
+    .removeGeneticData(id)
+    .signAndSend(pair, getCommandNonceAndSigner(pair), ({ events, status }) => {
+      successCallback(api, { events, status, callback, unsub });
+    });
 }
 
 export function addGeneticDataFee(api: ApiPromise, pair: any, title: string, description: string, link: string): any {

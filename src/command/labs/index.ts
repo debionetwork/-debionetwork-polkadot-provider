@@ -148,16 +148,18 @@ export async function retrieveLabUnstakeAmount(
   let unsub;
   return new Promise((resolve, reject) => {
     // tslint:disable-next-line
-    unsub = api.tx.labs.retrieveUnstakeAmount(accountId).signAndSend(pair, getCommandNonceAndSigner(pair), ({ events, status }) => {
-      extrinsicCallback(api, {
-        events,
-        status,
-        callback,
-        resolve,
-        reject,
-        unsub,
-      } as ExtrinsicCallbackParameters);
-    });
+    unsub = api.tx.labs
+      .retrieveUnstakeAmount(accountId)
+      .signAndSend(pair, getCommandNonceAndSigner(pair), ({ events, status }) => {
+        extrinsicCallback(api, {
+          events,
+          status,
+          callback,
+          resolve,
+          reject,
+          unsub,
+        } as ExtrinsicCallbackParameters);
+      });
   });
 }
 
@@ -170,16 +172,18 @@ export async function updateLabMinimumStakeAmount(
   let unsub;
   return new Promise((resolve, reject) => {
     // tslint:disable-next-line
-    unsub = api.tx.labs.updateMinimumStakeAmount(minimum).signAndSend(pair, getCommandNonceAndSigner(pair), ({ events, status }) => {
-      extrinsicCallback(api, {
-        events,
-        status,
-        callback,
-        resolve,
-        reject,
-        unsub,
-      } as ExtrinsicCallbackParameters);
-    });
+    unsub = api.tx.labs
+      .updateMinimumStakeAmount(minimum)
+      .signAndSend(pair, getCommandNonceAndSigner(pair), ({ events, status }) => {
+        extrinsicCallback(api, {
+          events,
+          status,
+          callback,
+          resolve,
+          reject,
+          unsub,
+        } as ExtrinsicCallbackParameters);
+      });
   });
 }
 
@@ -192,16 +196,18 @@ export async function updateLabUnstakeTime(
   let unsub;
   return new Promise((resolve, reject) => {
     // tslint:disable-next-line
-    unsub = api.tx.labs.updateUnstakeTime(unstakeTime).signAndSend(pair, getCommandNonceAndSigner(pair), ({ events, status }) => {
-      extrinsicCallback(api, {
-        events,
-        status,
-        callback,
-        resolve,
-        reject,
-        unsub,
-      } as ExtrinsicCallbackParameters);
-    });
+    unsub = api.tx.labs
+      .updateUnstakeTime(unstakeTime)
+      .signAndSend(pair, getCommandNonceAndSigner(pair), ({ events, status }) => {
+        extrinsicCallback(api, {
+          events,
+          status,
+          callback,
+          resolve,
+          reject,
+          unsub,
+        } as ExtrinsicCallbackParameters);
+      });
   });
 }
 
@@ -214,16 +220,18 @@ export async function updateLabAdminKey(
   let unsub;
   return new Promise((resolve, reject) => {
     // tslint:disable-next-line
-    unsub = api.tx.labs.updateAdminKey(accountId).signAndSend(pair, getCommandNonceAndSigner(pair), ({ events, status }) => {
-      extrinsicCallback(api, {
-        events,
-        status,
-        callback,
-        resolve,
-        reject,
-        unsub,
-      } as ExtrinsicCallbackParameters);
-    });
+    unsub = api.tx.labs
+      .updateAdminKey(accountId)
+      .signAndSend(pair, getCommandNonceAndSigner(pair), ({ events, status }) => {
+        extrinsicCallback(api, {
+          events,
+          status,
+          callback,
+          resolve,
+          reject,
+          unsub,
+        } as ExtrinsicCallbackParameters);
+      });
   });
 }
 
@@ -236,16 +244,18 @@ export async function sudoUpdateLabAdminKey(
   let unsub;
   return new Promise((resolve, reject) => {
     // tslint:disable-next-line
-    unsub = api.tx.labs.sudoUpdateAdminKey(accountId).signAndSend(pair, getCommandNonceAndSigner(pair), ({ events, status }) => {
-      extrinsicCallback(api, {
-        events,
-        status,
-        callback,
-        resolve,
-        reject,
-        unsub,
-      } as ExtrinsicCallbackParameters);
-    });
+    unsub = api.tx.labs
+      .sudoUpdateAdminKey(accountId)
+      .signAndSend(pair, getCommandNonceAndSigner(pair), ({ events, status }) => {
+        extrinsicCallback(api, {
+          events,
+          status,
+          callback,
+          resolve,
+          reject,
+          unsub,
+        } as ExtrinsicCallbackParameters);
+      });
   });
 }
 

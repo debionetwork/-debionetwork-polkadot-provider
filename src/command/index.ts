@@ -72,10 +72,9 @@ export function extrinsicCallback(api: ApiPromise, callbackParam: ExtrinsicCallb
 }
 
 export function getWeb3FromSource(): any {
-  import('@polkadot/extension-dapp')
-    .then(x => {
-      return x.web3FromSource
-    });
+  import('@polkadot/extension-dapp').then((x) => {
+    return x.web3FromSource;
+  });
   return null;
 }
 
@@ -85,16 +84,16 @@ export function getCommandNonceAndSigner(account: any) {
     const web3FromSource = getWeb3FromSource();
     if (source !== undefined && web3FromSource !== undefined) {
       web3FromSource(source)
-        .then(src => {
+        .then((src) => {
           const signer = src?.signer;
           if (signer !== undefined) {
             return {
               ...account,
-              signer
-            }
+              signer,
+            };
           }
         })
-        .catch(e => {
+        .catch((e) => {
           throw e;
         });
     }

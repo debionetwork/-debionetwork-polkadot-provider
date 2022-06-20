@@ -12,16 +12,18 @@ export async function registerHospital(
   let unsub;
   return new Promise((resolve, reject) => {
     // tslint:disable-next-line
-    unsub = api.tx.hospitals.registerHospital(data).signAndSend(pair, getCommandNonceAndSigner(pair), ({ events, status }) => {
-      extrinsicCallback(api, {
-        events,
-        status,
-        callback,
-        resolve,
-        reject,
-        unsub,
-      } as ExtrinsicCallbackParameters);
-    });
+    unsub = api.tx.hospitals
+      .registerHospital(data)
+      .signAndSend(pair, getCommandNonceAndSigner(pair), ({ events, status }) => {
+        extrinsicCallback(api, {
+          events,
+          status,
+          callback,
+          resolve,
+          reject,
+          unsub,
+        } as ExtrinsicCallbackParameters);
+      });
   });
 }
 
@@ -34,16 +36,18 @@ export async function updateHospital(
   let unsub;
   return new Promise((resolve, reject) => {
     // tslint:disable-next-line
-    unsub = api.tx.hospitals.updateHospital(data).signAndSend(pair, getCommandNonceAndSigner(pair), ({ events, status }) => {
-      extrinsicCallback(api, {
-        events,
-        status,
-        callback,
-        resolve,
-        reject,
-        unsub,
-      } as ExtrinsicCallbackParameters);
-    });
+    unsub = api.tx.hospitals
+      .updateHospital(data)
+      .signAndSend(pair, getCommandNonceAndSigner(pair), ({ events, status }) => {
+        extrinsicCallback(api, {
+          events,
+          status,
+          callback,
+          resolve,
+          reject,
+          unsub,
+        } as ExtrinsicCallbackParameters);
+      });
   });
 }
 
@@ -51,16 +55,18 @@ export async function deregisterHospital(api: ApiPromise, pair: any, callback?: 
   let unsub;
   return new Promise((resolve, reject) => {
     // tslint:disable-next-line
-    unsub = api.tx.hospitals.deregisterHospital().signAndSend(pair, getCommandNonceAndSigner(pair), ({ events, status }) => {
-      extrinsicCallback(api, {
-        events,
-        status,
-        callback,
-        resolve,
-        reject,
-        unsub,
-      } as ExtrinsicCallbackParameters);
-    });
+    unsub = api.tx.hospitals
+      .deregisterHospital()
+      .signAndSend(pair, getCommandNonceAndSigner(pair), ({ events, status }) => {
+        extrinsicCallback(api, {
+          events,
+          status,
+          callback,
+          resolve,
+          reject,
+          unsub,
+        } as ExtrinsicCallbackParameters);
+      });
   });
 }
 
