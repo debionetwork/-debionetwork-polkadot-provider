@@ -77,36 +77,27 @@ export async function getWeb3FromSource(): Promise<any> {
 
 export function getCommandNonceAndSigner(account: any) {
   if (typeof window !== 'undefined') {
-
     const source = account?.meta?.source;
     getWeb3FromSource()
-      .then(web3FromSource => {
-
+      .then((web3FromSource) => {
         if (source !== undefined && web3FromSource !== undefined) {
           web3FromSource(source)
             .then((src) => {
-
               const signer = src?.signer;
               if (signer !== undefined) {
                 return {
                   ...account,
                   signer,
                 };
-              }
-              else return { nonce: -1 };
-
+              } else return { nonce: -1 };
             })
             .catch((e) => {
               throw e;
             });
-        }
-        else return { nonce: -1 };
-
+        } else return { nonce: -1 };
       })
       .catch((e) => {
         throw e;
       });
-      
-  }
-  else return { nonce: -1 };
+  } else return { nonce: -1 };
 }
