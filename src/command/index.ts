@@ -71,30 +71,28 @@ export function extrinsicCallback(api: ApiPromise, callbackParam: ExtrinsicCallb
   }
 }
 
-export async function getWeb3FromSource(): Promise<any> {
-  return (await import('@polkadot/extension-dapp')).web3FromSource;
+export async function getExtensionDapp() {
+  return (await import('@polkadot/extension-dapp'));
 }
 
 export function getCommandNonceAndSigner(account: any) {
   if (typeof window !== 'undefined') {
     const source = account?.meta?.source;
-    getWeb3FromSource()
-      .then((web3FromSource) => {
-        if (source !== undefined && web3FromSource !== undefined) {
-          web3FromSource(source)
-            .then((src) => {
-              const signer = src?.signer;
-              if (signer !== undefined) {
-                return {
-                  ...account,
-                  signer,
-                };
-              } else return { nonce: -1 };
-            })
-            .catch((e) => {
-              throw e;
-            });
-        } else return { nonce: -1 };
+    getExtensionDapp()
+      .then(async dapp => {
+        await dapp.web3Enable("DeBio Network");
+
+        if (source !== undefined && dapp.web3FromSource !== undefined) {
+          const src = await dapp.web3FromSource(source)
+          
+          const signer = src?.signer;
+          if (signer !== undefined) {
+            return {
+              ...account,
+              signer,
+            };
+          } else return { nonce: -1 };
+        }
       })
       .catch((e) => {
         throw e;
