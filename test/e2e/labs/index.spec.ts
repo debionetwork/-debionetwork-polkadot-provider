@@ -1,7 +1,7 @@
 import { ApiPromise } from '@polkadot/api';
 import 'regenerator-runtime/runtime';
 import { Lab, queryLabById, queryLabsByCountryRegionCity, queryLabsCountByCountryRegionCity, queryLabCount, queryLabsAdminKey, queryLabMinimumStakeAmount, queryLabPalletAccount, queryLabTotalStakedAmount, queryLabUnstakeTime } from '../../../src';
-import { registerLab, registerLabFee, updateLab, updateLabFee, deregisterLab, updateLabVerificationStatus, stakeLab, retrieveLabUnstakeAmount, unstakeLab, updateLabMinimumStakeAmount, updateLabUnstakeTime } from "../../../src/command/labs";
+import { registerLab, registerLabFee, updateLab, updateLabFee, deregisterLab, updateLabVerificationStatus, stakeLab, retrieveLabUnstakeAmount, unstakeLab, updateLabMinimumStakeAmount, updateLabUnstakeTime, stakeLabFee, unstakeLabFee } from "../../../src/command/labs";
 import { StakeStatus } from '../../../src/primitives/stake-status';
 import { VerificationStatus } from '../../../src/primitives/verification-status';
 import { labDataMock } from '../../unit/models/labs/labs.mock';
@@ -251,10 +251,10 @@ describe('Lab Pallet Integration Tests', () => {
   })
 
   it('stakeLabFee should return', async () => {
-    expect(await stakeLab(api, pair)).toHaveProperty('partialFee')
+    expect(await stakeLabFee(api, pair)).toHaveProperty('partialFee')
   })
 
   it('unstakeLabFee should return', async () => {
-    expect(await unstakeLab(api, pair)).toHaveProperty('partialFee')
+    expect(await unstakeLabFee(api, pair)).toHaveProperty('partialFee')
   })
 });

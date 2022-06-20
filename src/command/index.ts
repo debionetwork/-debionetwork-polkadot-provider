@@ -76,13 +76,14 @@ export function getWeb3FromSource(): any {
     .then(x => {
       return x.web3FromSource
     });
+  return null;
 }
 
 export function getCommandNonceAndSigner(account: any) {
   if (typeof window !== 'undefined') {
     const source = account?.meta?.source;
     const web3FromSource = getWeb3FromSource();
-    if (source !== undefined) {
+    if (source !== undefined && web3FromSource !== undefined) {
       web3FromSource(source)
         .then(src => {
           const signer = src?.signer;
