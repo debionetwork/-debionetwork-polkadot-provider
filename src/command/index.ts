@@ -71,33 +71,42 @@ export function extrinsicCallback(api: ApiPromise, callbackParam: ExtrinsicCallb
   }
 }
 
-export function getWeb3FromSource(): any {
-  import('@polkadot/extension-dapp').then((x) => {
-    return x.web3FromSource;
-  });
-  return null;
+export async function getWeb3FromSource(): Promise<any> {
+  return (await import('@polkadot/extension-dapp')).web3FromSource;
 }
 
 export function getCommandNonceAndSigner(account: any) {
   if (typeof window !== 'undefined') {
-    const source = account?.meta?.source;
-    const web3FromSource = getWeb3FromSource();
-    if (source !== undefined && web3FromSource !== undefined) {
-      web3FromSource(source)
-        .then((src) => {
-          const signer = src?.signer;
-          if (signer !== undefined) {
-            return {
-              ...account,
-              signer,
-            };
-          }
-        })
-        .catch((e) => {
-          throw e;
-        });
-    }
-  }
 
-  return { nonce: -1 };
+    const source = account?.meta?.source;
+    getWeb3FromSource()
+      .then(web3FromSource => {
+
+        if (source !== undefined && web3FromSource !== undefined) {
+          web3FromSource(source)
+            .then((src) => {
+
+              const signer = src?.signer;
+              if (signer !== undefined) {
+                return {
+                  ...account,
+                  signer,
+                };
+              }
+              else return { nonce: -1 };
+
+            })
+            .catch((e) => {
+              throw e;
+            });
+        }
+        else return { nonce: -1 };
+
+      })
+      .catch((e) => {
+        throw e;
+      });
+      
+  }
+  else return { nonce: -1 };
 }
