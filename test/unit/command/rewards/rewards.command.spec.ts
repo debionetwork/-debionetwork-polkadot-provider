@@ -1,5 +1,5 @@
 import { sendRewards, updateRewardsAdminKey, sudoRewardsUpdateAdminKey } from "../../../../src/command/rewards";
-import { successCallback } from "../../../../src";
+import { successCallback, getCommandNonceAndSigner } from "../../../../src/index";
 import { ApiPromise, eventAndStatusMock, signAndSend } from "../../@polkadot-api.mock";
 import { mockFunction } from "../../mock";
 import { rewards } from "./rewards.command.mock";
@@ -11,6 +11,9 @@ jest.mock('../../mock', () => ({
 
 jest.mock('../../../../src', () => ({
   successCallback: jest.fn(() => mockFunction()),
+  getCommandNonceAndSigner: jest.fn(() => {
+    return { nonce: -1 };
+  }),
 }));
 
 describe('Reward Commands Unit Testing', () => {
@@ -54,7 +57,7 @@ describe('Reward Commands Unit Testing', () => {
       expect(rewardFundsSpy).toBeCalledTimes(1);
       expect(rewardFundsSpy).toBeCalledWith(SUBSTRATE_ADDRESS, REWARD_AMOUNT);
       expect(signAndSendSpy).toBeCalledTimes(1);
-      expect(signAndSendSpy).toBeCalledWith(PAIR, { nonce: -1 }, expect.any(Function));
+      expect(signAndSendSpy).toBeCalledWith(PAIR, getCommandNonceAndSigner(PAIR), expect.any(Function));
       expect(successCallback).toBeCalledTimes(1);
       expect(successCallback).toBeCalledWith(API_PROMISE_MOCK, { 
         events: eventAndStatusMock.events, 
@@ -80,7 +83,7 @@ describe('Reward Commands Unit Testing', () => {
       expect(updateAdminKeySpy).toBeCalledTimes(1);
       expect(updateAdminKeySpy).toBeCalledWith(SUBSTRATE_ADDRESS);
       expect(signAndSendSpy).toBeCalledTimes(1);
-      expect(signAndSendSpy).toBeCalledWith(PAIR, { nonce: -1 }, expect.any(Function));
+      expect(signAndSendSpy).toBeCalledWith(PAIR, getCommandNonceAndSigner(PAIR), expect.any(Function));
       expect(successCallback).toBeCalledTimes(1);
       expect(successCallback).toBeCalledWith(API_PROMISE_MOCK, { 
         events: eventAndStatusMock.events, 
@@ -107,7 +110,7 @@ describe('Reward Commands Unit Testing', () => {
       expect(sudoUpdateAdminKeySpy).toBeCalledTimes(1);
       expect(sudoUpdateAdminKeySpy).toBeCalledWith(SUBSTRATE_ADDRESS);
       expect(signAndSendSpy).toBeCalledTimes(1);
-      expect(signAndSendSpy).toBeCalledWith(PAIR, { nonce: -1 }, expect.any(Function));
+      expect(signAndSendSpy).toBeCalledWith(PAIR, getCommandNonceAndSigner(PAIR), expect.any(Function));
       expect(successCallback).toBeCalledTimes(1);
       expect(successCallback).toBeCalledWith(API_PROMISE_MOCK, { 
         events: eventAndStatusMock.events, 

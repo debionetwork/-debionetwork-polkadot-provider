@@ -1,5 +1,5 @@
 import { setEthAddress, adminSetEthAddress } from "../../../../src/command/user-profile";
-import { successCallback } from "../../../../src/index";
+import { successCallback, getCommandNonceAndSigner } from "../../../../src/index";
 import { ApiPromise, eventAndStatusMock, signAndSend } from "../../@polkadot-api.mock";
 import { mockFunction } from "../../mock";
 import { userProfile } from "./user-profile.command.mock";
@@ -10,6 +10,9 @@ jest.mock('../../mock', () => ({
 
 jest.mock('../../../../src/index', () => ({
   successCallback: jest.fn(() => mockFunction()),
+  getCommandNonceAndSigner: jest.fn(() => {
+    return { nonce: -1 };
+  }),
 }));
 
 describe('User Profile Commands Unit Testing', () => {
@@ -46,7 +49,7 @@ describe('User Profile Commands Unit Testing', () => {
       expect(setEthAddressSpy).toBeCalledTimes(1);
       expect(setEthAddressSpy).toBeCalledWith(ETH_ADDRESS);
       expect(signAndSendSpy).toBeCalledTimes(1);
-      expect(signAndSendSpy).toBeCalledWith(PAIR, { nonce: -1 }, expect.any(Function));
+      expect(signAndSendSpy).toBeCalledWith(PAIR, getCommandNonceAndSigner(PAIR), expect.any(Function));
       expect(successCallback).toBeCalledTimes(1);
       expect(successCallback).toBeCalledWith(API_PROMISE_MOCK, { 
         events: eventAndStatusMock.events, 
@@ -74,7 +77,7 @@ describe('User Profile Commands Unit Testing', () => {
       expect(adminSetEthAddressSpy).toBeCalledTimes(1);
       expect(adminSetEthAddressSpy).toBeCalledWith(SUBSTRATE_ADDRESS, ETH_ADDRESS);
       expect(signAndSendSpy).toBeCalledTimes(1);
-      expect(signAndSendSpy).toBeCalledWith(PAIR, { nonce: -1 }, expect.any(Function));
+      expect(signAndSendSpy).toBeCalledWith(PAIR, getCommandNonceAndSigner(PAIR), expect.any(Function));
       expect(successCallback).toBeCalledTimes(1);
       expect(successCallback).toBeCalledWith(API_PROMISE_MOCK, { 
         events: eventAndStatusMock.events, 

@@ -1,6 +1,6 @@
 import { ApiPromise } from '@polkadot/api';
 import { EventRecord } from '@polkadot/types/interfaces/system';
-import { extrinsicCallback, ExtrinsicCallbackParameters } from '../../index';
+import { extrinsicCallback, ExtrinsicCallbackParameters, getCommandNonceAndSigner } from '../../index';
 import { HospitalCertificationInfo } from '../../models';
 
 export async function createCertification(
@@ -14,7 +14,7 @@ export async function createCertification(
     // tslint:disable-next-line
     unsub = api.tx.hospitalCertifications
       .createCertification(hospitalCertificationInfo)
-      .signAndSend(pair, { nonce: -1 }, ({ events, status }) => {
+      .signAndSend(pair, getCommandNonceAndSigner(pair), ({ events, status }) => {
         extrinsicCallback(api, {
           events,
           status,
@@ -46,7 +46,7 @@ export async function deleteCertification(
     // tslint:disable-next-line
     unsub = api.tx.hospitalCertifications
       .deleteCertification(hospitalCertificationId)
-      .signAndSend(pair, { nonce: -1 }, ({ events, status }) => {
+      .signAndSend(pair, getCommandNonceAndSigner(pair), ({ events, status }) => {
         extrinsicCallback(api, {
           events,
           status,
@@ -75,7 +75,7 @@ export async function updateCertification(
     // tslint:disable-next-line
     unsub = api.tx.hospitalCertifications
       .updateCertification(hospitalCertificationId, hospitalCertificationInfo)
-      .signAndSend(pair, { nonce: -1 }, ({ events, status }) => {
+      .signAndSend(pair, getCommandNonceAndSigner(pair), ({ events, status }) => {
         extrinsicCallback(api, {
           events,
           status,

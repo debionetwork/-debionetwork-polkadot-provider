@@ -1,4 +1,4 @@
-import { ServiceFlow, successCallback } from "../../../../../src";
+import { getCommandNonceAndSigner, successCallback } from "../../../../../src/index";
 import { createService, updateService, deleteService } from "../../../../../src/command/labs/services";
 import { ApiPromise, eventAndStatusMock, signAndSendWithPaymentInfo } from "../../../@polkadot-api.mock";
 import { mockFunction } from "../../../mock";
@@ -11,6 +11,9 @@ jest.mock('../../../mock', () => ({
 
 jest.mock('../../../../../src/index', () => ({
   successCallback: jest.fn(() => mockFunction()),
+  getCommandNonceAndSigner: jest.fn(() => {
+    return { nonce: -1 };
+  }),
 }));
 
 describe('Services Command Unit Tests', () => {
@@ -52,7 +55,7 @@ describe('Services Command Unit Tests', () => {
     expect(createServiceSpy).toBeCalledTimes(1);
     expect(createServiceSpy).toBeCalledWith(SERVICE_INFO, SERVICE_FLOW);
     expect(signAndSendSpy).toBeCalledTimes(1);
-    expect(signAndSendSpy).toBeCalledWith(PAIR, { nonce: -1 }, expect.any(Function));
+    expect(signAndSendSpy).toBeCalledWith(PAIR, getCommandNonceAndSigner(PAIR), expect.any(Function));
     expect(successCallback).toBeCalledTimes(1);
     expect(successCallback).toBeCalledWith(API_PROMISE_MOCK, {
         events: eventAndStatusMock.events,
@@ -81,7 +84,7 @@ describe('Services Command Unit Tests', () => {
     expect(updateServiceSpy).toBeCalledTimes(1);
     expect(updateServiceSpy).toBeCalledWith(SERVICE_ID, SERVICE_INFO);
     expect(signAndSendSpy).toBeCalledTimes(1);
-    expect(signAndSendSpy).toBeCalledWith(PAIR, { nonce: -1 }, expect.any(Function));
+    expect(signAndSendSpy).toBeCalledWith(PAIR, getCommandNonceAndSigner(PAIR), expect.any(Function));
     expect(successCallback).toBeCalledTimes(1);
     expect(successCallback).toBeCalledWith(API_PROMISE_MOCK, {
         events: eventAndStatusMock.events,
@@ -108,7 +111,7 @@ describe('Services Command Unit Tests', () => {
     expect(deleteServiceSpy).toBeCalledTimes(1);
     expect(deleteServiceSpy).toBeCalledWith(SERVICE_ID);
     expect(signAndSendSpy).toBeCalledTimes(1);
-    expect(signAndSendSpy).toBeCalledWith(PAIR, { nonce: -1 }, expect.any(Function));
+    expect(signAndSendSpy).toBeCalledWith(PAIR, getCommandNonceAndSigner(PAIR), expect.any(Function));
     expect(successCallback).toBeCalledTimes(1);
     expect(successCallback).toBeCalledWith(API_PROMISE_MOCK, {
         events: eventAndStatusMock.events,

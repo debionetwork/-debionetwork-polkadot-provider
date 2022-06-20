@@ -1,6 +1,6 @@
 import { ApiPromise } from '@polkadot/api';
 import { EventRecord } from '@polkadot/types/interfaces/system';
-import { extrinsicCallback, ExtrinsicCallbackParameters } from '../../index';
+import { extrinsicCallback, ExtrinsicCallbackParameters, getCommandNonceAndSigner } from '../../index';
 import { GeneticAnalystInfo } from '../../models/genetic-analysts';
 import { AvailabilityStatus } from '../../primitives/availability-status';
 import { VerificationStatus } from '../../primitives/verification-status';
@@ -16,7 +16,7 @@ export async function registerGeneticAnalyst(
     // tslint:disable-next-line
     unsub = api.tx.geneticAnalysts
       .registerGeneticAnalyst(geneticAnalystInfo)
-      .signAndSend(pair, { nonce: -1 }, ({ events, status }) => {
+      .signAndSend(pair, getCommandNonceAndSigner(pair), ({ events, status }) => {
         extrinsicCallback(api, {
           events,
           status,
@@ -40,7 +40,7 @@ export async function updateGeneticAnalyst(
     // tslint:disable-next-line
     unsub = api.tx.geneticAnalysts
       .updateGeneticAnalyst(geneticAnalystInfo)
-      .signAndSend(pair, { nonce: -1 }, ({ events, status }) => {
+      .signAndSend(pair, getCommandNonceAndSigner(pair), ({ events, status }) => {
         extrinsicCallback(api, {
           events,
           status,
@@ -61,16 +61,18 @@ export async function deregisterGeneticAnalyst(
   let unsub;
   return new Promise((resolve, reject) => {
     // tslint:disable-next-line
-    unsub = api.tx.geneticAnalysts.deregisterGeneticAnalyst().signAndSend(pair, { nonce: -1 }, ({ events, status }) => {
-      extrinsicCallback(api, {
-        events,
-        status,
-        callback,
-        resolve,
-        reject,
-        unsub,
-      } as ExtrinsicCallbackParameters);
-    });
+    unsub = api.tx.geneticAnalysts
+      .deregisterGeneticAnalyst()
+      .signAndSend(pair, getCommandNonceAndSigner(pair), ({ events, status }) => {
+        extrinsicCallback(api, {
+          events,
+          status,
+          callback,
+          resolve,
+          reject,
+          unsub,
+        } as ExtrinsicCallbackParameters);
+      });
   });
 }
 
@@ -86,7 +88,7 @@ export async function updateGeneticAnalystVerificationStatus(
     // tslint:disable-next-line
     unsub = api.tx.geneticAnalysts
       .updateGeneticAnalystVerificationStatus(accountId, geneticAnalystVerificationStatus.toString())
-      .signAndSend(pair, { nonce: -1 }, ({ events, status }) => {
+      .signAndSend(pair, getCommandNonceAndSigner(pair), ({ events, status }) => {
         extrinsicCallback(api, {
           events,
           status,
@@ -110,7 +112,7 @@ export async function updateGeneticAnalystAvailabilityStatus(
     // tslint:disable-next-line
     unsub = api.tx.geneticAnalysts
       .updateGeneticAnalystAvailabilityStatus(geneticAnalystAvailabilityStatus.toString())
-      .signAndSend(pair, { nonce: -1 }, ({ events, status }) => {
+      .signAndSend(pair, getCommandNonceAndSigner(pair), ({ events, status }) => {
         extrinsicCallback(api, {
           events,
           status,
@@ -127,16 +129,18 @@ export async function stakeGeneticAnalyst(api: ApiPromise, pair: any, callback?:
   let unsub;
   return new Promise((resolve, reject) => {
     // tslint:disable-next-line
-    unsub = api.tx.geneticAnalysts.stakeGeneticAnalyst().signAndSend(pair, { nonce: -1 }, ({ events, status }) => {
-      extrinsicCallback(api, {
-        events,
-        status,
-        callback,
-        resolve,
-        reject,
-        unsub,
-      } as ExtrinsicCallbackParameters);
-    });
+    unsub = api.tx.geneticAnalysts
+      .stakeGeneticAnalyst()
+      .signAndSend(pair, getCommandNonceAndSigner(pair), ({ events, status }) => {
+        extrinsicCallback(api, {
+          events,
+          status,
+          callback,
+          resolve,
+          reject,
+          unsub,
+        } as ExtrinsicCallbackParameters);
+      });
   });
 }
 
@@ -144,16 +148,18 @@ export async function unstakeGeneticAnalyst(api: ApiPromise, pair: any, callback
   let unsub;
   return new Promise((resolve, reject) => {
     // tslint:disable-next-line
-    unsub = api.tx.geneticAnalysts.unstakeGeneticAnalyst().signAndSend(pair, { nonce: -1 }, ({ events, status }) => {
-      extrinsicCallback(api, {
-        events,
-        status,
-        callback,
-        resolve,
-        reject,
-        unsub,
-      } as ExtrinsicCallbackParameters);
-    });
+    unsub = api.tx.geneticAnalysts
+      .unstakeGeneticAnalyst()
+      .signAndSend(pair, getCommandNonceAndSigner(pair), ({ events, status }) => {
+        extrinsicCallback(api, {
+          events,
+          status,
+          callback,
+          resolve,
+          reject,
+          unsub,
+        } as ExtrinsicCallbackParameters);
+      });
   });
 }
 
@@ -168,7 +174,7 @@ export async function retrieveGeneticAnalystUnstakeAmount(
     // tslint:disable-next-line
     unsub = api.tx.geneticAnalysts
       .retrieveUnstakeAmount(accountId)
-      .signAndSend(pair, { nonce: -1 }, ({ events, status }) => {
+      .signAndSend(pair, getCommandNonceAndSigner(pair), ({ events, status }) => {
         extrinsicCallback(api, {
           events,
           status,
@@ -192,7 +198,7 @@ export async function updateGeneticAnalystMinimumStakeAmount(
     // tslint:disable-next-line
     unsub = api.tx.geneticAnalysts
       .updateMinimumStakeAmount(minimum)
-      .signAndSend(pair, { nonce: -1 }, ({ events, status }) => {
+      .signAndSend(pair, getCommandNonceAndSigner(pair), ({ events, status }) => {
         extrinsicCallback(api, {
           events,
           status,
@@ -214,16 +220,18 @@ export async function updateGeneticAnalystAdminKey(
   let unsub;
   return new Promise((resolve, reject) => {
     // tslint:disable-next-line
-    unsub = api.tx.geneticAnalysts.updateAdminKey(accountId).signAndSend(pair, { nonce: -1 }, ({ events, status }) => {
-      extrinsicCallback(api, {
-        events,
-        status,
-        callback,
-        resolve,
-        reject,
-        unsub,
-      } as ExtrinsicCallbackParameters);
-    });
+    unsub = api.tx.geneticAnalysts
+      .updateAdminKey(accountId)
+      .signAndSend(pair, getCommandNonceAndSigner(pair), ({ events, status }) => {
+        extrinsicCallback(api, {
+          events,
+          status,
+          callback,
+          resolve,
+          reject,
+          unsub,
+        } as ExtrinsicCallbackParameters);
+      });
   });
 }
 
@@ -238,7 +246,7 @@ export async function sudoUpdateGeneticAnalystAdminKey(
     // tslint:disable-next-line
     unsub = api.tx.geneticAnalysts
       .sudoUpdateAdminKey(accountId)
-      .signAndSend(pair, { nonce: -1 }, ({ events, status }) => {
+      .signAndSend(pair, getCommandNonceAndSigner(pair), ({ events, status }) => {
         extrinsicCallback(api, {
           events,
           status,

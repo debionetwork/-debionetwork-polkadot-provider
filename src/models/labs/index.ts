@@ -1,7 +1,7 @@
 import { StakeStatus } from '../../primitives/stake-status';
 import { LabInfo } from './lab-info';
 import { VerificationStatus } from '../../primitives/verification-status';
-import { convertSubstrateBalanceToNumber, convertSubstrateNumberToNumber } from '../../index';
+import { convertSubstrateBalanceToNumber, convertSubstrateNumberToNumber, getCommandNonceAndSigner } from '../../index';
 
 export class Lab {
   constructor(anyJson: any) {

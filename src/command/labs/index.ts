@@ -1,6 +1,6 @@
 import { ApiPromise } from '@polkadot/api';
 import { EventRecord } from '@polkadot/types/interfaces/system';
-import { LabInfo, extrinsicCallback, ExtrinsicCallbackParameters } from '../../index';
+import { LabInfo, extrinsicCallback, ExtrinsicCallbackParameters, getCommandNonceAndSigner } from '../../index';
 import { VerificationStatus } from '../../primitives/verification-status';
 
 export async function registerLab(
@@ -12,7 +12,7 @@ export async function registerLab(
   let unsub;
   return new Promise((resolve, reject) => {
     // tslint:disable-next-line
-    unsub = api.tx.labs.registerLab(data).signAndSend(pair, { nonce: -1 }, ({ events, status }) => {
+    unsub = api.tx.labs.registerLab(data).signAndSend(pair, getCommandNonceAndSigner(pair), ({ events, status }) => {
       extrinsicCallback(api, {
         events,
         status,
@@ -38,7 +38,7 @@ export async function updateLab(
   let unsub;
   return new Promise((resolve, reject) => {
     // tslint:disable-next-line
-    unsub = api.tx.labs.updateLab(data).signAndSend(pair, { nonce: -1 }, ({ events, status }) => {
+    unsub = api.tx.labs.updateLab(data).signAndSend(pair, getCommandNonceAndSigner(pair), ({ events, status }) => {
       extrinsicCallback(api, {
         events,
         status,
@@ -67,7 +67,7 @@ export async function updateLabVerificationStatus(
     // tslint:disable-next-line
     unsub = api.tx.labs
       .updateLabVerificationStatus(substrateAddress, labVerificationStatus.toString())
-      .signAndSend(pair, { nonce: -1 }, ({ events, status }) => {
+      .signAndSend(pair, getCommandNonceAndSigner(pair), ({ events, status }) => {
         extrinsicCallback(api, {
           events,
           status,
@@ -84,7 +84,7 @@ export async function deregisterLab(api: ApiPromise, pair: any, callback?: () =>
   let unsub;
   return new Promise((resolve, reject) => {
     // tslint:disable-next-line
-    unsub = api.tx.labs.deregisterLab().signAndSend(pair, { nonce: -1 }, ({ events, status }) => {
+    unsub = api.tx.labs.deregisterLab().signAndSend(pair, getCommandNonceAndSigner(pair), ({ events, status }) => {
       extrinsicCallback(api, {
         events,
         status,
@@ -101,7 +101,7 @@ export async function stakeLab(api: ApiPromise, pair: any, callback?: () => void
   let unsub;
   return new Promise((resolve, reject) => {
     // tslint:disable-next-line
-    unsub = api.tx.labs.stakeLab().signAndSend(pair, { nonce: -1 }, ({ events, status }) => {
+    unsub = api.tx.labs.stakeLab().signAndSend(pair, getCommandNonceAndSigner(pair), ({ events, status }) => {
       extrinsicCallback(api, {
         events,
         status,
@@ -122,7 +122,7 @@ export async function unstakeLab(api: ApiPromise, pair: any, callback?: () => vo
   let unsub;
   return new Promise((resolve, reject) => {
     // tslint:disable-next-line
-    unsub = api.tx.labs.unstakeLab().signAndSend(pair, { nonce: -1 }, ({ events, status }) => {
+    unsub = api.tx.labs.unstakeLab().signAndSend(pair, getCommandNonceAndSigner(pair), ({ events, status }) => {
       extrinsicCallback(api, {
         events,
         status,
@@ -148,16 +148,18 @@ export async function retrieveLabUnstakeAmount(
   let unsub;
   return new Promise((resolve, reject) => {
     // tslint:disable-next-line
-    unsub = api.tx.labs.retrieveUnstakeAmount(accountId).signAndSend(pair, { nonce: -1 }, ({ events, status }) => {
-      extrinsicCallback(api, {
-        events,
-        status,
-        callback,
-        resolve,
-        reject,
-        unsub,
-      } as ExtrinsicCallbackParameters);
-    });
+    unsub = api.tx.labs
+      .retrieveUnstakeAmount(accountId)
+      .signAndSend(pair, getCommandNonceAndSigner(pair), ({ events, status }) => {
+        extrinsicCallback(api, {
+          events,
+          status,
+          callback,
+          resolve,
+          reject,
+          unsub,
+        } as ExtrinsicCallbackParameters);
+      });
   });
 }
 
@@ -170,16 +172,18 @@ export async function updateLabMinimumStakeAmount(
   let unsub;
   return new Promise((resolve, reject) => {
     // tslint:disable-next-line
-    unsub = api.tx.labs.updateMinimumStakeAmount(minimum).signAndSend(pair, { nonce: -1 }, ({ events, status }) => {
-      extrinsicCallback(api, {
-        events,
-        status,
-        callback,
-        resolve,
-        reject,
-        unsub,
-      } as ExtrinsicCallbackParameters);
-    });
+    unsub = api.tx.labs
+      .updateMinimumStakeAmount(minimum)
+      .signAndSend(pair, getCommandNonceAndSigner(pair), ({ events, status }) => {
+        extrinsicCallback(api, {
+          events,
+          status,
+          callback,
+          resolve,
+          reject,
+          unsub,
+        } as ExtrinsicCallbackParameters);
+      });
   });
 }
 
@@ -192,16 +196,18 @@ export async function updateLabUnstakeTime(
   let unsub;
   return new Promise((resolve, reject) => {
     // tslint:disable-next-line
-    unsub = api.tx.labs.updateUnstakeTime(unstakeTime).signAndSend(pair, { nonce: -1 }, ({ events, status }) => {
-      extrinsicCallback(api, {
-        events,
-        status,
-        callback,
-        resolve,
-        reject,
-        unsub,
-      } as ExtrinsicCallbackParameters);
-    });
+    unsub = api.tx.labs
+      .updateUnstakeTime(unstakeTime)
+      .signAndSend(pair, getCommandNonceAndSigner(pair), ({ events, status }) => {
+        extrinsicCallback(api, {
+          events,
+          status,
+          callback,
+          resolve,
+          reject,
+          unsub,
+        } as ExtrinsicCallbackParameters);
+      });
   });
 }
 
@@ -214,16 +220,18 @@ export async function updateLabAdminKey(
   let unsub;
   return new Promise((resolve, reject) => {
     // tslint:disable-next-line
-    unsub = api.tx.labs.updateAdminKey(accountId).signAndSend(pair, { nonce: -1 }, ({ events, status }) => {
-      extrinsicCallback(api, {
-        events,
-        status,
-        callback,
-        resolve,
-        reject,
-        unsub,
-      } as ExtrinsicCallbackParameters);
-    });
+    unsub = api.tx.labs
+      .updateAdminKey(accountId)
+      .signAndSend(pair, getCommandNonceAndSigner(pair), ({ events, status }) => {
+        extrinsicCallback(api, {
+          events,
+          status,
+          callback,
+          resolve,
+          reject,
+          unsub,
+        } as ExtrinsicCallbackParameters);
+      });
   });
 }
 
@@ -236,16 +244,18 @@ export async function sudoUpdateLabAdminKey(
   let unsub;
   return new Promise((resolve, reject) => {
     // tslint:disable-next-line
-    unsub = api.tx.labs.sudoUpdateAdminKey(accountId).signAndSend(pair, { nonce: -1 }, ({ events, status }) => {
-      extrinsicCallback(api, {
-        events,
-        status,
-        callback,
-        resolve,
-        reject,
-        unsub,
-      } as ExtrinsicCallbackParameters);
-    });
+    unsub = api.tx.labs
+      .sudoUpdateAdminKey(accountId)
+      .signAndSend(pair, getCommandNonceAndSigner(pair), ({ events, status }) => {
+        extrinsicCallback(api, {
+          events,
+          status,
+          callback,
+          resolve,
+          reject,
+          unsub,
+        } as ExtrinsicCallbackParameters);
+      });
   });
 }
 

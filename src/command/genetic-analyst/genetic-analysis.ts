@@ -1,5 +1,5 @@
 import { ApiPromise } from '@polkadot/api';
-import { successCallback } from '../..';
+import { successCallback, getCommandNonceAndSigner } from '../../index';
 
 export async function rejectGeneticAnalysis(
   api: ApiPromise,
@@ -12,7 +12,7 @@ export async function rejectGeneticAnalysis(
   // tslint:disable-next-line
   var unsub = await api.tx.geneticAnalysis
     .rejectGeneticAnalysis(geneticAnalysisTrackingId, rejectedTitle, rejectedDescription)
-    .signAndSend(pair, { nonce: -1 }, ({ events, status }) => {
+    .signAndSend(pair, getCommandNonceAndSigner(pair), ({ events, status }) => {
       successCallback(api, { events, status, callback, unsub });
     });
 }
@@ -27,7 +27,7 @@ export async function processGeneticAnalysis(
   // tslint:disable-next-line
   var unsub = await api.tx.geneticAnalysis
     .processGeneticAnalysis(geneticAnalysisTrackingId, geneticAnalysisStatus)
-    .signAndSend(pair, { nonce: -1 }, ({ events, status }) => {
+    .signAndSend(pair, getCommandNonceAndSigner(pair), ({ events, status }) => {
       successCallback(api, { events, status, callback, unsub });
     });
 }
@@ -43,7 +43,7 @@ export async function submitGeneticAnalysis(
   // tslint:disable-next-line
   var unsub = await api.tx.geneticAnalysis
     .submitGeneticAnalysis(geneticAnalysisTrackingId, reportLink, comment)
-    .signAndSend(pair, { nonce: -1 }, ({ events, status }) => {
+    .signAndSend(pair, getCommandNonceAndSigner(pair), ({ events, status }) => {
       successCallback(api, { events, status, callback, unsub });
     });
 }

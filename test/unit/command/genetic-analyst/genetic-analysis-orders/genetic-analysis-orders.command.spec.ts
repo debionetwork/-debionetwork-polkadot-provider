@@ -9,7 +9,7 @@ import {
   sudoUpdateEscrowKey,
   updateEscrowKey
 } from "../../../../../src/command/genetic-analyst";
-import { successCallback } from "../../../../../src/index";
+import { successCallback, getCommandNonceAndSigner } from "../../../../../src/index";
 import { ApiPromise, eventAndStatusMock, signAndSendWithPaymentInfo } from "../../../@polkadot-api.mock";
 import { mockFunction } from "../../../mock";
 import { geneticAnalysisOrders } from "./genetic-analysis-orders.command.mock";
@@ -20,6 +20,9 @@ jest.mock('../../../mock', () => ({
 
 jest.mock('../../../../../src/index', () => ({
   successCallback: jest.fn(() => mockFunction()),
+  getCommandNonceAndSigner: jest.fn(() => {
+    return { nonce: -1 };
+  }),
 }));
 
 describe('Genetic Analysis Orders Commands Unit Testing', () => {
@@ -68,7 +71,7 @@ describe('Genetic Analysis Orders Commands Unit Testing', () => {
     expect(cancelGeneticAnalysisOrderSpy).toBeCalledTimes(1);
     expect(cancelGeneticAnalysisOrderSpy).toBeCalledWith(ORDER_ID);
     expect(signAndSendSpy).toBeCalledTimes(1);
-    expect(signAndSendSpy).toBeCalledWith(PAIR, { nonce: -1 }, expect.any(Function));
+    expect(signAndSendSpy).toBeCalledWith(PAIR, getCommandNonceAndSigner(PAIR), expect.any(Function));
     expect(successCallback).toBeCalledTimes(1);
     expect(successCallback).toBeCalledWith(API_PROMISE_MOCK, { 
       events: eventAndStatusMock.events, 
@@ -108,7 +111,7 @@ describe('Genetic Analysis Orders Commands Unit Testing', () => {
       GENETIC_LINK,
       );
     expect(signAndSendSpy).toBeCalledTimes(1);
-    expect(signAndSendSpy).toBeCalledWith(PAIR, { nonce: -1 }, expect.any(Function));
+    expect(signAndSendSpy).toBeCalledWith(PAIR, getCommandNonceAndSigner(PAIR), expect.any(Function));
     expect(successCallback).toBeCalledTimes(1);
     expect(successCallback).toBeCalledWith(API_PROMISE_MOCK, { 
       events: eventAndStatusMock.events, 
@@ -134,7 +137,7 @@ describe('Genetic Analysis Orders Commands Unit Testing', () => {
       expect(setGeneticAnalysisOrderRefundedSpy).toBeCalledTimes(1);
       expect(setGeneticAnalysisOrderRefundedSpy).toBeCalledWith(ORDER_ID);
       expect(signAndSendSpy).toBeCalledTimes(1);
-      expect(signAndSendSpy).toBeCalledWith(PAIR, { nonce: -1 }, expect.any(Function));
+      expect(signAndSendSpy).toBeCalledWith(PAIR, getCommandNonceAndSigner(PAIR), expect.any(Function));
       expect(successCallback).toBeCalledTimes(1);
       expect(successCallback).toBeCalledWith(API_PROMISE_MOCK, { 
         events: eventAndStatusMock.events, 
@@ -160,7 +163,7 @@ describe('Genetic Analysis Orders Commands Unit Testing', () => {
       expect(setGeneticAnalysisOrderPaidSpy).toBeCalledTimes(1);
       expect(setGeneticAnalysisOrderPaidSpy).toBeCalledWith(ORDER_ID);
       expect(signAndSendSpy).toBeCalledTimes(1);
-      expect(signAndSendSpy).toBeCalledWith(PAIR, { nonce: -1 }, expect.any(Function));
+      expect(signAndSendSpy).toBeCalledWith(PAIR, getCommandNonceAndSigner(PAIR), expect.any(Function));
       expect(successCallback).toBeCalledTimes(1);
       expect(successCallback).toBeCalledWith(API_PROMISE_MOCK, { 
         events: eventAndStatusMock.events, 
@@ -186,7 +189,7 @@ describe('Genetic Analysis Orders Commands Unit Testing', () => {
       expect(fulfillGeneticAnalysisOrderSpy).toBeCalledTimes(1);
       expect(fulfillGeneticAnalysisOrderSpy).toBeCalledWith(ORDER_ID);
       expect(signAndSendSpy).toBeCalledTimes(1);
-      expect(signAndSendSpy).toBeCalledWith(PAIR, { nonce: -1 }, expect.any(Function));
+      expect(signAndSendSpy).toBeCalledWith(PAIR, getCommandNonceAndSigner(PAIR), expect.any(Function));
       expect(successCallback).toBeCalledTimes(1);
       expect(successCallback).toBeCalledWith(API_PROMISE_MOCK, { 
         events: eventAndStatusMock.events, 
@@ -212,7 +215,7 @@ describe('Genetic Analysis Orders Commands Unit Testing', () => {
     expect(sudoUpdateEscrowKeySpy).toBeCalledTimes(1);
     expect(sudoUpdateEscrowKeySpy).toBeCalledWith(CUSTOMER_ID);
     expect(signAndSendSpy).toBeCalledTimes(1);
-    expect(signAndSendSpy).toBeCalledWith(PAIR, { nonce: -1 }, expect.any(Function));
+    expect(signAndSendSpy).toBeCalledWith(PAIR, getCommandNonceAndSigner(PAIR), expect.any(Function));
     expect(successCallback).toBeCalledTimes(1);
     expect(successCallback).toBeCalledWith(API_PROMISE_MOCK, { 
       events: eventAndStatusMock.events, 
@@ -238,7 +241,7 @@ describe('Genetic Analysis Orders Commands Unit Testing', () => {
     expect(updateEscrowKeySpy).toBeCalledTimes(1);
     expect(updateEscrowKeySpy).toBeCalledWith(CUSTOMER_ID);
     expect(signAndSendSpy).toBeCalledTimes(1);
-    expect(signAndSendSpy).toBeCalledWith(PAIR, { nonce: -1 }, expect.any(Function));
+    expect(signAndSendSpy).toBeCalledWith(PAIR, getCommandNonceAndSigner(PAIR), expect.any(Function));
     expect(successCallback).toBeCalledTimes(1);
     expect(successCallback).toBeCalledWith(API_PROMISE_MOCK, { 
       events: eventAndStatusMock.events, 

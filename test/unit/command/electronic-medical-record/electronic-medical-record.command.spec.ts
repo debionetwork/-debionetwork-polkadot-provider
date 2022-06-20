@@ -1,6 +1,6 @@
 import { ApiPromise, eventAndStatusMock, signAndSendWithPaymentInfo } from "../../@polkadot-api.mock";
 import { mockFunction } from "../../mock";
-import { successCallback } from "../../../../src/index";
+import { successCallback, getCommandNonceAndSigner } from "../../../../src/index";
 import { electronicMedicalRecord } from "./electronic-medical-record.command.mock";
 import { electronicMedicalRecordInputDataMock } from "../../models/electronic-medical-record/electronic-medical-record.mock";
 import { 
@@ -17,6 +17,9 @@ jest.mock('../../mock', () => ({
 
 jest.mock('../../../../src/index', () => ({
   successCallback: jest.fn(() => mockFunction()),
+  getCommandNonceAndSigner: jest.fn(() => {
+    return { nonce: -1 };
+  }),
 }));
 
 describe('Electronic Medical Record Commands Unit Tests', () => {
@@ -58,7 +61,7 @@ describe('Electronic Medical Record Commands Unit Tests', () => {
       expect(addElectronicMedicalRecordSpy).toBeCalledTimes(1);
       expect(addElectronicMedicalRecordSpy).toBeCalledWith(EMR_MOCK.title, EMR_MOCK.category, EMR_MOCK.files);
       expect(signAndSendSpy).toBeCalledTimes(1);
-      expect(signAndSendSpy).toBeCalledWith(PAIR, { nonce: -1 }, expect.any(Function));
+      expect(signAndSendSpy).toBeCalledWith(PAIR, getCommandNonceAndSigner(PAIR), expect.any(Function));
       expect(successCallback).toBeCalledTimes(1);
       expect(successCallback).toBeCalledWith(API_PROMISE_MOCK, {
           events: eventAndStatusMock.events,
@@ -85,7 +88,7 @@ describe('Electronic Medical Record Commands Unit Tests', () => {
       expect(updateElectronicMedicalRecordSpy).toBeCalledTimes(1);
       expect(updateElectronicMedicalRecordSpy).toBeCalledWith(EMR_MOCK.id, EMR_MOCK.title, EMR_MOCK.category, EMR_MOCK.files);
       expect(signAndSendSpy).toBeCalledTimes(1);
-      expect(signAndSendSpy).toBeCalledWith(PAIR, { nonce: -1 }, expect.any(Function));
+      expect(signAndSendSpy).toBeCalledWith(PAIR, getCommandNonceAndSigner(PAIR), expect.any(Function));
       expect(successCallback).toBeCalledTimes(1);
       expect(successCallback).toBeCalledWith(API_PROMISE_MOCK, {
           events: eventAndStatusMock.events,
@@ -112,7 +115,7 @@ describe('Electronic Medical Record Commands Unit Tests', () => {
       expect(removeElectronicMedicalRecordSpy).toBeCalledTimes(1);
       expect(removeElectronicMedicalRecordSpy).toBeCalledWith(EMR_ID);
       expect(signAndSendSpy).toBeCalledTimes(1);
-      expect(signAndSendSpy).toBeCalledWith(PAIR, { nonce: -1 }, expect.any(Function));
+      expect(signAndSendSpy).toBeCalledWith(PAIR, getCommandNonceAndSigner(PAIR), expect.any(Function));
       expect(successCallback).toBeCalledTimes(1);
       expect(successCallback).toBeCalledWith(API_PROMISE_MOCK, {
           events: eventAndStatusMock.events,

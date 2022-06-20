@@ -1,5 +1,5 @@
 import { ApiPromise } from '@polkadot/api';
-import { successCallback } from '../..';
+import { successCallback, getCommandNonceAndSigner } from '../../index';
 import { GeneticAnalystServiceInfo } from '../../models';
 
 export async function bulkCreateGeneticAnalystService(
@@ -11,7 +11,7 @@ export async function bulkCreateGeneticAnalystService(
   // tslint:disable-next-line
   var unsub = await api.tx.geneticAnalystServices
     .bulkCreateGeneticAnalystService(geneticAnalystServiceInfo)
-    .signAndSend(pair, { nonce: -1 }, ({ events, status }) => {
+    .signAndSend(pair, getCommandNonceAndSigner(pair), ({ events, status }) => {
       successCallback(api, { events, status, callback, unsub });
     });
 }
@@ -25,7 +25,7 @@ export async function createGeneticAnalystService(
   // tslint:disable-next-line
   var unsub = await api.tx.geneticAnalystServices
     .createGeneticAnalystService(geneticAnalystServiceInfo)
-    .signAndSend(pair, { nonce: -1 }, ({ events, status }) => {
+    .signAndSend(pair, getCommandNonceAndSigner(pair), ({ events, status }) => {
       successCallback(api, { events, status, callback, unsub });
     });
 }
@@ -39,7 +39,7 @@ export async function deleteGeneticAnalystService(
   // tslint:disable-next-line
   var unsub = await api.tx.geneticAnalystServices
     .deleteGeneticAnalystService(geneticAnalystServiceId)
-    .signAndSend(pair, { nonce: -1 }, ({ events, status }) => {
+    .signAndSend(pair, getCommandNonceAndSigner(pair), ({ events, status }) => {
       successCallback(api, { events, status, callback, unsub });
     });
 }
@@ -54,7 +54,7 @@ export async function updateGeneticAnalystService(
   // tslint:disable-next-line
   var unsub = await api.tx.geneticAnalystServices
     .updateGeneticAnalystService(geneticAnalystServiceId, geneticAnalystServiceInfo)
-    .signAndSend(pair, { nonce: -1 }, ({ events, status }) => {
+    .signAndSend(pair, getCommandNonceAndSigner(pair), ({ events, status }) => {
       successCallback(api, { events, status, callback, unsub });
     });
 }

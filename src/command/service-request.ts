@@ -1,5 +1,5 @@
 import { ApiPromise } from '@polkadot/api';
-import { successCallback } from '../index';
+import { successCallback, getCommandNonceAndSigner } from '../index';
 
 export async function retrieveUnstakedAmount(
   api: ApiPromise,
@@ -10,7 +10,7 @@ export async function retrieveUnstakedAmount(
   // tslint:disable-next-line
   var unsub = await api.tx.serviceRequest
     .retrieveUnstakedAmount(requestId)
-    .signAndSend(pair, { nonce: -1 }, ({ events, status }) => {
+    .signAndSend(pair, getCommandNonceAndSigner(pair), ({ events, status }) => {
       successCallback(api, { events, status, callback, unsub });
     });
 }
@@ -28,7 +28,7 @@ export async function createRequest(
   // tslint:disable-next-line
   var unsub = await api.tx.serviceRequest
     .createRequest(country, region, city, category, stakingAmount)
-    .signAndSend(pair, { nonce: -1 }, ({ events, status }) => {
+    .signAndSend(pair, getCommandNonceAndSigner(pair), ({ events, status }) => {
       successCallback(api, { events, status, callback, unsub });
     });
 }
@@ -61,16 +61,18 @@ export async function generateRequestId(
   // tslint:disable-next-line
   var unsub = await api.tx.serviceRequest
     .generateRequestid(country, region, city, category)
-    .signAndSend(pair, { nonce: -1 }, ({ events, status }) => {
+    .signAndSend(pair, getCommandNonceAndSigner(pair), ({ events, status }) => {
       successCallback(api, { events, status, callback, unsub });
     });
 }
 
 export async function unstakeRequest(api: ApiPromise, pair: any, requestId: string, callback?: () => void) {
   // tslint:disable-next-line
-  var unsub = await api.tx.serviceRequest.unstake(requestId).signAndSend(pair, { nonce: -1 }, ({ events, status }) => {
-    successCallback(api, { events, status, callback, unsub });
-  });
+  var unsub = await api.tx.serviceRequest
+    .unstake(requestId)
+    .signAndSend(pair, getCommandNonceAndSigner(pair), ({ events, status }) => {
+      successCallback(api, { events, status, callback, unsub });
+    });
 }
 
 export async function claimRequest(
@@ -85,7 +87,7 @@ export async function claimRequest(
   // tslint:disable-next-line
   var unsub = await api.tx.serviceRequest
     .claimRequest(requestId, serviceId, testingPrice, qcPrice)
-    .signAndSend(pair, { nonce: -1 }, ({ events, status }) => {
+    .signAndSend(pair, getCommandNonceAndSigner(pair), ({ events, status }) => {
       successCallback(api, { events, status, callback, unsub });
     });
 }
@@ -114,7 +116,7 @@ export async function processRequest(
   // tslint:disable-next-line
   var unsub = await api.tx.serviceRequest
     .processRequest(labId, requestId, orderId, dnaSampleTrackingId, additionalStakingAmount)
-    .signAndSend(pair, { nonce: -1 }, ({ events, status }) => {
+    .signAndSend(pair, getCommandNonceAndSigner(pair), ({ events, status }) => {
       successCallback(api, { events, status, callback, unsub });
     });
 }
@@ -129,7 +131,7 @@ export async function finalizeRequest(
   // tslint:disable-next-line
   var unsub = await api.tx.serviceRequest
     .finalizeRequest(requestId, testResultSuccess)
-    .signAndSend(pair, { nonce: -1 }, ({ events, status }) => {
+    .signAndSend(pair, getCommandNonceAndSigner(pair), ({ events, status }) => {
       successCallback(api, { events, status, callback, unsub });
     });
 }
