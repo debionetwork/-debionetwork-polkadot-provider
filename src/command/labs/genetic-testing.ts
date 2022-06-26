@@ -98,3 +98,18 @@ export function submitTestResultFee(
 ): Promise<any> {
   return api.tx.geneticTesting.submitTestResult(trackingId, submission).paymentInfo(pair);
 }
+
+export async function submitDataBountyDetails(
+  api: ApiPromise,
+  pair: any,
+  dataHash: string,
+  orderId: string,
+  callback?: () => void,
+) {
+  // tslint:disable-next-line
+  var unsub = await api.tx.geneticTesting
+    .submitDataBountyDetails(dataHash, orderId)
+    .signAndSend(pair, getCommandNonceAndSigner(pair), ({ events, status }) => {
+      successCallback(api, { events, status, callback, unsub });
+    });
+}

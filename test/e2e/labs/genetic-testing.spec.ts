@@ -2,10 +2,10 @@ import { ApiPromise } from '@polkadot/api';
 import 'regenerator-runtime/runtime';
 import { queryLastOrderHashByCustomer, queryOrderDetailByOrderID} from '../../../src/query/labs/orders';
 import { createOrder} from "../../../src/command/labs/orders";
-import { processDnaSample, processDnaSampleFee, rejectDnaSampleFee, rejectDnaSample, submitTestResult, submitTestResultFee } from "../../../src/command/labs/genetic-testing";
+import { processDnaSample, processDnaSampleFee, rejectDnaSampleFee, rejectDnaSample, submitTestResult, submitTestResultFee, submitDataBountyDetails } from "../../../src/command/labs/genetic-testing";
 import { createService, deleteService } from "../../../src/command/labs/services";
 import { initializeApi } from '../polkadot-init';
-import { queryDnaSamples, queryLabById } from '../../../src/query/labs';
+import { queryDnaSamples, queryLabById, queryStakedDataByAccountId, queryStakedDataByOrderId } from '../../../src/query/labs';
 import { queryServicesByMultipleIds, queryServicesCount } from '../../../src/query/labs/services';
 import { DnaTestResultSubmission, Lab } from '../../../src/models/labs';
 import { deregisterLab, registerLab } from "../../../src/command/labs";
@@ -151,6 +151,24 @@ describe('Genetic Testing Pallet Integration Tests', () => {
     expect(dnaSample.status).toEqual(DnaSampleStatus.Rejected);
     expect(dnaSample.rejectedTitle).toEqual(rejectedTitle);
     expect(dnaSample.rejectedDescription).toEqual(rejectedDescription);
+  });
+
+  it('should submit data bounty details return', async () => {
+    // eslint-disable-next-line
+    const submitDataBountyDetailsPromise: Promise<string[]> = new Promise((resolve, reject) => {
+      submitDataBountyDetails(api, pair, order.id, order.id, () => { // Order ID as data hash on param 1
+        queryStakedDataByAccountId(api, pair.address)
+          .then((res) => {
+            resolve(res)
+          });
+      });
+    });
+    
+    const stakedData = await submitDataBountyDetailsPromise;
+    expect(stakedData).toEqual(order.id);
+    
+    const stakedDataByOrderId = await queryStakedDataByOrderId(api, order.id)
+    expect(stakedDataByOrderId).toEqual(order.id);
   });
 
   it('reset service and lab pallet data', async () => {
