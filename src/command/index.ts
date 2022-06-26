@@ -72,19 +72,19 @@ export function extrinsicCallback(api: ApiPromise, callbackParam: ExtrinsicCallb
 }
 
 export async function getExtensionDapp() {
-  return (await import('@polkadot/extension-dapp'));
+  return await import('@polkadot/extension-dapp');
 }
 
 export function getCommandNonceAndSigner(account: any) {
   if (typeof window !== 'undefined') {
     const source = account?.meta?.source;
     getExtensionDapp()
-      .then(async dapp => {
-        await dapp.web3Enable("DeBio Network");
+      .then(async (dapp) => {
+        await dapp.web3Enable('DeBio Network');
 
         if (source !== undefined && dapp.web3FromSource !== undefined) {
-          const src = await dapp.web3FromSource(source)
-          
+          const src = await dapp.web3FromSource(source);
+
           const signer = src?.signer;
           if (signer !== undefined) {
             return {
