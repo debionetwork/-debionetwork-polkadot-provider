@@ -1,4 +1,6 @@
 
+/* tslint:disable:no-string-literal */
+/* tslint:disable:no-console */
 export async function processEvent(
   state: any,
   address: string,
