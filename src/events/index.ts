@@ -1,3 +1,5 @@
+import { customerHandler } from "./handlers/customer"
+import { labHandler } from "./handlers/lab"
 
 /* tslint:disable:no-string-literal */
 /* tslint:disable:no-console */
@@ -6,13 +8,17 @@ export async function processEvent(
   address: string,
   event: any,
   role: string,
-  handlers: any,
   store: any
 ) {
   let statusAdd = false
   let message = ""
   let payloadData = null
   let paramsData = null
+
+  const handlers = {
+    customer: customerHandler,
+    lab: labHandler
+  }
 
   const dataEvent = JSON.parse(JSON.stringify(event.data))
   const handler = handlers[role][event.section]

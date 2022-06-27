@@ -1,11 +1,11 @@
 export const sampleAddress = "sampleAddress"
-export const sampleRole = "sampleRole"
+export const sampleRole = "customer"
 export const sampleState = {
   configEvent: {
     "role": {
-      "sampleRole": {
-        "sampleSection": {
-          "sampleMethod1": {
+      "customer": {
+        "serviceRequest": {
+          "ServiceRequestCreated": {
             "message": "",
             "value": "hash",
             "value_message": "Congrats! You successfully submitted your requested service with staking ID ",
@@ -13,7 +13,7 @@ export const sampleState = {
             "params": "",
             "identity": 0
           },
-          "sampleMethod2": {
+          "ServiceRequestUnstaked": {
             "message": "Your stake amount has been refunded, kindly check your balance.",
             "value": 1,
             "value_message": "",
@@ -45,8 +45,8 @@ export const sampleEvent = {
       "unstakedAt": null
     }
   ],
-  section: "sampleSection",
-  method: "sampleMethod1"
+  "section": "serviceRequest",
+  "method": "ServiceRequestCreated"
 }
 
 export const sampleEvent2 = {
@@ -70,8 +70,8 @@ export const sampleEvent2 = {
       }
     ]
   ],
-  section: "sampleSection",
-  method: "sampleMethod1"
+  "section": "serviceRequest",
+  "method": "ServiceRequestCreated"
 }
 
 export const sampleEvent3 = {
@@ -95,24 +95,6 @@ export const sampleEvent3 = {
       }
     ]
   ],
-  section: "sampleSection",
-  method: "sampleMethod2"
+  "section": "serviceRequest",
+  "method": "ServiceRequestUnstaked"
 }
-
-const handler = {
-  sampleSection: async ({ dataEvent, value, valueMessage, event }) => {
-    const data = dataEvent
-    const id = isNaN(value) ? data[0][value] : data[value]
-    const params = { page: 1 }
-    let wording = valueMessage
-
-    if (event.method === "sampleMethod1") {
-      const formatedHash = `${data[1]?.hash?.substr(0, 4)}...${data[1]?.hash?.substr(data[1]?.hash?.length - 4)}`
-      wording = `${valueMessage} (${formatedHash}).`
-    }
-
-    return { data, id, params, wording }
-  }
-}
-
-export const sampleHandler = new Proxy(handler, {})

@@ -1,5 +1,5 @@
 import { processEvent } from "../../../src/events/index"
-import { sampleAddress, sampleRole, sampleState, sampleEvent, sampleEvent2, sampleEvent3, sampleHandler } from "./dataSample"
+import { sampleAddress, sampleRole, sampleState, sampleEvent, sampleEvent2, sampleEvent3 } from "./dataSample"
 
 describe("Polkadot Events Test", () => {
   it(
@@ -10,7 +10,6 @@ describe("Polkadot Events Test", () => {
         sampleAddress,
         sampleEvent,
         sampleRole,
-        { sampleRole: sampleHandler },
         {
           store: {
             getters: {
@@ -32,7 +31,6 @@ describe("Polkadot Events Test", () => {
         "foo",
         sampleEvent,
         sampleRole,
-        { sampleRole: sampleHandler },
         {
           store: {
             getters: {
@@ -54,7 +52,6 @@ describe("Polkadot Events Test", () => {
         sampleAddress,
         sampleEvent2,
         sampleRole,
-        { sampleRole: sampleHandler },
         {
           store: {
             getters: {
@@ -76,7 +73,6 @@ describe("Polkadot Events Test", () => {
         "foo",
         sampleEvent2,
         sampleRole,
-        { sampleRole: sampleHandler },
         {
           store: {
             getters: {
@@ -98,7 +94,6 @@ describe("Polkadot Events Test", () => {
         sampleAddress,
         sampleEvent3,
         sampleRole,
-        { sampleRole: sampleHandler },
         {
           store: {
             getters: {
