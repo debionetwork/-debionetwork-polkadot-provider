@@ -1,17 +1,17 @@
 import { ApiPromise } from '@polkadot/api';
-import { successCallback } from '../..';
+import { successCallback, getCommandNonceAndSigner } from '../../index';
 import { GeneticAnalystQualificationInfo } from '../../models';
 
 export async function bulkCreateQualification(
   api: ApiPromise,
   pair: any,
-  geneticAnalystQualificationInfo: GeneticAnalystQualificationInfo,
+  geneticAnalystQualificationInfos: GeneticAnalystQualificationInfo[],
   callback?: () => void,
 ): Promise<void> {
   // tslint:disable-next-line
   var unsub = await api.tx.geneticAnalystQualifications
-    .bulkCreateQualification(geneticAnalystQualificationInfo)
-    .signAndSend(pair, { nonce: -1 }, ({ events, status }) => {
+    .bulkCreateQualification(geneticAnalystQualificationInfos)
+    .signAndSend(pair, getCommandNonceAndSigner(pair), ({ events, status }) => {
       successCallback(api, { events, status, callback, unsub });
     });
 }
@@ -25,7 +25,7 @@ export async function createQualification(
   // tslint:disable-next-line
   var unsub = await api.tx.geneticAnalystQualifications
     .createQualification(geneticAnalystQualificationInfo)
-    .signAndSend(pair, { nonce: -1 }, ({ events, status }) => {
+    .signAndSend(pair, getCommandNonceAndSigner(pair), ({ events, status }) => {
       successCallback(api, { events, status, callback, unsub });
     });
 }
@@ -39,7 +39,7 @@ export async function deleteQualification(
   // tslint:disable-next-line
   var unsub = await api.tx.geneticAnalystQualifications
     .deleteQualification(qualificationId)
-    .signAndSend(pair, { nonce: -1 }, ({ events, status }) => {
+    .signAndSend(pair, getCommandNonceAndSigner(pair), ({ events, status }) => {
       successCallback(api, { events, status, callback, unsub });
     });
 }
@@ -54,7 +54,7 @@ export async function updateQualification(
   // tslint:disable-next-line
   var unsub = await api.tx.geneticAnalystQualifications
     .updateQualification(qualificationId, geneticAnalystQualificationInfo)
-    .signAndSend(pair, { nonce: -1 }, ({ events, status }) => {
+    .signAndSend(pair, getCommandNonceAndSigner(pair), ({ events, status }) => {
       successCallback(api, { events, status, callback, unsub });
     });
 }

@@ -13,4 +13,22 @@ export const labs = {
   deregisterLab() {
     return signAndSend;
   },
+  stakeLab() {
+    return signAndSend;
+  },
+  unstakeLab() {
+    return signAndSend;
+  },
+  updateMinimumStakeAmount(params) { // eslint-disable-line
+    return signAndSend;
+  },
+  retrieveUnstakeAmount(params) { // eslint-disable-line
+    return signAndSend;
+  },
+  updateAdminKey(params) { // eslint-disable-line
+    return signAndSend;
+  },
+  sudoUpdateAdminKey(params) { // eslint-disable-line
+    return signAndSend;
+  }
 }

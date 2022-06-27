@@ -1,26 +1,36 @@
-export const geneticAnalystServicesMock = {
-  id: 'string',
-  ownerId: 'string',
-  info: {
-    name: 'string',
-    pricesByCurrency: [
-      {
-        currency: 'string',
-        totalPrice: 0,
-        priceComponents: [
+export const geneticAnalystServicesMock = [
+  [
+    ['string'],
+    {
+      id: 'string',
+      ownerId: 'string',
+      info: {
+        name: 'string',
+        pricesByCurrency: [
           {
-            component: 'string',
-            value: 0
-          }
+            currency: 'DAI',
+            totalPrice: '0',
+            priceComponents: [
+              {
+                component: 'string',
+                value: '0'
+              }
+            ],
+            additionalPrices: [
+              {
+                component: 'string',
+                value: '0'
+              }
+            ],
+          },
         ],
-        additionalPrices: [],
-      },
-    ],
-    expectedDuration: {
-      duration: '1',
-      durationType: 'string',
-    },
-    description: 'string',
-    testResultSample: 'string',
-  }
-}
+        expectedDuration: {
+          duration: '1',
+          durationType: 'WorkingDays',
+        },
+        description: 'string',
+        testResultSample: 'string',
+      }
+    }
+  ]
+]

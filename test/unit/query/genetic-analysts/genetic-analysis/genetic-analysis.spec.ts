@@ -1,7 +1,7 @@
 import { 
   queryGeneticAnalysisByGeneticAnalysisTrackingId,
   queryGeneticAnalysisByOwnerId,
-  queryGeneticAnalysisByGeneticAnalystId,
+  queryGeneticAnalysisByGeneticAnalyst,
 } from "../../../../../src/query/genetic-analysts/genetic-analysis";
 import { geneticAnalysis } from "./genetic-analysis.mock";
 import { ApiPromise } from "../../../@polkadot-api.mock";
@@ -22,7 +22,7 @@ import { GeneticAnalysis } from "../../../../../src/models/genetic-analysts/gene
   
     const geneticAnalysisStorageSpy = jest.spyOn(geneticAnalysis, 'geneticAnalysisStorage');
     const geneticAnalysisByOwnerSpy = jest.spyOn(geneticAnalysis, 'geneticAnalysisByOwner');
-    const geneticAnalysisByGeneticAnalystIdSpy = jest.spyOn(geneticAnalysis, 'geneticAnalysisByGeneticAnalystId');
+    const geneticAnalysisByGeneticAnalystIdSpy = jest.spyOn(geneticAnalysis, 'geneticAnalysisByGeneticAnalyst');
     
     beforeEach(() => {
       (mockFunction as jest.Mock).mockClear();
@@ -89,7 +89,7 @@ import { GeneticAnalysis } from "../../../../../src/models/genetic-analysts/gene
         .mockReturnValue(geneticAnalysisDataMock);
   
       // Assert
-      expect(await queryGeneticAnalysisByGeneticAnalystId(API_PROMISE_MOCK as any, ACCOUNT_ID))
+      expect(await queryGeneticAnalysisByGeneticAnalyst(API_PROMISE_MOCK as any, ACCOUNT_ID))
         .toEqual([EXPECTED_VALUE]);
       expect(mockFunction).toBeCalledTimes(2);
       expect(mockFunction).toBeCalledWith(ACCOUNT_ID);

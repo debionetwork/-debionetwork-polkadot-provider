@@ -8,7 +8,7 @@ import {
 import { ApiPromise, signAndSendWithPaymentInfo, eventAndStatusMock } from "../../../@polkadot-api.mock";
 import { mockFunction } from "../../../mock";
 import { geneticTesting } from "./genetic-testing.command.mock";
-import { successCallback } from "../../../../../src/index";
+import { successCallback, getCommandNonceAndSigner } from "../../../../../src/index";
 
 jest.mock('../../../mock', () => ({
   mockFunction: jest.fn(),
@@ -16,6 +16,9 @@ jest.mock('../../../mock', () => ({
 
 jest.mock('../../../../../src/index', () => ({
   successCallback: jest.fn(() => mockFunction()),
+  getCommandNonceAndSigner: jest.fn(() => {
+    return { nonce: -1 };
+  }),
 }));
 
 describe('geneticTesting Commands Unit Tests', () => {
@@ -61,7 +64,7 @@ describe('geneticTesting Commands Unit Tests', () => {
       expect(processDnaSampeSpy).toBeCalledTimes(1);
       expect(processDnaSampeSpy).toBeCalledWith(TRACKING_ID, PROCESS_STATUS);
       expect(signAndSendSpy).toBeCalledTimes(1);
-      expect(signAndSendSpy).toBeCalledWith(PAIR, { nonce: -1 }, expect.any(Function));
+      expect(signAndSendSpy).toBeCalledWith(PAIR, getCommandNonceAndSigner(PAIR), expect.any(Function));
       expect(successCallback).toBeCalledTimes(1);
       expect(successCallback).toBeCalledWith(API_PROMISE_MOCK, {
           events: eventAndStatusMock.events,
@@ -88,7 +91,7 @@ describe('geneticTesting Commands Unit Tests', () => {
       expect(receivedDnaSampleSpy).toBeCalledTimes(1);
       expect(receivedDnaSampleSpy).toBeCalledWith(TRACKING_ID);
       expect(signAndSendSpy).toBeCalledTimes(1);
-      expect(signAndSendSpy).toBeCalledWith(PAIR, { nonce: -1 }, expect.any(Function));
+      expect(signAndSendSpy).toBeCalledWith(PAIR, getCommandNonceAndSigner(PAIR), expect.any(Function));
       expect(successCallback).toBeCalledTimes(1);
       expect(successCallback).toBeCalledWith(API_PROMISE_MOCK, {
           events: eventAndStatusMock.events,
@@ -119,7 +122,7 @@ describe('geneticTesting Commands Unit Tests', () => {
       expect(rejectedDnaSampleSpy).toBeCalledTimes(1);
       expect(rejectedDnaSampleSpy).toBeCalledWith(TRACKING_ID, REJECTED_TITLE, REJECTED_DESCRIPTION);
       expect(signAndSendSpy).toBeCalledTimes(1);
-      expect(signAndSendSpy).toBeCalledWith(PAIR, { nonce: -1 }, expect.any(Function));
+      expect(signAndSendSpy).toBeCalledWith(PAIR, getCommandNonceAndSigner(PAIR), expect.any(Function));
       expect(successCallback).toBeCalledTimes(1);
       expect(successCallback).toBeCalledWith(API_PROMISE_MOCK, {
           events: eventAndStatusMock.events,
@@ -150,7 +153,7 @@ describe('geneticTesting Commands Unit Tests', () => {
       expect(submitIndependentTestResultSpy).toBeCalledTimes(1);
       expect(submitIndependentTestResultSpy).toBeCalledWith(DNA_TEST_RESULT_SUBMISSION);
       expect(signAndSendSpy).toBeCalledTimes(1);
-      expect(signAndSendSpy).toBeCalledWith(PAIR, { nonce: -1 }, expect.any(Function));
+      expect(signAndSendSpy).toBeCalledWith(PAIR, getCommandNonceAndSigner(PAIR), expect.any(Function));
       expect(successCallback).toBeCalledTimes(1);
       expect(successCallback).toBeCalledWith(API_PROMISE_MOCK, {
           events: eventAndStatusMock.events,
@@ -183,7 +186,7 @@ describe('geneticTesting Commands Unit Tests', () => {
       expect(submitTestResultSpy).toBeCalledTimes(1);
       expect(submitTestResultSpy).toBeCalledWith(TRACKING_ID, SUBMISSION);
       expect(signAndSendSpy).toBeCalledTimes(1);
-      expect(signAndSendSpy).toBeCalledWith(PAIR, { nonce: -1 }, expect.any(Function));
+      expect(signAndSendSpy).toBeCalledWith(PAIR, getCommandNonceAndSigner(PAIR), expect.any(Function));
       expect(successCallback).toBeCalledTimes(1);
       expect(successCallback).toBeCalledWith(API_PROMISE_MOCK, {
           events: eventAndStatusMock.events,

@@ -12,3 +12,4 @@ export class Hospital {
 }
 
 export * from './hospital-info';
+export * from './certifications';

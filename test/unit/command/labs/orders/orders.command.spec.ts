@@ -10,7 +10,7 @@ import {
 } from "../../../../../src/command/labs/orders";
 import { ApiPromise, signAndSendWithPaymentInfo, eventAndStatusMock } from "../../../@polkadot-api.mock";
 import { mockFunction } from "../../../mock";
-import { successCallback } from "../../../../../src/index";
+import { successCallback, getCommandNonceAndSigner } from "../../../../../src/index";
 import { orders } from "./orders.command.mock";
 
 jest.mock('../../../mock', () => ({
@@ -19,6 +19,9 @@ jest.mock('../../../mock', () => ({
 
 jest.mock('../../../../../src/index', () => ({
   successCallback: jest.fn(() => mockFunction()),
+  getCommandNonceAndSigner: jest.fn(() => {
+    return { nonce: -1 };
+  }),
 }));
 
 describe('Orders Commands Unit Tests', () => {
@@ -74,7 +77,7 @@ describe('Orders Commands Unit Tests', () => {
       expect(createOrderSpy).toBeCalledTimes(1);
       expect(createOrderSpy).toBeCalledWith(SERVICE_ID, PRICE_INDEX, BOX_PUBLIC_KEY, ORDER_FLOW);
       expect(signAndSendSpy).toBeCalledTimes(1);
-      expect(signAndSendSpy).toBeCalledWith(PAIR, { nonce: -1 }, expect.any(Function));
+      expect(signAndSendSpy).toBeCalledWith(PAIR, getCommandNonceAndSigner(PAIR), expect.any(Function));
       expect(successCallback).toBeCalledTimes(1);
       expect(successCallback).toBeCalledWith(API_PROMISE_MOCK, {
           events: eventAndStatusMock.events,
@@ -101,7 +104,7 @@ describe('Orders Commands Unit Tests', () => {
       expect(fulfillOrderSpy).toBeCalledTimes(1);
       expect(fulfillOrderSpy).toBeCalledWith(ORDER_ID);
       expect(signAndSendSpy).toBeCalledTimes(1);
-      expect(signAndSendSpy).toBeCalledWith(PAIR, { nonce: -1 }, expect.any(Function));
+      expect(signAndSendSpy).toBeCalledWith(PAIR, getCommandNonceAndSigner(PAIR), expect.any(Function));
       expect(successCallback).toBeCalledTimes(1);
       expect(successCallback).toBeCalledWith(API_PROMISE_MOCK, {
           events: eventAndStatusMock.events,
@@ -128,7 +131,7 @@ describe('Orders Commands Unit Tests', () => {
       expect(setOrderRefundedSpy).toBeCalledTimes(1);
       expect(setOrderRefundedSpy).toBeCalledWith(ORDER_ID);
       expect(signAndSendSpy).toBeCalledTimes(1);
-      expect(signAndSendSpy).toBeCalledWith(PAIR, { nonce: -1 }, expect.any(Function));
+      expect(signAndSendSpy).toBeCalledWith(PAIR, getCommandNonceAndSigner(PAIR), expect.any(Function));
       expect(successCallback).toBeCalledTimes(1);
       expect(successCallback).toBeCalledWith(API_PROMISE_MOCK, {
           events: eventAndStatusMock.events,
@@ -155,7 +158,7 @@ describe('Orders Commands Unit Tests', () => {
       expect(setOrderPaidSpy).toBeCalledTimes(1);
       expect(setOrderPaidSpy).toBeCalledWith(ORDER_ID);
       expect(signAndSendSpy).toBeCalledTimes(1);
-      expect(signAndSendSpy).toBeCalledWith(PAIR, { nonce: -1 }, expect.any(Function));
+      expect(signAndSendSpy).toBeCalledWith(PAIR, getCommandNonceAndSigner(PAIR), expect.any(Function));
       expect(successCallback).toBeCalledTimes(1);
       expect(successCallback).toBeCalledWith(API_PROMISE_MOCK, {
           events: eventAndStatusMock.events,
@@ -182,7 +185,7 @@ describe('Orders Commands Unit Tests', () => {
       expect(cancelOrderSpy).toBeCalledTimes(1);
       expect(cancelOrderSpy).toBeCalledWith(ORDER_ID);
       expect(signAndSendSpy).toBeCalledTimes(1);
-      expect(signAndSendSpy).toBeCalledWith(PAIR, { nonce: -1 }, expect.any(Function));
+      expect(signAndSendSpy).toBeCalledWith(PAIR, getCommandNonceAndSigner(PAIR), expect.any(Function));
       expect(successCallback).toBeCalledTimes(1);
       expect(successCallback).toBeCalledWith(API_PROMISE_MOCK, {
           events: eventAndStatusMock.events,

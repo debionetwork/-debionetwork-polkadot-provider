@@ -1,4 +1,4 @@
-import { ServiceFlow, Price, CurrencyType } from '..';
+import { ServiceFlow, Price, CurrencyType } from '../index';
 import { convertSubstrateBalanceToNumber, convertSubstrateNumberToNumber } from '../../..';
 import { OrderStatus } from './order-status';
 

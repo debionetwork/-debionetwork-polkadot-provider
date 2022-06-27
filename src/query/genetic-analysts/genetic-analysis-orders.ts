@@ -2,7 +2,7 @@ import { ApiPromise } from '@polkadot/api';
 import { GeneticAnalysisOrder } from '../../models/genetic-analysts/genetic-analysis-orders';
 
 export async function queryGeneticAnalysisOrderById(api: ApiPromise, orderId: string): Promise<GeneticAnalysisOrder> {
-  const res = (await api.query.geneticAnalysisOrders.geneticAnalysisOrderById(orderId)).toHuman();
+  const res = (await api.query.geneticAnalysisOrders.geneticAnalysisOrders(orderId)).toHuman();
   return new GeneticAnalysisOrder(res);
 }
 
@@ -10,7 +10,7 @@ export async function queryGeneticAnalysisOrderByCustomerId(
   api: ApiPromise,
   accountId: string,
 ): Promise<GeneticAnalysisOrder[]> {
-  const orderIds: any = (await api.query.geneticAnalysisOrders.geneticAnalysisOrdersByCustomerId(accountId)).toHuman();
+  const orderIds: any = (await api.query.geneticAnalysisOrders.geneticAnalysisOrdersByCustomer(accountId)).toHuman();
   const orders: GeneticAnalysisOrder[] = new Array<GeneticAnalysisOrder>();
   for (const orderId of orderIds) {
     orders.push(await queryGeneticAnalysisOrderById(api, orderId));
@@ -18,13 +18,11 @@ export async function queryGeneticAnalysisOrderByCustomerId(
   return orders;
 }
 
-export async function queryGeneticAnalysisOrderByGeneticAnalystId(
+export async function queryGeneticAnalysisOrderBySeller(
   api: ApiPromise,
   accountId: string,
 ): Promise<GeneticAnalysisOrder[]> {
-  const orderIds: any = (
-    await api.query.geneticAnalysisOrders.geneticAnalysisOrdersByGeneticAnalystId(accountId)
-  ).toHuman();
+  const orderIds: any = (await api.query.geneticAnalysisOrders.geneticAnalysisOrdersBySeller(accountId)).toHuman();
   const orders: GeneticAnalysisOrder[] = new Array<GeneticAnalysisOrder>();
   for (const orderId of orderIds) {
     orders.push(await queryGeneticAnalysisOrderById(api, orderId));
@@ -49,15 +47,10 @@ export async function queryPendingGeneticAnalysisOrderByGeneticAnalystId(
 export async function queryLastGeneticAnalysisOrderByCustomerId(
   api: ApiPromise,
   accountId: string,
-): Promise<GeneticAnalysisOrder[]> {
-  const orderIds: any = (
-    await api.query.geneticAnalysisOrders.lastGeneticAnalysisOrderByCustomerId(accountId)
-  ).toHuman();
-  const orders: GeneticAnalysisOrder[] = new Array<GeneticAnalysisOrder>();
-  for (const orderId of orderIds) {
-    orders.push(await queryGeneticAnalysisOrderById(api, orderId));
-  }
-  return orders;
+): Promise<GeneticAnalysisOrder> {
+  const orderId: any = (await api.query.geneticAnalysisOrders.lastGeneticAnalysisOrderByCustomer(accountId)).toString();
+  const order: GeneticAnalysisOrder = await queryGeneticAnalysisOrderById(api, orderId);
+  return order;
 }
 
 export async function queryGeneticAnalysisOrderAdminKey(api: ApiPromise): Promise<string> {

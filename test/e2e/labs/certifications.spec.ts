@@ -1,11 +1,11 @@
 import { ApiPromise } from '@polkadot/api';
 import 'regenerator-runtime/runtime';
 import { queryCertificationById, queryCertificationsByMultipleIds } from '../../../src/query/labs/certifications';
-import { createCertification, updateCertification, deleteCertification } from "../../../src/command/labs/certifications";
+import { createCertification, createCertificationFee, updateCertification, updateCertificationFee, deleteCertification, deleteCertificationFee } from "../../../src/command/labs/certifications";
 import { initializeApi } from '../polkadot-init';
 import { queryLabById } from '../../../src/query/labs';
 import { Lab } from '../../../src/models/labs';
-import { registerLab } from "../../../src/command/labs";
+import { deregisterLab, registerLab } from "../../../src/command/labs";
 import { labDataMock } from '../../unit/models/labs/labs.mock';
 import { Certification } from '../../../src/models/labs/certifications';
 import { certificationDataMock } from '../../unit/models/labs/certifications.mock';
@@ -49,7 +49,12 @@ describe('Certifications Pallet Integration Tests', () => {
     });
 
     expect((await promise)[0].info).toEqual(certificationDataMock.info);
-  }, 60000); // Set timeout for 60 seconds
+  });
+
+  it('createCertificationFee should return', async () => {
+    expect(await createCertificationFee(api, pair, certificationDataMock.info)).toHaveProperty('partialFee')
+  })
+
 
   it('updateCertification should return', async () => {
     const lab = await queryLabById(api, pair.address);
@@ -64,7 +69,17 @@ describe('Certifications Pallet Integration Tests', () => {
     });
 
     expect((await promise).info).toEqual(certificationDataMock.info);
-  }, 25000); // Set timeout for 25 seconds
+  });
+
+  it('updateCertificationFee should return', async () => {
+    const lab = await queryLabById(api, pair.address);
+    expect(await updateCertificationFee(api, pair, lab.certifications[0], certificationDataMock.info)).toHaveProperty('partialFee')
+  })
+
+  it('deleteCertificationFee should return', async () => {
+    const lab = await queryLabById(api, pair.address)
+    expect(await deleteCertificationFee(api, pair, lab.certifications[0])).toHaveProperty('partialFee')
+  })
 
   it('deleteCertification should return', async () => {
     const lab = await queryLabById(api, pair.address);
@@ -73,11 +88,13 @@ describe('Certifications Pallet Integration Tests', () => {
       deleteCertification(api, pair, lab.certifications[0], () => {
         queryLabById(api, pair.address)
           .then((res) => {
-            resolve(res.certifications.length)
+            deregisterLab(api, pair, () => {
+              resolve(res.certifications.length);
+            });
           });
       });
     });
 
     expect(await promise).toEqual(0);
-  }, 25000); // Set timeout for 25 seconds
+  });
 });

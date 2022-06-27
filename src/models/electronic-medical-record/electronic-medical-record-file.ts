@@ -1,4 +1,4 @@
-import { convertSubstrateNumberToNumber } from '../../index';
+import { convertSubstrateNumberToNumber, getCommandNonceAndSigner } from '../../index';
 
 export class ElectronicMedicalRecordFile {
   constructor(anyJson: any) {

@@ -1,5 +1,5 @@
 import { ApiPromise } from '@polkadot/api';
-import { successCallback } from '../..';
+import { successCallback, getCommandNonceAndSigner } from '../../index';
 
 export async function addGeneticData(
   api: ApiPromise,
@@ -12,7 +12,7 @@ export async function addGeneticData(
   // tslint:disable-next-line
   var unsub = await api.tx.geneticData
     .addGeneticData(title, description, link)
-    .signAndSend(pair, { nonce: -1 }, ({ events, status }) => {
+    .signAndSend(pair, getCommandNonceAndSigner(pair), ({ events, status }) => {
       successCallback(api, { events, status, callback, unsub });
     });
 }
@@ -29,16 +29,18 @@ export async function updateGeneticData(
   // tslint:disable-next-line
   var unsub = await api.tx.geneticData
     .updateGeneticData(id, title, description, link)
-    .signAndSend(pair, { nonce: -1 }, ({ events, status }) => {
+    .signAndSend(pair, getCommandNonceAndSigner(pair), ({ events, status }) => {
       successCallback(api, { events, status, callback, unsub });
     });
 }
 
 export async function removeGeneticData(api: ApiPromise, pair: any, id: string, callback?: () => void): Promise<void> {
   // tslint:disable-next-line
-  var unsub = await api.tx.geneticData.removeGeneticData(id).signAndSend(pair, { nonce: -1 }, ({ events, status }) => {
-    successCallback(api, { events, status, callback, unsub });
-  });
+  var unsub = await api.tx.geneticData
+    .removeGeneticData(id)
+    .signAndSend(pair, getCommandNonceAndSigner(pair), ({ events, status }) => {
+      successCallback(api, { events, status, callback, unsub });
+    });
 }
 
 export function addGeneticDataFee(api: ApiPromise, pair: any, title: string, description: string, link: string): any {
