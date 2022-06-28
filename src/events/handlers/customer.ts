@@ -1,7 +1,7 @@
 import { toFormatDebioCoin } from "../helpers"
 
 const defaultHandler = {
-  get: function (target: any, name: string) {
+  get: (target: any, name: string) => {
     return Object.prototype.hasOwnProperty.call(target, name) ? target[name] : ({ dataEvent, value, valueMessage }) => {
       const data = dataEvent[0]
       const id = data[value]
@@ -16,7 +16,7 @@ const handler = {
   orders: async ({ dataEvent, value, valueMessage, event }) => {
     const data = dataEvent[0]
     const id = data[value]
-    const params = { id: id }
+    const params = { id }
 
     const computeId = `${id.substr(0, 4)}...${id.substr(id.length - 4)}`
     let wording = `${valueMessage} (${computeId})`
@@ -31,9 +31,9 @@ const handler = {
   },
   geneticTesting: async ({ dataEvent, value, valueMessage }) => {
     const data = dataEvent[0]
-    const status = data["status"]
+    const status = data.status
     const id = data[value]
-    const params = { id: id }
+    const params = { id }
 
     const formatedHash = `${data?.trackingId.substr(0, 4)}...${data?.trackingId?.substr(data?.trackingId?.length - 4)}`
     const wording = `${valueMessage} (${formatedHash}) ${status.toLowerCase() === "fulfilled" ? "are out" : status.toLowerCase()}. Click here to see your order details.`
@@ -74,7 +74,7 @@ const handler = {
   geneticAnalysisOrders: async ({ dataEvent, value, valueMessage, event }) => {
     const data = dataEvent[0]
     const id = data[value]
-    const status = data["status"]
+    const status = data.status
     const params = { orderId: id }
     const formatedHash = `${id?.substr(0, 4)}...${id?.substr(id?.length - 4)}`
     let wording = `${valueMessage} <${formatedHash}>`
@@ -88,7 +88,7 @@ const handler = {
   geneticAnalysis: async ({ dataEvent, value, valueMessage, event }) => {
     const data = dataEvent[0]
     const id = data[value]
-    const status = data["status"]
+    const status = data.status
     const params = { orderId: id }
     const formatedHash = `${id?.substr(0, 4)}...${id?.substr(id?.length - 4)}`
     const computeStatus = event.method === "GeneticAnalysisResultReady" ? "are out" : `has been ${status.toLowerCase()}`

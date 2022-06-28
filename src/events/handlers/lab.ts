@@ -1,8 +1,8 @@
 import { toFormatDebioCoin } from "../helpers"
 
 const defaultHandler = {
-  get: function (target: any, name: string) {
-    return Object.prototype.hasOwnProperty.call(target, name) ? target[name] : (dataEvent, value, valueMessage) => {
+  get: (target: any, name: string) => {
+    return Object.prototype.hasOwnProperty.call(target, name) ? target[name] : ({ dataEvent, value, valueMessage }) => {
       const data = dataEvent[0]
       const id = data[value]
       const params = { number: id }
