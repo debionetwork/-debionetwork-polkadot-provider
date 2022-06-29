@@ -259,6 +259,10 @@ export async function sudoUpdateGeneticAnalystAdminKey(
   });
 }
 
+export function unstakeGeneticAnalystFee(api: ApiPromise, pair: any): Promise<any> {
+  return api.tx.geneticAnalysts.unstakeGeneticAnalyst().paymentInfo(pair);
+}
+
 export * from './genetic-analysis-orders';
 export * from './genetic-analysis';
 export * from './genetic-analyst-qualification';
