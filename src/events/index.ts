@@ -23,16 +23,22 @@ export async function processEvent(
   const dataEvent = JSON.parse(JSON.stringify(event.data))
   const handler = handlers[role][event.section]
 
-  if (!dataEvent.length) return
-  if (!handler) {
-    console.log("no role mapping")
+  // Re-validate before proceeding to the next step
+  if (
+    !handler ||
+    !dataEvent.length ||
+    !state.configEvent["role"][role][event.section] ||
+    !state.configEvent["role"][role][event.section][event.method]
+  ) {
     return { statusAdd, message, data: payloadData, params: paramsData }
   }
 
+  const getConfigEvent = state.configEvent["role"][role][event.section][event.method]
   // Get event configuration data
-  const value = state.configEvent["role"][role][event.section][event.method].value
-  const valueMessage = state.configEvent["role"][role][event.section][event.method].value_message
-  const identity = state.configEvent["role"][role][event.section][event.method].identity
+
+  const value = getConfigEvent?.value
+  const valueMessage = getConfigEvent?.value_message
+  const identity = getConfigEvent?.identity
 
   const { data, params, wording } = await handler({
     dataEvent,
@@ -44,7 +50,7 @@ export async function processEvent(
 
   if (data[identity] === address || data[1][identity] === address) {
     statusAdd = true
-    message = `${state.configEvent["role"][role][event.section][event.method].message} ${wording}`
+    message = `${getConfigEvent?.message} ${wording}`
   }
 
   payloadData = data

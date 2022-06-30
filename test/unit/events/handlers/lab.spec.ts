@@ -53,8 +53,6 @@ describe("Lab Events Handler Test", () => {
       { dataEvent, value, valueMessage, event: { section: sampleEvent4.section, method: sampleEvent4.method } }
     )
 
-    console.log(handler)
-
     expect(handler).toMatchObject({
       data: {
         id: 'sampleIdHash',

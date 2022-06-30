@@ -106,4 +106,25 @@ describe("Polkadot Events Test", () => {
       expect(response?.statusAdd).toBe(false)
     }
   )
+
+  it(
+    "Should not receive Polkadot event if role not match with current event",
+    async () => {
+      const response = await processEvent(
+        sampleState,
+        sampleAddress,
+        sampleEvent3,
+        sampleRole.lab,
+        {
+          store: {
+            getters: {
+              getWeb3: jest.fn()
+            }
+          }
+        }
+      )
+
+      expect(response?.statusAdd).toBe(false)
+    }
+  )
 })
