@@ -18,6 +18,7 @@ const handler = {
 
     return { data, id, params, wording }
   },
+
   geneticTesting: async ({ dataEvent, value, valueMessage }) => {
     const data = dataEvent[0]
     const status = data.status
@@ -29,6 +30,7 @@ const handler = {
 
     return { data, id, params, wording }
   },
+
   balances: async ({ dataEvent, value, valueMessage, store }) => {
     const data = dataEvent
     const id = data[value]
@@ -37,6 +39,7 @@ const handler = {
     const wording = finalText + " DBIO!"
     return { data, id, params, wording }
   },
+
   rewards: async ({ dataEvent, value, valueMessage, store }) => {
     const web3 = store.getters["metamask/getWeb3"]
     const data = dataEvent;
@@ -47,19 +50,25 @@ const handler = {
     const wording = `${coin} DBIO for registering in Debio Appchain`;
     return { data, id, params, wording }
   },
+
   serviceRequest: async ({ dataEvent, value, valueMessage, event }) => {
     const data = dataEvent
-    const id = isNaN(value) ? data[0][value] : data[value]
+    const id = data[value] || data[1][value]
     const params = { page: 1 }
     let wording = valueMessage
 
+    if (event.method === "StakingAmountExcessRefunded") {
+      wording = `${data[value]} ${valueMessage.trim()}`
+    }
+
     if (event.method === "ServiceRequestCreated") {
-      const formatedHash = `${data[1]?.hash?.substr(0, 4)}...${data[1]?.hash?.substr(data[1]?.hash?.length - 4)}`
+      const formatedHash = `${id?.substr(0, 4)}...${id?.substr(id?.length - 4)}`
       wording = `${valueMessage} (${formatedHash}).`
     }
 
     return { data, id, params, wording }
   },
+
   geneticAnalysisOrders: async ({ dataEvent, value, valueMessage, event }) => {
     const data = dataEvent[0]
     const id = data[value]
@@ -74,6 +83,7 @@ const handler = {
 
     return { data, id, params, wording }
   },
+
   geneticAnalysis: async ({ dataEvent, value, valueMessage, event }) => {
     const data = dataEvent[0]
     const id = data[value]
