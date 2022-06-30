@@ -8,9 +8,9 @@ const handler = {
     const params = { number: id };
     let wording = valueMessage
 
-    if (data[2] == "LabUpdateVerificationStatus") {
+    if (data[2] === "LabUpdateVerificationStatus") {
       store.dispatch("substrate/getLabAccount")
-      if (data[0].verificationStatus == "Verified") {
+      if (data[0].verificationStatus === "Verified") {
         wording = `Congrats! ${wording}`
       }
       wording = `${wording} ${data[0].verificationStatus.toLowerCase()}`
@@ -62,7 +62,7 @@ const handler = {
   services: async ({ dataEvent, value, valueMessage }) => {
     const data = dataEvent[0];
     const id = data[value];
-    const params = { id: id };
+    const params = { id };
     const formatedHash = `${id.substr(0, 4)}...${id.substr(id.length - 4)}`
     const wording = `${valueMessage} ${formatedHash}`;
 
