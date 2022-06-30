@@ -9,7 +9,7 @@ describe("Polkadot Events Test", () => {
         sampleState,
         sampleAddress,
         sampleEvent,
-        sampleRole,
+        sampleRole.customer,
         {
           store: {
             getters: {
@@ -30,7 +30,7 @@ describe("Polkadot Events Test", () => {
         sampleState,
         "foo",
         sampleEvent,
-        sampleRole,
+        sampleRole.customer,
         {
           store: {
             getters: {
@@ -51,7 +51,7 @@ describe("Polkadot Events Test", () => {
         sampleState,
         sampleAddress,
         sampleEvent2,
-        sampleRole,
+        sampleRole.customer,
         {
           store: {
             getters: {
@@ -72,7 +72,7 @@ describe("Polkadot Events Test", () => {
         sampleState,
         "foo",
         sampleEvent2,
-        sampleRole,
+        sampleRole.customer,
         {
           store: {
             getters: {
@@ -93,7 +93,7 @@ describe("Polkadot Events Test", () => {
         sampleState,
         sampleAddress,
         sampleEvent3,
-        sampleRole,
+        sampleRole.customer,
         {
           store: {
             getters: {
