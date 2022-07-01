@@ -22,7 +22,7 @@ export async function createRequest(
   region: string,
   city: string,
   category: string,
-  stakingAmount: number,
+  stakingAmount: BigInt,
   callback?: () => void,
 ): Promise<void> {
   // tslint:disable-next-line
@@ -40,7 +40,7 @@ export function createRequestFee(
   region: string,
   city: string,
   category: string,
-  stakingAmount: number,
+  stakingAmount: BigInt,
 ): any {
   return api.tx.serviceRequest.createRequest(country, region, city, category, stakingAmount).paymentInfo(pair);
 }

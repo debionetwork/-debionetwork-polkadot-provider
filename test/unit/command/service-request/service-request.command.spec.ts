@@ -79,7 +79,7 @@ describe('Service Request Commands Unit Testing', () => {
     const REGION_ID = "REGION_ID";
     const CITY_ID = "CITY_ID";
     const CATEGORY_ID = "CATEGORY_ID";
-    const STAKING_AMOUNT = 1;
+    const STAKING_AMOUNT = BigInt(1);
     const EXPECTED_VALUE = 0;
     (mockFunction as jest.Mock).mockReturnValue(EXPECTED_VALUE);
       
@@ -116,7 +116,7 @@ describe('Service Request Commands Unit Testing', () => {
     const REGION_ID = "REGION_ID";
     const CITY_ID = "CITY_ID";
     const CATEGORY_ID = "CATEGORY_ID";
-    const STAKING_AMOUNT = 1
+    const STAKING_AMOUNT = BigInt(1);
     const EXPECTED_VALUE = 0;
     (mockFunction as jest.Mock).mockReturnValue(EXPECTED_VALUE);
       
@@ -132,7 +132,7 @@ describe('Service Request Commands Unit Testing', () => {
         STAKING_AMOUNT,
       )).toEqual(EXPECTED_VALUE);
     expect(createRequestSpy).toBeCalledTimes(1);
-    expect(createRequestSpy).toBeCalledWith(COUNTRY_ID, REGION_ID, CITY_ID, CATEGORY_ID, 1);
+    expect(createRequestSpy).toBeCalledWith(COUNTRY_ID, REGION_ID, CITY_ID, CATEGORY_ID, STAKING_AMOUNT);
     expect(paymentInfoSpy).toBeCalledTimes(1);
     expect(paymentInfoSpy).toBeCalledWith(PAIR);
     expect(mockFunction).toBeCalledTimes(1);
