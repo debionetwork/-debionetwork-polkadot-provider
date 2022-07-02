@@ -1,7 +1,7 @@
 import { ApiPromise } from '@polkadot/api';
 import 'regenerator-runtime/runtime';
 import { initializeApi } from '../polkadot-init';
-import { bulkCreateQualification, createQualification, deleteQualification, updateQualification } from "../../../src/command/genetic-analyst/genetic-analyst-qualification";
+import { bulkCreateQualification, createQualification, createQualificationFee, deleteQualification, updateQualification } from "../../../src/command/genetic-analyst/genetic-analyst-qualification";
 import { GeneticAnalyst, GeneticAnalystQualification } from '../../../src/models/genetic-analysts';
 import { geneticAnalystsDataMock } from '../../unit/models/genetic-analysts/genetic-analysts.mock';
 import { queryGeneticAnalystByAccountId, queryGeneticAnalystCount, queryGeneticAnalystQualificationsByHashId, queryGeneticAnalystQualificationsCount, queryGeneticAnalystQualificationsCountByOwner } from '../../../src/query/genetic-analysts';
@@ -109,4 +109,8 @@ describe('Genetic Analyst Qualifications Pallet Integration Tests', () => {
     
     expect(await gaPromise).toEqual(0);
   });
+
+  it('createQualificationFee should return', async () => {
+    expect(await createQualificationFee(api, pair, geneticAnalystQualificationsDataMock.info)).toHaveProperty('partialFee')
+  })
 });
