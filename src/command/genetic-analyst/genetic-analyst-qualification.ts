@@ -59,13 +59,10 @@ export async function updateQualification(
     });
 }
 
-export async function createQualificationFee( 
+export async function createQualificationFee(
   api: ApiPromise,
   pair: any,
   geneticAnalystQualificationInfo: GeneticAnalystQualificationInfo,
 ): Promise<any> {
-  return api.tx.geneticAnalystQualifications
-    .createQualification(geneticAnalystQualificationInfo)
-    .paymentInfo(pair);
+  return api.tx.geneticAnalystQualifications.createQualification(geneticAnalystQualificationInfo).paymentInfo(pair);
 }
-

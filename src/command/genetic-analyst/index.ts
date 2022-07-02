@@ -259,23 +259,12 @@ export async function sudoUpdateGeneticAnalystAdminKey(
   });
 }
 
-export async function registerGeneticAnalystFee(
-  api: ApiPromise,
-  pair: any,
-  data: GeneticAnalystInfo,
-): Promise<any> {
-  return api.tx.geneticAnalysts
-    .registerGeneticAnalyst(data)
-    .paymentInfo(pair);
+export async function registerGeneticAnalystFee(api: ApiPromise, pair: any, data: GeneticAnalystInfo): Promise<any> {
+  return api.tx.geneticAnalysts.registerGeneticAnalyst(data).paymentInfo(pair);
 }
 
-export async function stakeGeneticAnalystFee(
-  api: ApiPromise,
-  pair: any,
-): Promise<any> {
-  return api.tx.geneticAnalysts
-    .stakeGeneticAnalyst()
-    .paymentInfo(pair);
+export async function stakeGeneticAnalystFee(api: ApiPromise, pair: any): Promise<any> {
+  return api.tx.geneticAnalysts.stakeGeneticAnalyst().paymentInfo(pair);
 }
 
 export function unstakeGeneticAnalystFee(api: ApiPromise, pair: any): Promise<any> {
