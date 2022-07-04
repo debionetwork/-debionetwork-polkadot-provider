@@ -1,10 +1,5 @@
-import { eventTypes } from '../../../src/events';
-
 export const sampleAddress = "sampleAddress"
 export const sampleRole = { customer: "customer", lab: "lab" }
-export const sampleState = {
-  configEvent: eventTypes
-}
 export const sampleEvent = {
   "index": "sampleIndex",
   "data": [

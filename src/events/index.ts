@@ -1,6 +1,6 @@
 import { customerHandler } from './handlers/customer';
 import { labHandler } from './handlers/lab';
-import { eventTypes } from "./event-types"
+import { eventTypes } from './event-types';
 
 /* tslint:disable:no-string-literal */
 /* tslint:disable:no-console */

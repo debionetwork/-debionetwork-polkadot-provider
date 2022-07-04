@@ -1,11 +1,12 @@
 import { labHandler } from "../../../../src/events/handlers/lab"
-import { sampleRole, sampleState, sampleEvent4, sampleEvent5 } from "../dataSample"
+import { sampleRole, sampleEvent4, sampleEvent5 } from "../dataSample"
+import { eventTypes } from "../../../../src/events/event-types"
 
 describe("Lab Events Handler Test", () => {
   it("Default lab handler", async () => {
     const dataEvent = JSON.parse(JSON.stringify(sampleEvent4.data))
-    const value = sampleState.configEvent["role"][sampleRole.lab][sampleEvent4.section][sampleEvent4.method].value
-    const valueMessage = sampleState.configEvent["role"][sampleRole.lab][sampleEvent4.section][sampleEvent4.method].value_message
+    const value = eventTypes["role"][sampleRole.lab][sampleEvent4.section][sampleEvent4.method].value
+    const valueMessage = eventTypes["role"][sampleRole.lab][sampleEvent4.section][sampleEvent4.method].value_message
 
     const handler = await labHandler.call(
       { dataEvent, value, valueMessage, event: { section: sampleEvent4.section, method: sampleEvent4.method } }
@@ -45,8 +46,8 @@ describe("Lab Events Handler Test", () => {
 
   it("Orders lab handler", async () => {
     const dataEvent = JSON.parse(JSON.stringify(sampleEvent4.data))
-    const value = sampleState.configEvent["role"][sampleRole.lab][sampleEvent4.section][sampleEvent4.method].value
-    const valueMessage = sampleState.configEvent["role"][sampleRole.lab][sampleEvent4.section][sampleEvent4.method].value_message
+    const value = eventTypes["role"][sampleRole.lab][sampleEvent4.section][sampleEvent4.method].value
+    const valueMessage = eventTypes["role"][sampleRole.lab][sampleEvent4.section][sampleEvent4.method].value_message
 
     const handler = await labHandler.orders.call(
       null,
@@ -87,8 +88,8 @@ describe("Lab Events Handler Test", () => {
 
   it("ServiceRequest lab handler", async () => {
     const dataEvent = JSON.parse(JSON.stringify(sampleEvent5.data))
-    const value = sampleState.configEvent["role"][sampleRole.lab][sampleEvent5.section][sampleEvent5.method].value
-    const valueMessage = sampleState.configEvent["role"][sampleRole.lab][sampleEvent5.section][sampleEvent5.method].value_message
+    const value = eventTypes["role"][sampleRole.lab][sampleEvent5.section][sampleEvent5.method].value
+    const valueMessage = eventTypes["role"][sampleRole.lab][sampleEvent5.section][sampleEvent5.method].value_message
 
     const handler = await labHandler.ServiceRequest.call(
       null,

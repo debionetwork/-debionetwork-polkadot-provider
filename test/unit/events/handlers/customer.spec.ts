@@ -1,11 +1,12 @@
 import { customerHandler } from "../../../../src/events/handlers/customer"
-import { sampleRole, sampleState, sampleEvent, sampleEvent2 } from "../dataSample"
+import { sampleRole, sampleEvent, sampleEvent2 } from "../dataSample"
+import { eventTypes } from '../../../../src/events/event-types'
 
 describe("Customer Events Handler", () => {
   it("Default customer handler", async () => {
     const dataEvent = JSON.parse(JSON.stringify(sampleEvent.data))
-    const value = sampleState.configEvent["role"][sampleRole.customer][sampleEvent.section][sampleEvent.method].value
-    const valueMessage = sampleState.configEvent["role"][sampleRole.customer][sampleEvent.section][sampleEvent.method].value_message
+    const value = eventTypes["role"][sampleRole.customer][sampleEvent.section][sampleEvent.method].value
+    const valueMessage = eventTypes["role"][sampleRole.customer][sampleEvent.section][sampleEvent.method].value_message
 
     const handler = await customerHandler.call(
       { dataEvent, value, valueMessage, event: { section: sampleEvent.section, method: sampleEvent.method } }
@@ -34,8 +35,8 @@ describe("Customer Events Handler", () => {
 
   it("ServiceRequest customer handler", async () => {
     const dataEvent = JSON.parse(JSON.stringify(sampleEvent2.data))
-    const value = sampleState.configEvent["role"][sampleRole.customer][sampleEvent2.section][sampleEvent2.method].value
-    const valueMessage = sampleState.configEvent["role"][sampleRole.customer][sampleEvent2.section][sampleEvent2.method].value_message
+    const value = eventTypes["role"][sampleRole.customer][sampleEvent2.section][sampleEvent2.method].value
+    const valueMessage = eventTypes["role"][sampleRole.customer][sampleEvent2.section][sampleEvent2.method].value_message
 
     const handler = await customerHandler.serviceRequest.call(
       null,
