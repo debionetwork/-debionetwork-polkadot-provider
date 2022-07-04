@@ -53,8 +53,5 @@ export async function processEvent(
     message = `${getConfigEvent?.message} ${wording}`
   }
 
-  payloadData = data
-  paramsData = params
-
-  return { statusAdd, message, data: payloadData, params: paramsData }
+  return { statusAdd, message, data, params }
 }
