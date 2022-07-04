@@ -1,4 +1,4 @@
-{
+export const eventTypes = {
   "role": {
     "customer": {
       "orders": {
