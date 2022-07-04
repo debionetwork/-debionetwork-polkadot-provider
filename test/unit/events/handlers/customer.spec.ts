@@ -60,9 +60,22 @@ describe("Customer Events Handler", () => {
           unstakedAt: null
         }
       ],
-      id: 'sampleHash',
+      id:  {
+        city: "sampleCity",
+        country: "sampleCountry",
+        createdAt: "now",
+        hash: "sampleHash",
+        labAddress: null,
+        region: "sampleRegion",
+        requesterAddress: "sampleAddress",
+        serviceCategory: "sampleServiceCategory",
+        stakingAmount: "sampleStakingAmount",
+        status: "Open",
+        unstakedAt: null,
+        updatedAt: null,
+      },
       params: { page: 1 },
-      wording: 'Your stake amount has been refunded, kindly check your balance.'
+      wording: ''
     })
   })
 })

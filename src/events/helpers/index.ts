@@ -1,1 +1,1 @@
-export * from "./coinFormater"
+export * from './coinFormater';

@@ -134,7 +134,7 @@ describe("Lab Events Handler Test", () => {
       },
       id: 'sampleIdHash',
       params: { id: 'sampleIdHash' },
-      wording: "You've successfully added your new service (samp...Hash)"
+      wording: "You've successfully added your new service - (samp...Hash)"
     })
   })
 })
