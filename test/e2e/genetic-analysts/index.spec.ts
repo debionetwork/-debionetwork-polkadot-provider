@@ -1,6 +1,6 @@
 import 'regenerator-runtime/runtime';
 import { ApiPromise } from "@polkadot/api";
-import { deregisterGeneticAnalyst, GeneticAnalyst, queryGeneticAnalystByAccountId, queryGeneticAnalystCount, queryGeneticAnalystMinimumStakeAmount, queryGeneticAnalystVerifierKey, registerGeneticAnalyst, retrieveGeneticAnalystUnstakeAmount, stakeGeneticAnalyst, unstakeGeneticAnalyst, updateGeneticAnalyst, updateGeneticAnalystAvailabilityStatus, updateGeneticAnalystMinimumStakeAmount, updateGeneticAnalystVerificationStatus } from "../../../src";
+import { deregisterGeneticAnalyst, GeneticAnalyst, queryGeneticAnalystByAccountId, queryGeneticAnalystCount, queryGeneticAnalystMinimumStakeAmount, queryGeneticAnalystVerifierKey, registerGeneticAnalyst, retrieveGeneticAnalystUnstakeAmount, stakeGeneticAnalyst, unstakeGeneticAnalyst, updateGeneticAnalyst, updateGeneticAnalystAvailabilityStatus, updateGeneticAnalystMinimumStakeAmount, updateGeneticAnalystVerificationStatus, unstakeGeneticAnalystFee, stakeGeneticAnalystFee, registerGeneticAnalystFee } from "../../../src";
 import { initializeApi } from "../polkadot-init";
 import { geneticAnalystsDataMock } from '../../unit/models/genetic-analysts/genetic-analysts.mock';
 import { VerificationStatus } from '../../../src/primitives/verification-status';
@@ -156,4 +156,16 @@ describe('Genetic Analyst Pallet Integration Tests', () => {
     
     expect(await promise).toEqual(0);
   });
+
+  it('registerGeneticAnalystFee should return', async () => {
+    expect(await registerGeneticAnalystFee(api, pair, geneticAnalystsDataMock.info)).toHaveProperty('partialFee')
+  })
+
+  it('stakeGeneticAnalystFee should return', async () => {
+    expect(await stakeGeneticAnalystFee(api, pair)).toHaveProperty('partialFee')
+  })
+
+  it('unstakeGeneticAnalystFee should return', async () => {
+    expect(await unstakeGeneticAnalystFee(api, pair)).toHaveProperty('partialFee')
+  })
 });
