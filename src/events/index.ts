@@ -1,9 +1,10 @@
 import { customerHandler } from './handlers/customer';
 import { labHandler } from './handlers/lab';
+import { eventTypes } from "./event-types"
 
 /* tslint:disable:no-string-literal */
 /* tslint:disable:no-console */
-export async function processEvent(state: any, address: string, event: any, role: string, store: any) {
+export async function processEvent(address: string, event: any, role: string, store: any) {
   let statusAdd = false;
   let message = '';
 
@@ -19,13 +20,13 @@ export async function processEvent(state: any, address: string, event: any, role
   if (
     !handler ||
     !dataEvent.length ||
-    !state.configEvent['role'][role][event.section] ||
-    !state.configEvent['role'][role][event.section][event.method]
+    !eventTypes['role'][role][event.section] ||
+    !eventTypes['role'][role][event.section][event.method]
   ) {
     return { statusAdd, message, data: null, params: null };
   }
 
-  const getConfigEvent = state.configEvent['role'][role][event.section][event.method];
+  const getConfigEvent = eventTypes['role'][role][event.section][event.method];
   // Get event configuration data
 
   const value = getConfigEvent?.value;
