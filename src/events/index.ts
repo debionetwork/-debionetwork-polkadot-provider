@@ -12,8 +12,6 @@ export async function processEvent(
 ) {
   let statusAdd = false
   let message = ""
-  let payloadData = null
-  let paramsData = null
 
   const handlers = {
     customer: customerHandler,
@@ -30,7 +28,7 @@ export async function processEvent(
     !state.configEvent["role"][role][event.section] ||
     !state.configEvent["role"][role][event.section][event.method]
   ) {
-    return { statusAdd, message, data: payloadData, params: paramsData }
+    return { statusAdd, message, data: null, params: null }
   }
 
   const getConfigEvent = state.configEvent["role"][role][event.section][event.method]
