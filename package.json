@@ -1,5 +1,5 @@
 {
-  "version": "0.0.12-beta.3",
+  "version": "0.0.12",
   "description": "Javascript Library to connect and interact with the DeBio Network blockchain.",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
@@ -36,7 +36,7 @@
     "kit"
   ],
   "author": "Agustinus Theodorus <agustinustheoo@gmail.com>",
-  "license": "ISC",
+  "license": "AGPL-3.0",
   "bugs": {
     "url": "https://github.com/debionetwork/polkadot-provider/issues"
   },

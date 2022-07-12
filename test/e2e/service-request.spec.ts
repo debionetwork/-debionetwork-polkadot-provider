@@ -61,7 +61,7 @@ describe('Service Request Pallet Integration Tests', () => {
     
     const category = 'Whole Genome Sequencing';
     serviceRequestDataMock.serviceCategory = category;
-    const stakingAmount = 10;
+    const stakingAmount = BigInt(10);
 
     const promise: Promise<ServiceRequest> = new Promise((resolve, reject) => { // eslint-disable-line
       createRequest(api, pair, labDataMock.info.country, labDataMock.info.region, labDataMock.info.city , category, stakingAmount, () => {
@@ -132,7 +132,7 @@ describe('Service Request Pallet Integration Tests', () => {
     await labPromise;
     
     const category = 'Whole Genome Sequencing';
-    const stakingAmount = 10;
+    const stakingAmount = BigInt(10);
 
     const serviceRequestPromise: Promise<ServiceRequest> = new Promise((resolve, reject) => { // eslint-disable-line
       createRequest(api, pair, labDataMock.info.country, labDataMock.info.region, labDataMock.info.city , category, stakingAmount, () => {

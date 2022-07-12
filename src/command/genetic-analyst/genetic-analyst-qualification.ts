@@ -58,3 +58,11 @@ export async function updateQualification(
       successCallback(api, { events, status, callback, unsub });
     });
 }
+
+export async function createQualificationFee(
+  api: ApiPromise,
+  pair: any,
+  geneticAnalystQualificationInfo: GeneticAnalystQualificationInfo,
+): Promise<any> {
+  return api.tx.geneticAnalystQualifications.createQualification(geneticAnalystQualificationInfo).paymentInfo(pair);
+}

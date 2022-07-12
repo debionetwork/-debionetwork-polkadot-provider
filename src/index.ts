@@ -19,3 +19,4 @@ export function convertSubstrateBalanceToNumber(bal: any): number {
 export * from './query';
 export * from './models';
 export * from './command';
+export * from './events';

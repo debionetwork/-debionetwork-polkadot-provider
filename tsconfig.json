@@ -5,6 +5,7 @@
     "declaration": true,
     "outDir": "./lib",
     "skipLibCheck": true,
+    "resolveJsonModule": true,
     "strict": false
   },
   "include": ["src"],

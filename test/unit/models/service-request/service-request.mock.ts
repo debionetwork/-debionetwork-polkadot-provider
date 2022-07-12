@@ -6,7 +6,7 @@ export const serviceRequestDataMock = {
   region: 'string',
   city: 'string',
   serviceCategory: 'string',
-  stakingAmount: 1,
+  stakingAmount: BigInt(1),
   status: 'Open',
   createdAt: 0,
   updatedAt: 0,
