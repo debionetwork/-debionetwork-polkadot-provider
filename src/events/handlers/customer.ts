@@ -75,7 +75,7 @@ const handler = {
     const data = dataEvent[0];
     const id = data[value];
     const status = data.status;
-    const params = { id: id };
+    const params = { id };
     const formatedHash = `${id?.substr(0, 4)}...${id?.substr(id?.length - 4)}`;
     let wording = `${valueMessage} <${formatedHash}>`;
 
@@ -90,7 +90,7 @@ const handler = {
     const data = dataEvent[0];
     const id = data[value];
     const status = data.status;
-    const params = { id: id };
+    const params = { id };
     const formatedHash = `${id?.substr(0, 4)}...${id?.substr(id?.length - 4)}`;
     const computeStatus =
       event.method === 'GeneticAnalysisResultReady' ? 'are out' : `has been ${status.toLowerCase()}`;
