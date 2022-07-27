@@ -28,7 +28,7 @@ export async function queryGeneticAnalystMinimumStakeAmount(api: ApiPromise): Pr
   const res: any = (await api.query.geneticAnalysts.minimumStakeAmount()).toHuman();
   const minimum: string = String(res).replace(/,/g, '')
   
-  return parseInt(minimum);
+  return parseInt(minimum, 0);
 }
 
 export async function queryGeneticAnalystVerifierKey(api: ApiPromise): Promise<any> {
