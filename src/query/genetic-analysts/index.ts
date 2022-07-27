@@ -26,7 +26,8 @@ export async function queryGeneticAnalystTotalStakedAmount(api: ApiPromise): Pro
 
 export async function queryGeneticAnalystMinimumStakeAmount(api: ApiPromise): Promise<number> {
   const res: any = (await api.query.geneticAnalysts.minimumStakeAmount()).toHuman();
-  return parseInt(res, 0);
+  const minimum: string = res.replaceAll(",", "")
+  return parseInt(minimum);
 }
 
 export async function queryGeneticAnalystVerifierKey(api: ApiPromise): Promise<any> {
