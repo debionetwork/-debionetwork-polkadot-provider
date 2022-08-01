@@ -1,5 +1,6 @@
 import { customerHandler } from './handlers/customer';
 import { labHandler } from './handlers/lab';
+import { geneticAnalystHandler } from './handlers/geneticAnalyst';
 import { eventTypes } from './event-types';
 
 /* tslint:disable:no-string-literal */
@@ -11,6 +12,7 @@ export async function processEvent(address: string, event: any, role: string, st
   const handlers = {
     customer: customerHandler,
     lab: labHandler,
+    analyst: geneticAnalystHandler,
   };
 
   const dataEvent = JSON.parse(JSON.stringify(event.data));
