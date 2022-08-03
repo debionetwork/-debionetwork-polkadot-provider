@@ -10,7 +10,7 @@ const handler = {
     return { data, id, params, wording }
   },
 
-  geneticAnalysts: async ({ dataEvent, valueMessage }) => {
+  geneticAnalysts: async ({ dataEvent, valueMessage, event }) => {
     let wording: string = ""
     const data = dataEvent[0];
     const { verificationStatus } = data
@@ -18,14 +18,23 @@ const handler = {
     if (verificationStatus === "Verified") wording = "Congrats! Your account has been verified."
     else wording = `${valueMessage} ${verificationStatus === "Revoked" ? "has been" : "verification has been" } ${verificationStatus}.`
 
+    if (event.method === "GeneticAnalystStakeSuccessful" && verificationStatus === "Unverified") wording = valueMessage
+
     return { data, id: null, params: null, wording }
   },
 
-  geneticAnalysisOrders: async ({ dataEvent, value, valueMessage }) => {
+  geneticAnalysisOrders: async ({ dataEvent, value, valueMessage, event, store }) => {
+    let wording: string
     const data = dataEvent[0]
     const id = data[value]
     const params = { id }
-    const wording = `${valueMessage} <${id.slice(0, 5)}...${id.slice(-5)}> is awaiting process.`
+
+    const formatedId = `${id.slice(0, 4)}...${id.slice(-4)}`
+
+    const coin = Number(store.web3.utils.fromWei(String(data.totalPrice.replace(/,/g, "")), "ether")) - 5
+
+    if (event.method === "GeneticAnalysisOrderFulfilled") wording = valueMessage(coin, formatedId)
+    else wording = `${valueMessage} <${formatedId}> is awaiting process.`
 
     return { data, id, params, wording }
   }

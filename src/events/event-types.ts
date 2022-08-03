@@ -249,6 +249,14 @@ export const eventTypes = {
           route: '',
           params: '',
           identity: 'accountId'
+        },
+        GeneticAnalystStakeSuccessful: {
+          message: '',
+          value: '',
+          value_message: "You've successfully submitted your account verification.",
+          route: '',
+          params: '',
+          identity: 'ownerId'
         }
       },
 
@@ -260,6 +268,16 @@ export const eventTypes = {
           route: 'ga-order-details',
           params: 'id',
           identity: 'accountId'
+        },
+        GeneticAnalysisOrderFulfilled: {
+          message: '',
+          value: 'id',
+          value_message: (coin: string|number, id: string|number) => {
+            return `You've received ${coin} DBIO for completing the requested analysis for <${id}>.`
+          },
+          route: 'ga-order-details',
+          params: 'id',
+          identity: 'sellerId'
         }
       }
     }
