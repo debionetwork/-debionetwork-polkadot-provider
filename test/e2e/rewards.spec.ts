@@ -26,28 +26,12 @@ describe('Rewards Pallet Integration Tests', () => {
   });
 
   it('updateRewardsAdminKey should return', async () => {
-    const promise: Promise<String> = new Promise((resolve, reject) => { // eslint-disable-line
-      updateRewardsAdminKey(api, pair, pair.address, () => {
-        queryRewarderKey(api)
-          .then((res) => {
-            resolve(res)
-          });
-      });
-    });
-
-    expect(await promise).toEqual(pair.address);
+    await updateRewardsAdminKey(api, pair, pair.address);
+    expect(await queryRewarderKey(api)).toEqual(pair.address);
   });
 
   it('sudoRewardsUpdateAdminKey should return', async () => {
-    const promise: Promise<String> = new Promise((resolve, reject) => { // eslint-disable-line
-      sudoRewardsUpdateAdminKey(api, pair, pair.address, () => {
-        queryRewarderKey(api)
-          .then((res) => {
-            resolve(res)
-          });
-      });
-    });
-
-    expect(await promise).toEqual(pair.address);
+    await sudoRewardsUpdateAdminKey(api, pair, pair.address);
+    expect(await queryRewarderKey(api)).toEqual(pair.address);
   });
 });
