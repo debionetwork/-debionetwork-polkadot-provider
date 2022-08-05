@@ -24,13 +24,13 @@ describe("Lab Events Handler Test", () => {
         prices: [
           {
             component: "0x74657374696e675f7072696365",
-            value: "0x00000000000000000de0b6b3a7640000"
+            value: "1,000,000,000,000,000,000"
           }
         ],
         additionalPrices: [
           {
             component: "0x71635f7072696365",
-            value: "0x00000000000000000de0b6b3a7640000"
+            value: "1,000,000,000,000,000,000"
           }
         ],
         status: 'Paid',
@@ -66,13 +66,13 @@ describe("Lab Events Handler Test", () => {
         prices: [
           {
             component: "0x74657374696e675f7072696365",
-            value: "0x00000000000000000de0b6b3a7640000"
+            value: "1,000,000,000,000,000,000"
           }
         ],
         additionalPrices: [
           {
             component: "0x71635f7072696365",
-            value: "0x00000000000000000de0b6b3a7640000"
+            value: "1,000,000,000,000,000,000"
           }
         ],
         status: 'Paid',
@@ -109,13 +109,13 @@ describe("Lab Events Handler Test", () => {
               priceComponents: [
                 {
                   component: "0x74657374696e675f7072696365",
-                  value: "0x00000000000000000de0b6b3a7640000"
+                  value: "1,000,000,000,000,000,000"
                 }
               ],
               additionalPrices: [
                 {
                   component: "0x71635f7072696365",
-                  value: "0x00000000000000000de0b6b3a7640000"
+                  value: "1,000,000,000,000,000,000"
                 }
               ]
             }
