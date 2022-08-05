@@ -237,18 +237,18 @@ export const eventTypes = {
           value_message: "You've successfully added your new service -",
           route: 'ga-edit-service',
           params: 'id',
-          identity: 'ownerId'
-        }
+          identity: 'ownerId',
+        },
       },
 
       geneticAnalysts: {
         GeneticAnalystUpdateVerificationStatus: {
           message: '',
           value: '',
-          value_message: "Your account",
+          value_message: 'Your account',
           route: '',
           params: '',
-          identity: 'accountId'
+          identity: 'accountId',
         },
         GeneticAnalystStakeSuccessful: {
           message: '',
@@ -256,30 +256,30 @@ export const eventTypes = {
           value_message: "You've successfully submitted your account verification.",
           route: '',
           params: '',
-          identity: 'ownerId'
-        }
+          identity: 'ownerId',
+        },
       },
 
       geneticAnalysisOrders: {
         GeneticAnalysisOrderPaid: {
           message: '',
           value: 'id',
-          value_message: "A new order",
+          value_message: 'A new order',
           route: 'ga-order-details',
           params: 'id',
-          identity: 'accountId'
+          identity: 'accountId',
         },
         GeneticAnalysisOrderFulfilled: {
           message: '',
           value: 'id',
-          value_message: (coin: string|number, id: string|number) => {
-            return `You've received ${coin} DBIO for completing the requested analysis for <${id}>.`
+          value_message: (coin: string | number, id: string | number) => {
+            return `You've received ${coin} DBIO for completing the requested analysis for <${id}>.`;
           },
           route: 'ga-order-details',
           params: 'id',
-          identity: 'sellerId'
-        }
-      }
-    }
+          identity: 'sellerId',
+        },
+      },
+    },
   },
 };

@@ -27,6 +27,6 @@ jobs:
       - name: Install Dependencies
         run: yarn
       - name: Run Checks
-        run: yarn check
+        run: yarn check:all
       - name: Run Build
         run: yarn build
