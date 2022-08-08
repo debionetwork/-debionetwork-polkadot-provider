@@ -31,12 +31,14 @@ const handler = {
     const data = dataEvent[0];
     const id = data[value];
     const params = { id };
+    const web3 = store.getters['metamask/getWeb3']
 
     const formatedId = `${id.slice(0, 4)}...${id.slice(-4)}`;
 
-    const coin = Number(store.web3.utils.fromWei(String(data.totalPrice.replace(/,/g, '')), 'ether')) - 5;
-
-    if (event.method === 'GeneticAnalysisOrderFulfilled') wording = valueMessage(coin, formatedId);
+    if (event.method === 'GeneticAnalysisOrderFulfilled') {
+      const coin = Number(web3.utils.fromWei(String(data.totalPrice.replace(/,/g, '')), 'ether')) - 5;
+      wording = valueMessage(coin, formatedId)
+    }
     else wording = `${valueMessage} <${formatedId}> is awaiting process.`;
 
     return { data, id, params, wording };
