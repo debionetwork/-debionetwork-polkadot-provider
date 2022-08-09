@@ -60,7 +60,6 @@ const handler = {
     let wording = valueMessage;
 
     if (event.method === 'StakingAmountExcessRefunded') {
-      // wording = `${data[value]} ${valueMessage.trim()}`;
       wording = valueMessage(data[value])
     }
 
