@@ -82,9 +82,11 @@ export const eventTypes = {
       electronicMedicalRecord: null,
       serviceRequest: {
         ServiceRequestFinalized: {
-          message: 'Congrats! You’ve got ',
+          message: '',
           value: 0,
-          value_message: ' DBIO as a reward for completing the request test from the service requested',
+          value_message: (coin: string | number) => {
+            return `Congrats! You’ve got ${coin} DBIO as a reward for completing the request test from the service requested.`;
+          },
           route: '',
           params: '',
           identity: 0,
@@ -98,25 +100,27 @@ export const eventTypes = {
           identity: 0,
         },
         ServiceRequestUnstaked: {
-          message: 'Your stake amount has been refunded, kindly check your balance.',
+          message: '',
           value: 1,
-          value_message: '',
+          value_message: 'Your stake amount has been refunded, kindly check your balance.',
           route: '',
           params: '',
           identity: 'requesterAddress',
         },
         StakingAmountExcessRefunded: {
-          message: 'You’ve got ',
+          message: '',
           value: 2,
-          value_message: ' DBIO from an overpayment, kindly check your balance.',
+          value_message: (coin: string | number) => {
+            return `You’ve got ${coin} DBIO from an overpayment, kindly check your balance.`;
+          },
           route: '',
           params: '',
           identity: 0,
         },
         ServiceRequestClaimed: {
-          message: 'Congrats! Your requested service is available now. See your stake service.',
+          message: '',
           value: 'serviceId',
-          value_message: '',
+          value_message: 'Congrats! Your requested service is available now. See your stake service.',
           route: 'my-test',
           params: '1',
           identity: 0,
