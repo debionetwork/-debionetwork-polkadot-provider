@@ -104,7 +104,7 @@ import { GeneticAnalyst } from "../../../../src/models/genetic-analysts";
   
     it('queryGeneticAnalystMinimumStakeAmount should return', async () => {
       // Arrange
-      const EXPECTED_VALUE = 0;
+      const EXPECTED_VALUE = "";
       (mockFunction as jest.Mock).mockReturnValue(EXPECTED_VALUE);
   
       // Assert
