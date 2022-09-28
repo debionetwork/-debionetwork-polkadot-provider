@@ -21,14 +21,16 @@ describe('User Profile Pallet Integration Tests', () => {
   });
 
   it('setEthAddress should return', async () => {
-    await setEthAddress(api, pair, ETH_ADDRESS_MOCK);
-    expect(await queryEthAdressByAccountId(api, pair.address)).toEqual(ETH_ADDRESS_MOCK);
-    expect(await queryAccountIdByEthAddress(api, ETH_ADDRESS_MOCK)).toEqual(pair.address);
+    await setEthAddress(api, pair, ETH_ADDRESS_MOCK, async () => {
+      expect(await queryEthAdressByAccountId(api, pair.address)).toEqual(ETH_ADDRESS_MOCK);
+      expect(await queryAccountIdByEthAddress(api, ETH_ADDRESS_MOCK)).toEqual(pair.address);
+    });
   });
 
   it('adminSetEthAddress should return', async () => {
-    await adminSetEthAddress(api, pair, pair.address, ETH_ADDRESS_MOCK);
-    expect(await queryEthAdressByAccountId(api, pair.address)).toEqual(ETH_ADDRESS_MOCK);
-    expect(await queryAccountIdByEthAddress(api, ETH_ADDRESS_MOCK)).toEqual(pair.address);
+    await adminSetEthAddress(api, pair, pair.address, ETH_ADDRESS_MOCK, async () => {
+      expect(await queryEthAdressByAccountId(api, pair.address)).toEqual(ETH_ADDRESS_MOCK);
+      expect(await queryAccountIdByEthAddress(api, ETH_ADDRESS_MOCK)).toEqual(pair.address);
+    });
   });
 });

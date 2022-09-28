@@ -1,5 +1,5 @@
 import { ApiPromise } from '@polkadot/api';
-import { successCallback, getCommandNonceAndSigner } from '../index';
+import { successCallback, getCommandNonceAndSigner, ServicePrice } from '../index';
 
 export async function retrieveUnstakedAmount(
   api: ApiPromise,
@@ -80,13 +80,12 @@ export async function claimRequest(
   pair: any,
   requestId: string,
   serviceId: string,
-  testingPrice: string,
-  qcPrice: string,
+  servicePrice: ServicePrice,
   callback?: () => void,
 ) {
   // tslint:disable-next-line
   var unsub = await api.tx.serviceRequest
-    .claimRequest(requestId, serviceId, testingPrice, qcPrice)
+    .claimRequest(requestId, serviceId, servicePrice)
     .signAndSend(pair, getCommandNonceAndSigner(pair), ({ events, status }) => {
       successCallback(api, { events, status, callback, unsub });
     });
@@ -97,10 +96,9 @@ export function claimRequestFee(
   pair: any,
   requestId: string,
   serviceId: string,
-  testingPrice: string,
-  qcPrice: string,
+  servicePrice: ServicePrice,
 ): Promise<any> {
-  return api.tx.serviceRequest.claimRequest(requestId, serviceId, testingPrice, qcPrice).paymentInfo(pair);
+  return api.tx.serviceRequest.claimRequest(requestId, serviceId, servicePrice).paymentInfo(pair);
 }
 
 export async function processRequest(
@@ -110,12 +108,11 @@ export async function processRequest(
   requestId: string,
   orderId: string,
   dnaSampleTrackingId: string,
-  additionalStakingAmount: string,
   callback?: () => void,
 ) {
   // tslint:disable-next-line
   var unsub = await api.tx.serviceRequest
-    .processRequest(labId, requestId, orderId, dnaSampleTrackingId, additionalStakingAmount)
+    .processRequest(labId, requestId, orderId, dnaSampleTrackingId)
     .signAndSend(pair, getCommandNonceAndSigner(pair), ({ events, status }) => {
       successCallback(api, { events, status, callback, unsub });
     });

@@ -69,7 +69,7 @@ describe('Doctor Pallet Integration Tests', () => {
 
   it('deregisterDoctor should return', async () => {
     await deregisterDoctor(api, pair);
-    expect(await queryDoctorById(api, pair.address)).toEqual(0);
+    expect(await queryDoctorCount(api)).toEqual(0);
   });
 
   it('registerDoctorFee should return', async () => {
