@@ -2,6 +2,8 @@ module.exports = async () => {
     const path = require('path');
     const compose = require('docker-compose');
 
+    await new Promise((resolve) => setTimeout(resolve, 10000));
+
     const promise = new Promise((resolve, reject) => { // eslint-disable-line
         compose.upAll({ cwd: path.join(__dirname), log: true }).then(
             () => {

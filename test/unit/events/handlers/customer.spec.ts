@@ -76,7 +76,7 @@ describe("Customer Events Handler", () => {
         updatedAt: null,
       },
       params: { page: 1 },
-      wording: ''
+      wording: 'Your stake amount has been refunded, kindly check your balance.'
     })
   })
 })
