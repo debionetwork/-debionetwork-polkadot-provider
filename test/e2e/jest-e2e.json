@@ -18,7 +18,7 @@
       "**/*.(t|j)s"
     ],
     "testSequencer": "./test-sequencer.js",
-    "testTimeout": 150000,
+    "testTimeout": 250000,
     "coverageDirectory": "../coverage"
   }
   

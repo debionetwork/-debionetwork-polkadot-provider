@@ -69,7 +69,8 @@ describe('Orders Commands Unit Tests', () => {
         SERVICE_ID,
         PRICE_INDEX,
         BOX_PUBLIC_KEY,
-        ORDER_FLOW,
+        ORDER_FLOW, 
+        null,
         mockFunction
       );
         
@@ -214,6 +215,7 @@ describe('Orders Commands Unit Tests', () => {
         PRICE_INDEX,
         BOX_PUBLIC_KEY,
         ORDER_FLOW,
+        null,
         )).toEqual(EXPECTED_VALUE);
     expect(createOrderSpy).toBeCalledTimes(1);
     expect(createOrderSpy).toBeCalledWith(SERVICE_ID, PRICE_INDEX, BOX_PUBLIC_KEY, ORDER_FLOW);

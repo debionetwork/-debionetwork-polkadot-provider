@@ -11,17 +11,17 @@ export const serviceDataMock = {
         priceComponents: [
           {
             component: 'string',
-            value: "1"
+            value: "1000"
           }
         ],
         additionalPrices: [
           {
             component: 'string',
-            value: "1"
+            value: "1000"
           }
         ],
-        currency: "DAI",
-        totalPrice: "2",
+        currency: "USN",
+        totalPrice: "2000",
       }
     ],
     expectedDuration: {

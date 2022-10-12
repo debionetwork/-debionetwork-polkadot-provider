@@ -8,11 +8,12 @@ export async function createOrder(
   priceIndex: number,
   customerBoxPublicKey: string,
   orderFlow: string,
+  assetId: number | null,
   callback?: () => void,
 ): Promise<void> {
   // tslint:disable-next-line
   var unsub = await api.tx.orders
-    .createOrder(serviceId, priceIndex, customerBoxPublicKey, orderFlow)
+    .createOrder(serviceId, priceIndex, customerBoxPublicKey, orderFlow, assetId)
     .signAndSend(pair, getCommandNonceAndSigner(pair), ({ events, status }) => {
       successCallback(api, { events, status, callback, unsub });
     });
@@ -69,8 +70,9 @@ export function createOrderFee(
   priceIndex: number,
   customerBoxPublicKey: string,
   orderFlow: string,
+  assetId: number | null,
 ): any {
-  return api.tx.orders.createOrder(serviceId, priceIndex, customerBoxPublicKey, orderFlow).paymentInfo(pair);
+  return api.tx.orders.createOrder(serviceId, priceIndex, customerBoxPublicKey, orderFlow, assetId).paymentInfo(pair);
 }
 
 export async function sudoUpdateLabOrderEscrowKey(
