@@ -10,7 +10,7 @@ export interface MenstrualCycleLogModel {
   menstrualCalendarId: string;
   date: number;
   menstruation: boolean;
-  symptoms: Array<Symptom>;
+  symptoms: Symptom[];
   createdAt: number;
   updatedAt: number;
 }

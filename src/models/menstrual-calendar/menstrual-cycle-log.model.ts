@@ -1,3 +1,5 @@
+import { Symptom } from './symptom';
+
 export class MenstrualCycleLog {
   constructor(anyJson: any) {
     this.id = anyJson.id;
@@ -17,15 +19,7 @@ export class MenstrualCycleLog {
   menstrualCalendarId: string;
   date: Date;
   menstruation: boolean;
-  symptoms: Array<Symptom>;
+  symptoms: Symptom[];
   createdAt: Date;
   updatedAt: Date;
-}
-
-export class Symptom {
-  constructor(name: string) {
-    this.name = name;
-  }
-
-  name: string;
 }

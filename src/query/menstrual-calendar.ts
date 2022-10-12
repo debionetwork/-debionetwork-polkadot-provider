@@ -6,8 +6,8 @@ export async function queryMenstrualCalendarById(api: ApiPromise, menstrualId: s
   return new MenstrualCalendar(res);
 }
 
-export async function queryMenstrualCalendarByOwner(api: ApiPromise, accountId: string): Promise<Array<MenstrualCalendar>> {
-  const menstrualCalendarList: Array<MenstrualCalendar> = new Array<MenstrualCalendar>();
+export async function queryMenstrualCalendarByOwner(api: ApiPromise, accountId: string): Promise<MenstrualCalendar[]> {
+  const menstrualCalendarList: MenstrualCalendar[] = new Array<MenstrualCalendar>();
   const res: any = (await api.query.menstrualCalendar.menstrualCalendarByOwner(accountId)).toHuman();
 
   for (const menstrualCalendarId of res) {
@@ -26,13 +26,16 @@ export async function queryMenstrualCalendarCountByOwner(api: ApiPromise, accoun
   return parseInt(res, 0);
 }
 
-export async function queryMenstrualCycleLogById(api: ApiPromise, menstrualcycleLogId: string): Promise<MenstrualCycleLog> {
+export async function queryMenstrualCycleLogById(
+  api: ApiPromise,
+  menstrualcycleLogId: string,
+): Promise<MenstrualCycleLog> {
   const res = (await api.query.menstrualCalendar.menstrualCycleLogById(menstrualcycleLogId)).toHuman();
   return new MenstrualCycleLog(res);
 }
 
-export async function queryMenstrualCycleLogByOwner(api: ApiPromise, accountId: string): Promise<Array<MenstrualCycleLog>> {
-  const menstrualCycleLogList: Array<MenstrualCycleLog> = new Array<MenstrualCycleLog>();
+export async function queryMenstrualCycleLogByOwner(api: ApiPromise, accountId: string): Promise<MenstrualCycleLog[]> {
+  const menstrualCycleLogList: MenstrualCycleLog[] = new Array<MenstrualCycleLog>();
   const res: any = (await api.query.menstrualCalendar.menstrualCycleLogByOwner(accountId)).toHuman();
 
   for (const menstrualCycleLogId of res) {

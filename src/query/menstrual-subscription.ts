@@ -1,13 +1,19 @@
-import { ApiPromise } from "@polkadot/api";
-import { MenstrualSubscription } from "../models/menstrual-subscription";
+import { ApiPromise } from '@polkadot/api';
+import { MenstrualSubscription } from '../models/menstrual-subscription';
 
-export async function queryMenstrualSubscriptionById(api: ApiPromise, menstrualSubscriptionId: string): Promise<MenstrualSubscription> {
+export async function queryMenstrualSubscriptionById(
+  api: ApiPromise,
+  menstrualSubscriptionId: string,
+): Promise<MenstrualSubscription> {
   const res = (await api.query.menstrualSubscription.menstrualSubscriptionById(menstrualSubscriptionId)).toHuman();
   return new MenstrualSubscription(res);
 }
 
-export async function queryMenstrualSubscriptionByOwner(api: ApiPromise, accountId: string): Promise<Array<MenstrualSubscription>> {
-  const menstrualSubscriptionList: Array<MenstrualSubscription> = new Array<MenstrualSubscription>();
+export async function queryMenstrualSubscriptionByOwner(
+  api: ApiPromise,
+  accountId: string,
+): Promise<MenstrualSubscription[]> {
+  const menstrualSubscriptionList: MenstrualSubscription[] = new Array<MenstrualSubscription>();
   const res: any = (await api.query.menstrualSubscription.menstrualSubscriptionByOwner(accountId)).toHuman();
 
   for (const menstrualSubscriptionId of res) {

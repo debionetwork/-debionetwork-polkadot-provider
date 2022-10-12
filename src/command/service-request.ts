@@ -90,12 +90,7 @@ export async function claimRequest(
     });
 }
 
-export function claimRequestFee(
-  api: ApiPromise,
-  pair: any,
-  requestId: string,
-  serviceId: string,
-): Promise<any> {
+export function claimRequestFee(api: ApiPromise, pair: any, requestId: string, serviceId: string): Promise<any> {
   return api.tx.serviceRequest.claimRequest(requestId, serviceId).paymentInfo(pair);
 }
 
@@ -108,7 +103,7 @@ export async function processRequest(
 ) {
   // tslint:disable-next-line
   var unsub = await api.tx.serviceRequest
-    .processRequest(requestId, orderId,)
+    .processRequest(requestId, orderId)
     .signAndSend(pair, getCommandNonceAndSigner(pair), ({ events, status }) => {
       successCallback(api, { events, status, callback, unsub });
     });

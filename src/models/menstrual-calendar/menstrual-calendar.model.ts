@@ -11,7 +11,7 @@ export class MenstrualCalendar {
   id: string;
   addressId: string;
   averageCycle: number;
-  cycleLog: Array<string>;
+  cycleLog: string[];
   createdAt: Date;
   updatedAt: Date;
 }
