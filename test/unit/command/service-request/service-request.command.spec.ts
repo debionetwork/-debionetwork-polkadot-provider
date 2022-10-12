@@ -222,8 +222,6 @@ describe('Service Request Commands Unit Testing', () => {
     const PAIR = "PAIR";
     const REQUEST_ID = "REQUEST_ID";
     const SERVICE_ID = "SERVICE_ID";
-    const TESTING_PRICE = "TESTING_PRICE";
-    const QC_PRICE = "QC_PRICE";
 
     // Act
     await claimRequest(
@@ -231,14 +229,12 @@ describe('Service Request Commands Unit Testing', () => {
       PAIR,
       REQUEST_ID,
       SERVICE_ID,
-      TESTING_PRICE,
-      QC_PRICE,
       mockFunction,
     );
 
     // Assert
     expect(claimRequestSpy).toBeCalledTimes(1);
-    expect(claimRequestSpy).toBeCalledWith(REQUEST_ID, SERVICE_ID, TESTING_PRICE, QC_PRICE);
+    expect(claimRequestSpy).toBeCalledWith(REQUEST_ID, SERVICE_ID);
     expect(signAndSendSpy).toBeCalledTimes(1);
     expect(signAndSendSpy).toBeCalledWith(PAIR, getCommandNonceAndSigner(PAIR), expect.any(Function));
     expect(successCallback).toBeCalledTimes(1);
@@ -253,27 +249,21 @@ describe('Service Request Commands Unit Testing', () => {
   it('processRequest should return', async () => {
     // Arrange
     const PAIR = "PAIR";
-    const LAB_ID = "LAB_ID";
     const REQUEST_ID = "REQUEST_ID";
     const ORDER_ID = "ORDER_ID";
-    const DNA_SAMPLE_TRACKING_ID = "DNA_SAMPLE_TRACKING_ID";
-    const ADDITIONAL_STACKING_AMOUNT = "ADDITIONAL_STACKING_AMOUNT";
 
     // Act
     await processRequest(
       API_PROMISE_MOCK as any,
       PAIR,
-      LAB_ID,
       REQUEST_ID,
       ORDER_ID,
-      DNA_SAMPLE_TRACKING_ID,
-      ADDITIONAL_STACKING_AMOUNT,
       mockFunction,
     );
 
     // Assert
     expect(processRequestSpy).toBeCalledTimes(1);
-    expect(processRequestSpy).toBeCalledWith(LAB_ID, REQUEST_ID, ORDER_ID, DNA_SAMPLE_TRACKING_ID, ADDITIONAL_STACKING_AMOUNT);
+    expect(processRequestSpy).toBeCalledWith(REQUEST_ID, ORDER_ID);
     expect(signAndSendSpy).toBeCalledTimes(1);
     expect(signAndSendSpy).toBeCalledWith(PAIR, getCommandNonceAndSigner(PAIR), expect.any(Function));
     expect(successCallback).toBeCalledTimes(1);
