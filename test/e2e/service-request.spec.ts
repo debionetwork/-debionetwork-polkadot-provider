@@ -146,7 +146,7 @@ describe('Service Request Pallet Integration Tests', () => {
     serviceRequest = await serviceRequestPromise;
 
     const promise: Promise<ServiceRequest> = new Promise((resolve, reject) => { // eslint-disable-line
-      claimRequest(api, pair, serviceRequest.hash, service.id, service.price, service.qcPrice, () => {
+      claimRequest(api, pair, serviceRequest.hash, service.id, () => {
         queryServiceRequestById(api, serviceRequest.hash)
           .then((res) => {
             resolve(res)
@@ -166,7 +166,7 @@ describe('Service Request Pallet Integration Tests', () => {
   });
 
   it('claimRequestFee should return', async () => {
-    expect(await claimRequestFee(api, pair, serviceRequest.hash, service.id, service.price, service.qcPrice)).toHaveProperty('partialFee')
+    expect(await claimRequestFee(api, pair, serviceRequest.hash, service.id)).toHaveProperty('partialFee')
   })
 
 
@@ -189,7 +189,7 @@ describe('Service Request Pallet Integration Tests', () => {
     order = await orderPromise;
 
     const promise: Promise<ServiceInvoice> = new Promise((resolve, reject) => { // eslint-disable-line
-      processRequest(api, pair, lab.accountId, serviceRequest.hash, order.id, order.dnaSampleTrackingId, stakingAmount.toString(), () => {
+      processRequest(api, pair, serviceRequest.hash, order.id, () => {
         queryServiceInvoiceById(api, serviceRequest.hash)
           .then((res) => {
             resolve(res)
