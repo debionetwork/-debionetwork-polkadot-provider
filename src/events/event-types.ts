@@ -276,8 +276,8 @@ export const eventTypes = {
         GeneticAnalysisOrderFulfilled: {
           message: '',
           value: 'id',
-          value_message: (coin: string | number, id: string | number) => {
-            return `You've received ${coin} DBIO for completing the requested analysis for <${id}>.`;
+          value_message: (coin: string | number, currency: string, id: string | number) => {
+            return `You've received ${coin} ${currency} for completing the requested analysis for <${id}>.`;
           },
           route: 'ga-order-details',
           params: 'id',
