@@ -21,30 +21,14 @@ describe('User Profile Pallet Integration Tests', () => {
   });
 
   it('setEthAddress should return', async () => {
-    const promise: Promise<String> = new Promise((resolve, reject) => { // eslint-disable-line
-      setEthAddress(api, pair, ETH_ADDRESS_MOCK, () => {
-        queryEthAdressByAccountId(api, pair.address)
-          .then((res) => {
-            resolve(res)
-          });
-      });
-    });
-
-    expect(await promise).toEqual(ETH_ADDRESS_MOCK);
+    await setEthAddress(api, pair, ETH_ADDRESS_MOCK);
+    expect(await queryEthAdressByAccountId(api, pair.address)).toEqual(ETH_ADDRESS_MOCK);
     expect(await queryAccountIdByEthAddress(api, ETH_ADDRESS_MOCK)).toEqual(pair.address);
   });
 
   it('adminSetEthAddress should return', async () => {
-    const promise: Promise<String> = new Promise((resolve, reject) => { // eslint-disable-line
-      adminSetEthAddress(api, pair, pair.address, ETH_ADDRESS_MOCK, () => {
-        queryEthAdressByAccountId(api, pair.address)
-          .then((res) => {
-            resolve(res)
-          });
-      });
-    });
-
-    expect(await promise).toEqual(ETH_ADDRESS_MOCK);
+    await adminSetEthAddress(api, pair, pair.address, ETH_ADDRESS_MOCK);
+    expect(await queryEthAdressByAccountId(api, pair.address)).toEqual(ETH_ADDRESS_MOCK);
     expect(await queryAccountIdByEthAddress(api, ETH_ADDRESS_MOCK)).toEqual(pair.address);
   });
 });

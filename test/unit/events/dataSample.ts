@@ -1,5 +1,5 @@
 export const sampleAddress = "sampleAddress"
-export const sampleRole = { customer: "customer", lab: "lab" }
+export const sampleRole = { customer: "customer", lab: "lab", analyst: "analyst" }
 export const sampleEvent = {
   "index": "sampleIndex",
   "data": [
@@ -83,13 +83,13 @@ export const sampleEvent4 = {
       "prices": [
         {
           "component": "0x74657374696e675f7072696365",
-          "value": "0x00000000000000000de0b6b3a7640000"
+          "value": "1,000,000,000,000,000,000"
         }
       ],
       "additionalPrices": [
         {
           "component": "0x71635f7072696365",
-          "value": "0x00000000000000000de0b6b3a7640000"
+          "value": "1,000,000,000,000,000,000"
         }
       ],
       "status": "Paid",
@@ -117,13 +117,13 @@ export const sampleEvent5 = {
             "priceComponents": [
               {
                 "component": "0x74657374696e675f7072696365",
-                "value": "0x00000000000000000de0b6b3a7640000"
+                "value": "1,000,000,000,000,000,000"
               }
             ],
             "additionalPrices": [
               {
                 "component": "0x71635f7072696365",
-                "value": "0x00000000000000000de0b6b3a7640000"
+                "value": "1,000,000,000,000,000,000"
               }
             ]
           }
@@ -145,4 +145,39 @@ export const sampleEvent5 = {
   ],
   "section": "services",
   "method": "ServiceCreated"
+}
+
+export const sampleEvent6 = {
+  "index": "0x2300",
+  "data": [
+    {
+      "id": "sampleIdHash",
+      "ownerId": "sampleAddress",
+      "info": {
+        "name": "Test Service",
+        "pricesByCurrency": [
+          {
+            "currency": "DBIO",
+            "totalPrice": "1,000,000,000,000,000,000",
+            "priceComponents": [
+              {
+                "component": "Main Price",
+                "value": "1,000,000,000,000,000,000"
+              }
+            ],
+            "additionalPrices": []
+          }
+        ],
+        "expectedDuration": {
+          "duration": 1,
+          "durationType": "Days"
+        },
+        "description": "test service",
+        "testResultSample": "link"
+      }
+    },
+    "sampleAddress"
+  ],
+  "section": "geneticAnalystServices",
+  "method": "GeneticAnalystServiceCreated"
 }

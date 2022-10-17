@@ -20,16 +20,8 @@ describe('Doctor Pallet Integration Tests', () => {
   });
 
   it('registerDoctor should return', async () => {
-    const promise: Promise<Doctor> = new Promise((resolve, reject) => { // eslint-disable-line
-      registerDoctor(api, pair, doctorDataMock.info, () => {
-        queryDoctorById(api, pair.address)
-          .then((res) => {
-            resolve(res)
-          });
-      }).catch(e => reject(e));
-    });
-
-    expect((await promise).info).toEqual(doctorDataMock.info);
+    await registerDoctor(api, pair, doctorDataMock.info);
+    expect((await queryDoctorById(api, pair.address)).info).toEqual(doctorDataMock.info);
   });
 
   it('queryDoctorsByCountryRegionCity should return', async () => {
@@ -71,29 +63,13 @@ describe('Doctor Pallet Integration Tests', () => {
       country: "SG",
     };
 
-    const promise: Promise<Doctor> = new Promise((resolve, reject) => { // eslint-disable-line
-      updateDoctor(api, pair, info, () => {
-        queryDoctorById(api, pair.address)
-          .then((res) => {
-            resolve(res)
-          });
-      }).catch(e => reject(e));
-    });
-
-    expect((await promise).info).toEqual(info);
+    await updateDoctor(api, pair, info);
+    expect((await queryDoctorById(api, pair.address)).info).toEqual(info);
   });
 
   it('deregisterDoctor should return', async () => {
-    const promise: Promise<number> = new Promise((resolve, reject) => { // eslint-disable-line
-      deregisterDoctor(api, pair, () => {
-        queryDoctorCount(api)
-          .then((res) => {
-            resolve(res);
-          });
-      }).catch(e => reject(e));
-    });
-    
-    expect(await promise).toEqual(0);
+    await deregisterDoctor(api, pair);
+    expect(await queryDoctorById(api, pair.address)).toEqual(0);
   });
 
   it('registerDoctorFee should return', async () => {
