@@ -289,20 +289,18 @@ describe('Service Request Commands Unit Testing', () => {
     // Arrange
     const PAIR = "PAIR";
     const REQUEST_ID = "REQUEST_ID";
-    const TEST_RESULT_SUCCESS = true;
 
     // Act
     await finalizeRequest(
       API_PROMISE_MOCK as any,
       PAIR,
       REQUEST_ID,
-      TEST_RESULT_SUCCESS,
       mockFunction,
     );
 
     // Assert
     expect(finalizeRequestSpy).toBeCalledTimes(1);
-    expect(finalizeRequestSpy).toBeCalledWith(REQUEST_ID, TEST_RESULT_SUCCESS);
+    expect(finalizeRequestSpy).toBeCalledWith(REQUEST_ID);
     expect(signAndSendSpy).toBeCalledTimes(1);
     expect(signAndSendSpy).toBeCalledWith(PAIR, getCommandNonceAndSigner(PAIR), expect.any(Function));
     expect(successCallback).toBeCalledTimes(1);

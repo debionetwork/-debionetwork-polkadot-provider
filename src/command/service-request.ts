@@ -125,12 +125,11 @@ export async function finalizeRequest(
   api: ApiPromise,
   pair: any,
   requestId: string,
-  testResultSuccess: boolean,
   callback?: () => void,
 ) {
   // tslint:disable-next-line
   var unsub = await api.tx.serviceRequest
-    .finalizeRequest(requestId, testResultSuccess)
+    .finalizeRequest(requestId)
     .signAndSend(pair, getCommandNonceAndSigner(pair), ({ events, status }) => {
       successCallback(api, { events, status, callback, unsub });
     });
