@@ -1,6 +1,34 @@
 import 'regenerator-runtime/runtime';
 import { ApiPromise } from "@polkadot/api";
-import { claimRequest, claimRequestFee, createOrder, createRequest, createRequestFee, createService, deregisterLab, finalizeRequest, Lab, Order, processRequest, queryGetAllServiceRequest, queryLabById, queryLabCount, queryLastOrderHashByCustomer, queryOrderDetailByOrderID, queryServiceInvoiceById, queryServiceInvoiceByOrderId, queryServiceRequestByAccountId, queryServiceRequestById, queryServicesByMultipleIds, registerLab, RequestStatus, Service, ServiceInvoice, ServiceRequest, unstakeRequest, unstakeRequestFee, updateLabVerificationStatus } from "../../src";
+import { 
+  claimRequest, 
+  claimRequestFee, 
+  createOrder, 
+  createRequest, 
+  createRequestFee, 
+  createService, 
+  deregisterLab, 
+  finalizeRequest, 
+  Lab, 
+  Order, 
+  processRequest, 
+  queryGetAllServiceRequest, 
+  queryLabById, 
+  queryLabCount, 
+  queryLastOrderHashByCustomer, 
+  queryOrderDetailByOrderID, 
+  queryServiceRequestByAccountId, 
+  queryServiceRequestById, 
+  queryServicesByMultipleIds, 
+  registerLab, 
+  RequestStatus, 
+  Service, 
+  ServiceInvoice, 
+  ServiceRequest, 
+  unstakeRequest, 
+  unstakeRequestFee, 
+  updateLabVerificationStatus 
+} from "../../src";
 import { labDataMock } from "../unit/models/labs/labs.mock";
 import { serviceDataMock } from "../unit/models/labs/services.mock";
 import { serviceRequestDataMock } from "../unit/models/service-request/service-request.mock";
@@ -14,7 +42,6 @@ describe('Service Request Pallet Integration Tests', () => {
   let lab: Lab;
   let order: Order;
   let service: Service;
-  let serviceInvoice: ServiceInvoice;
   let serviceRequest: ServiceRequest;
 
   beforeAll(async () => {
@@ -146,7 +173,7 @@ describe('Service Request Pallet Integration Tests', () => {
     serviceRequest = await serviceRequestPromise;
 
     const promise: Promise<ServiceRequest> = new Promise((resolve, reject) => { // eslint-disable-line
-      claimRequest(api, pair, serviceRequest.hash, service.id, { assetId: '', qcPrice: BigInt(service.qcPrice), testingPrice: BigInt(service.price) }, () => {
+      claimRequest(api, pair, serviceRequest.hash, service.id, () => {
         queryServiceRequestById(api, serviceRequest.hash)
           .then((res) => {
             resolve(res)
@@ -166,7 +193,7 @@ describe('Service Request Pallet Integration Tests', () => {
   });
 
   it('claimRequestFee should return', async () => {
-    expect(await claimRequestFee(api, pair, serviceRequest.hash, service.id, { assetId: '', qcPrice: BigInt(service.qcPrice), testingPrice: BigInt(service.price) })).toHaveProperty('partialFee')
+    expect(await claimRequestFee(api, pair, serviceRequest.hash, service.id)).toHaveProperty('partialFee')
   })
 
 
@@ -188,44 +215,24 @@ describe('Service Request Pallet Integration Tests', () => {
 
     order = await orderPromise;
 
-    const promise: Promise<ServiceInvoice> = new Promise((resolve, reject) => { // eslint-disable-line
-      processRequest(api, pair, lab.accountId, serviceRequest.hash, order.id, order.dnaSampleTrackingId, () => {
-        queryServiceInvoiceById(api, serviceRequest.hash)
+    const promise: Promise<ServiceRequest> = new Promise((resolve, reject) => { // eslint-disable-line
+      processRequest(api, pair, serviceRequest.hash, order.id, () => {
+        queryServiceRequestById(api, serviceRequest.hash)
           .then((res) => {
             resolve(res)
           });
       });
     });
-
-    serviceInvoice = await promise;
-
-    expect(serviceInvoice.customerAddress).toEqual(pair.address);
-    expect(serviceInvoice.sellerAddress).toEqual(pair.address);
-    expect(serviceInvoice.requestHash).toEqual(serviceRequest.hash);
-    expect(serviceInvoice.serviceId).toEqual(service.id);
-    expect(serviceInvoice.orderId).toEqual(order.id);
-    expect(serviceInvoice.dnaSampleTrackingId).toEqual(order.dnaSampleTrackingId);
     
-    const _serviceRequest = await queryServiceRequestById(api, serviceRequest.hash);
+    serviceRequest = await promise;
 
-    expect(_serviceRequest.requesterAddress).toEqual(pair.address);
-    expect(_serviceRequest.country).toEqual(labDataMock.info.country);
-    expect(_serviceRequest.region).toEqual(labDataMock.info.region);
-    expect(_serviceRequest.city).toEqual(labDataMock.info.city);
-    expect(_serviceRequest.serviceCategory).toEqual(category);
-    expect(_serviceRequest.stakingAmount).toEqual(stakingAmount.toString());
-    expect(_serviceRequest.status).toEqual(RequestStatus.Processed);
-  });
-
-  it('queryServiceInvoiceByOrderId should return', async () => {
-    const _serviceInvoice = await queryServiceInvoiceByOrderId(api, serviceInvoice.orderId);
-
-    expect(_serviceInvoice.customerAddress).toEqual(serviceInvoice.customerAddress);
-    expect(_serviceInvoice.sellerAddress).toEqual(serviceInvoice.sellerAddress);
-    expect(_serviceInvoice.requestHash).toEqual(serviceInvoice.requestHash);
-    expect(_serviceInvoice.serviceId).toEqual(serviceInvoice.serviceId);
-    expect(_serviceInvoice.orderId).toEqual(serviceInvoice.orderId);
-    expect(_serviceInvoice.dnaSampleTrackingId).toEqual(serviceInvoice.dnaSampleTrackingId);
+    expect(serviceRequest.requesterAddress).toEqual(pair.address);
+    expect(serviceRequest.country).toEqual(labDataMock.info.country);
+    expect(serviceRequest.region).toEqual(labDataMock.info.region);
+    expect(serviceRequest.city).toEqual(labDataMock.info.city);
+    expect(serviceRequest.serviceCategory).toEqual(category);
+    expect(serviceRequest.stakingAmount).toEqual(stakingAmount.toString());
+    expect(serviceRequest.status).toEqual(RequestStatus.Processed);
   });
 
   it('finalizeRequest should return', async () => {
@@ -233,7 +240,7 @@ describe('Service Request Pallet Integration Tests', () => {
     const stakingAmount = 10;
 
     const promise: Promise<ServiceRequest> = new Promise((resolve, reject) => { // eslint-disable-line
-      finalizeRequest(api, pair, serviceInvoice.requestHash, true, () => {
+      finalizeRequest(api, pair, serviceRequest.hash, true, () => {
         queryServiceRequestById(api, serviceRequest.hash)
           .then((res) => {
             resolve(res)
