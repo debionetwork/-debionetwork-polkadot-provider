@@ -16,4 +16,6 @@ module.exports = async () => {
     });
 
     console.log(await promise);
+
+    await new Promise((resolve) => setTimeout(resolve, 20000));
 }

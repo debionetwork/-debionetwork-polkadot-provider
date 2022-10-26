@@ -60,7 +60,7 @@ const handler = {
     let wording = valueMessage;
 
     if (event.method === 'StakingAmountExcessRefunded') {
-      wording = valueMessage(data[value])
+      wording = valueMessage(data[value]);
     }
 
     if (event.method === 'ServiceRequestCreated') {

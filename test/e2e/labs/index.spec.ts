@@ -154,7 +154,7 @@ describe('Lab Pallet Integration Tests', () => {
         });
     });
 
-    expect(await promise).toEqual(50);
+    expect(await promise).toEqual(0);
   });
 
   it('queryLabUnstakeTime should return', async () => {

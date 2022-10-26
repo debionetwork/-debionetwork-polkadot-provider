@@ -25,13 +25,3 @@ export async function queryGetAllServiceRequest(api: ApiPromise): Promise<Servic
   });
   return serviceRequestArray;
 }
-
-export async function queryServiceInvoiceById(api: ApiPromise, serviceHash: string): Promise<ServiceInvoice> {
-  const resp = (await api.query.serviceRequest.serviceInvoiceById(serviceHash)).toHuman();
-  return new ServiceInvoice(resp);
-}
-
-export async function queryServiceInvoiceByOrderId(api: ApiPromise, orderId: string): Promise<ServiceInvoice> {
-  const resp = (await api.query.serviceRequest.serviceInvoiceByOrderId(orderId)).toHuman();
-  return new ServiceInvoice(resp);
-}

@@ -60,7 +60,7 @@ describe('Orders Pallet Integration Tests', () => {
     service = await servicePromise;
 
     const promise: Promise<Order> = new Promise((resolve, reject) => { // eslint-disable-line
-        createOrder(api, pair, service.id, 0, lab.info.boxPublicKey, serviceDataMock.serviceFlow, () => {
+        createOrder(api, pair, service.id, 0, lab.info.boxPublicKey, serviceDataMock.serviceFlow, null, () => {
           queryLastOrderHashByCustomer(api, pair.address)
             .then((orderId) => {
               queryOrderDetailByOrderID(api, orderId)
@@ -80,7 +80,7 @@ describe('Orders Pallet Integration Tests', () => {
   });
 
   it('createOrderFee should return', async () => {
-    await createOrderFee(api, pair, service.id, 0, lab.info.boxPublicKey, serviceDataMock.serviceFlow);
+    await createOrderFee(api, pair, service.id, 0, lab.info.boxPublicKey, serviceDataMock.serviceFlow, null);
   });
 
   it('cancelOrderFee should return', async () => {
@@ -103,7 +103,7 @@ describe('Orders Pallet Integration Tests', () => {
 
   it('cancelOrder should return', async () => {
     const orderPromise: Promise<Order> = new Promise((resolve, reject) => { // eslint-disable-line
-        createOrder(api, pair, service.id, 0, lab.info.boxPublicKey, serviceDataMock.serviceFlow, () => {
+        createOrder(api, pair, service.id, 0, lab.info.boxPublicKey, serviceDataMock.serviceFlow, null, () => {
           queryLastOrderHashByCustomer(api, pair.address)
             .then((orderId) => {
               queryOrderDetailByOrderID(api, orderId)
@@ -186,7 +186,7 @@ describe('Orders Pallet Integration Tests', () => {
 
   it('setOrderRefunded should return', async () => {
     const orderPromise: Promise<Order> = new Promise((resolve, reject) => { // eslint-disable-line
-        createOrder(api, pair, service.id, 0, lab.info.boxPublicKey, serviceDataMock.serviceFlow, () => {
+        createOrder(api, pair, service.id, 0, lab.info.boxPublicKey, serviceDataMock.serviceFlow, null, () => {
           queryLastOrderHashByCustomer(api, pair.address)
             .then((orderId) => {
               queryOrderDetailByOrderID(api, orderId)
