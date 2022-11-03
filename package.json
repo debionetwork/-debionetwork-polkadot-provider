@@ -1,5 +1,5 @@
 {
-  "version": "0.0.15",
+  "version": "0.0.16",
   "description": "Javascript Library to connect and interact with the DeBio Network blockchain.",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
