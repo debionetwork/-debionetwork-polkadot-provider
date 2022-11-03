@@ -36,8 +36,10 @@ const handler = {
     const formatedId = `${id.slice(0, 4)}...${id.slice(-4)}`;
 
     if (event.method === 'GeneticAnalysisOrderFulfilled') {
-      const coin = Number(web3.utils.fromWei(String(data.totalPrice.replace(/,/g, '')), 'ether')) - 5;
-      wording = valueMessage(coin, formatedId);
+      const currency = data.currency
+      const unit = data.currency === "USDT" ? "mwei" : "ether"
+      const coin = Number(web3.utils.fromWei(String(data.totalPrice.replace(/,/g, '')), unit)) - 5;
+      wording = valueMessage(coin, currency, formatedId);
     } else wording = `${valueMessage} <${formatedId}> is awaiting process.`;
 
     return { data, id, params, wording };
