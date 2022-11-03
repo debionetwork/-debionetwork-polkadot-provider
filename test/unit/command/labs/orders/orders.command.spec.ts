@@ -61,6 +61,7 @@ describe('Orders Commands Unit Tests', () => {
       const BOX_PUBLIC_KEY = "BOX_PUBLIC_KEY";
       const PRICE_INDEX = 0;
       const ORDER_FLOW = "RequestTest"
+      const ASSET_ID = 1;
 
       // Act
       await createOrder(
@@ -69,13 +70,14 @@ describe('Orders Commands Unit Tests', () => {
         SERVICE_ID,
         PRICE_INDEX,
         BOX_PUBLIC_KEY,
-        ORDER_FLOW,
+        ORDER_FLOW, 
+        ASSET_ID,
         mockFunction
       );
         
       // Assert
       expect(createOrderSpy).toBeCalledTimes(1);
-      expect(createOrderSpy).toBeCalledWith(SERVICE_ID, PRICE_INDEX, BOX_PUBLIC_KEY, ORDER_FLOW);
+      expect(createOrderSpy).toBeCalledWith(SERVICE_ID, PRICE_INDEX, BOX_PUBLIC_KEY, ORDER_FLOW, ASSET_ID);
       expect(signAndSendSpy).toBeCalledTimes(1);
       expect(signAndSendSpy).toBeCalledWith(PAIR, getCommandNonceAndSigner(PAIR), expect.any(Function));
       expect(successCallback).toBeCalledTimes(1);
@@ -203,6 +205,7 @@ describe('Orders Commands Unit Tests', () => {
     const ORDER_FLOW = "RequestTest"
     const PRICE_INDEX = 0;
     const EXPECTED_VALUE = 0;
+    const ASSET_ID = 1;
     (mockFunction as jest.Mock).mockReturnValue(EXPECTED_VALUE);
       
     // Assert
@@ -214,9 +217,10 @@ describe('Orders Commands Unit Tests', () => {
         PRICE_INDEX,
         BOX_PUBLIC_KEY,
         ORDER_FLOW,
+        ASSET_ID,
         )).toEqual(EXPECTED_VALUE);
     expect(createOrderSpy).toBeCalledTimes(1);
-    expect(createOrderSpy).toBeCalledWith(SERVICE_ID, PRICE_INDEX, BOX_PUBLIC_KEY, ORDER_FLOW);
+    expect(createOrderSpy).toBeCalledWith(SERVICE_ID, PRICE_INDEX, BOX_PUBLIC_KEY, ORDER_FLOW, ASSET_ID);
     expect(paymentInfoSpy).toBeCalledTimes(1);
     expect(paymentInfoSpy).toBeCalledWith(PAIR);
     expect(mockFunction).toBeCalledTimes(1);

@@ -6,6 +6,8 @@ export class ServiceRequest {
     this.hash = anyJson.hash_;
     this.requesterAddress = anyJson.requesterAddress;
     this.labAddress = anyJson.labAddress;
+    this.serviceId = anyJson.serviceId;
+    this.orderId = anyJson.orderId;
     this.country = anyJson.country;
     this.region = anyJson.region;
     this.city = anyJson.city;
@@ -20,6 +22,8 @@ export class ServiceRequest {
   hash: string;
   requesterAddress: string;
   labAddress: string;
+  serviceId: string;
+  orderId: string;
   country: string;
   region: string;
   city: string;
@@ -51,3 +55,4 @@ export class ServiceRequest {
 
 export * from './request-status';
 export * from './service-invoice';
+export * from './service-price';
