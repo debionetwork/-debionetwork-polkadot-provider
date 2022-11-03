@@ -128,11 +128,11 @@ describe('Genetic Analyst Pallet Integration Tests', () => {
 
   it('updateGeneticAnalystMinimumStakeAmount, queryGeneticAnalystCount and queryGeneticAnalystVerifierKey should return', async () => {
     const minimumStakeInput = 2
-    const geneticAnalystPromise: Promise<Number> = new Promise((resolve, reject) => { // eslint-disable-line
+    const geneticAnalystPromise: Promise<BigInt> = new Promise((resolve, reject) => { // eslint-disable-line
       updateGeneticAnalystMinimumStakeAmount(api, pair, minimumStakeInput,  () => {
         queryGeneticAnalystMinimumStakeAmount(api)
           .then((res) => {
-            resolve(res);
+            resolve(BigInt(res));
           });
       });
     });
@@ -140,7 +140,7 @@ describe('Genetic Analyst Pallet Integration Tests', () => {
     const verifierKey = await queryGeneticAnalystVerifierKey(api)
     const geneticAnalystMinimumStake = await geneticAnalystPromise;
     
-    expect(geneticAnalystMinimumStake).toEqual(minimumStakeInput);
+    expect(geneticAnalystMinimumStake.toString()).toEqual(minimumStakeInput);
     expect(verifierKey).not.toBeFalsy()
   });
 

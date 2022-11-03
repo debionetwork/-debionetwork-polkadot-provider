@@ -240,7 +240,7 @@ describe('Service Request Pallet Integration Tests', () => {
     const stakingAmount = 10;
 
     const promise: Promise<ServiceRequest> = new Promise((resolve, reject) => { // eslint-disable-line
-      finalizeRequest(api, pair, serviceRequest.hash, true, () => {
+      finalizeRequest(api, pair, serviceRequest.hash, () => {
         queryServiceRequestById(api, serviceRequest.hash)
           .then((res) => {
             resolve(res)
