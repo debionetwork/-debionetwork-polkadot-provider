@@ -30,7 +30,7 @@ export async function addMenstrualCycleLog(
   api: ApiPromise,
   pair: any,
   menstrualCalendarId: string,
-  menstrualInfos: Array<MenstrualInfo>,
+  menstrualInfos: MenstrualInfo[],
   callback?: () => void,
 ) {
   // tslint:disable-next-line
@@ -51,7 +51,13 @@ export async function updateMenstrualCycleLog(
 ) {
   // tslint:disable-next-line
   var unsub = await api.tx.menstrualCalendar
-    .updateMenstrualCycleLog(menstrualCalendarId, menstrualCycleLogId, menstrualInfo.date, menstrualInfo.symptoms, menstrualInfo.menstruation)
+    .updateMenstrualCycleLog(
+      menstrualCalendarId,
+      menstrualCycleLogId,
+      menstrualInfo.date,
+      menstrualInfo.symptoms,
+      menstrualInfo.menstruation,
+    )
     .signAndSend(pair, getCommandNonceAndSigner(pair), ({ events, status }) => {
       successCallback(api, { events, status, callback, unsub });
     });
