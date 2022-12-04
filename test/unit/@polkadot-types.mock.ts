@@ -14,3 +14,11 @@ export function returnToHumanMockWithParam(param) {
         }
     }
 }
+
+export function returnToString(param) {
+    return {
+        toString() {
+            return mockFunction(param);
+        }
+    }
+}
