@@ -26,7 +26,7 @@ export async function queryGetAllServiceRequest(api: ApiPromise): Promise<Servic
   return serviceRequestArray;
 }
 
-export async function queryServiceRequestByOrderId(api: ApiPromise, orderId: string): Promise<string>{
+export async function queryServiceRequestByOrderId(api: ApiPromise, orderId: string): Promise<string> {
   const resp = (await api.query.serviceRequest.requestByOrderId(orderId)).toString();
   return resp;
 }
