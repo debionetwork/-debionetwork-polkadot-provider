@@ -7,7 +7,7 @@ export class MenstrualSubscription {
     this.id = anyJson.id;
     this.addressId = anyJson.addressId;
     this.duration = anyJson.duration;
-    this.price = anyJson.price;
+    this.currency = anyJson.currency;
     this.paymentStatus = anyJson.paymentStatus;
     this.status = anyJson.status;
 
@@ -21,7 +21,7 @@ export class MenstrualSubscription {
   id: string;
   addressId: string;
   duration: Duration;
-  price: number;
+  currency: string;
   paymentStatus: PaymentStatus;
   status: SubscriptionStatus;
   createdAt?: Date;

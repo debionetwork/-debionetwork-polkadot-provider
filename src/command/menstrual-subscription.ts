@@ -24,14 +24,13 @@ export async function addMenstrualSubscription(
 export async function changeMenstrualSubscriptionStatus(
   api: ApiPromise,
   pair: any,
-  accountId: string,
   menstrualSubscriptionId: string,
   subscriptionStatus: SubscriptionStatus,
   callback?: () => void,
 ) {
   // tslint:disable-next-line
   var unsub = await api.tx.menstrualSubscription
-    .changeMenstrualSubscriptionStatus(accountId, menstrualSubscriptionId, subscriptionStatus)
+    .changeMenstrualSubscriptionStatus(menstrualSubscriptionId, subscriptionStatus)
     .signAndSend(pair, getCommandNonceAndSigner(pair), ({ events, status }) => {
       successCallback(api, { events, status, callback, unsub });
     });

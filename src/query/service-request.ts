@@ -1,5 +1,5 @@
 import { ApiPromise } from '@polkadot/api';
-import { ServiceInvoice, ServiceRequest } from '../index';
+import { ServiceRequest } from '../index';
 
 export async function queryServiceRequestById(api: ApiPromise, requestId: string): Promise<ServiceRequest> {
   const resp = (await api.query.serviceRequest.requestById(requestId)).toHuman();
@@ -24,4 +24,9 @@ export async function queryGetAllServiceRequest(api: ApiPromise): Promise<Servic
     serviceRequestArray.push(new ServiceRequest(element[1].toHuman()));
   });
   return serviceRequestArray;
+}
+
+export async function queryServiceRequestByOrderId(api: ApiPromise, orderId: string): Promise<string> {
+  const resp = (await api.query.serviceRequest.requestByOrderId(orderId)).toString();
+  return resp;
 }
