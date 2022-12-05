@@ -5,12 +5,8 @@ export interface Symptom {
   name: string;
 }
 
-export interface MenstrualCycleLogModel {
-  id: string;
-  menstrualCalendarId: string;
+export interface MenstrualInfo {
   date: number;
   menstruation: boolean;
   symptoms: Symptom[];
-  createdAt: number;
-  updatedAt: number;
 }
