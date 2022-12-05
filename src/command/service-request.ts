@@ -109,12 +109,7 @@ export async function processRequest(
     });
 }
 
-export async function finalizeRequest(
-  api: ApiPromise,
-  pair: any,
-  requestId: string,
-  callback?: () => void,
-) {
+export async function finalizeRequest(api: ApiPromise, pair: any, requestId: string, callback?: () => void) {
   // tslint:disable-next-line
   var unsub = await api.tx.serviceRequest
     .finalizeRequest(requestId)
