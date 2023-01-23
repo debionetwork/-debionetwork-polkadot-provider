@@ -10,6 +10,8 @@ export * from './hospitals';
 export * from './rewards';
 export * from './service-request';
 export * from './user-profile';
+export * from './health-professional';
+export * from './health-professional-qualification';
 
 export class ExtrinsicCallbackParameters {
   events: EventRecord[];
