@@ -1,8 +1,8 @@
-import { ApiPromise } from "@polkadot/api";
+import { ApiPromise } from '@polkadot/api';
 import { EventRecord } from '@polkadot/types/interfaces/system';
-import { extrinsicCallback, ExtrinsicCallbackParameters, getCommandNonceAndSigner, successCallback } from "..";
-import { HealthProfessionalInfo } from "../../models/health-professional/info";
-import { AvailabilityStatus, VerificationStatus } from "../../primitives";
+import { extrinsicCallback, ExtrinsicCallbackParameters, getCommandNonceAndSigner, successCallback } from '..';
+import { HealthProfessionalInfo } from '../../models/health-professional/info';
+import { AvailabilityStatus, VerificationStatus } from '../../primitives';
 
 export async function registerHealthProfessional(
   api: ApiPromise,
@@ -79,14 +79,14 @@ export async function updateVerificationStatusHealthProfessional(
   api: ApiPromise,
   pair: any,
   accountId: string,
-  status: VerificationStatus,
+  verificationStatus: VerificationStatus,
   callback?: () => void,
 ): Promise<EventRecord[]> {
   let unsub;
   return new Promise((resolve, reject) => {
     // tslint:disable-next-line
     unsub = api.tx.healthProfessional
-      .updateVerificationStatus(accountId, status)
+      .updateVerificationStatus(accountId, verificationStatus)
       .signAndSend(pair, getCommandNonceAndSigner(pair), ({ events, status }) => {
         extrinsicCallback(api, {
           events,

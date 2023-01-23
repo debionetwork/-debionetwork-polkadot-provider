@@ -1,30 +1,30 @@
 export class HealthProfessionalInfo {
   constructor(data: any) {
-    this.box_public_key = data.box_public_key;
-    this.first_name = data.first_name;
-    this.last_name = data.last_name;
-    this.myriad_username = data.myriad_username;
+    this.boxPublicKey = data.boxPublicKey;
+    this.firstName = data.firstName;
+    this.lastName = data.lastName;
+    this.myriadUsername = data.myriadUsername;
     this.gender = data.gender;
-    this.date_of_birth = data.date_of_birth;
+    this.dateOfBirth = data.dateOfBirth;
     this.email = data.email;
-    this.phone_number = data.phone_number;
+    this.phoneNumber = data.phoneNumber;
     this.role = data.role;
     this.category = data.category;
-    this.profile_link = data.profile_link;
-    this.profile_image = data.profile_image;
+    this.profileLink = data.profileLink;
+    this.profileImage = data.profileImage;
     this.anonymous = data.anonymous;
   }
-  box_public_key: string;
-  first_name: string;
-  last_name: string;
-  myriad_username: string;
+  boxPublicKey: string;
+  firstName: string;
+  lastName: string;
+  myriadUsername: string;
   gender: string;
-  date_of_birth: string;
+  dateOfBirth: string;
   email: string;
-  phone_number: string;
+  phoneNumber: string;
   role: string;
   category: string;
-  profile_link: string;
-  profile_image: string;
+  profileLink: string;
+  profileImage: string;
   anonymous: boolean;
 }

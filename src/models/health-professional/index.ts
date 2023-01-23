@@ -1,27 +1,24 @@
-import { AvailabilityStatus, StakeStatus, VerificationStatus } from "../../primitives";
-import { HealthProfessionalInfo } from "./info";
-
+import { AvailabilityStatus, StakeStatus, VerificationStatus } from '../../primitives';
+import { HealthProfessionalInfo } from './info';
 
 export class HealthProfessional {
   constructor(data: any) {
-    this.account_id = data.account_id;
+    this.accountId = data.accountId;
     this.qualifications = data.qualifications;
     this.info = new HealthProfessionalInfo(data.info);
-    this.stake_amount = data.stake_amount;
-    this.stake_status = data.stake_status;
-    this.verification_status = data.verification_status;
-    this.availability_status = data.availability_status;
-    this.unstaked_at = data.unstaked_at
-      ? Number((data.unstaked_at as string).split(',').join(''))
-      : null;
+    this.stakeAmount = data.stakeAmount;
+    this.stakeStatus = data.stakeStatus;
+    this.verificationStatus = data.verificationStatus;
+    this.availabilityStatus = data.availabilityStatus;
+    this.unstakedAt = data.unstakedAt ? Number((data.unstakedAt as string).split(',').join('')) : null;
   }
 
-  account_id: string;
+  accountId: string;
   qualifications: string[];
   info: HealthProfessionalInfo;
-  stake_amount: string;
-  stake_status: StakeStatus;
-  verification_status: VerificationStatus;
-  availability_status: AvailabilityStatus;
-  unstaked_at: number;
+  stakeAmount: string;
+  stakeStatus: StakeStatus;
+  verificationStatus: VerificationStatus;
+  availabilityStatus: AvailabilityStatus;
+  unstakedAt: number;
 }
